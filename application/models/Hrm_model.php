@@ -28,7 +28,44 @@ class Hrm_model extends CI_Model {
     //      }
     //      return false;
     // }
+    public function office_loan_list(){
 
+        $this->db->select('*');
+        $this->db->from('person_ledger');
+         $this->db->where('create_by',$this->session->userdata('user_id'));
+         $query = $this->db->get();
+        //  echo $this->db->last_query(); die();
+         if ($query->num_rows() > 0) {
+           return $query->result_array();
+         }
+         return false;
+    }
+    
+
+
+    public function delete_off_loan($transaction_id){
+        $this->db->where('transaction_id', $transaction_id);
+        $this->db->delete('person_ledger');
+        return true;
+      }
+
+    
+    public function office_loan_datas($transaction_id){
+
+        $this->db->select('*');
+        $this->db->from('person_ledger');
+        
+        $this->db->where('transaction_id', $transaction_id);
+
+         $this->db->where('create_by',$this->session->userdata('user_id'));
+         $query = $this->db->get();
+        //  echo $this->db->last_query(); die();
+         if ($query->num_rows() > 0) {
+           return $query->result_array();
+         }
+         return false;
+    }
+    
 
   public function timesheet_list(){
 

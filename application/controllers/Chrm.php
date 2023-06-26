@@ -229,6 +229,15 @@ class Chrm extends CI_Controller {
 
 
 
+                public function office_loan_delete($transaction_id){
+
+                    $this->load->model('Hrm_model');
+                    $this->Hrm_model->delete_off_loan($transaction_id);
+                    $this->session->set_userdata(array('message' => display('successfully_delete')));
+                   redirect("Chrm/manage_officeloan");
+            
+                }
+            
 
 
 

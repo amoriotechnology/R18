@@ -672,12 +672,40 @@ class Settings extends CI_Model {
         $this->db->where('create_by',$this->session->userdata('user_id'));
       //  $this->db->where('status', 1);
         $query = $this->db->get();
-        echo $this->db->last_query();
+        // echo $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
         return false;
     }
+
+
+
+
+
+    public function update_employee($postData,$transaction_id){
+
+
+        // print_r($transaction_id);
+
+        $this->db->where('transaction_id', $transaction_id);
+
+        $this->db->update('person_ledger',$postData);
+
+        
+
+        return true;
+
+    }
+
+
+
+
+
+
+
+
+
     public function password_recovery($data = array())
     {
         return $this->db->select("*")
