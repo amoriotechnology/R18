@@ -304,7 +304,7 @@
 
                <a href="<?php echo base_url() . 'Chrm/employee_payslip_permission/'.$timsht['timesheet_id']; ?>" class="btnclr btn m-b-5 m-r-2" data-toggle="tooltip" data-placement="left" title="Administrator Update"><i class="fas fa-user-tie" aria-hidden="true"></i></a>
 
-               <a class="btnclr btn m-b-5 m-r-2" href="<?php echo base_url('Chrm/timesheed_inserted_data/'.$employees['id'])?>"><i class="fa fa-download" aria-hidden="true"></i></a>
+               <a class="btnclr btn m-b-5 m-r-2" href="<?php echo base_url('Chrm/time_sheet_pdf/'.$timsht['timesheet_id'])?>"><i class="fa fa-download" aria-hidden="true"></i></a>
              
              
                <a href="<?php echo base_url('Chrm/employee_delete/'.$employees['id']) ?>" class="btnclr btn m-b-5 m-r-2" onclick="return confirm('<?php echo display('are_you_sure') ?>')" data-toggle="tooltip" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
