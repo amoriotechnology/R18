@@ -189,12 +189,17 @@
 
                                 <P>HRS/ UNITS</P>
                                 <br>
-
+                                <p>1000.00</p>
+                                <p>1000.00</p>
+                                <p>1000.00</p>
                                 </div>
                                  <div class="col-md-1">
 
                                 <P>RATE </P>
                                 <br>
+                                <p><?php echo  $employee_data[0]['total_hours']; ?></p>
+                                <p>1000.00</p>
+                                <p>1000.00</p>
 
                                 </div>
                                   <div class="col-md-2">
@@ -202,9 +207,9 @@
                                <p>THIS PERIOD($)</p>
                                <br>
                                 <p>1000.00</p>
-                                <p></p>
+                                <p>1000.00</p>
                                  <p>1000.00</p>
-                                 <p></p>
+                                 <p>1000.00</p>
 
                                 </div>
 

@@ -49,9 +49,9 @@ class Chrm extends CI_Controller {
        
         $datacontent = $CC->invoice_content->retrieve_data();
 
-        $data['employee_data'] = $this->Hrm_model->employee_info($templ_name);
+        $employee_data = $this->Hrm_model->employee_info($templ_name);
         $data['timesheet_data'] = $this->Hrm_model-> timesheet_info_data($timesheet_id);
-        $hrate= $data['employee_data'][0]['hrate'];
+        $hrate= $employee_data[0]['hrate'];
         $total_hours=  $data['timesheet_data'][0]['total_hours'];    
         $final=$hrate *$total_hours;
 
@@ -61,6 +61,9 @@ class Chrm extends CI_Controller {
         'address'=> $datacontent[0]['address'],
         'email'=> $datacontent[0]['email'],
         'phone'=> $datacontent[0]['phone'],
+
+        'total_hours' =>  $employee_data[0]['total_hours'],
+
           );
 
         
