@@ -287,7 +287,7 @@ padding:0px;
 
                     <td class="1 value" data-col="1"><?php echo $sl;?></td>
 
- <td class="2 value"  data-col="2">  <?php echo html_escape($first_name." ".$last_name);?></a></td>
+ <td class="2 value"  data-col="2">  <?php echo html_escape($timsht['first_name']." ".$timsht['last_name']);?></a></td>
 <td class="3 value"  data-col="3"><?php echo html_escape($timsht['job_title']);?></td>
 
 <td class="4 value"  data-col="4"><?php echo html_escape($timsht['duration']);?></td>

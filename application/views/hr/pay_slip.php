@@ -197,7 +197,7 @@
 
                                 <P>RATE </P>
                                 <br>
-                                <p><?php echo  $employee_data[0]['total_hours']; ?></p>
+                                <p><?php echo  $total_hours; ?></p>
                                 <p>1000.00</p>
                                 <p>1000.00</p>
 
