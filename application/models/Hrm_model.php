@@ -73,7 +73,7 @@ class Hrm_model extends CI_Model {
         $this->db->from('timesheet_info');
          $this->db->where('create_by',$this->session->userdata('user_id'));
          $query = $this->db->get();
-        //  echo $this->db->last_query(); die();
+       //   echo $this->db->last_query(); 
          if ($query->num_rows() > 0) {
            return $query->result_array();
          }
