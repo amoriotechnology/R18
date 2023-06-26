@@ -843,6 +843,33 @@ Payment Type
 
 
 
+                 </div>
+
+<div>
+<label for="zip" class="col-sm-2 col-form-div"><?php echo ('Employee Tax') ?><i class="text-danger">*</i></label>
+
+   <div class="col-sm-4">
+
+   <select name="emp_tax_detail" id="emp_tax_detail" class="form-control" requried="" >
+
+    <option value="">Select Employee Tax</option>
+    <option value="single">Single</option>
+    <option value="tax_filling">Tax Filling</option>
+    <option value="married">Married</option>
+    <option value="head_household">Head Household</option>
+
+   </select>
+   
+   </div>
+
+   </div>
+<br><br><br>
+
+
+
+
+
+
                     <div class="form-group text-left">
 
                         <!-- <button type="reset"   style="color:white;background-color: #38469f;"   class="btn btn-primary w-md m-b-5"><?php echo display('reset') ?></button> -->

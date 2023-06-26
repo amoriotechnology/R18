@@ -89,9 +89,7 @@
 
     <div class="col-md-6">
         <p>
-            <!-- ABSSOLUTE MARBLE & GRANITE CORP
-            <span>1300 Taylors Lane</span>
-            <span>Cinnomantion NJ 08077</span> -->
+           
            <?php echo $company[0]['business_name']; ?><br>
            <?php echo $company[0]['address']; ?><br> 
            <?php echo $company[0]['email']; ?><br>
@@ -108,9 +106,7 @@
 
 <div class="Employee_details row">
 
-    <!-- <p>Ankul Sen</p>
-    <p>28 BROWNSTONE BLVD</p>
-      <p>VOORHEES NJ 08043</p> -->
+  
       Test<br>
       Test
 
