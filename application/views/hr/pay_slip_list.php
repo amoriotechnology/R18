@@ -1,3 +1,27 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.base64.js"></script>
+  <script type="text/javascript" src="<?php echo base_url()?>assets/js/html2canvas.js"></script>
+ <script type="text/javascript" src="<?php echo base_url()?>assets/js/jspdf.plugin.autotable"></script>
+  <script type="text/javascript" src="<?php echo base_url()?>assets/js/jspdf.umd.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+ <script type="text/javascript" src="<?php echo base_url()?>my-assets/js/tableManager.js"></script>
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script type="text/javascript" src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
+<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+<script type="text/javascript" src="http://www.bacubacu.com/colresizable/js/colResizable-1.5.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/drag_drop_index_table.js"></script>
+
 
 
 <!-- Manage Invoice Start -->
@@ -16,15 +40,15 @@
 
             <h1>Generated Pay Slips List</h1>
 
-            <small>Generated List</small>
+            <small> </small>
 
             <ol class="breadcrumb">
 
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
 
-                <li><a href="#"><?php echo display('invoice') ?></a></li>
+                <li><a href="#"><?php echo display('hrm') ?></a></li>
 
-                <li class="active">Generated Pay Slips List</li>
+                <li class="active" style="color:orange">Generated Pay Slips List</li>
 
             </ol>
 
@@ -61,12 +85,14 @@
                                     <th><?php echo display('sl') ?></th>
 
 
-                                    <th>Duration</th>
+                                    <th style="text-align:center;">Employee Name</th>
+                                    <th style="text-align:center;">Job Title</th>
+                                    <th style="text-align:center;">Daily Break</th>
+                                    <th style="text-align:center;">Payment Term</th>
+                                    <th style="text-align:center;">Total Hours </th>
 
-                                    <th>Job Title</th>
-                                    <th>Month</th>
+                                    <th style="text-align:center;">Month</th>
 
-                               
 
                                     <th class="text-center"><?php echo display('action') ?></th>
 
@@ -75,14 +101,22 @@
                                 </thead>
 
                                 <tbody>
-                                <?php $s = 1; foreach ($timesheet_list as $key => $list) { ?>
+
+
+                                <?php $s = 1; foreach ($dataforpayslip as $key => $list) { ?>
                                     <tr role="row" class="odd">
  
-                                        <td tabindex="0"><?php echo $s; ?></td>
-                                        <td><?php echo $list['duration']; ?></td>
-                                        <td><?php echo $list['job_title']; ?></td>
-                                        <td><?php echo $list['month']; ?></td>
-                                        <td><a href="<?php echo base_url('Chrm/time_list/'.$list['timesheet_id']) ?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="left" title="" data-original-title="View Pay Slip"><i class="fa fa-window-restore" aria-hidden="true"></i></a>
+                                        <td style="text-align:center;" tabindex="0"><?php echo $s; ?></td>
+                                        <td style="text-align:center;"><?php echo $list['templ_name']; ?></td>
+                                        <td style="text-align:center;"><?php echo $list['job_title']; ?></td>
+                                        <td style="text-align:center;"><?php echo $list['dailybreak']; ?></td>
+                                        <td style="text-align:center;"><?php echo $list['payment_term']; ?></td>
+                                        <td style="text-align:center;"><?php echo $list['total_hours']; ?></td>
+                                        <td style="text-align:center;"><?php echo $list['month']; ?></td>
+
+
+
+                                        <td style="text-align:center;"><a href="<?php echo base_url('Chrm/time_list/'.$list['timesheet_id'] .'/'. $list['templ_name'] ) ?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="left" title="" data-original-title="View Pay Slip"><i class="fa fa-window-restore" aria-hidden="true"></i></a>
                                         </td>
                                         <input type="hidden" value="<?php echo $list['timesheet_id']; ?>">
                                         <input type="hidden" value="<?php echo $list['create_by']; ?>">

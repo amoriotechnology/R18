@@ -16,18 +16,7 @@ class Hrm_model extends CI_Model {
 
     }
 
-    // public function timesheet_list(){
 
-    //     $this->db->select('*');
-    //     $this->db->from('timesheet_info');
-    //      $this->db->where('create_by',$this->session->userdata('user_id'));
-    //      $query = $this->db->get();
-    //     //  echo $this->db->last_query(); die();
-    //      if ($query->num_rows() > 0) {
-    //       return $query->result_array();
-    //      }
-    //      return false;
-    // }
     public function office_loan_list(){
 
         $this->db->select('*');
@@ -43,11 +32,78 @@ class Hrm_model extends CI_Model {
     
 
 
+    
+
+    public function employee_info($templ_name){
+
+        $this->db->select('*');
+        $this->db->from('employee_history');
+        $this->db->where('id', $templ_name);
+        $this->db->where('create_by',$this->session->userdata('user_id'));
+        $query = $this->db->get();
+       //  echo $this->db->last_query(); 
+         if ($query->num_rows() > 0) {
+           return $query->result_array();
+         }
+
+        return true;
+    }
+
+
+
+    public function timesheet_info_data($timesheet_id){
+
+        $this->db->select('*');
+        $this->db->from('timesheet_info');
+        $this->db->where('timesheet_id', $timesheet_id);
+        $this->db->where('create_by',$this->session->userdata('user_id'));
+        $query = $this->db->get();
+      //   echo $this->db->last_query(); 
+         if ($query->num_rows() > 0) {
+           return $query->result_array();
+         }
+
+        return true;
+    }
+
+
+
+
+
     public function delete_off_loan($transaction_id){
         $this->db->where('transaction_id', $transaction_id);
         $this->db->delete('person_ledger');
         return true;
       }
+
+
+      public function get_data_payslip(){
+
+        $this->db->select('*');
+        $this->db->from('timesheet_info');
+        
+        $this->db->where('uneditable', '1');
+
+         $this->db->where('create_by',$this->session->userdata('user_id'));
+        
+         $query = $this->db->get();
+
+
+        //  echo $this->db->last_query(); 
+
+
+         if ($query->num_rows() > 0) {
+           return $query->result_array();
+         }
+
+        return true;
+    }
+
+
+
+
+
+
 
     
     public function office_loan_datas($transaction_id){
@@ -59,7 +115,6 @@ class Hrm_model extends CI_Model {
 
          $this->db->where('create_by',$this->session->userdata('user_id'));
          $query = $this->db->get();
-        //  echo $this->db->last_query(); die();
          if ($query->num_rows() > 0) {
            return $query->result_array();
          }

@@ -18,25 +18,82 @@ class Chrm extends CI_Controller {
 
 
  public function edit_timesheet($id) {
-        $this->load->model('Hrm_model');
-         $data['title']            = display('Payment_Administration');
-     
-        $data['employee_name'] = $this->Hrm_model->employee_name();
-$data['designation'] = $this->db->select('designation')->from('employee_history')->where('id',$data['employee_name'][0]['id'])->get()->row()->designation;
-        $data['payment_terms'] = $this->Hrm_model->get_payment_terms();
-   
-
+       $this->load->model('Hrm_model');
+       $data['title']            = display('Payment_Administration');
+       $data['employee_name'] = $this->Hrm_model->employee_name();
+       $data['designation'] = $this->db->select('designation')->from('employee_history')->where('id',$data['employee_name'][0]['id'])->get()->row()->designation;
+       $data['payment_terms'] = $this->Hrm_model->get_payment_terms();
        $data['dailybreak'] = $this->Hrm_model->get_dailybreak();
-       
        $data['duration'] = $this->Hrm_model->get_duration_data();
-
        $data['administrator'] = $this->Hrm_model->administrator_data();
-          $data['time_sheet_data'] = $this->Hrm_model->time_sheet_data($id);
+       $data['time_sheet_data'] = $this->Hrm_model->time_sheet_data($id);
        print_r($data);
-   
          $content                  = $this->parser->parse('hr/edit_timesheet', $data, true);
          $this->template->full_admin_html_view($content);
         }
+
+
+
+
+
+
+
+     //Designation form
+     public function time_list($timesheet_id = null,$templ_name)
+     {
+        $CI = & get_instance();
+        $CI->load->model('invoice_content');
+        $this->load->model('Hrm_model');
+        $CC = & get_instance();
+
+       
+        $datacontent = $CC->invoice_content->retrieve_data();
+
+        $employee_data = $this->Hrm_model->employee_info($templ_name);
+        $data['timesheet_data'] = $this->Hrm_model-> timesheet_info_data($timesheet_id);
+        $hrate= $employee_data[0]['hrate'];
+        $total_hours=  $data['timesheet_data'][0]['total_hours'];    
+        $final=$hrate *$total_hours;
+
+        $data=array(
+        'company'=> $datacontent,
+        'business_name'=> $datacontent[0]['business_name'],
+        'address'=> $datacontent[0]['address'],
+        'email'=> $datacontent[0]['email'],
+        'phone'=> $datacontent[0]['phone'],
+
+        'total_hours' =>  $employee_data[0]['total_hours'],
+
+          );
+
+        
+        $content = $this->parser->parse('hr/pay_slip', $data, true);
+         $this->template->full_admin_html_view($content);
+     }
+     
+     
+     
+     
+     
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function employee_payslip_permission($id) {
         $this->load->model('Hrm_model');
@@ -423,19 +480,16 @@ public function timesheed_inserted_data($id) {
        $this->template->full_admin_html_view($content);
        }
 
-     //Designation form
-public function time_list($timesheet_id = null)
-{
-   $CI = & get_instance();
-   $CI->load->model('invoice_content');
-   $datacontent = $CI->invoice_content->retrieve_data();
-   print_r($datacontent);
-   $data = array(
-    'company' =>  $datacontent
-   );
-   $content = $this->parser->parse('hr/pay_slip', $data, true);
-    $this->template->full_admin_html_view($content);
-}
+
+
+
+
+
+
+
+
+
+
 
 
 public function pay_slip() {
@@ -555,9 +609,28 @@ $data['job_title']=$row['designation'];
 
     public function pay_slip_list() {
     $data['title'] = display('pay_slip_list');
+
+    $this->load->model('Hrm_model');
+
+    $datainfo = $this->Hrm_model->get_data_payslip();
+
+    $data=array(
+        'dataforpayslip' => $datainfo,
+   );
+
     $content = $this->parser->parse('hr/pay_slip_list', $data, true);
+
+      
     $this->template->full_admin_html_view($content);
     }
+
+
+
+
+
+
+
+
 
 public function add_state(){
   $CI = & get_instance();
@@ -907,6 +980,9 @@ public function add_state_taxes_detail($tax=0) {
         $data_empolyee['country'] = $this->input->post('country');
         $data_empolyee['city'] = $this->input->post('city');
         $data_empolyee['zip'] = $this->input->post('zip');
+
+        $data_empolyee['employee_tax'] = $this->input->post('emp_tax_detail');
+
         $data_empolyee['create_by'] =$this->session->userdata('user_id');
     //     echo '<pre>';
     //    print_r($data_empolyee); exit();
