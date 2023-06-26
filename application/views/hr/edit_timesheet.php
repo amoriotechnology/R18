@@ -13,17 +13,19 @@
 <link href="<?php echo base_url() ?>assets/css/daterangepicker.css" rel="stylesheet">
 <link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet">
 
-
 <style>
-    input {border:0;outline:0;}
+      input {border:0;outline:0;}
     .work_table td {
         height: 36px;
     }
-
+th,td{
+    text-align:center;
+}
     .select2-selection{
         display :none;
     }
 </style>
+
 <div class="content-wrapper">
 
     <section class="content-header" style="height:70px;">
