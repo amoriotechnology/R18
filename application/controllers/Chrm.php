@@ -239,7 +239,7 @@ class Chrm extends CI_Controller {
                 }
             
 
-
+                
 
 
 
@@ -256,7 +256,7 @@ class Chrm extends CI_Controller {
 
             public function manage_officeloan() {
                 $this->load->model('Hrm_model');
-                 $data['title']            = display('manage_employee');
+                $data['title']            = display('manage_employee');
 
                  $data['office_loan_list']    = $this->Hrm_model->office_loan_list();
 
@@ -268,9 +268,13 @@ class Chrm extends CI_Controller {
 
 
 
-
-
-
+                public function  payroll_reports() {
+                    $this->load->model('Hrm_model');
+                    $data['title']            = display('payroll_manage');
+                    $content                  = $this->parser->parse('hr/payroll_manage_list', $data, true);
+                    $this->template->full_admin_html_view($content);
+                    }
+            
 
 
 
