@@ -268,6 +268,9 @@ $data['designation'] = $this->db->select('designation')->from('employee_history'
             $this->load->model('Hrm_model');
              $data['title']            = display('manage_employee');
              $data['timesheet_list']    = $this->Hrm_model->timesheet_list();
+                $employee_data = $this->db->select('first_name,last_name')->from('employee_history')->where('id',$data['timesheet_list'][0]['templ_name'])->get()->row();
+                $data['first_name']=$employee_data->first_name;
+                  $data['last_name']=$employee_data->last_name;
              $content                  = $this->parser->parse('hr/timesheet_list', $data, true);
             $this->template->full_admin_html_view($content);
             }
@@ -309,17 +312,19 @@ $data['designation'] = $this->db->select('designation')->from('employee_history'
     
 
 
+public function timesheet_delete($id){
+  $this->db->where('timesheet_id',$id);
+  $this->db->delete('timesheet_info');
+    $this->db->delete('timesheet_info_details');
+    $this->session->set_flashdata('message', "Deleted Successfully");
+       redirect("Chrm/manage_timesheet");
+}
 
 
 
 
 
 
-
-
-
-     
-        
 public function time_sheet_pdf($id) {
        $CI = & get_instance();
            $CC = & get_instance();
@@ -335,23 +340,33 @@ public function time_sheet_pdf($id) {
            $this->auth->check_admin_auth();
            $CI->load->model('Hrm_model');
               $pdf = $CI->Hrm_model->time_sheet_data($id);
+             
+               $employee_data = $this->db->select('first_name,last_name,designation')->from('employee_history')->where('id',$pdf[0]['templ_name'])->get()->row();
               $setting=  $CI->Web_settings->retrieve_setting_editdata();
               $dataw = $CA->invoice_design->retrieve_data();
               $datacontent = $CC->invoice_content->retrieve_data();
                 $data=array(
-               'curn_info_default' =>$curn_info_default[0]['currency_name'],
-               'currency'  =>$currency_details[0]['currency'],
+            
+             
                'header'=> $dataw[0]['header'],
                'logo'=> $setting[0]['invoice_logo'],
                'color'=> $dataw[0]['color'],
                'template'=> $dataw[0]['template'],
-
+                 'company'=> $datacontent,
+               'employee_name' => $employee_data->first_name." ".$employee_data->last_name,
+               'destination'  => $employee_data->designation,
+               'time_sheet' =>$pdf
 
                 );
-              $content = $this->load->view('invoice/timesheet_pdf', $data, true);
+                // print_r($data);
+              $content = $this->load->view('hr/timesheet_pdf', $data, true);
        $this->template->full_admin_html_view($content);   
 
 }
+
+     
+        
+
 
 
 public function timesheed_inserted_data($id) {
