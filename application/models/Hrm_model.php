@@ -30,23 +30,19 @@ class Hrm_model extends CI_Model {
          return false;
     }
     
-
-    public function administrator_info($ads_id){
-
-        $this->db->select('*');
-        $this->db->from('administrator');
-        $this->db->where('adm_id',$ads_id);
-        $this->db->where('create_by',$this->session->userdata('user_id'));
-        $query = $this->db->get();
-        
-          echo $this->db->last_query(); 
+ public function federal_tax_info($employee_status,$final){
+ $this->db->select('*');
+        $this->db->from('federal_tax');
+        $this->db->where($employee_status,);
+      $query = $this->db->get();
+         echo $this->db->last_query(); 
          if ($query->num_rows() > 0) {
            return $query->result_array();
          }
 
-        return true;
 
-    }
+ }
+
     
 
     public function employee_info($templ_name){
@@ -56,7 +52,7 @@ class Hrm_model extends CI_Model {
         $this->db->where('id', $templ_name);
         $this->db->where('create_by',$this->session->userdata('user_id'));
         $query = $this->db->get();
-    //    echo $this->db->last_query(); 
+       //  echo $this->db->last_query(); 
          if ($query->num_rows() > 0) {
            return $query->result_array();
          }
@@ -73,7 +69,7 @@ class Hrm_model extends CI_Model {
         $this->db->where('timesheet_id', $timesheet_id);
         $this->db->where('create_by',$this->session->userdata('user_id'));
         $query = $this->db->get();
-      //   echo $this->db->last_query(); 
+         echo $this->db->last_query(); 
          if ($query->num_rows() > 0) {
            return $query->result_array();
          }
@@ -140,12 +136,14 @@ class Hrm_model extends CI_Model {
     
 
   public function timesheet_list(){
-
-        $this->db->select('*');
-        $this->db->from('timesheet_info');
-         $this->db->where('create_by',$this->session->userdata('user_id'));
+  $this->db->select('*');
+    $this->db->from('timesheet_info a');
+ 
+        $this->db->join('employee_history b' , 'a.templ_name = b.id');
+ 
+         $this->db->where('a.create_by',$this->session->userdata('user_id'));
          $query = $this->db->get();
-        //  echo $this->db->last_query(); die();
+         //echo $this->db->last_query(); die();
          if ($query->num_rows() > 0) {
            return $query->result_array();
          }
@@ -209,7 +207,7 @@ class Hrm_model extends CI_Model {
    $this->db->where('a.timesheet_id' , $id);
    // $this->db->where('a.created_by' ,$this->session->userdata('user_id'));
  $query = $this->db->get(); 
- echo $this->db->last_query();
+// echo $this->db->last_query();
     if ($query->num_rows() > 0) {
         return $query->result_array();
     }
@@ -241,13 +239,14 @@ class Hrm_model extends CI_Model {
 
 
 
-    public function employee_name() {
+    public function employee_name($id) {
 
         $this->db->select('*');
         $this->db->from('employee_history');
-         $this->db->where('create_by',$this->session->userdata('user_id'));
+          $this->db->where('create_by',$this->session->userdata('user_id'));
+         $this->db->where('id',$id);
          $query = $this->db->get();
-    //    echo $this->db->last_query();
+      //  echo $this->db->last_query();die();
        if ($query->num_rows() > 0) {
         return $query->result_array();
 
