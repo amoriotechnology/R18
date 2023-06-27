@@ -57,36 +57,93 @@ class Chrm extends CI_Controller {
 
         // Federal Income Tax
         $federal_tax = $this->db->select('*')->from('federal_tax')->where('tax','Federal Income tax')->get()->result_array();
+   
         $federal_range='';
+        $f_tax='';
         foreach($federal_tax as $amt){
            $split=explode('-',$amt[$data['employee_data'][0]['employee_tax']]);
             if($final > $split[0] && $final < $split[1]){
+
               $federal_range=$split[0]."-".$split[1];
             }
             }
-        $data['federal'] = $this->Hrm_model->federal_tax_info($data['employee_data'][0]['employee_tax'],$final,$range);
+        $data['federal'] = $this->Hrm_model->federal_tax_info($data['employee_data'][0]['employee_tax'],$final,$federal_range);
+        if(!empty($data['federal'])){
         $Federal_employee= $data['federal'][0]['employee'];
         $f_tax=($Federal_employee/100)*$final;
-        
+        }
+      
         //Social Security
         $social_tax = $this->db->select('*')->from('federal_tax')->where('tax','Social Security')->get()->result_array();
+      
         $social_range='';
-        foreach($social_tax as $amt){
-           $split=explode('-',$amt[$data['employee_data'][0]['employee_tax']]);
+        $s_tax='';
+           $split=explode('-',$social_tax[0][$data['employee_data'][0]['employee_tax']]);
+        //    print_r($split);
+        //    echo $final."/".$split[0]."/".$split[1];
             if($final > $split[0] && $final < $split[1]){
-              $social_range=$split[0]."-".$split[1];
+           $social_range=$split[0]."-".$split[1];
+       
             }
-            }
-        $data['social'] = $this->Hrm_model->social_tax_info($data['employee_data'][0]['employee_tax'],$final,$range);
-        $social_employee= $data['federal'][0]['employee'];
-        $social_employer= $data['federal'][0]['employer'];
+            
+        $data['social'] = $this->Hrm_model->social_tax_info($data['employee_data'][0]['employee_tax'],$final,$social_range);
+       // print_r($data['social']);
+        if(!empty($data['social']['employee'])){
+        $social_employee= $data['social']['employee'];
+      
         $s_tax=($social_employee/100)*$final;
+  }
+           //Medicare
+        $Medicare = $this->db->select('*')->from('federal_tax')->where('tax','Medicare')->get()->result_array();
+        $Medicare_range='';
+        $m_tax='';
+        foreach($Medicare as $social_amt){
+           $split=explode('-',$social_amt[$data['employee_data'][0]['employee_tax']]);
+            if($final > $split[0] && $final < $split[1]){
+           $Medicare_range=$split[0]."-".$split[1];
+         
+            }
+            }
+           
+        $data['Medicare'] = $this->Hrm_model->Medicare_tax_info($data['employee_data'][0]['employee_tax'],$final,$Medicare_range);
+        if(!empty($data['Medicare'])){
+        $Medicare_employee= $data['Medicare'][0]['employee'];
+        $m_tax=($Medicare_employee/100)*$final;
+        }
+        //Federal unemployment
+        $unemployment = $this->db->select('*')->from('federal_tax')->where('tax','Federal unemployment')->get()->result_array();
+        $unemployment_range='';
+        $u_tax='';
+        foreach($unemployment as $social_amt){
+           $split=explode('-',$social_amt[$data['employee_data'][0]['employee_tax']]);
+            if($final > $split[0] && $final < $split[1]){
+           $unemployment_range=$split[0]."-".$split[1];
+            }
+            }
+        $data['unemployment'] = $this->Hrm_model->unemployment_tax_info($data['employee_data'][0]['employee_tax'],$final,$unemployment_range);
+        if(!empty($data['unemployment'])){
+        $unemployment_employee= $data['Medicare'][0]['employee'];
+        $u_tax=($unemployment_employee/100)*$final;
+        }
+//State Tax
+ $state_tax = $this->db->select('*')->from('state_and_tax')->where('Status','1')->get()->result_array();
+ $state= $this->db->select('*')->from('state_and_tax')->where('state',$state_tax[0]['state'])->get()->result_array();
+ $tax_split=explode(',',$state[0]['tax']);
+ //print_r($tax_split);die();
+foreach($tax_split as $tax){
+   // echo $tax;
+    $tax=$this->db->select()->from('state_localtax')->where($data['employee_data'][0]['employee_tax'],)->where('tax',$state_tax[0]['state']."-".$tax)->get()->result_array();
+echo $this->db->last_query();
+echo "<br/>";
+}
 
-
-        
         $ads_id = $data['timesheet_data'][0]['admin_name'];
         $adminis_data = $this->Hrm_model->administrator_info($ads_id);
         $data=array(
+               's_tax'=>$s_tax,
+            'm_tax'=>$m_tax,
+            'u_tax'=>$u_tax,
+            'f_tax'=>$f_tax,
         'company'=> $datacontent,
         'business_name'=> $datacontent[0]['business_name'],
         'address'=> $datacontent[0]['address'],
@@ -98,18 +155,33 @@ class Chrm extends CI_Controller {
         'adm_name'  => $adminis_data,
         'adm_address'=> $adminis_data,
     );
-    $data1 = array(
-                 'totalhour_final'          => $final,
-                 'timesheet_id'   => $timesheetdata[0]['timesheet_id'],
-                 'total_hours'    => $timesheetdata[0]['total_hours'],
-                 'templ_name'     => $timesheetdata[0]['templ_name'],
-                 'employee_tax'   => $employeedata[0]['employee_tax'],
-                 'hrate'          => $employeedata[0]['hrate'],
-                 'id'             => $employeedata[0]['id'],
-                  'create_by'     => $this->session->userdata('user_id'),
-                );
-                // print_r($data1); die();
-            $this->db->insert('info_payslip',$data1);
+$data1 = array(
+        'totalhour_final'          => $final,
+        'timesheet_id'   => $timesheetdata[0]['timesheet_id'],
+        'total_hours'    => $timesheetdata[0]['total_hours'],
+        'templ_name'     => $timesheetdata[0]['templ_name'],
+        'employee_tax'   => $employeedata[0]['employee_tax'],
+        'hrate'          => $employeedata[0]['hrate'],
+        'id'             => $employeedata[0]['id'],
+        // 'month'          => $timesheetdata[0]['month'],
+         'create_by'     => $this->session->userdata('user_id'),
+       );
+    //    print_r($data1);die();
+     $test= $this->db->select('timesheet_id')->from('info_payslip')->where('timesheet_id',$timesheetdata[0]['timesheet_id'])->get()->row();
+    //  print_r($test);die();
+     if(!empty($test->timesheet_id)) {
+    $this->db->where('timesheet_id',$timesheet_id);
+    $this->db->delete('info_payslip');
+   // echo $this->db->last_query();
+    $this->db->insert('info_payslip',$data1);
+    // echo $this->db->last_query(); die();
+   // echo $this->db->last_query();
+     }
+     else{
+        $this->db->insert('info_payslip',$data1);
+        // echo $this->db->last_query();die();
+      //  echo $this->db->last_query();
+     }
     // print_r($data);
         $content = $this->parser->parse('hr/pay_slip', $data, true);
          $this->template->full_admin_html_view($content);

@@ -301,11 +301,11 @@ EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>
 
                                <p>THIS PERIOD($)</p>
                                <br>
-                               <p>62.00</p>
-                                <p>14.50</p>
-                                 <p>121.53</p>
-                                  <p>29.37</p>
-                                   <p>7.50</p>
+                               <p><?php echo $s_tax; ?></p>
+                                <p><?php echo $m_tax; ?></p>
+                                 <p><?php echo $f_tax; ?></p>
+                                  <p><?php echo $s_tax; ?></p>
+                                   <p><?php echo $s_tax; ?></p>
                                     <p></p>
                                      <p></p>
                                      <br>

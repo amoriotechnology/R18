@@ -30,27 +30,50 @@ class Hrm_model extends CI_Model {
          return false;
     }
     
- public function federal_tax_info($employee_status,$final,$range){
+ public function federal_tax_info($employee_status,$final,$federal_range){
         $this->db->select('employee');
         $this->db->from('federal_tax');
-        $this->db->where($employee_status,$range);
+        $this->db->where($employee_status,$federal_range);
        $query = $this->db->get();
+       //echo $this->db->last_query();
        if ($query->num_rows() > 0) {
            return $query->result_array();
         }
          return true;
 }
- public function social_tax_info($employee_status,$final,$range){
-        $this->db->select('employee');
+ public function unemployment_tax_info($employee_status,$final,$unemployment_range){
+        $this->db->select('employee,employer');
         $this->db->from('federal_tax');
-        $this->db->where($employee_status,$range);
+        $this->db->where($employee_status,$unemployment_range);
        $query = $this->db->get();
+      // echo  $this->db->last_query();
        if ($query->num_rows() > 0) {
            return $query->result_array();
         }
          return true;
 }
-
+ public function social_tax_info($employee_status,$final,$social_range){
+        $this->db->select('employee,employer');
+        $this->db->from('federal_tax');
+        $this->db->where($employee_status,$social_range);
+       $query = $this->db->get();
+     //  echo  $this->db->last_query();
+       if ($query->num_rows() > 0) {
+           return $query->result_array();
+        }
+         return true;
+}
+ public function Medicare_tax_info($employee_status,$final,$Medicare_range){
+        $this->db->select('employee,employer');
+        $this->db->from('federal_tax');
+        $this->db->where($employee_status,$Medicare_range);
+       $query = $this->db->get();
+    //   echo  $this->db->last_query();
+       if ($query->num_rows() > 0) {
+           return $query->result_array();
+        }
+         return true;
+}
     public function employee_info($templ_name){
 
         $this->db->select('*');
