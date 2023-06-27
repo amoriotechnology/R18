@@ -99,7 +99,7 @@
 
 <div class="col-sm-4">
 
-    <input name="first_name" class="form-control" type="text" placeholder="<?php echo display('first_name') ?>" required id="first_name">
+    <input name="first_name" class="form-control" type="text" placeholder="<?php echo display('first_name') ?>" required >
 
 </div>
 
@@ -107,7 +107,7 @@
 
 <div class="col-sm-4">
 
-    <input name="last_name" class="form-control" type="text" placeholder="<?php echo display('last_name') ?>" required id="last_name">
+    <input name="last_name" class="form-control" type="text" placeholder="<?php echo display('last_name') ?>" required >
 
 </div>
 

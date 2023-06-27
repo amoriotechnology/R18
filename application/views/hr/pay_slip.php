@@ -49,7 +49,7 @@
 
             <h1>Employee Payslip</h1>
 
-            <small>Add Employee Payslip</small>
+            <small></small>
 
             <ol class="breadcrumb">
 
@@ -90,14 +90,15 @@
     <div class="col-md-6">
         <p>
            
-           <?php echo $company[0]['business_name']; ?><br>
-           <?php echo $company[0]['address']; ?><br> 
-           <?php echo $company[0]['email']; ?><br>
-           <?php echo $company[0]['phone']; ?>
+           COMPANY NAME:<?php echo $company[0]['business_name']; ?><br>
+           ADDRESS:<?php echo $company[0]['address']; ?><br> 
+           EMAIL:<?php echo $company[0]['email']; ?><br>
+           PHONE:<?php echo $company[0]['phone']; ?>
         </p>
 
-        <div style="float: right;">1308-5812
-            <span>EE ID:1</span>
+        <div style="float: right;">TIMESHEET ID:<?php echo $infotime[0]['timesheet_id']; ?>  
+<br>
+            <span>EMPLOYEE ID:<?php echo $infoemployee[0]['id']; ?></span>
         </div>
 
     </div>
@@ -107,8 +108,9 @@
 <div class="Employee_details row">
 
   
-      Test<br>
-      Test
+EMPLOYEE NAME: <?php echo $infotime[0]['templ_name']; ?>  
+<br>
+EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>  
 
 </div>
 
@@ -118,10 +120,11 @@
                         <tbody>
                            <tr>
                               <td class="col-md-4"><h3>PERSONAL AND CHECK INFORMATION</h3>
-                                <p>Tarn C Doan</p>
-                              <p>28 Brownstone Blvd</p>
+                                
+                                <p><?php echo $adm_name[0]['adm_name']; ?></p>
+
+                              <p><?php echo $adm_name[0]['adm_address']; ?></p>
                              
-                              <p>Voorhee,NJ 08043</p>
                              
                               <p>Soc Sec #: xxx-xx-xxxx <span>Employee ID: 1</span> </p>
                                 <br>
@@ -186,31 +189,25 @@
                                 </div>
 
                                 <div class="col-md-1">
-
                                 <P>HRS/ UNITS</P>
                                 <br>
-                                <p>1000.00</p>
-                                <p>1000.00</p>
-                                <p>1000.00</p>
+                                <?php echo $infotime[0]['total_hours']; ?>
                                 </div>
-                                 <div class="col-md-1">
 
+
+
+                                 <div class="col-md-1">
                                 <P>RATE </P>
                                 <br>
-                                <p><?php echo  $employee_data[0]['total_hours']; ?></p>
-                                <p>1000.00</p>
-                                <p>1000.00</p>
-
+                                <?php echo $infoemployee[0]['hrate']; ?>
                                 </div>
-                                  <div class="col-md-2">
 
+
+
+                                  <div class="col-md-2">
                                <p>THIS PERIOD($)</p>
                                <br>
-                                <p>1000.00</p>
-                                <p>1000.00</p>
-                                 <p>1000.00</p>
-                                 <p>1000.00</p>
-
+                                <p><?php echo $total; ?></p>                        
                                 </div>
 
                                  <div class="col-md-2">
@@ -223,18 +220,34 @@
 
                                <p>YTD($)</p>
                                <br>
-                               <p>51800.00</p>
+                               <p><?php echo $total; ?></p>
                                <p></p>
-                                <p>51800.00</p>
+                               <p><?php echo $total; ?></p>
                                 <p></p>
 
+
+
+
                                 </div>
-
-
                                 </div>
                                
 
+
+
+
+
                                 <hr>
+
+
+
+
+
+
+
+
+
+
+
 
                                  <div class="row">
                                     <div class="col-md-2">

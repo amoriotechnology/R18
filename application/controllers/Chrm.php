@@ -42,18 +42,44 @@ class Chrm extends CI_Controller {
      public function time_list($timesheet_id = null,$templ_name)
      {
         $CI = & get_instance();
+        $CC = & get_instance();
+
         $CI->load->model('invoice_content');
         $this->load->model('Hrm_model');
-        $CC = & get_instance();
 
        
         $datacontent = $CC->invoice_content->retrieve_data();
 
-        $employee_data = $this->Hrm_model->employee_info($templ_name);
+        $data['employee_data'] = $this->Hrm_model->employee_info($templ_name);
         $data['timesheet_data'] = $this->Hrm_model-> timesheet_info_data($timesheet_id);
-        $hrate= $employee_data[0]['hrate'];
+       
+
+        $timesheetdata =$data['timesheet_data'];
+        $employeedata  =$data['employee_data'];
+
+
+        $hrate= $data['employee_data'][0]['hrate'];
         $total_hours=  $data['timesheet_data'][0]['total_hours'];    
         $final=$hrate *$total_hours;
+
+        $ads_id = $data['timesheet_data'][0]['admin_name']; 
+
+
+        $adminis_data = $this->Hrm_model->administrator_info($ads_id);
+
+
+
+       // echo $data['timesheetdata']['total_hours'];die();
+        // $administrator_info = $this->db->select('*')
+        // ->from('administrator')
+        // ->where('admin_name',$ads_id)
+        // ->get()
+        // ->result_array();
+
+        //  echo  $this->db->last_query();      die();  
+    //  print_r($administrator_info); 
+        // administrator_info[0]['']
+        
 
         $data=array(
         'company'=> $datacontent,
@@ -61,12 +87,20 @@ class Chrm extends CI_Controller {
         'address'=> $datacontent[0]['address'],
         'email'=> $datacontent[0]['email'],
         'phone'=> $datacontent[0]['phone'],
+        'infotime' =>  $timesheetdata,
+        'infoemployee' =>  $employeedata,
+        'total' => $final,
+        'adm_name'  => $adminis_data,
+        'adm_address'=> $adminis_data,
+    );
 
-        'total_hours' =>  $employee_data[0]['total_hours'],
+    print_r($data); 
 
-          );
 
-        
+
+     
+    // print_r($timesheetdata);
+
         $content = $this->parser->parse('hr/pay_slip', $data, true);
          $this->template->full_admin_html_view($content);
      }

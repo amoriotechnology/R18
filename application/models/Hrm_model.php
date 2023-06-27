@@ -31,7 +31,22 @@ class Hrm_model extends CI_Model {
     }
     
 
+    public function administrator_info($ads_id){
 
+        $this->db->select('*');
+        $this->db->from('administrator');
+        $this->db->where('adm_id',$ads_id);
+        $this->db->where('create_by',$this->session->userdata('user_id'));
+        $query = $this->db->get();
+        
+          echo $this->db->last_query(); 
+         if ($query->num_rows() > 0) {
+           return $query->result_array();
+         }
+
+        return true;
+
+    }
     
 
     public function employee_info($templ_name){
@@ -41,7 +56,7 @@ class Hrm_model extends CI_Model {
         $this->db->where('id', $templ_name);
         $this->db->where('create_by',$this->session->userdata('user_id'));
         $query = $this->db->get();
-       //  echo $this->db->last_query(); 
+    //    echo $this->db->last_query(); 
          if ($query->num_rows() > 0) {
            return $query->result_array();
          }
@@ -75,6 +90,8 @@ class Hrm_model extends CI_Model {
         $this->db->delete('person_ledger');
         return true;
       }
+
+
 
 
       public function get_data_payslip(){
