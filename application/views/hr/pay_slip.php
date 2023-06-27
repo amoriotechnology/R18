@@ -200,9 +200,11 @@ EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>
                                 <P>RATE </P>
                                 <br>
                                 <?php echo $infoemployee[0]['hrate']; ?>
+
                                 <p><?php echo  $total_hours; ?></p>
                                 <p>1000.00</p>
                                 <p>1000.00</p>
+
 
                                 </div>
 

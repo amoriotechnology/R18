@@ -44,43 +44,48 @@ class Chrm extends CI_Controller {
      {
         $CI = & get_instance();
         $CC = & get_instance();
-
         $CI->load->model('invoice_content');
         $this->load->model('Hrm_model');
-
-       
         $datacontent = $CC->invoice_content->retrieve_data();
-
         $data['employee_data'] = $this->Hrm_model->employee_info($templ_name);
         $data['timesheet_data'] = $this->Hrm_model-> timesheet_info_data($timesheet_id);
-       
-
         $timesheetdata =$data['timesheet_data'];
         $employeedata  =$data['employee_data'];
-
-
         $hrate= $data['employee_data'][0]['hrate'];
-        $total_hours=  $data['timesheet_data'][0]['total_hours'];    
+        $total_hours=  $data['timesheet_data'][0]['total_hours'];
         $final=$hrate *$total_hours;
 
-        $ads_id = $data['timesheet_data'][0]['admin_name']; 
-
-        $adminis_data = $this->Hrm_model->administrator_info($ads_id);
-
-
-
-       // echo $data['timesheetdata']['total_hours'];die();
-        // $administrator_info = $this->db->select('*')
-        // ->from('administrator')
-        // ->where('admin_name',$ads_id)
-        // ->get()
-        // ->result_array();
-
-        //  echo  $this->db->last_query();      die();  
-    //  print_r($administrator_info); 
-        // administrator_info[0]['']
+        // Federal Income Tax
+        $federal_tax = $this->db->select('*')->from('federal_tax')->where('tax','Federal Income tax')->get()->result_array();
+        $federal_range='';
+        foreach($federal_tax as $amt){
+           $split=explode('-',$amt[$data['employee_data'][0]['employee_tax']]);
+            if($final > $split[0] && $final < $split[1]){
+              $federal_range=$split[0]."-".$split[1];
+            }
+            }
+        $data['federal'] = $this->Hrm_model->federal_tax_info($data['employee_data'][0]['employee_tax'],$final,$range);
+        $Federal_employee= $data['federal'][0]['employee'];
+        $f_tax=($Federal_employee/100)*$final;
         
+        //Social Security
+        $social_tax = $this->db->select('*')->from('federal_tax')->where('tax','Social Security')->get()->result_array();
+        $social_range='';
+        foreach($social_tax as $amt){
+           $split=explode('-',$amt[$data['employee_data'][0]['employee_tax']]);
+            if($final > $split[0] && $final < $split[1]){
+              $social_range=$split[0]."-".$split[1];
+            }
+            }
+        $data['social'] = $this->Hrm_model->social_tax_info($data['employee_data'][0]['employee_tax'],$final,$range);
+        $social_employee= $data['federal'][0]['employee'];
+        $social_employer= $data['federal'][0]['employer'];
+        $s_tax=($social_employee/100)*$final;
 
+
+        
+        $ads_id = $data['timesheet_data'][0]['admin_name'];
+        $adminis_data = $this->Hrm_model->administrator_info($ads_id);
         $data=array(
         'company'=> $datacontent,
         'business_name'=> $datacontent[0]['business_name'],
@@ -93,17 +98,22 @@ class Chrm extends CI_Controller {
         'adm_name'  => $adminis_data,
         'adm_address'=> $adminis_data,
     );
-
-    // print_r($data); 
-
-
-
+    $data1 = array(
+                 'totalhour_final'          => $final,
+                 'timesheet_id'   => $timesheetdata[0]['timesheet_id'],
+                 'total_hours'    => $timesheetdata[0]['total_hours'],
+                 'templ_name'     => $timesheetdata[0]['templ_name'],
+                 'employee_tax'   => $employeedata[0]['employee_tax'],
+                 'hrate'          => $employeedata[0]['hrate'],
+                 'id'             => $employeedata[0]['id'],
+                  'create_by'     => $this->session->userdata('user_id'),
+                );
+                // print_r($data1); die();
+            $this->db->insert('info_payslip',$data1);
+    // print_r($data);
         $content = $this->parser->parse('hr/pay_slip', $data, true);
          $this->template->full_admin_html_view($content);
      }
-     
-     
-     
      
      
      
@@ -827,7 +837,7 @@ public function add_state_taxes_detail($tax=0) {
     
         $this->load->model('Hrm_model');
 
-        $data['employee_name'] = $this->Hrm_model->employee_name();
+        $data['employee_name'] = $this->Hrm_model->employee_name1();
 
          $data['payment_terms'] = $this->Hrm_model->get_payment_terms();
     

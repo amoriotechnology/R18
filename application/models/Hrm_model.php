@@ -30,20 +30,26 @@ class Hrm_model extends CI_Model {
          return false;
     }
     
- public function federal_tax_info($employee_status,$final){
- $this->db->select('*');
+ public function federal_tax_info($employee_status,$final,$range){
+        $this->db->select('employee');
         $this->db->from('federal_tax');
-        $this->db->where($employee_status,);
-      $query = $this->db->get();
-         echo $this->db->last_query(); 
-         if ($query->num_rows() > 0) {
+        $this->db->where($employee_status,$range);
+       $query = $this->db->get();
+       if ($query->num_rows() > 0) {
            return $query->result_array();
-         }
-
-
- }
-
-    
+        }
+         return true;
+}
+ public function social_tax_info($employee_status,$final,$range){
+        $this->db->select('employee');
+        $this->db->from('federal_tax');
+        $this->db->where($employee_status,$range);
+       $query = $this->db->get();
+       if ($query->num_rows() > 0) {
+           return $query->result_array();
+        }
+         return true;
+}
 
     public function employee_info($templ_name){
 
@@ -69,7 +75,7 @@ class Hrm_model extends CI_Model {
         $this->db->where('timesheet_id', $timesheet_id);
         $this->db->where('create_by',$this->session->userdata('user_id'));
         $query = $this->db->get();
-         echo $this->db->last_query(); 
+     //    echo $this->db->last_query(); 
          if ($query->num_rows() > 0) {
            return $query->result_array();
          }
@@ -183,7 +189,21 @@ class Hrm_model extends CI_Model {
         }
         return false;
     }
+    // public function federal(){
 
+    // }
+public function administrator_info($ads_id){
+        $this->db->select('*');
+        $this->db->from('administrator');
+        $this->db->where('adm_id',$ads_id);
+        $this->db->where('create_by',$this->session->userdata('user_id'));
+        $query = $this->db->get();
+       //   echo $this->db->last_query();
+         if ($query->num_rows() > 0) {
+           return $query->result_array();
+         }
+        return true;
+    }
     // Pdf Download Expense
     public function pdf_expense($id)
     {
@@ -231,6 +251,22 @@ class Hrm_model extends CI_Model {
 
 
 
+
+    public function employee_name1() {
+
+        $this->db->select('*');
+        $this->db->from('employee_history');
+          $this->db->where('create_by',$this->session->userdata('user_id'));
+     
+         $query = $this->db->get();
+      //  echo $this->db->last_query();die();
+       if ($query->num_rows() > 0) {
+        return $query->result_array();
+
+    }
+        return false;
+
+    }
 
 
 
