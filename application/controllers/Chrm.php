@@ -62,24 +62,11 @@ class Chrm extends CI_Controller {
         $total_hours=  $data['timesheet_data'][0]['total_hours'];    
         $final=$hrate *$total_hours;
 
+
+
         $ads_id = $data['timesheet_data'][0]['admin_name']; 
-
-
         $adminis_data = $this->Hrm_model->administrator_info($ads_id);
 
-
-
-       // echo $data['timesheetdata']['total_hours'];die();
-        // $administrator_info = $this->db->select('*')
-        // ->from('administrator')
-        // ->where('admin_name',$ads_id)
-        // ->get()
-        // ->result_array();
-
-        //  echo  $this->db->last_query();      die();  
-    //  print_r($administrator_info); 
-        // administrator_info[0]['']
-        
 
         $data=array(
         'company'=> $datacontent,
@@ -92,17 +79,27 @@ class Chrm extends CI_Controller {
         'total' => $final,
         'adm_name'  => $adminis_data,
         'adm_address'=> $adminis_data,
-    );
+    
+      );
+  
+               $data1 = array( 
+                 'totalhour_final'          => $final,
+                 'timesheet_id'   => $timesheetdata[0]['timesheet_id'],
+                 'total_hours'    => $timesheetdata[0]['total_hours'],
+                 'templ_name'     => $timesheetdata[0]['templ_name'],
+                 'employee_tax'   => $employeedata[0]['employee_tax'],
+                 'hrate'          => $employeedata[0]['hrate'],
+                 'id'             => $employeedata[0]['id'],
+                  'create_by'     => $this->session->userdata('user_id'),
+                );
 
-    print_r($data); 
+                // print_r($data1); die();
 
+            $this->db->insert('info_payslip',$data1);
 
-
-     
-    // print_r($timesheetdata);
 
         $content = $this->parser->parse('hr/pay_slip', $data, true);
-         $this->template->full_admin_html_view($content);
+        $this->template->full_admin_html_view($content);
      }
      
      

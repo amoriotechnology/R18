@@ -39,7 +39,7 @@ class Hrm_model extends CI_Model {
         $this->db->where('create_by',$this->session->userdata('user_id'));
         $query = $this->db->get();
         
-          echo $this->db->last_query(); 
+        //   echo $this->db->last_query(); 
          if ($query->num_rows() > 0) {
            return $query->result_array();
          }
@@ -509,16 +509,28 @@ public function designation_dropdown(){
 
 
     //Update Categories
-
     public function update_designation($data = []) {
-
         $this->db->where('id', $data['id']);
-
         $this->db->update('designation', $data);
-
         return true;
+    }
+
+
+
+
+    public function insert_totalamount($data1=null,$timesheet_id){
+
+        // $this->db->where('timesheet_id', $data1['timesheet_id']);
+
+        // $this->db->update('timesheet_info', $data1);
+
+    
+         
+
+      //  return true;
 
     }
+
 
 
 
@@ -748,19 +760,13 @@ $sql3="UPDATE state_and_tax SET tax = replace(replace(tax, ',,', ','), ',', ',')
     $updateddate = date('Y-m-d H:i:s');
 
     $employee_coa = [
-
              'HeadName'         => $up_headname,
-
              'UpdateBy'         => $updatedby,
-
              'UpdateDate'       => $updateddate,
-
         ];
 
         $this->db->where('HeadName', $headname);
-
         $this->db->update('acc_coa',$employee_coa);
-
         return true;
 
     }
