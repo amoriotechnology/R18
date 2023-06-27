@@ -21,7 +21,15 @@
 <script type="text/javascript" src="http://www.bacubacu.com/colresizable/js/colResizable-1.5.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/js/drag_drop_index_table.js"></script>
 
+<style>
+    th,td{
+        text-align:center;
+    }
+#content {
 
+padding:0px;
+}
+    </style>
 
 
 <div class="content-wrapper">
@@ -70,7 +78,7 @@
 
             ?>
 
-            <div class="alert alert-info alert-dismissable">
+            <div class="alert alert-info alert-dismissable" style="color: white;background-color: #38469f;">
 
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 
@@ -90,7 +98,7 @@
 
             ?>
 
-            <div class="alert alert-danger alert-dismissable">
+            <div class="alert alert-danger alert-dismissable" style="color: white;background-color: #38469f;">
 
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 
@@ -106,7 +114,9 @@
 
         ?>
 
-
+<script>
+    $('.alert').delay(1000).fadeOut('slow');
+</script>
 
         <!-- Manage Category -->
 
@@ -198,12 +208,13 @@
 <div id="for_filter_by" class="for_filter_by" style="display: inline;text-align:right;"><label for="filter_by"><?php echo display('Filter By') ?>&nbsp;&nbsp;
 
 </label><select id="filterby" style="border-radius:5px;height:25px;">
-<!-- <option value="1"><?php echo display('Sl') ?></option>
-<option value="2"><?php echo display('Name') ?></option>
-<option value="3"><?php echo ('Designation') ?></option>
-<option value="4"><?php echo ('Phone') ?></option>
-<option value="5"><?php echo ('Email') ?></option>
-<option value="6"><?php echo ('Picture') ?></option> -->
+<option value="1"><?php echo display('Sl') ?></option>
+<option value="2">Employee Name</option>
+<option value="3">Job title</option>
+<option value="4">Duration</option>
+<option value="5">Daily Break</option>
+<option value="6">Payment terms</option>
+<option value="7">month</option>
 
 </select> <input id="filterinput" style="border-radius:5px;height:25px;" type="text">
 
@@ -230,20 +241,20 @@
 
     <th class="1 value"  data-col="1"  data-resizable-column-id="1"    ><?php echo display('sl') ?></th>
 
-    <th class="2 value"  data-col="2"  data-resizable-column-id="2"    ><?php echo ('Employee Name') ?></th>
+    <th class="2 value"  data-col="2"  data-resizable-column-id="2"    >Employee Name</th>
 
-    <th class="3 value"  data-col="3"  data-resizable-column-id="3"   ><?php echo ('Job title') ?></th>
+    <th class="3 value"  data-col="3"  data-resizable-column-id="3"   >Job title</th>
 
-    <th class="4 value"  data-col="4"  data-resizable-column-id="4"   ><?php echo ('Duration') ?></th>
+    <th class="4 value"  data-col="4"  data-resizable-column-id="4"   >Duration</th>
 
-    <th class="5 value"  data-col="5"  data-resizable-column-id="5"   ><?php echo ('Daily Break') ?></th>
+    <th class="5 value"  data-col="5"  data-resizable-column-id="5"   >Daily Break</th>
 
-    <th class="6 value"  data-col="6"  data-resizable-column-id="6" ><?php echo display('Payment terms') ?></th>
+    <th class="6 value"  data-col="6"  data-resizable-column-id="6" >Payment terms</th>
 
-    <th class="7 value"  data-col="7"  data-resizable-column-id="7"><?php echo ('month') ?></th>
+    <th class="7 value"  data-col="7"  data-resizable-column-id="7">month</th>
 
 
-    <th class="8 value"  data-col="8"  data-resizable-column-id="8"><?php echo ('Action') ?></th>
+    <th class="8 value"  data-col="8"  data-resizable-column-id="8">Action</th>
 
     </tr>
 
@@ -276,7 +287,7 @@
 
                     <td class="1 value" data-col="1"><?php echo $sl;?></td>
 
- <td class="2 value"  data-col="2">  <?php echo html_escape($timsht['templ_name']);?></a></td>
+ <td class="2 value"  data-col="2">  <?php echo html_escape($timsht['first_name']." ".$timsht['last_name']);?></a></td>
 <td class="3 value"  data-col="3"><?php echo html_escape($timsht['job_title']);?></td>
 
 <td class="4 value"  data-col="4"><?php echo html_escape($timsht['duration']);?></td>
@@ -307,7 +318,7 @@
                <a class="btnclr btn m-b-5 m-r-2" href="<?php echo base_url('Chrm/time_sheet_pdf/'.$timsht['timesheet_id'])?>"><i class="fa fa-download" aria-hidden="true"></i></a>
              
              
-               <a href="<?php echo base_url('Chrm/employee_delete/'.$employees['id']) ?>" class="btnclr btn m-b-5 m-r-2" onclick="return confirm('<?php echo display('are_you_sure') ?>')" data-toggle="tooltip" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+               <a href="<?php echo base_url('Chrm/timesheet_delete/'.$timsht['timesheet_id']) ?>" class="btnclr btn m-b-5 m-r-2" onclick="return confirm('<?php echo display('are_you_sure') ?>')" data-toggle="tooltip" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 
 
 
@@ -348,9 +359,99 @@
 
 </div>
 
+
+
+
+
+           <div id="myModal_colSwitch" class="modal_colSwitch" >
+                    <div class="modal-content_colSwitch" style="width:25%;height:30%;">
+                          <span class="close_colSwitch">&times;</span>
+                           <div class="col-sm-2"></div>
+                          <div class="col-sm-4"><br><br>
+                          <div class="form-group row">
+                          <input type="checkbox"  data-control-column="1" checked = "checked" class="1"  value="1"/>&nbsp; <?php echo display('Sl')?><br><br>
+<input type="checkbox"  data-control-column="2" checked = "checked" class="2"  value="2"/>&nbsp;Employee Name<br><br>
+<input type="checkbox"  data-control-column="3" checked = "checked" class="3"   value="3"/>&nbsp;Job title<br><br>
+<input type="checkbox"  data-control-column="4" checked = "checked" class="4"   value="4"/>&nbsp;Duration<br><br>
+
+
+                          </div> </div>
+                           <div class="col-sm-2"></div>
+                          <div class="col-sm-4"><br><br>
+                          <div class="form-group row">
+                        
+<input type="checkbox"  data-control-column="5"  class="5" value="5"/>&nbsp;Daily Break<br><br>
+<input type="checkbox"  data-control-column="6"  class="6" value="6"/>&nbsp;Payment terms<br><br>
+<input type="checkbox"  data-control-column="7"  class="7" value="7"/>&nbsp;Month<br><br>
+
+    <input type="checkbox"  data-control-column="8" checked = "checked" class="8"   value="8"/>&nbsp;<?php echo display('Action')?><br>
+                          </div>
+                          </div>
+            </div>
+                </div>
 </section>
 
 </div>
 
+<script type="text/javascript" src="<?php echo base_url()?>my-assets/js/profarma.js"></script>
+<script>
+ $(document).on('keyup', '#filterinput', function(){
+  
+    var value = $(this).val().toLowerCase();
+    var filter=$("#filterby").val();
+    $("#ProfarmaInvList tr:not(:eq(0))").filter(function() {
+        $(this).toggle($(this).find("td."+filter).text().toLowerCase().indexOf(value) > -1)
+    });
+});
+$("input:checkbox:not(:checked)").each(function() {
+    var column = "table ." + $(this).attr("value");
+    console.log("Heyy : "+column);
+    $(column).hide();
+});
 
+$("input:checkbox").click(function(){
+    var column = "table ." + $(this).attr("value");
+      console.log("Heyy : "+column);
+    $(column).toggle();
+});
+    var csrfName = '<?php echo $this->security->get_csrf_token_name();?>';
+var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
+$editor = $('#submit'),
+  $editor.on('click', function(e) {
+    if (this.checkValidity && !this.checkValidity()) return;
+    e.preventDefault();
+    var yourArray = [];
+    //loop through all checkboxes which is checked
+    $('.modal-content_colSwitch input[type=checkbox]:not(:checked)').each(function() {
+      yourArray.push($(this).val());//push value in array
+    });
+   
+    values = {
+    
+      extralist_text: yourArray
+    
+    };
+    console.log(values)
+    var json=values;
+    var data = {
+        page:$('#url').val(),
+          content: yourArray
+       
+       };
+       data[csrfName] = csrfHash;
+$.ajax({
+    
+    type: "POST",  
+    url:'<?php echo base_url();?>Cinvoice/setting',
+   
+    data: data,
+    dataType: "json", 
+    success: function(data) {
+        if(data) {
+           console.log(data);
+        }
+    }  
+});
+  });
+</script>
 
