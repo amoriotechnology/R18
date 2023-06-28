@@ -129,14 +129,40 @@ class Chrm extends CI_Controller {
  $state_tax = $this->db->select('*')->from('state_and_tax')->where('Status','1')->get()->result_array();
  $state= $this->db->select('*')->from('state_and_tax')->where('state',$state_tax[0]['state'])->get()->result_array();
  $tax_split=explode(',',$state[0]['tax']);
- //print_r($tax_split);die();
+ //print_r($state);
+ $local_tax_range='';
+        $local_tax='';
+        $i=1;
 foreach($tax_split as $tax){
    // echo $tax;
-    $tax=$this->db->select()->from('state_localtax')->where($data['employee_data'][0]['employee_tax'],)->where('tax',$state_tax[0]['state']."-".$tax)->get()->result_array();
-echo $this->db->last_query();
-echo "<br/>";
-}
+    $tax=$this->db->select('*')->from('state_localtax')->where('tax',$state_tax[0]['state']."-".$tax)->get()->result_array();
+   // print_r($tax);
+//$selected_tax=trim($tax[$i][$data['employee_data'][0]['employee_tax']]);
+ foreach($tax as $tx){
+ // print_r($tx);
+  //  echo $tx;
+ //$tx_name= trim($data['employee_data'][0]['employee_tax']);
+           $split=explode('-',$tx[$data['employee_data'][0]['employee_tax']]);
+          // print_r($split);
+        
+            if($final > $split[0] && $final < $split[1]){
+       $local_tax_range=$split[0]."-".$split[1];
+     
+            }
+            $i++;
+           }
+// echo $this->db->last_query();
+// echo "<br/>";
 
+}
+//echo "Tax Range :".$local_tax_range;
+    $data['localtax'] = $this->Hrm_model->local_state_tax($data['employee_data'][0]['employee_tax'],$final,$local_tax_range);
+  //  print_r($data['localtax']);die();
+        if(!empty($data['localtax'])){
+        $local_tax_employee= $data['localtax'][0]['employee'];
+        echo $local_tax_employee;
+        //$u_tax=($unemployment_employee/100)*$final;
+        }
         $ads_id = $data['timesheet_data'][0]['admin_name'];
         $adminis_data = $this->Hrm_model->administrator_info($ads_id);
         $data=array(
@@ -191,7 +217,12 @@ $data1 = array(
      
 
 
-
+public function add_taxname_data(){
+        $this->load->model('Hrm_model');
+        $postData = $this->input->post('value');
+        $data = $this->Hrm_model->insert_taxesname($postData);
+        echo json_encode($data);
+    }
 
 
 

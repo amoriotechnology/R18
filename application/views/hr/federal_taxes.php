@@ -358,8 +358,8 @@ border-collapse:collapse;'>
                  
                   $j=1;
                
-                   echo "<tr><td>".$k."</td><td class='state_name' style='text-align:center;font-weight:bold;' rowspan='".$j."'>". $states_list[$i]['state']."</td><td><table>";
-                  
+                 
+                  echo "<tr><td>".$k."</td> <td><input style='text-align:center' type='checkbox' value=".$states_list[$i]['state']." class='checkbox_id' ></td> <td class='state_name' style='text-align:center;font-weight:bold;' rowspan='".$j."'>". $states_list[$i]['state']."</td> <td><table>";
                    foreach($splt as $sp){
                    
           //  $empName = $states_list[$i];
@@ -618,7 +618,28 @@ break;
 
 var csrfName = '<?php echo $this->security->get_csrf_token_name();?>';
 var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
-
+$('.checkbox_id').click(function() {
+    var tax_name=$(this).closest('tr').find('.checkbox_id').val();
+    var data = {
+      value:tax_name
+     };
+   data[csrfName] = csrfHash;
+   $.ajax({
+      type:'POST',
+      data: data,
+      dataType:"json",
+      url:'<?php echo base_url();?>Chrm/add_taxname_data',
+      success: function(result, statut) {
+      }
+  });
+});
+$(document).ready(function(){
+$('[type="checkbox"]').change(function(){
+  if(this.checked){
+     $('[type="checkbox"]').not(this).prop('checked', false);
+  }
+});
+});
 
 
 

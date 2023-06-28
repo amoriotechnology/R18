@@ -63,6 +63,13 @@ class Hrm_model extends CI_Model {
         }
          return true;
 }
+public function  insert_taxesname($postData){
+        $data=array(
+            'status' => 1,
+        );
+        $this->db->where('state',$postData);
+        $this->db->update('state_and_tax', $data);
+    }
  public function Medicare_tax_info($employee_status,$final,$Medicare_range){
         $this->db->select('employee,employer');
         $this->db->from('federal_tax');
@@ -74,6 +81,18 @@ class Hrm_model extends CI_Model {
         }
          return true;
 }
+ public function local_state_tax($employee_status,$final,$local_tax_range){
+  $this->db->select('employee,employer');
+        $this->db->from('state_localtax');
+        $this->db->where($employee_status,$local_tax_range);
+       $query = $this->db->get();
+    //   echo  $this->db->last_query();
+       if ($query->num_rows() > 0) {
+           return $query->result_array();
+        }
+         return true;
+
+ }
     public function employee_info($templ_name){
 
         $this->db->select('*');
