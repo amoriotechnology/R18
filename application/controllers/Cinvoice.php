@@ -801,8 +801,8 @@ echo json_encode($data);
         $dataw = $CII->invoice_design->retrieve_data($this->session->userdata('user_id'));
         
        $datacontent = $CI->invoice_content->retrieve_data();
-
-    //    print_r($datacontent); exit();
+//  print_r($company_info);
+//        print_r($datacontent); exit();
 
 
        $customer = $this->db->select('*')->from('customer_information')->where("customer_id",$purchase_detail[0]['customer_id'])->get()->result_array();
@@ -814,26 +814,26 @@ echo json_encode($data);
             'curn_info_default' =>$curn_info_default[0]['currency_name'],
             'currency'  =>$currency_details[0]['currency'],
             'header'=> $dataw[0]['header'],
-            'logo'=> $setting[0]['invoice_logo'],
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:base_url().$company_info[0]['logo']),  
             'color'=> $dataw[0]['color'],
             'template'=> $dataw[0]['template'],
             'all_supplier' => $all_supplier,
-            'address'=>$datacontent[0]['address'],
+           // 'address'=>$datacontent[0]['address'],
             
-            'cname'=>$datacontent[0]['business_name'],
-            'phone'=>$datacontent[0]['phone'],
-            'email'=>$datacontent[0]['email'],
-            'reg_number'=>$datacontent[0]['reg_number'],
-            'website'=>$datacontent[0]['website'],
-            'address'=>$datacontent[0]['address'],
+            'cname'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:$company_info[0]['reg_number']),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),   
          
             'customer_currency' => $customer[0]['currency_type'],
             'customer'      => $customer[0]['customer_name'],
       
             'tax' => $purchase_detail[0]['tax_details'],
-            
+            'company_info'=> (!empty($datacontent)?$datacontent:$company_info),
 
-            'company_info'     => $datacontent,
+          //  'company_info'     => $datacontent,
 
 
                  'purchase_id'   => $purchase_detail[0]['purchase_id'],
@@ -946,18 +946,18 @@ echo json_encode($data);
             'curn_info_default' =>$curn_info_default[0]['currency_name'],
             'currency'  =>$currency_details[0]['currency'],
             'header'=> $dataw[0]['header'],
-            'logo'=> $setting[0]['invoice_logo'],
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:base_url().$company_info[0]['logo']),  
             'color'=> $dataw[0]['color'],
             'template'=> $dataw[0]['template'],
             'all_supplier' => $all_supplier,
             'address'=>$datacontent[0]['address'],
-            
-            'cname'=>$datacontent[0]['business_name'],
-            'phone'=>$datacontent[0]['phone'],
-            'email'=>$datacontent[0]['email'],
-            'reg_number'=>$datacontent[0]['reg_number'],
-            'website'=>$datacontent[0]['website'],
-            'address'=>$datacontent[0]['address'],
+             'company_info'=> (!empty($datacontent)?$datacontent:$company_info),
+           'cname'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:$company_info[0]['reg_number']),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
          
             'customer_currency' => $customer[0]['currency_type'],
             'customer'      => $customer[0]['customer_name'],
@@ -965,7 +965,7 @@ echo json_encode($data);
             'tax' => $purchase_detail[0]['tax_details'],
             
 
-            'company_info'     => $datacontent,
+          
                  'purchase_id'   => $purchase_detail[0]['purchase_id'],
             'chalan_no'     => $purchase_detail[0]['chalan_no'],
             'purchase_date'  => $purchase_detail[0]['purchase_date'],
@@ -2808,11 +2808,11 @@ $this->db->update('bootgrid_data');
             'curn_info_default' =>$curn_info_default[0]['currency_name'],
             'currency'  =>$currency_details[0]['currency'],
             'header'=> $dataw[0]['header'],
-            'logo'=> $setting[0]['invoice_logo'],
+           'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']), 
             'color'=> $dataw[0]['color'],
             'template'=> $dataw[0]['template'],
             'packing_id'  =>$invoice_detail[0]['packing_id'],
-            'company'=> $datacontent,
+          'company'=> (!empty($datacontent)?$datacontent:$company_info), 
             'customer_currency'=> $customer[0]['currency_type'],
             'customername'=> $customer[0]['customer_name'],
            
@@ -2869,11 +2869,11 @@ $this->db->update('bootgrid_data');
             'curn_info_default' =>$curn_info_default[0]['currency_name'],
             'currency'  =>$currency_details[0]['currency'],
             'header'=> $dataw[0]['header'],
-            'logo'=> $setting[0]['invoice_logo'],
+          'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']), 
             'color'=> $dataw[0]['color'],
             'template'=> $dataw[0]['template'],
             'packing_id'  =>$invoice_detail[0]['packing_id'],
-            'company'=> $datacontent,
+          'company'=> (!empty($datacontent)?$datacontent:$company_info), 
             'customer_currency'=> $customer[0]['currency_type'],
             'customername'=> $customer[0]['customer_name'],
            
@@ -3126,7 +3126,7 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
     //  print_r($all_invoice); 
 
           $dataw = $CA->invoice_design->retrieve_data();
-          print_r( $dataw );
+    //      print_r( $dataw );
         $datacontent = $CC->invoice_content->retrieve_data();
      //   print_r($datacontent); 
 
@@ -3148,7 +3148,7 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
             'curn_info_default' =>$curn_info_default[0]['currency_name'],
             'currency'  =>$currency_details[0]['currency'],
             'header'=> $dataw[0]['header'],
-            'logo'=> $setting[0]['invoice_logo'],
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),   
             'color'=> $dataw[0]['color'],
             'template'=> $dataw[0]['template'],
            'invoice_id'      => $invoice_detail[0]['invoice_id'],
@@ -3160,8 +3160,8 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
             'container_no'=> $invoice_detail[0]['container_no'],
             'bl_no'=> $invoice_detail[0]['bl_no'],
 
-            'company'=> $datacontent,
-
+            'company'=> (!empty($datacontent)?$datacontent:$company_info),     
+ 
 
             'customer_currency'=> $customer[0]['currency_type'],
             'customername'=> $customer[0]['customer_name'],
@@ -3212,7 +3212,7 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
             'invoice_detail'=>$invoice_detail
          
         );
-   
+ // print_r($data);die();
          print_r($dataw[0]['color']);
     $content = $this->load->view('invoice/new_invoice_pdf_html', $data, true);
 
@@ -3268,7 +3268,7 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
             'curn_info_default' =>$curn_info_default[0]['currency_name'],
             'currency'  =>$currency_details[0]['currency'],
             'header'=> $dataw[0]['header'],
-            'logo'=> $setting[0]['invoice_logo'],
+         'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
             'color'=> $dataw[0]['color'],
             'template'=> $dataw[0]['template'],
      'invoice_id'      => $invoice_detail[0]['invoice_id'],
@@ -3279,7 +3279,7 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
             'billing_address' => $invoice_detail[0]['billing_address'],
             'container_no'=> $invoice_detail[0]['container_no'],
             'bl_no'=> $invoice_detail[0]['bl_no'],
-            'company'=> $datacontent,
+             'company'=> (!empty($datacontent)?$datacontent:$company_info), 
             'customer_currency'=> $customer[0]['currency_type'],
             'customername'=> $customer[0]['customer_name'],
    

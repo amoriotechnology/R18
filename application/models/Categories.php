@@ -61,7 +61,7 @@ $query = $this->db->get()->row();
 
         $this->db->from('product_category');
 
-       
+       $this->db->where('created_by',$this->session->userdata('user_id'));
 
         $query = $this->db->get();
 

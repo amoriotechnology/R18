@@ -1498,12 +1498,11 @@ class Ppurchases extends CI_Model {
     public function retrieve_company() {
         $this->db->select('*');
         $this->db->from('company_information');
-     
+        $this->db->where('company_id', $this->session->userdata('user_id'));
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
-        
     }
 
     //Update Categories

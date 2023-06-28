@@ -286,15 +286,12 @@ if ($query->num_rows() > 0 )
         $fomdata=$this->input->post();
         $mysqltime = date ('Y-m-d H:i:s');
         if($fomdata['form_type']=='sales&Profarma'   ){
-          
     $this->db->select("*");
     $this->db->from('sales_invoice_settings');
     $this->db->where('user_id', $fomdata['uid'] );
     $this->db->where('invoice_template', $fomdata['form_type'] );
     $query = $this->db->get();
-
 //    echo $this->db->last_query();
-
     if ( $query->num_rows() > 0 )
     {
       //  $row = $query->row_array();
@@ -302,80 +299,60 @@ if ($query->num_rows() > 0 )
       $data = array(
         'Time' => $mysqltime,
         'account' => $fomdata['acc'],
-        'remarks'  => $fomdata['remarks']
+        'remarks'  => $fomdata['remarks'],
+        'create_by'       =>  $this->session->userdata('user_id'),
         );
-
-    //    print_r($data); die();
-        
+    //   print_r($data);
         $this->db->where('user_id', $fomdata['uid']);
         $this->db->where('invoice_template',$fomdata['form_type']);
         $this->db->update('sales_invoice_settings',$data);
     }else{
-      
         $data = array(
             'user_id' => $fomdata['uid'],
             'invoice_template' => $fomdata['form_type'],
             'account'  =>  $fomdata['acc'],
             'remarks'  => $fomdata['remarks'],
             'Time'  => $mysqltime,
+            'create_by'       =>  $this->session->userdata('user_id'),
             );
-        print_r($data);
-
+        // print_r($data);
             $this->db->insert('sales_invoice_settings', $data);
     }
-
 }else///remarks
 {
     $this->db->select('*');
-
     $this->db->from('sales_invoice_settings');
-
     $this->db->where('user_id', $fomdata['uid'] );
     $this->db->where('invoice_template', $fomdata['form_type'] );
-
     $query = $this->db->get();
     // echo $this->db->last_query();
-
     if ( $query->num_rows() > 0 )
     {
-
         $data = array(
             'Time' => $mysqltime,
-            'remarks' => $fomdata['remarks']
-           
-            );     //    print_r($data);
-
+            'remarks' => $fomdata['remarks'],
+            'create_by'       =>  $this->session->userdata('user_id'),
+            );
+            //  print_r($data);die();
             $this->db->where('user_id', $fomdata['uid']);
             $this->db->where('invoice_template',$fomdata['form_type']);
             $this->db->update('sales_invoice_settings',$data);
-
             // echo $this->db->last_query();die();
 //////////Update
-		 
-
 }
 else
 {
-    
-  
     $data = array(
         'user_id' => $fomdata['uid'],
         'invoice_template' => $fomdata['form_type'],
-       'remarks'  => $fomdata['company_address'],
+        'remarks'  => $fomdata['remarks'],
         'Time'  => $mysqltime,
         );
-
-        //  print_r($data);
+        // print_r($data); die();
        $this->db->insert('sales_invoice_settings', $data);
-		
-}   
-    
 }
-        
-  
+}
         return true;
-       
-
     }
 
 

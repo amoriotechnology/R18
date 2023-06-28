@@ -29,10 +29,8 @@ th{
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title">
+      
+        <!-- <div class="header-title">
             <h1><?php echo display('Sale Invoice') ?></h1>
             <small><?php echo display('invoice_details') ?></small>
             <ol class="breadcrumb">
@@ -40,7 +38,7 @@ th{
                 <li><a href="#"><?php echo display('invoice') ?></a></li>
                 <li class="active"><?php echo display('invoice_details') ?></li>
             </ol>
-        </div>
+        </div> -->
     </section>
     <!-- Main content -->
     <section class="content">
@@ -74,6 +72,7 @@ th{
 
 
 ?>
+<div id="head"></div>
     <div class="container" id="content">
         <?php
   
@@ -94,10 +93,10 @@ th{
 
    <div class="col-sm-3" style="color:white;font-weight:bold;" id='company_info'>
    
-   <b><?php echo display('Company name') ?> : </b><?php echo $company[0]['business_name']; ?><br>
+   <b><?php echo display('Company name') ?> : </b><?php echo $company[0]['company_name']; ?><br>
              <b>  <?php echo display('Address ') ?>: </b><?php echo $company[0]['address']; ?><br>
              <b> <?php echo display('Email ') ?>: </b><?php echo $company[0]['email']; ?><br>
-             <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['phone']; ?><br>
+             <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['mobile']; ?><br>
           </div>
 
 
@@ -318,10 +317,10 @@ elseif($template==1)
 
 <div class="col-sm-4" style="color:white;font-weight:bold;" id='company_info'>
    
-<b><?php echo display('Company name') ?> : </b><?php echo $company[0]['business_name']; ?><br>
+<b><?php echo display('Company name') ?> : </b><?php echo $company[0]['company_name']; ?><br>
           <b>  <?php echo display('Address ') ?>: </b><?php echo $company[0]['address']; ?><br>
           <b> <?php echo display('Email ') ?>: </b><?php echo $company[0]['email']; ?><br>
-          <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['phone']; ?><br>
+          <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['mobile']; ?><br>
        </div>
 
 
@@ -544,10 +543,10 @@ elseif($template==2)
        <div class="col-sm-3 text-center" style="color:white;     text-align: end;"><h3><?php echo $header; ?></h3></div>
 
        <div class="col-sm-6" style="color:white;font-weight:bold ;text-align: end;" id='company_info'>          
-     <b><?php echo display('Company name') ?> : </b><?php echo $company[0]['business_name']; ?><br>
+     <b><?php echo display('Company name') ?> : </b><?php echo $company[0]['company_name']; ?><br>
           <b>  <?php echo display('Address ') ?>: </b><?php echo $company[0]['address']; ?><br>
           <b> <?php echo display('Email ') ?>: </b><?php echo $company[0]['email']; ?><br>
-          <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['phone']; ?><br>
+          <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['mobile']; ?><br>
        </div>
 
 
@@ -923,6 +922,17 @@ body {
     padding: 0;
     background: #38469f;
 }
+#head{
+    text-align: center;
+    margin-top: 250px;
+}
+
+
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+}
 </style>
 
 <div class="modal fade" id="myModal_sale" role="dialog" >
@@ -1007,13 +1017,28 @@ var v=$(this).html();
 
  $(document).ready(function () {
   // window.onload =function (){
-   
+   $("#content").attr("hidden", true);
+
+ var img = document.createElement("img");
+img.src = "<?php  echo  base_url() ?>/asset/images/icons/loading.gif";
+var src = document.getElementById("head");
+src.appendChild(img);
+
+
+     const element = document.getElementById("content");
+
+    // clone the element
+    var clonedElement = element.cloneNode(true);
+
+    // change display of cloned element 
+    $(clonedElement).css("display", "block");
+    var pdf = new jsPDF('p','pt','a4');
 
 function first(callback1,callback2){
 setTimeout( function(){
-    var pdf = new jsPDF('p','pt','a4');
-    const invoice = document.getElementById("content");
-             console.log(invoice);
+    // var pdf = new jsPDF('p','pt','a4');
+    // const invoice = document.getElementById("content");
+            // console.log(invoice);
              console.log(window);
              var pageWidth = 8.5;
              var margin=0.5;
@@ -1026,16 +1051,18 @@ setTimeout( function(){
                  html2canvas: { scale: 3 },
                  jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
              };
-              html2pdf().from(invoice).set(opt).toPdf().get('pdf').then(function (pdf) {
+              html2pdf().from(clonedElement).set(opt).toPdf().get('pdf').then(function (pdf) {
   var totalPages = pdf.internal.getNumberOfPages();
  for (var i = 1; i <= totalPages; i++) {
     pdf.setPage(i);
     pdf.setFontSize(10);
     pdf.setTextColor(150);
   }
-  }).save('invoice_no_<?php echo $invoicenumber.'.pdf'  ?>');
+  }).save('NewSale_<?php  echo $all_invoice[0]['commercial_invoice_number'].'.pdf'  ?>');
     callback1();
     callback2();
+         clonedElement.remove();
+ $("#content").attr("hidden", true);
  }, 3000 );
 }
 function second(){

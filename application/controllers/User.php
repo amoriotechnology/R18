@@ -172,6 +172,14 @@ public function company_insert(){
     
              $this->db->insert('company_information',$data);
               $cid= $this->db->insert_id();
+              $cid= $this->db->insert_id();
+             $data1 = array(
+                'create_by'     => $cid,
+                //  'template'     =>1,
+             );
+            //  print_r($data1); die();
+             $this->db->insert('web_setting',$data1);
+             $this->db->insert('invoice_design',$data1);
              $num_str = sprintf("%03d", mt_rand(1, 999));
      $data = array(
             

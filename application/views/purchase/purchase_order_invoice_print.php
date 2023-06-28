@@ -2,18 +2,7 @@
 
 <div class="content-wrapper">
 	<section class="content-header">
-	    <div class="header-icon">
-	        <i class="pe-7s-note2"></i>
-	    </div>
-	    <div class="header-title">
-	        <h1><?php  echo  display('Purchase Order');  ?></h1>
-	        <small></small>
-	        <ol class="breadcrumb">
-	            <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-	            <li><a href="#"><?php echo display('expense');  ?></a></li>
-	            <li class="active"><?php  echo  display('Purchase Order');?></li>
-	        </ol>
-	    </div>
+
 	</section>
 
 
@@ -26,7 +15,8 @@
 
 ?>
 
-           <?php // echo $match[0];  ?>     
+           <?php // echo $match[0];  ?>    
+           <div id="head"></div> 
     <div class="container" id="content">
     <?php 
 
@@ -882,7 +872,16 @@ table th, table td {
     size: A3;
     margin: 0mm;
 }
-
+#content{display:none;} 
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+} 
+  #head{
+    text-align: center;
+    margin-top: 250px;
+}
        
     </style>
 

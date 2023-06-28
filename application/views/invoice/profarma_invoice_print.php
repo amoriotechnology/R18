@@ -1,18 +1,7 @@
 <!-- Purchase Payment Ledger Start -->
 <div class="content-wrapper">
 	<section class="content-header">
-	    <div class="header-icon">
-	        <i class="pe-7s-note2"></i>
-	    </div>
-	    <div class="header-title">
-	        <h1><?php echo display('Purchase Order Invoice') ?></h1>
-	        <small><?php echo display('Purchase Order Invoice') ?></small>
-	        <ol class="breadcrumb">
-	            <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-	            <li><a href="#"><?php echo display('Purchase Order Invoice') ?></a></li>
-	            <li class="active"><?php echo display('Purchase Order Invoice') ?></li>
-	        </ol>
-	    </div>
+
 	</section>
 
 	<!-- Invoice information -->
@@ -60,7 +49,7 @@
      
         
 <!-- 
-     <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>"   style='width: 100%;'  /></div>
+     <div class="col-sm-2"><img src="<?php echo  $logo; ?>"   style='width: 100%;'  /></div>
 
 
        </div>
@@ -76,7 +65,7 @@
 
 
 
-       <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>" style='width: 100%;'>
+       <div class="col-sm-2"><img src="<?php echo  $logo; ?>" style='width: 100%;'>
         
         </div>
       <div class="col-sm-6 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
@@ -293,7 +282,7 @@ elseif($template==1)
 
             <div class="col-sm-6 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
        
-                  <div class="col-sm-3"><img src="<?php echo  base_url().$logo; ?>" style='width: 100%;'></div>
+                  <div class="col-sm-3"><img src="<?php echo  $logo; ?>" style='width: 100%;'></div>
  -->
 
 
@@ -312,7 +301,7 @@ elseif($template==1)
    
    <div class="col-sm-5 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
    
-   <div class="col-sm-3"><img src="<?php echo  base_url().$logo; ?>"   style='width: 70%;'  /></div>
+   <div class="col-sm-3"><img src="<?php echo  $logo; ?>"   style='width: 70%;'  /></div>
    
 
 
@@ -504,7 +493,7 @@ elseif($template==3)
     
 <div class="col-sm-2 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
 
-<div class="col-sm-4"><img src="<?php echo  base_url().$logo; ?>"   style='width: 30%;float:right;'  /></div>
+<div class="col-sm-4"><img src="<?php echo  $logo; ?>"   style='width: 30%;float:right;'  /></div>
 
 
 
@@ -728,6 +717,7 @@ if($a==$m){
     <style>
 #content{
     padding:10px;
+    display:none;
 }
    
 .key{
@@ -927,8 +917,12 @@ table th, table td {
     size: A3;
     margin: 0mm;
 }
+#content{display:none;} 
+    @media print 
+{ 
 
-       
+#content{display:block;} 
+}    
     </style>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

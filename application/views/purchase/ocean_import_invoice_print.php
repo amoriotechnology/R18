@@ -13,18 +13,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title">
-           <h1><?php echo  display('Ocean Import Tracking'); ?></h1>
-            <small>Ocean Import Invoice Detail</small>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('invoice') ?></a></li>
-                <li class="active"><?php   echo  display('Ocean Import Tracking')?></li>
-            </ol>
-        </div>
+      
     </section>
    
     <!-- Main content -->
@@ -457,8 +446,16 @@ table th, table td {
     margin: 0mm;
 }
 
-       
-
+  #content{display:none;} 
+     #head{
+    text-align: center;
+    margin-top: 250px;
+}
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+} 
 
 </style>      
 

@@ -2,28 +2,31 @@
 
 <div class="content-wrapper">
     <section class="content-header" >
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title" >
-            <h1><?php echo display('purchase_ledger') ?></h1>
-            <small><?php echo display('purchase_ledger') ?></small>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('purchase') ?></a></li>
-                <li class="active"><?php echo display('purchase_ledger') ?></li>
-            </ol>
-        </div>
+       
     </section>
   <!-- Invoice information -->
  
  <style>
+    .sidebar-mini{
+  background-color:#38469f;
+    }
    body{
        background-color:#38469f;
    }
+       #head{
+    text-align: center;
+    margin-top: 250px;
+}
+
+#content{display:none;} 
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+} 
  </style>
 
-
+<div id="head"></div>
      <div class="container" id="content">
         <?php
     $m=1;
@@ -33,7 +36,7 @@
         <div class="brand-section" style="background-color:<?php echo $color; ?>">
         <div class="row" >
      
-     <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>" style='width: 100%;'>
+     <div class="col-sm-2"><img src="<?php echo $logo; ?>" style='width: 100%;'>
         
        </div>
       <div class="col-sm-6 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
@@ -140,11 +143,11 @@ elseif($template==3)
     <div class="brand-section" style="background-color:<?php echo $color; ?>">
     <div class="row" >
    <div class="col-sm-2 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
- <div class="col-sm-4"><img src="<?php echo  base_url().$logo; ?>" style='width: 30%;float:right;'>
+ <div class="col-sm-4"><img src="<?php echo $logo; ?>" style='width: 30%;float:right;'>
     
    </div>
 
- <div class="col-sm-6" style="color:white;font-weight:bold ;text-align: end;"  id='company_info'>
+ <div class="col-sm-6" style="color:white;font-weight:bold ;"  id='company_info'>
        
       <b> <?php echo display('Company name') ?> : </b><?php echo $company_info[0]['company_name']; ?><br>
       <b>  <?php echo display('Address') ?> : </b><?php echo $company_info[0]['address']; ?><br>
@@ -265,7 +268,7 @@ elseif($template==1)
         
           <div class="col-sm-5 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
           
-          <div class="col-sm-3"><img src="<?php echo  base_url().$logo; ?>" style='width: 70%;'>
+          <div class="col-sm-3"><img src="<?php echo $logo; ?>" style='width: 70%;'>
            
            </div>
 
@@ -390,11 +393,27 @@ elseif($template==1)
 <script>
 
 $(document).ready(function () {
+      $("#content").attr("hidden", true);
+
+ var img = document.createElement("img");
+img.src = "<?php  echo  base_url() ?>/asset/images/icons/loading.gif";
+var src = document.getElementById("head");
+src.appendChild(img);
+
+
+     const element = document.getElementById("content");
+
+    // clone the element
+    var clonedElement = element.cloneNode(true);
+
+    // change display of cloned element 
+    $(clonedElement).css("display", "block");
+    var pdf = new jsPDF('p','pt','a4');
 function first(callback1,callback2){
 setTimeout( function(){
-    var pdf = new jsPDF('p','pt','a4');
-    const invoice = document.getElementById("content");
-             console.log(invoice);
+  //  var pdf = new jsPDF('p','pt','a4');
+   // const invoice = document.getElementById("content");
+           //  console.log(invoice);
              console.log(window);
              var pageWidth = 8.5;
              var margin=0.5;
@@ -407,16 +426,18 @@ setTimeout( function(){
                  html2canvas: { scale: 3 },
                  jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
              };
-              html2pdf().from(invoice).set(opt).toPdf().get('pdf').then(function (pdf) {
+              html2pdf().from(clonedElement).set(opt).toPdf().get('pdf').then(function (pdf) {
   var totalPages = pdf.internal.getNumberOfPages();
  for (var i = 1; i <= totalPages; i++) {
     pdf.setPage(i);
     pdf.setFontSize(10);
     pdf.setTextColor(150);
   }
-  }).save('invoice_no');
+  }).save('ServiceProvider_<?php echo $bill_number.'.pdf'  ?>');
     callback1();
     callback2();
+                     clonedElement.remove();
+ $("#content").attr("hidden", true);
  }, 2500 );
 }
 function second(){
@@ -429,13 +450,13 @@ $( '.close' ).click(function() {
   $( '#myModal_ex' ).removeClass( 'open' );
   $( '.cont' ).removeClass( 'blur' );
 });
-}, 3000 );
+}, 3500 );
 }
 function third(){
     setTimeout( function(){
         window.location='<?php  echo base_url();   ?>'+'Cpurchase/manage_purchase';
         window.close();
-    }, 3500 );
+    }, 4500 );
 }
 first(second,third);
 });
@@ -443,9 +464,11 @@ first(second,third);
 
 
 <style>
-
+#content {
+  padding:10px;
+  padding-top:10px;
+}
 .key{
-    width:250px;
     border:none;
     text-align:left;
 font-weight:bold;
@@ -460,8 +483,8 @@ float:left;
 width:100%;
 }
 body{
-    background-color: #fcf8f8; 
-    margin: 0;
+    background-color: #38469f; 
+    margin: 0px;
     
 }
 h1,h2,h3,h4,h5,h6{
@@ -482,7 +505,7 @@ p{
     margin-top: 50px;
 }
 .brand-section{
-   background-color: #5961b3;
+   /* background-color: #5961b3; */
    padding: 10px 40px;
 }
 .logo{
@@ -525,7 +548,7 @@ th{
 }
 table{
    
-    /*background-color: #fff;*/
+    background-color: #fff;
     width: 100%;
     border-collapse: collapse;
    
@@ -533,7 +556,7 @@ table{
 
 table thead tr{
     border: 1px solid #111;
-  
+    /* background-color: #5961b3; */
     
 }
 .table-bordered td{
@@ -546,10 +569,13 @@ table td {
 }
 th{
     text-align:center;
-   
+    color:white;
 }
 
-
+table th, table td {
+    /* padding-top: 08px;
+    padding-bottom: 08px; */
+}
 .table-bordered{
     box-shadow: 0px 0px 5px 0.5px gray !important;
 }
@@ -618,22 +644,21 @@ th{
 .content {
     min-height: 0px;
 }
-
-    .input-symbol-euro {
-  position: absolute;
-  font-size: 14px;
+#content{display:none;} 
+  #head{
+    text-align: center;
+    margin-top: 250px;
 }
-.input-symbol-euro input {
-  padding-left: 18px;
-}
-.input-symbol-euro:after {
-  position: absolute;
-  top: 7px;
- content: '<?php echo $currency; ?>';
-  left: 5px;
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+} 
+  #head{
+    text-align: center;
+    margin-top: 250px;
 }
 </style>
-
 
 
 

@@ -2,18 +2,7 @@
 
 <div class="content-wrapper">
     <section class="content-header" >
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title" >
-            <h1><?php echo display('purchase_ledger') ?></h1>
-            <small><?php echo display('purchase_ledger') ?></small>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('purchase') ?></a></li>
-                <li class="active"><?php echo display('purchase_ledger') ?></li>
-            </ol>
-        </div>
+       
     </section>
   <!-- Invoice information -->
   <?php
@@ -444,13 +433,13 @@ if($a==$m){
       <div class="modal-content" style="width: 500px;height:100px;text-align:center;margin-bottom: 300px;">
         <div class="modal-header" style="">
       
-          <h4 class="modal-title">New Expenses</h4>
+          <h4 class="modal-title">Sale</h4>
         </div>
         <div class="content">
 
         <div class="modal-body">
           
-          <h4>New Expenses Downloaded Successfully</h4>
+          <h4>Packing List Downloaded Successfully</h4>
      
         </div>
         <div class="modal-footer">
@@ -658,7 +647,14 @@ table th, table td {
     margin: 0mm;
 }
 
+#content{
+    display:none;
+}
+@media print 
+{ 
 
+#content{display:block;} 
+}
 </style>
 
     

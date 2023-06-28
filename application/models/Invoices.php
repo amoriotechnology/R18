@@ -3115,12 +3115,12 @@ $this->db->where('payment_id',$payment_id);
 
 public function profarma_invoice_customer()
 {
-    $query = $this->db->get('customer_information');
-
+    $this->db->select('*');
+    $this->db->from('customer_information');
+    $this->db->where('create_by',$this->session->userdata('user_id'));
+    $query = $this->db->get();
     if ($query->num_rows() > 0) {
-
         return $query->result_array();
-
     }
     return true;
 }

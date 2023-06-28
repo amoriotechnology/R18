@@ -363,7 +363,12 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
             $CI = & get_instance();
             $CI->load->model('Invoices');
             $CI->load->model('Web_settings');
+               $CI->load->model('invoice_content');
             $CI->load->library('occational');
+             $w = & get_instance();
+
+        $w->load->model('Ppurchases');
+        $company_info = $w->Ppurchases->retrieve_company();
             $purchase_detail = $CI->Invoices->ocean_export_tracking_details_data($purchase_id);
             if (!empty($purchase_detail)) {
                 $i = 0;
@@ -377,20 +382,21 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
             }
             $CII = & get_instance();
             $CII->load->model('invoice_design');
+              $datacontent = $CI->invoice_content->retrieve_info_data();
             $currency_details = $CI->Web_settings->retrieve_setting_editdata();
 
             $dataw = $CII->invoice_design->retrieve_data();
 
             $setting=  $CI->Web_settings->retrieve_setting_editdata();
 
-            $company_info = $CI->Invoices->retrieve_company();
+          
             $customer_name = $CI->db->select('*')->from('customer_information')->where('customer_id', $purchase_detail[0]['consignee'])->get()->result_array();
                      $setting=  $CI->Web_settings->retrieve_setting_editdata();
 
          
             $data = array(
                 'header'=> $dataw[0]['header'],
-               'logo'=> $setting[0]['invoice_logo'],
+              'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
                 'color'=> $dataw[0]['color'],
                 'template'=> $dataw[0]['template'],
             'title'            => 'Ocean Export Tracking Invoice Detail',
@@ -399,10 +405,14 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
               'customer_name'  => $customer_name[0]['customer_name'],
                 'supplier'    => $purchase_detail[0]['supplier_name'],
                 'container_no'    => $purchase_detail[0]['container_no'],
-                'company'    => $company_info[0]['company_name'],
-                'address'    => $company_info[0]['address'],
-                'email'    => $company_info[0]['email'],
-                'phone'    => $company_info[0]['mobile'],
+                    
+
+ 'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:$company_info[0]['reg_number']),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),  
                 'seal_no'       => $purchase_detail[0]['seal_no'],
                 'etd' => $purchase_detail[0]['etd'],
                 'eta' => $purchase_detail[0]['eta'],
@@ -443,7 +453,10 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
         $CI->load->model('invoice_content');
+ $w = & get_instance();
 
+        $w->load->model('Ppurchases');
+        $company_info = $w->Ppurchases->retrieve_company();
         $purchase_detail = $CI->Invoices->ocean_export_tracking_details_data($purchase_id);
         if (!empty($purchase_detail)) {
             $i = 0;
@@ -465,11 +478,11 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
         $setting=  $CI->Web_settings->retrieve_setting_editdata();
 
 
-        $company_info = $CI->Invoices->retrieve_company();
+    
         $customer_name = $CI->db->select('*')->from('customer_information')->where('customer_id', $purchase_detail[0]['consignee'])->get()->result_array();
         $data = array(
             'header'=> $dataw[0]['header'],
-            'logo'=> $setting[0]['invoice_logo'],
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
             'color'=> $dataw[0]['color'],
             'template'=> $dataw[0]['template'],
         'title'            => 'Ocean Export Tracking Invoice Detail',
@@ -478,10 +491,20 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
           'customer_name'  => $customer_name[0]['customer_name'],
             'supplier'    => $purchase_detail[0]['supplier_name'],
             'container_no'    => $purchase_detail[0]['container_no'],
-            'business_name'    => $datacontent[0]['business_name'],
-            'address'    => $datacontent[0]['address'],
-            'email'    => $datacontent[0]['email'],
-            'phone'    => $datacontent[0]['phone'],
+
+
+         
+
+ 'business_name'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:$company_info[0]['reg_number']),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),  
+
+
+
+
             'seal_no'       => $purchase_detail[0]['seal_no'],
             'etd' => $purchase_detail[0]['etd'],
             'eta' => $purchase_detail[0]['eta'],
@@ -663,18 +686,26 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
             'curn_info_default' =>$curn_info_default[0]['currency_name'],
             'currency'  =>$currency_details[0]['currency'],
             'header'=> $dataw[0]['header'],
-            'logo'=> $setting[0]['invoice_logo'],
+          'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
             'color'=> $dataw[0]['color'],
             'template'=> $dataw[0]['template'],
             'all_supplier' => $all_supplier,
             'add'=>$company_info[0]['address'],
             'company'=>$company_info[0]['company_name'],
-            'cname'=>$datacontent[0]['business_name'],
-            'phone'=>$datacontent[0]['phone'],
-            'email'=>$datacontent[0]['email'],
-            'reg_number'=>$datacontent[0]['reg_number'],
-            'website'=>$datacontent[0]['website'],
-            'address'=>$datacontent[0]['address'],
+  
+
+
+             'cname'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:$company_info[0]['reg_number']),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),  
+
+
+
+
+
             'title'            => display('purchase_details'),
             'trucking_id'      => $purchase_detail[0]['trucking_id'],
             'invoice_no' =>  $purchase_detail[0]['invoice_no'],
@@ -748,18 +779,18 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
         'curn_info_default' =>$curn_info_default[0]['currency_name'],
         'currency'  =>$currency_details[0]['currency'],
             'header'=> $dataw[0]['header'],
-            'logo'=> $setting[0]['invoice_logo'],
+           'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
             'color'=> $dataw[0]['color'],
             'template'=> $dataw[0]['template'],
             'all_supplier' => $all_supplier,
             'add'=>$company_info[0]['address'],
             'company'=>$company_info[0]['company_name'],
-            'cname'=>$datacontent[0]['business_name'],
-            'phone'=>$datacontent[0]['phone'],
-            'email'=>$datacontent[0]['email'],
-            'reg_number'=>$datacontent[0]['reg_number'],
-            'website'=>$datacontent[0]['website'],
-            'address'=>$datacontent[0]['address'],
+            'cname'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:$company_info[0]['reg_number']),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),  
             'title'            => display('purchase_details'),
             'trucking_id'      => $purchase_detail[0]['trucking_id'],
             'invoice_no' =>  $purchase_detail[0]['invoice_no'],

@@ -13,25 +13,10 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title">
-        <h1><?php echo display('invoice design') ?></h1>
-            <!-- <h1>Packing List Invoice Detail</h1>
-            <small>Packing List Invoice Detail</small>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('invoice') ?></a></li>
-                <li class="active">Packing List Invoice Detail</li> -->
-                <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('ads') ?></a></li>
-                <li class="active"><?php echo display('update_setting') ?></li>
-            </ol>
-        </div>
+       
     </section>
     <!-- Main content -->
+    <div id="head"></div>
     <div class="" id="content">
     <section class="content">   
         <!-- Alert Message -->
@@ -506,13 +491,13 @@ elseif($template==3)
       <div class="modal-content" style="width: 500px;height:100px;text-align:center;margin-bottom: 300px;">
         <div class="modal-header" style="color:white;background-color:#38469f;">
       
-          <h4 class="modal-title"><?php echo display('Sales - Trucking') ?></h4>
+          <h4 class="modal-title"><?php echo display('Sales - Road Transport') ?></h4>
         </div>
         <div class="content">
 
         <div class="modal-body" style="text-align:center;font-weight:bold;">
           
-          <h4><?php echo display('Trucking Invoice Downloaded Successfully') ?></h4>
+          <h4><?php echo display('Road Transport Downloaded Successfully') ?></h4>
      
         </div>
         <div class="modal-footer">
@@ -696,6 +681,19 @@ float: right;
 .content {
    min-height: 0px;
 }
+  #head{
+    text-align: center;
+    margin-top: 250px;
+}
+
+#content{display:none;} 
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+} 
+
+
     </style>    
 
 
@@ -715,11 +713,27 @@ float: right;
 <script>
    
    $(document).ready(function () {
+     $("#content").attr("hidden", true);
+
+ var img = document.createElement("img");
+img.src = "<?php  echo  base_url() ?>/asset/images/icons/loading.gif";
+var src = document.getElementById("head");
+src.appendChild(img);
+
+
+     const element = document.getElementById("content");
+
+    // clone the element
+    var clonedElement = element.cloneNode(true);
+
+    // change display of cloned element 
+    $(clonedElement).css("display", "block");
+    var pdf = new jsPDF('p','pt','a4');
 function first(callback1,callback2){
 setTimeout( function(){
-    var pdf = new jsPDF('p','pt','a4');
-    const invoice = document.getElementById("content");
-             console.log(invoice);
+   //var pdf = new jsPDF('p','pt','a4');
+    //const invoice = document.getElementById("content");
+          //   console.log(invoice);
              console.log(window);
              var pageWidth = 8.5;
              var margin=0.5;
@@ -732,16 +746,18 @@ setTimeout( function(){
                  html2canvas: { scale: 3 },
                  jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
              };
-              html2pdf().from(invoice).set(opt).toPdf().get('pdf').then(function (pdf) {
+              html2pdf().from(clonedElement).set(opt).toPdf().get('pdf').then(function (pdf) {
   var totalPages = pdf.internal.getNumberOfPages();
  for (var i = 1; i <= totalPages; i++) {
     pdf.setPage(i);
     pdf.setFontSize(10);
     pdf.setTextColor(150);
   }
-  }).save('invoice_no_<?php echo $invoice_no.'.pdf'  ?>');
+  }).save('TruckingInvoice_<?php echo $invoice_no.'.pdf'  ?>');
     callback1();
     callback2();
+                 clonedElement.remove();
+ $("#content").attr("hidden", true);
  }, 3500 );
 }
 function second(){

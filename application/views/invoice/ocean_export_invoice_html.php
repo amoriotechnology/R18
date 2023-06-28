@@ -21,18 +21,16 @@ display:none;
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title">
-            <h1><?php echo display('Ocean Export Invoice Detail') ?> </h1>
-            <small><?php echo display('Ocean Export Invoice Detail') ?> </small>
+      
+        <!-- <div class="header-title">
+            <h1><?php echo display('Sale Invoice') ?></h1>
+            <small><?php echo display('invoice_details') ?></small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('invoice') ?></a></li>
-                <li class="active"><?php echo display('Ocean Export Invoice Detail') ?> </li>
+                <li class="active"><?php echo display('invoice_details') ?></li>
             </ol>
-        </div>
+        </div> -->
     </section>
     <!-- Main content -->
     <div class="">
@@ -62,7 +60,7 @@ display:none;
         ?>
       <!-- <table id="tab"> -->
            
-         
+   <div id="head"></div>      
  <div class="container" id="content">
  <?php 
   
@@ -487,7 +485,17 @@ table th, table td {
 .content {
     min-height: 0px;
 }
+  #head{
+    text-align: center;
+    margin-top: 250px;
+}
 
+
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+} 
 
 </style>      
 
@@ -508,12 +516,26 @@ table th, table td {
 <script>
 
 $(document).ready(function () {
-  
+   $("#content").attr("hidden", true);
+
+ var img = document.createElement("img");
+img.src = "<?php  echo  base_url() ?>/asset/images/icons/loading.gif";
+var src = document.getElementById("head");
+src.appendChild(img);
+
+
+     const element = document.getElementById("content");
+
+    // clone the element
+    var clonedElement = element.cloneNode(true);
+
+    // change display of cloned element 
+    $(clonedElement).css("display", "block");
+    var pdf = new jsPDF('p','pt','a4');
 function first(callback1,callback2){
 setTimeout( function(){
-    var pdf = new jsPDF('p','pt','a4');
-    const invoice = document.getElementById("content");
-             console.log(invoice);
+   // var pdf = new jsPDF('p','pt','a4');
+ 
              console.log(window);
              var pageWidth = 8.5;
              var margin=0.5;
@@ -526,7 +548,7 @@ setTimeout( function(){
                  html2canvas: { scale: 3 },
                  jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
              };
-              html2pdf().from(invoice).set(opt).toPdf().get('pdf').then(function (pdf) {
+              html2pdf().from(clonedElement).set(opt).toPdf().get('pdf').then(function (pdf) {
   var totalPages = pdf.internal.getNumberOfPages();
  for (var i = 1; i <= totalPages; i++) {
     pdf.setPage(i);
@@ -534,9 +556,11 @@ setTimeout( function(){
     pdf.setTextColor(150);
   }
  
-  }).save('Booking_no_<?php echo $booking_no.'.pdf'  ?>');
+  }).save('Ocean_Export_<?php echo $booking_no.'.pdf'  ?>');
     callback1();
     callback2();
+             clonedElement.remove();
+ $("#content").attr("hidden", true);
  }, 2500 );
 
 }

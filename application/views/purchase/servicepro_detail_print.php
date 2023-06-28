@@ -17,6 +17,9 @@
     </section>
   <!-- Invoice information -->
  <style>
+      .sidebar-mini{
+  background-color:#38469f;
+    }
    body{
        background-color:#38469f;
    }
@@ -33,7 +36,7 @@
         <div class="brand-section" style="background-color:<?php echo $color; ?>">
         <div class="row" >
      
-     <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>" style='width: 100%;'>
+     <div class="col-sm-2"><img src="<?php echo $logo; ?>" style='width: 100%;'>
         
        </div>
       <div class="col-sm-6 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
@@ -140,11 +143,11 @@ elseif($template==3)
     <div class="brand-section" style="background-color:<?php echo $color; ?>">
     <div class="row" >
    <div class="col-sm-2 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
- <div class="col-sm-4"><img src="<?php echo  base_url().$logo; ?>" style='width: 30%;float:right;'>
+ <div class="col-sm-4"><img src="<?php echo $logo; ?>" style='width: 30%;float:right;'>
     
    </div>
 
- <div class="col-sm-6" style="color:white;font-weight:bold ;text-align: end;"  id='company_info'>
+ <div class="col-sm-6" style="color:white;font-weight:bold ;  "  id='company_info'>
        
       <b>  <?php echo display('Company name') ?> : </b><?php echo $company_info[0]['company_name']; ?><br>
       <b>   <?php echo display('Address') ?> : </b><?php echo $company_info[0]['address']; ?><br>
@@ -255,7 +258,7 @@ elseif($template==1)
 
 
 
- <div class="col-sm-4" id='company_info' style="color:white;font-weight:bold ;text-align: end;">
+ <div class="col-sm-4" id='company_info' style="color:white;font-weight:bold ;">
             
             <b> <?php echo display('Company name') ?> : </b><?php echo $company_info[0]['company_name']; ?><br>
             <b><?php echo display('Address') ?> : </b><?php echo $company_info[0]['address']; ?><br>
@@ -265,7 +268,7 @@ elseif($template==1)
         
           <div class="col-sm-5 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
           
-          <div class="col-sm-3"><img src="<?php echo  base_url().$logo; ?>" style='width: 70%;'>
+          <div class="col-sm-3"><img src="<?php echo $logo; ?>" style='width: 70%;'>
            
            </div>
 
@@ -407,14 +410,14 @@ function printDiv(elementId) {
 
 
 
-<style>
+
 
 <style>
 
 .key{
   text-align:left;
 font-weight:bold;
-width:400px;
+width:250px;
 
 }
 .value{
@@ -609,6 +612,17 @@ filter: blur(5px);
   size: A3;
   margin: 0mm;
 }
+#content{display:none;} 
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+} 
+  #head{
+    text-align: center;
+    margin-top: 250px;
+}
+   
 </style>
 
 

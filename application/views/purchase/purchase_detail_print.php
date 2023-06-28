@@ -2,18 +2,7 @@
 
 <div class="content-wrapper">
     <section class="content-header" >
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title" >
-            <h1><?php echo display('purchase_ledger') ?></h1>
-            <small><?php echo display('purchase_ledger') ?></small>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('purchase') ?></a></li>
-                <li class="active"><?php echo display('purchase_ledger') ?></li>
-            </ol>
-        </div>
+
     </section>
   <!-- Invoice information -->
   <?php
@@ -849,7 +838,13 @@ filter: blur(5px);
   margin: 0mm;
 }
 
-     
+   #content{display:none;} 
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+} 
+  
   </style>
 
 <div class="modal fade" id="myModal_sale" role="dialog" >
@@ -859,13 +854,13 @@ filter: blur(5px);
       <div class="modal-content" style="width: 500px;height:100px;text-align:center;margin-bottom: 300px;">
         <div class="modal-header" style="">
       
-          <h4 class="modal-title">New Sale</h4>
+          <h4 class="modal-title">Expense</h4>
         </div>
         <div class="content">
 
         <div class="modal-body" style="text-align:center;font-weight:bold;">
           
-          <h4>New Sale Downloaded Successfully</h4>
+          <h4>Purchase Order Downloaded Successfully</h4>
      
         </div>
         <div class="modal-footer">

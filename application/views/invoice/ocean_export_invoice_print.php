@@ -13,18 +13,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title">
-            <h1><?php echo display('Ocean Export Invoice Detail') ?></h1>
-            <small><?php echo display('Ocean Export Invoice Detail') ?></small>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('invoice') ?></a></li>
-                <li class="active"><?php echo display('Ocean Export Invoice Detail') ?></li>
-            </ol>
-        </div>
+     
     </section>
     <!-- Main content -->
     <div class="">
@@ -225,7 +214,7 @@ elseif($template==3)
 
 <div class="col-sm-6" style="color:white;font-weight:bold ;text-align: end;" id='company_info'>
    
-<b>  <?php echo display('Company name') ?> : </b><?php echo $cname; ?><br>
+<b>  <?php echo display('Company name') ?> : </b><?php echo $company; ?><br>
   <b>   <?php echo display('Address') ?> : </b><?php echo $address; ?><br>
   <b>   <?php echo display('Email') ?> : </b><?php echo $email; ?><br>
   <b>   <?php echo display('Contact') ?> : </b><?php echo $phone; ?><br>
@@ -503,7 +492,12 @@ table th, table td {
     margin: 0mm;
 }
 
-       
+   #content{display:none;} 
+    @media print 
+{ 
+
+#content{display:block;} 
+}      
 
 
 </style>      

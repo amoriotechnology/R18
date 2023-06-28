@@ -21,18 +21,7 @@ textarea:focus, input:focus{
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title">
-            <h1><?php echo display('invoice_details') ?></h1>
-            <small><?php echo display('invoice_details') ?></small>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('invoice') ?></a></li>
-                <li class="active"><?php echo display('invoice_details') ?></li>
-            </ol>
-        </div>
+
     </section>
     <!-- Main content -->
     <section class="content">
@@ -985,8 +974,14 @@ table th, table td {
     size: A3;
     margin: 0mm;
 }
+#content{
+    display:none;
+}
+@media print 
+{ 
 
-
+#content{display:block;} 
+}
 </style>
 
 <div class="modal fade" id="myModal_sale" role="dialog" >

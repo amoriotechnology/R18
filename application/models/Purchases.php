@@ -1372,7 +1372,7 @@ public function ret_company_info() {
                 ->where('supplier_id',$value)
                 ->where('status', '1')
                 ->get();
-             
+          //   echo $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }

@@ -10,13 +10,12 @@ class Settings extends CI_Model {
     }
 
     //BANK LIST
-    public function get_bank_list() {
+   public function get_bank_list() {
         $this->db->select('*');
         $this->db->from('bank_add');
         $this->db->where('created_by',$this->session->userdata('user_id'));
         $this->db->order_by('bank_name','asc');
         $this->db->where('status', 1);
-
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -440,7 +439,7 @@ class Settings extends CI_Model {
 
 
     //==========Bank Ledger=============//
-    public function bank_ledger($bank_name,$from,$to) {
+ public function bank_ledger($bank_name) {
         $this->db->select('a.*,b.HeadName');
         $this->db->from('acc_transaction a');
         $this->db->join('acc_coa b','a.COAID=b.HeadCode');
@@ -448,8 +447,8 @@ class Settings extends CI_Model {
         if(!empty($bank_name)){
         $this->db->where('b.HeadName',$bank_name);
          }
-        $this->db->where('a.VDate >=', $from);
-        $this->db->where('a.VDate <=', $to);
+        // $this->db->where('a.VDate >=', $from);
+        // $this->db->where('a.VDate <=', $to);
         $this->db->where('a.IsAppove',1);
         $this->db->order_by('a.VDate','desc');
         $query = $this->db->get();
@@ -458,7 +457,6 @@ class Settings extends CI_Model {
         }
         return false;
     }
-
     //==========Bank Info=============//
     public function bank_info($bank_id) {
         $this->db->select('*');
@@ -475,7 +473,7 @@ class Settings extends CI_Model {
 
     //COUNT PRODUCT
     public function bank_entry($data) {
-        $this->db->insert('bank_add', $data);
+      //  $this->db->insert('bank_add', $data);
         $this->db->select('bank_name');
         $this->db->from('bank_add');
         $this->db->where('created_by', $this->session->userdata('user_id'));

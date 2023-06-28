@@ -14,25 +14,10 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title">
-        <h1><?php  echo display('Road Transport');  ?></h1>
-            <!-- <h1>Packing List Invoice Detail</h1>
-            <small>Packing List Invoice Detail</small>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php// echo display('home') ?></a></li>
-                <li><a href="#"><?php //echo display('invoice') ?></a></li>
-                <li class="active">Packing List Invoice Detail</li> -->
-                <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('expense');  ?></a></li>
-                <li class="active"><?php echo display('Road Transport');?></li>
-            </ol>
-        </div>
+       
     </section>
     <!-- Main content -->
+    <div id="head"></div>
     <div class="" id="content">
     <section class="content">   
         <!-- Alert Message -->
@@ -537,7 +522,7 @@ elseif($template==3)
 
         <div class="modal-body" style="text-align:center;">
           
-          <h4>Trucking Invoice Downloaded Successfully</h4>
+          <h4>Road Transport Downloaded Successfully</h4>
      
         </div>
         <div class="modal-footer">
@@ -728,6 +713,16 @@ table th, table td {
 .content {
      min-height: 0px;
 }
+  #content{display:none;} 
+     #head{
+    text-align: center;
+    margin-top: 250px;
+}
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+} 
 </style>    
 
 

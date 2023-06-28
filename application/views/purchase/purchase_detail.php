@@ -2,18 +2,7 @@
 
 <div class="content-wrapper">
     <section class="content-header" >
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title" >
-            <h1><?php echo display('purchase_ledger') ?></h1>
-            <small><?php echo display('purchase_ledger') ?></small>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('purchase') ?></a></li>
-                <li class="active"><?php echo display('purchase_ledger') ?></li>
-            </ol>
-        </div>
+ 
     </section>
   <!-- Invoice information -->
   <?php
@@ -23,34 +12,35 @@
       
       
       ?>
+      <div id="head"></div>
      <div class="container" id="content">
         <?php
     
-     if($template==2)
-            {
-            ?>
-        <div class="brand-section" style="background-color:<?php echo $color; ?>">
-        <div class="row" >
-     
-     <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>" style='width: 100%;'>
-        
-       </div>
-     <div class="col-sm-5 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
-    <div class="col-sm-5" style="color:white;font-weight:bold;" id='company_info'>
-           
-          <b> Company name : </b><?php echo $company_info[0]['business_name']; ?><br>
-          <b>   Address : </b><?php echo $company_info[0]['address']; ?><br>
-          <b>   Email : </b><?php echo $company_info[0]['email']; ?><br>
-          <b>   Contact : </b><?php echo $company_info[0]['phone']; ?><br>
-       </div>
- </div>
-        </div>
-       
-        <div class="body-section">
-            <div class="row">
-                <div class="col-6">
-                <table id="one" style="border:none;">
-    <tr><td  class="key"><?php echo display('Vendor');?></td><td >:</td><td calss="value"><?php echo $supplier_nam;  ?></td></tr>
+    if($template==2)
+    {
+    ?>
+<div class="brand-section">
+<div class="row" >
+
+<div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>" style='width: 50%;'>
+
+</div>
+<div class="col-sm-4 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
+<div class="col-sm-4" style="color:white;font-weight:bold;" id='company_info'>
+   
+  <b> Company name : </b><?php echo $company_info[0]['company_name']; ?><br>
+  <b>   Address : </b><?php echo $company_info[0]['address']; ?><br>
+  <b>   Email : </b><?php echo $company_info[0]['email']; ?><br>
+  <b>   Contact : </b><?php echo $company_info[0]['mobile']; ?><br>
+</div>
+</div>
+</div>
+
+<div class="body-section">
+    <div class="row">
+        <div class="col-6">
+        <table id="one" style="border:none;">
+<tr><td  class="key"><?php echo display('Vendor');?></td><td >:</td><td calss="value"><?php echo $supplier_nam;  ?></td></tr>
 <tr><td  class="key"><?php echo display('Vendor Type');?></td><td >:</td><td calss="value"><?php echo $vendor_type;  ?></td></tr>
 <tr><td  class="key"><?php echo display('invoice_no');  ?></td><td >:</td><td calss="value"><?php echo $chalan_no;  ?></td></tr>
 <tr><td  class="key"><?php echo display('Payment Due Date');?></td><td >:</td><td calss="value"><?php echo $payment_due_date;  ?></td></tr>
@@ -62,6 +52,7 @@
 <tr><td  class="key"><?php echo display('Estimated Time Of Arrival');?></td><td >:</td><td calss="value"><?php echo $eta;  ?></td></tr>
 <?php  if(!empty($isf_filling)) { ?>
 <tr><td  class="key"><?php echo display('ISF NO');?></td><td >:</td><td calss="value"><?php echo $isf_filling;  ?></td></tr>
+<tr><td  class="key"><?php echo display('B/L No');?></td><td >:</td><td calss="value"><?php echo $bl_number;  ?></td></tr>
 <?php   }  ?>
 
 </table>
@@ -72,16 +63,16 @@
         <tr><td  class="key"><?php echo display('Vendor Address');?></td><td >:</td><td calss="value"><?php echo $address."-".$city ."<br/>".$state."-".$zip."-".$country ."<br/>".$primaryemail."-".$mobile ; ?></td></tr>
 <tr><td  class="key"><?php echo display('Expenses / Bill date');?></td><td >:</td><td calss="value"><?php echo $final_date;  ?></td></tr>
 <tr><td  class="key"><?php echo display('Container Number');?></td><td>:</td><td calss="value"><?php echo $container_no;  ?></td></tr>
-<tr><td  class="key"><?php echo display('B/L No');?></td><td >:</td><td calss="value"><?php echo $bl_number;  ?></td></tr>
+
 
 <tr><td  class="key"><?php echo display('Port Of Discharge');?></td><td>:</td><td calss="value"><?php echo $Port_of_discharge;  ?></td></tr>
 <!-- <tr><td  class="key">Attachments</td><td style="width:10px;">:</td><td calss="value"><?php  ?></td></tr> -->
 
-    
+
 </table> </div> 
-            </div>
-        </div>
-        <div class="body-section" >
+    </div>
+</div>
+ <div class="body-section" >
           <div class="table-responsive">
      
   
@@ -92,24 +83,24 @@
 for($m=1;$m<count($purchase_all_data);$m++){ 
     ?>
     <table class="table table-bordered normalinvoice table-hover" style="border:none;" id="normalinvoice_<?php  echo $m; ?>" >
-            <thead style="background-color:<?php echo $color; ?>">
+            <thead>
                     <tr>
-                    <!-- <th rowspan="1" style="border-style : hidden!important; class="text-center text-white">S.No</th> -->
-                        <th rowspan="1" class="absorbing-column text-center text-white" style="width:6px;">Product<br/> Name</th>
-                        <th rowspan="1" class="text-center text-white"style="width:4px;">Des<br/>crip<br/>tion</th>
-                        <th rowspan="1" class="text-center text-white"style="width:4px;">Thick<br/>ness</th>
-                        <th rowspan="1" class="text-center text-white"style="width:4px;">Supp<br/>lier<br/> Block<br/> No</th>
-                        <th rowspan="1" class="text-center text-white"style="width:4px;">Supp<br/>lier<br/>Slab<br/> No</th> 
-                       <th colspan="2"  class="text-center text-white"style="width:6px;">Gross<br/> Mea<br/>sure<br/>ment<br/>Wth&#9474;Hght</th>
-                        <th rowspan="1" class="text-center text-white"style="width:5px;">Gross<br/>Sq.<br/>ft</th>
-                        <th rowspan="1" class="text-center text-white"style="width:5px;">Bun<br/>dle <br/>No</th>
-                         <th rowspan="1" class="text-center text-white"style="width:3px;">Slab No</th>
-                         <th colspan="2" class="text-center text-white"style="width:4px;">Net<br/> Mea<br/>sure<br/>Wth&#9474;Hght</th>
-                           <th rowspan="1" class="text-center text-white"style="width:4px;">Net <br/>Sq.<br/> Ft</th>
-                            <th rowspan="1"  class="text-center text-white"style="width:4px;">Cost<br/>per Sq. Ft</th>
+                    <!-- <th rowspan="1" style="border-style : hidden!important; class="text-center ">S.No</th> -->
+                        <th rowspan="1" class="absorbing-column text-center " style="width:6px;">Product<br/> Name</th>
+                        <th rowspan="1" class="text-center "style="width:4px;">Des<br/>crip<br/>tion</th>
+                        <th rowspan="1" class="text-center "style="width:4px;">Thick<br/>ness</th>
+                        <th rowspan="1" class="text-center "style="width:4px;">Supp<br/>lier<br/> Block<br/> No</th>
+                        <th rowspan="1" class="text-center "style="width:4px;">Supp<br/>lier<br/>Slab<br/> No</th> 
+                       <th colspan="2"  class="text-center "style="width:6px;">Gross<br/> Mea<br/>sure<br/>ment<br/>Wth&#9474;Hght</th>
+                        <th rowspan="1" class="text-center "style="width:5px;">Gross<br/>Sq.<br/>ft</th>
+                        <th rowspan="1" class="text-center "style="width:5px;">Bun<br/>dle <br/>No</th>
+                         <th rowspan="1" class="text-center "style="width:3px;">Slab No</th>
+                         <th colspan="2" class="text-center "style="width:4px;">Net<br/> Mea<br/>sure<br/>Wth&#9474;Hght</th>
+                            <th rowspan="1" class="text-center "style="width:6px;">Net Sq.Ft</th>
+                            <th rowspan="1"  class="text-center "style="width:4px;">Cost<br/>per Sq.Ft</th>
                             <th rowspan="1" class="text-center"style="width:5px;">Cost <br/>per <br/>Slab</th>
-                        <th rowspan="1"  class="text-center text-white"style="width:2px;">Ori<br/>gin </th>
-                          <th rowspan="1" style="width:100px;"  class="text-center text-white">Total</th>
+                        <th rowspan="1"  class="text-center "style="width:2px;">Ori<br/>gin </th>
+                          <th rowspan="1" style="width:80px;"  class="text-center ">Total</th>
                     </tr> 
 <tr>
 
@@ -148,37 +139,19 @@ if($a==$m){
                        <td style="font-size: 9px;"><?php  echo $currency ?><?php echo $inv['cost_sq_ft']; ?></td>
                        <td style="font-size: 9px;"><?php  echo $currency ; ?><?php echo  $inv['cost_sq_slab']; ?></td>
                        <td style="font-size: 9px;"><?php echo $inv['origin']; ?></td>
-                       <td style="font-size: 9px;" >            <table><tr><td style=" border: none !important;font-size: 9px;">
+                       <td style="font-size: 9px;" >            <table><tr><td style="padding-bottom: 2px; border: none !important;font-size: 9px;">
                        <?php  echo $currency ; ?> </td><td style=" text-align: left;border: none !important;"><input  type="text" class="total_price" style="border:none;width:80px;font-size: 9px;text-align: left;"   value="<?php  echo $inv['total'];  ?>"  id="total_<?php  echo $m.$n; ?>"     name="total_amt[]"/></td>
 </tr></table></td> 
                     </tr>
                     <?php $n++;}}  ?><br>
-                          <tfoot style="border:none;">
-                                    <tr>
-                             <td style="text-align:right;font-size: 9px;" colspan="7"><b><?php  echo display('Gross Sq.Ft');?> :</b></td>
-                                        <td >
-             <input type="text" id="overall_gross_<?php echo $m; ?>" name="overall_gross[]"  class="overall_gross"  style="border:none;width: 40px;font-size: 9px;"   readonly="readonly"  /> 
-            </td>     
-             <td style="text-align:right;font-size: 9px;" colspan="4"><b><?php  echo display('Net Sq.Ft');?> :</b></td>
-                                        <td >
-             <input type="text" id="overall_net_<?php echo $m; ?>" name="overall_net[]"  class="overall_net"  style="border:none;width: 20px;font-size: 9px;"   readonly="readonly"  /> 
-             <!-- <input type="text"   style="width:60px;" readonly id="net_sq_ft_<?php  echo $m.$n; ?>" name="overall_net[]" value="<?php  echo $inv['net_sqft'];  ?>" class="overall_net"/></td> -->
-            </td>
-
-                                        <td style="text-align:right;font-size: 9px;" colspan="3"><b><?php  echo display('total'); ?> :</b></td>
-                                        <td style="text-align: left;">
-               <span class="input-symbol-euro">     <input type="text" id="Total_<?php echo $m; ?>" name="total[]"   class="b_total"   style="border:none;padding-top: 6px;width: 60px;font-size: 9px;text-align: left;"    readonly="readonly"  />
-            </td>                   
-                                    </tr>
-
-                                            </tfoot>
+                         
                             
                             <?php   } ?>
         
                             <table border="0" class="overall table table-hover" style="border:none;">
 <tr style="border:none;">
 
- <td colspan="2" style="text-align:left;border:none;"><b><?php  echo display('Overall TOTAL');?> :</b></td><td style="border:none;"> <?php  echo $currency; ?><?php echo $overall_total; ?> </td>
+ <td colspan="2" style="text-align:left;border:none;"><b><?php  echo display('Overall TOTAL');?>  :</b></td><td style="border:none;"> <?php  echo $currency; ?><?php echo $overall_total; ?> </td>
  <td style="text-align:right;border:none;" colspan="12"><b><?php echo  "Tax( ".$tax_des;  ?></b></td>
                          
                    <td  style="border:none;"><?php  echo $currency; ?><?php echo $tax_amt;  ?></td>
@@ -240,46 +213,35 @@ if($a==$m){
         </div> </div>
 
 
-        <?php 
+        <?php  
 
 }
 elseif($template==1)
 {
 ?>     
-   <div class="brand-section" style="background-color:<?php echo $color; ?>">
+   <div class="brand-section">
    <div class="row">
       
 
-   
-
-          <div class="col-sm-4" style="color:white;font-weight:bold;" id='company_info'>
-          <b> Company name : </b><?php echo $company_info[0]['business_name']; ?><br>
-          <b>   Address : </b><?php echo $company_info[0]['address']; ?><br>
-          <b>   Email : </b><?php echo $company_info[0]['email']; ?><br>
-          <b>   Contact : </b><?php echo $company_info[0]['phone']; ?><br>
-          </div>
- 
- 
- 
- 
-            <div class="col-sm-5 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
- 
-            <div class="col-sm-3"><img src="<?php echo  base_url().$logo; ?>" style='width: 70%;'></div>
-
-
-
-
-
-
-
+     <div class="col-sm-5" id='company_info' style="color:white;">
+            
+          <b>  Company name : </b><?php echo $company_info[0]['company_name']; ?><br>
+          <b> Address : </b><?php echo $company_info[0]['address']; ?><br>
+          <b>  Email : </b><?php echo $company_info[0]['email']; ?><br>
+          <b>  Contact : </b><?php echo $company_info[0]['mobile']; ?><br>
+        </div>
+        <div class="col-sm-5 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
+        <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>" style='width: 100%;'>
+         
+         </div>
       
   </div>
         </div>
         <div class="body-section">
-            <div class="row">
-                <div class="col-6">
-                <table id="one" style="border:none;">
-    <tr><td  class="key"><?php echo display('Vendor');?></td><td >:</td><td calss="value"><?php echo $supplier_nam;  ?></td></tr>
+    <div class="row">
+        <div class="col-6">
+             <table id="one" style="border:none;">
+<tr><td  class="key"><?php echo display('Vendor');?></td><td >:</td><td calss="value"><?php echo $supplier_nam;  ?></td></tr>
 <tr><td  class="key"><?php echo display('Vendor Type');?></td><td >:</td><td calss="value"><?php echo $vendor_type;  ?></td></tr>
 <tr><td  class="key"><?php echo display('invoice_no');  ?></td><td >:</td><td calss="value"><?php echo $chalan_no;  ?></td></tr>
 <tr><td  class="key"><?php echo display('Payment Due Date');?></td><td >:</td><td calss="value"><?php echo $payment_due_date;  ?></td></tr>
@@ -291,6 +253,7 @@ elseif($template==1)
 <tr><td  class="key"><?php echo display('Estimated Time Of Arrival');?></td><td >:</td><td calss="value"><?php echo $eta;  ?></td></tr>
 <?php  if(!empty($isf_filling)) { ?>
 <tr><td  class="key"><?php echo display('ISF NO');?></td><td >:</td><td calss="value"><?php echo $isf_filling;  ?></td></tr>
+<tr><td  class="key"><?php echo display('B/L No');?></td><td >:</td><td calss="value"><?php echo $bl_number;  ?></td></tr>
 <?php   }  ?>
 
 </table>
@@ -301,16 +264,16 @@ elseif($template==1)
         <tr><td  class="key"><?php echo display('Vendor Address');?></td><td >:</td><td calss="value"><?php echo $address."-".$city ."<br/>".$state."-".$zip."-".$country ."<br/>".$primaryemail."-".$mobile ; ?></td></tr>
 <tr><td  class="key"><?php echo display('Expenses / Bill date');?></td><td >:</td><td calss="value"><?php echo $final_date;  ?></td></tr>
 <tr><td  class="key"><?php echo display('Container Number');?></td><td>:</td><td calss="value"><?php echo $container_no;  ?></td></tr>
-<tr><td  class="key"><?php echo display('B/L No');?></td><td >:</td><td calss="value"><?php echo $bl_number;  ?></td></tr>
+
 
 <tr><td  class="key"><?php echo display('Port Of Discharge');?></td><td>:</td><td calss="value"><?php echo $Port_of_discharge;  ?></td></tr>
 <!-- <tr><td  class="key">Attachments</td><td style="width:10px;">:</td><td calss="value"><?php  ?></td></tr> -->
 
-    
+
 </table> </div> 
-            </div>
-        </div>
-        <div class="body-section" >
+    </div>
+</div>
+<div class="body-section" >
           <div class="table-responsive">
      
   
@@ -321,24 +284,24 @@ elseif($template==1)
 for($m=1;$m<count($purchase_all_data);$m++){ 
     ?>
     <table class="table table-bordered normalinvoice table-hover" style="border:none;" id="normalinvoice_<?php  echo $m; ?>" >
-            <thead style="background-color:<?php echo $color; ?>">
+            <thead>
                     <tr>
-                    <!-- <th rowspan="1" style="border-style : hidden!important; class="text-center text-white">S.No</th> -->
-                        <th rowspan="1" class="absorbing-column text-center text-white" style="width:6px;">Product<br/> Name</th>
-                        <th rowspan="1" class="text-center text-white"style="width:4px;">Des<br/>crip<br/>tion</th>
-                        <th rowspan="1" class="text-center text-white"style="width:4px;">Thick<br/>ness</th>
-                        <th rowspan="1" class="text-center text-white"style="width:4px;">Supp<br/>lier<br/> Block<br/> No</th>
-                        <th rowspan="1" class="text-center text-white"style="width:4px;">Supp<br/>lier<br/>Slab<br/> No</th> 
-                       <th colspan="2"  class="text-center text-white"style="width:6px;">Gross<br/> Mea<br/>sure<br/>ment<br/>Wth&#9474;Hght</th>
-                        <th rowspan="1" class="text-center text-white"style="width:5px;">Gross<br/>Sq.<br/>ft</th>
-                        <th rowspan="1" class="text-center text-white"style="width:5px;">Bun<br/>dle <br/>No</th>
-                         <th rowspan="1" class="text-center text-white"style="width:3px;">Slab No</th>
-                         <th colspan="2" class="text-center text-white"style="width:4px;">Net<br/> Mea<br/>sure<br/>Wth&#9474;Hght</th>
-                           <th rowspan="1" class="text-center text-white"style="width:4px;">Net <br/>Sq.<br/> Ft</th>
-                            <th rowspan="1"  class="text-center text-white"style="width:4px;">Cost<br/>per Sq. Ft</th>
+                    <!-- <th rowspan="1" style="border-style : hidden!important; class="text-center ">S.No</th> -->
+                        <th rowspan="1" class="absorbing-column text-center " style="width:6px;">Product<br/> Name</th>
+                        <th rowspan="1" class="text-center "style="width:4px;">Des<br/>crip<br/>tion</th>
+                        <th rowspan="1" class="text-center "style="width:4px;">Thick<br/>ness</th>
+                        <th rowspan="1" class="text-center "style="width:4px;">Supp<br/>lier<br/> Block<br/> No</th>
+                        <th rowspan="1" class="text-center "style="width:4px;">Supp<br/>lier<br/>Slab<br/> No</th> 
+                       <th colspan="2"  class="text-center "style="width:6px;">Gross<br/> Mea<br/>sure<br/>ment<br/>Wth&#9474;Hght</th>
+                        <th rowspan="1" class="text-center "style="width:5px;">Gross<br/>Sq.<br/>ft</th>
+                        <th rowspan="1" class="text-center "style="width:5px;">Bun<br/>dle <br/>No</th>
+                         <th rowspan="1" class="text-center "style="width:3px;">Slab No</th>
+                         <th colspan="2" class="text-center "style="width:4px;">Net<br/> Mea<br/>sure<br/>Wth&#9474;Hght</th>
+                           <th rowspan="1" class="text-center "style="width:6px;">Net Sq.Ft</th>
+                            <th rowspan="1"  class="text-center "style="width:4px;">Cost<br/>per Sq.Ft</th>
                             <th rowspan="1" class="text-center"style="width:5px;">Cost <br/>per <br/>Slab</th>
-                        <th rowspan="1"  class="text-center text-white"style="width:2px;">Ori<br/>gin </th>
-                          <th rowspan="1" style="width:100px;"  class="text-center text-white">Total</th>
+                        <th rowspan="1"  class="text-center "style="width:2px;">Ori<br/>gin </th>
+                          <th rowspan="1" style="width:80px;"  class="text-center ">Total</th>
                     </tr> 
 <tr>
 
@@ -355,7 +318,7 @@ if($a==$m){
                                     
                                         ?>
 
-                    <tr>
+                      <tr>
                     <!-- <td style="font-size: 10px;"><?php //echo $count; ?></td> -->
                          <td style="font-size: 9px;"><?php echo $inv['product_name']; ?></td>
                        <td style="font-size: 9px;"><?php echo $inv['description']; ?></td>
@@ -377,37 +340,19 @@ if($a==$m){
                        <td style="font-size: 9px;"><?php  echo $currency ?><?php echo $inv['cost_sq_ft']; ?></td>
                        <td style="font-size: 9px;"><?php  echo $currency ; ?><?php echo  $inv['cost_sq_slab']; ?></td>
                        <td style="font-size: 9px;"><?php echo $inv['origin']; ?></td>
-                       <td style="font-size: 9px;" >            <table><tr><td style=" border: none !important;font-size: 9px;">
+                       <td style="font-size: 9px;" >            <table><tr><td style="padding-bottom: 2px; border: none !important;font-size: 9px;">
                        <?php  echo $currency ; ?> </td><td style=" text-align: left;border: none !important;"><input  type="text" class="total_price" style="border:none;width:80px;font-size: 9px;text-align: left;"   value="<?php  echo $inv['total'];  ?>"  id="total_<?php  echo $m.$n; ?>"     name="total_amt[]"/></td>
 </tr></table></td> 
                     </tr>
                     <?php $n++;}}  ?><br>
-                           <tfoot style="border:none;">
-                                    <tr>
-                             <td style="text-align:right;font-size: 9px;" colspan="7"><b><?php  echo display('Gross Sq.Ft');?> :</b></td>
-                                        <td >
-             <input type="text" id="overall_gross_<?php echo $m; ?>" name="overall_gross[]"  class="overall_gross"  style="border:none;width: 40px;font-size: 9px;"   readonly="readonly"  /> 
-            </td>     
-             <td style="text-align:right;font-size: 9px;" colspan="4"><b><?php  echo display('Net Sq.Ft');?> :</b></td>
-                                        <td >
-             <input type="text" id="overall_net_<?php echo $m; ?>" name="overall_net[]"  class="overall_net"  style="border:none;width: 20px;font-size: 9px;"   readonly="readonly"  /> 
-             <!-- <input type="text"   style="width:60px;" readonly id="net_sq_ft_<?php  echo $m.$n; ?>" name="overall_net[]" value="<?php  echo $inv['net_sqft'];  ?>" class="overall_net"/></td> -->
-            </td>
-
-                                        <td style="text-align:right;font-size: 9px;" colspan="3"><b><?php  echo display('total'); ?> :</b></td>
-                                        <td style="text-align: left;">
-               <span class="input-symbol-euro">     <input type="text" id="Total_<?php echo $m; ?>" name="total[]"   class="b_total"   style="border:none;padding-top: 6px;width: 60px;font-size: 9px;text-align: left;"    readonly="readonly"  />
-            </td>                   
-                                    </tr>
-
-                                            </tfoot>
+                         
                             
                             <?php   } ?>
         
-                            <table border="0" class="overall table table-hover" style="border:none;">
+                                             <table border="0" class="overall table table-hover" style="border:none;">
 <tr style="border:none;">
 
- <td colspan="2" style="text-align:left;border:none;"><b><?php  echo display('Overall TOTAL');?> :</b></td><td style="border:none;"> <?php  echo $currency; ?><?php echo $overall_total; ?> </td>
+ <td colspan="2" style="text-align:left;border:none;"><b><?php  echo display('Overall TOTAL');?>  :</b></td><td style="border:none;"> <?php  echo $currency; ?><?php echo $overall_total; ?> </td>
  <td style="text-align:right;border:none;" colspan="12"><b><?php echo  "Tax( ".$tax_des;  ?></b></td>
                          
                    <td  style="border:none;"><?php  echo $currency; ?><?php echo $tax_amt;  ?></td>
@@ -468,47 +413,29 @@ if($a==$m){
 <br><br>
         </div> </div>
 
-        <?php 
+
+        <?php   
 
 }
 elseif($template==3)
 {
 ?>
-<div class="brand-section" style="background-color:<?php echo $color; ?>">
+<div class="brand-section">
 <div class="row">
-
        
-      
-
-       <div class="col-sm-2 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
-        <div class="col-sm-4"><img src="<?php echo  base_url().$logo; ?>" style='width: 30%;float:right;'> </div>
-
-        
+       <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>" style='width: 100%;'>
+          
+         </div>
+       <div class="col-sm-6 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
     
-     <div class="col-sm-6" style="color:white;font-weight:bold ;text-align: end;" id='company_info'>
-           
-     <b> Company name : </b><?php echo $company_info[0]['business_name']; ?><br>
-          <b>   Address : </b><?php echo $company_info[0]['address']; ?><br>
-          <b>   Email : </b><?php echo $company_info[0]['email']; ?><br>
-          <b>   Contact : </b><?php echo $company_info[0]['phone']; ?><br>
-
-
-       </div>
-
-
-
    </div>
-
         </div>
 
-
-
-
         <div class="body-section">
-            <div class="row">
-                <div class="col-6">
-                <table id="one" style="border:none;">
-   <tr><td  class="key"><?php echo display('Vendor');?></td><td >:</td><td calss="value"><?php echo $supplier_nam;  ?></td></tr>
+    <div class="row">
+        <div class="col-6">
+              <table id="one" style="border:none;">
+<tr><td  class="key"><?php echo display('Vendor');?></td><td >:</td><td calss="value"><?php echo $supplier_nam;  ?></td></tr>
 <tr><td  class="key"><?php echo display('Vendor Type');?></td><td >:</td><td calss="value"><?php echo $vendor_type;  ?></td></tr>
 <tr><td  class="key"><?php echo display('invoice_no');  ?></td><td >:</td><td calss="value"><?php echo $chalan_no;  ?></td></tr>
 <tr><td  class="key"><?php echo display('Payment Due Date');?></td><td >:</td><td calss="value"><?php echo $payment_due_date;  ?></td></tr>
@@ -520,6 +447,7 @@ elseif($template==3)
 <tr><td  class="key"><?php echo display('Estimated Time Of Arrival');?></td><td >:</td><td calss="value"><?php echo $eta;  ?></td></tr>
 <?php  if(!empty($isf_filling)) { ?>
 <tr><td  class="key"><?php echo display('ISF NO');?></td><td >:</td><td calss="value"><?php echo $isf_filling;  ?></td></tr>
+<tr><td  class="key"><?php echo display('B/L No');?></td><td >:</td><td calss="value"><?php echo $bl_number;  ?></td></tr>
 <?php   }  ?>
 
 </table>
@@ -530,16 +458,17 @@ elseif($template==3)
         <tr><td  class="key"><?php echo display('Vendor Address');?></td><td >:</td><td calss="value"><?php echo $address."-".$city ."<br/>".$state."-".$zip."-".$country ."<br/>".$primaryemail."-".$mobile ; ?></td></tr>
 <tr><td  class="key"><?php echo display('Expenses / Bill date');?></td><td >:</td><td calss="value"><?php echo $final_date;  ?></td></tr>
 <tr><td  class="key"><?php echo display('Container Number');?></td><td>:</td><td calss="value"><?php echo $container_no;  ?></td></tr>
-<tr><td  class="key"><?php echo display('B/L No');?></td><td >:</td><td calss="value"><?php echo $bl_number;  ?></td></tr>
+
 
 <tr><td  class="key"><?php echo display('Port Of Discharge');?></td><td>:</td><td calss="value"><?php echo $Port_of_discharge;  ?></td></tr>
 <!-- <tr><td  class="key">Attachments</td><td style="width:10px;">:</td><td calss="value"><?php  ?></td></tr> -->
 
-    
-</table> </div> 
-            </div>
-        </div>
-        <div class="body-section" >
+
+</table> 
+ </div> 
+    </div>
+</div>
+<div class="body-section" >
           <div class="table-responsive">
      
   
@@ -550,24 +479,24 @@ elseif($template==3)
 for($m=1;$m<count($purchase_all_data);$m++){ 
     ?>
     <table class="table table-bordered normalinvoice table-hover" style="border:none;" id="normalinvoice_<?php  echo $m; ?>" >
-            <thead style="background-color:<?php echo $color; ?>">
+            <thead>
                     <tr>
-                    <!-- <th rowspan="1" style="border-style : hidden!important; class="text-center text-white">S.No</th> -->
-                        <th rowspan="1" class="absorbing-column text-center text-white" style="width:6px;">Product<br/> Name</th>
-                        <th rowspan="1" class="text-center text-white"style="width:4px;">Des<br/>crip<br/>tion</th>
-                        <th rowspan="1" class="text-center text-white"style="width:4px;">Thick<br/>ness</th>
-                        <th rowspan="1" class="text-center text-white"style="width:4px;">Supp<br/>lier<br/> Block<br/> No</th>
-                        <th rowspan="1" class="text-center text-white"style="width:4px;">Supp<br/>lier<br/>Slab<br/> No</th> 
-                       <th colspan="2"  class="text-center text-white"style="width:6px;">Gross<br/> Mea<br/>sure<br/>ment<br/>Wth&#9474;Hght</th>
-                        <th rowspan="1" class="text-center text-white"style="width:5px;">Gross<br/>Sq.<br/>ft</th>
-                        <th rowspan="1" class="text-center text-white"style="width:5px;">Bun<br/>dle <br/>No</th>
-                         <th rowspan="1" class="text-center text-white"style="width:3px;">Slab No</th>
-                         <th colspan="2" class="text-center text-white"style="width:4px;">Net<br/> Mea<br/>sure<br/>Wth&#9474;Hght</th>
-                           <th rowspan="1" class="text-center text-white"style="width:4px;">Net <br/>Sq.<br/> Ft</th>
-                            <th rowspan="1"  class="text-center text-white"style="width:4px;">Cost<br/>per Sq. Ft</th>
+                    <!-- <th rowspan="1" style="border-style : hidden!important; class="text-center ">S.No</th> -->
+                        <th rowspan="1" class="absorbing-column text-center " style="width:6px;">Product<br/> Name</th>
+                        <th rowspan="1" class="text-center "style="width:4px;">Des<br/>crip<br/>tion</th>
+                        <th rowspan="1" class="text-center "style="width:4px;">Thick<br/>ness</th>
+                        <th rowspan="1" class="text-center "style="width:4px;">Supp<br/>lier<br/> Block<br/> No</th>
+                        <th rowspan="1" class="text-center "style="width:4px;">Supp<br/>lier<br/>Slab<br/> No</th> 
+                       <th colspan="2"  class="text-center "style="width:6px;">Gross<br/> Mea<br/>sure<br/>ment<br/>Wth&#9474;Hght</th>
+                        <th rowspan="1" class="text-center "style="width:5px;">Gross<br/>Sq.<br/>ft</th>
+                        <th rowspan="1" class="text-center "style="width:5px;">Bun<br/>dle <br/>No</th>
+                         <th rowspan="1" class="text-center "style="width:3px;">Slab No</th>
+                         <th colspan="2" class="text-center "style="width:4px;">Net<br/> Mea<br/>sure<br/>Wth&#9474;Hght</th>
+                           <th rowspan="1" class="text-center "style="width:6px;">Net Sq.Ft</th>
+                            <th rowspan="1"  class="text-center "style="width:4px;">Cost<br/>per Sq.Ft</th>
                             <th rowspan="1" class="text-center"style="width:5px;">Cost <br/>per <br/>Slab</th>
-                        <th rowspan="1"  class="text-center text-white"style="width:2px;">Ori<br/>gin </th>
-                          <th rowspan="1" style="width:100px;"  class="text-center text-white">Total</th>
+                        <th rowspan="1"  class="text-center "style="width:2px;">Ori<br/>gin </th>
+                          <th rowspan="1" style="width:80px;"  class="text-center ">Total</th>
                     </tr> 
 <tr>
 
@@ -606,37 +535,19 @@ if($a==$m){
                        <td style="font-size: 9px;"><?php  echo $currency ?><?php echo $inv['cost_sq_ft']; ?></td>
                        <td style="font-size: 9px;"><?php  echo $currency ; ?><?php echo  $inv['cost_sq_slab']; ?></td>
                        <td style="font-size: 9px;"><?php echo $inv['origin']; ?></td>
-                       <td style="font-size: 9px;" >            <table><tr><td style=" border: none !important;font-size: 9px;">
+                       <td style="font-size: 9px;" >            <table><tr><td style="padding-bottom: 2px; border: none !important;font-size: 9px;">
                        <?php  echo $currency ; ?> </td><td style=" text-align: left;border: none !important;"><input  type="text" class="total_price" style="border:none;width:80px;font-size: 9px;text-align: left;"   value="<?php  echo $inv['total'];  ?>"  id="total_<?php  echo $m.$n; ?>"     name="total_amt[]"/></td>
 </tr></table></td> 
                     </tr>
                     <?php $n++;}}  ?><br>
-                            <tfoot style="border:none;">
-                                    <tr>
-                             <td style="text-align:right;font-size: 9px;" colspan="7"><b><?php  echo display('Gross Sq.Ft');?> :</b></td>
-                                        <td >
-             <input type="text" id="overall_gross_<?php echo $m; ?>" name="overall_gross[]"  class="overall_gross"  style="border:none;width: 40px;font-size: 9px;"   readonly="readonly"  /> 
-            </td>     
-             <td style="text-align:right;font-size: 9px;" colspan="4"><b><?php  echo display('Net Sq.Ft');?> :</b></td>
-                                        <td >
-             <input type="text" id="overall_net_<?php echo $m; ?>" name="overall_net[]"  class="overall_net"  style="border:none;width: 20px;font-size: 9px;"   readonly="readonly"  /> 
-             <!-- <input type="text"   style="width:60px;" readonly id="net_sq_ft_<?php  echo $m.$n; ?>" name="overall_net[]" value="<?php  echo $inv['net_sqft'];  ?>" class="overall_net"/></td> -->
-            </td>
-
-                                        <td style="text-align:right;font-size: 9px;" colspan="3"><b><?php  echo display('total'); ?> :</b></td>
-                                        <td style="text-align: left;">
-               <span class="input-symbol-euro">     <input type="text" id="Total_<?php echo $m; ?>" name="total[]"   class="b_total"   style="border:none;padding-top: 6px;width: 60px;font-size: 9px;text-align: left;"    readonly="readonly"  />
-            </td>                   
-                                    </tr>
-
-                                            </tfoot>
+                         
                             
                             <?php   } ?>
         
-                            <table border="0" class="overall table table-hover" style="border:none;">
+                                                  <table border="0" class="overall table table-hover" style="border:none;">
 <tr style="border:none;">
 
- <td colspan="2" style="text-align:left;border:none;"><b><?php  echo display('Overall TOTAL');?> :</b></td><td style="border:none;"> <?php  echo $currency; ?><?php echo $overall_total; ?> </td>
+ <td colspan="2" style="text-align:left;border:none;"><b><?php  echo display('Overall TOTAL');?>  :</b></td><td style="border:none;"> <?php  echo $currency; ?><?php echo $overall_total; ?> </td>
  <td style="text-align:right;border:none;" colspan="12"><b><?php echo  "Tax( ".$tax_des;  ?></b></td>
                          
                    <td  style="border:none;"><?php  echo $currency; ?><?php echo $tax_amt;  ?></td>
@@ -697,9 +608,11 @@ if($a==$m){
 <br><br>
         </div> </div>
 
-        <?php   } ?>
+
+        <?php    } ?>
 
     </div>
+
 
 </div>
 
@@ -710,13 +623,13 @@ if($a==$m){
       <div class="modal-content" style="width: 500px;height:100px;text-align:center;margin-bottom: 300px;">
         <div class="modal-header" style="color:white;background-color:#38469f;">
       
-          <h4 class="modal-title">New Expenses</h4>
+          <h4 class="modal-title">Expenses</h4>
         </div>
         <div class="content">
 
         <div class="modal-body">
           
-          <h4>New Expenses Downloaded Successfully</h4>
+          <h4>New Expense Downloaded Successfully</h4>
      
         </div>
         <div class="modal-footer">
@@ -908,6 +821,20 @@ table th, table td {
 .content {
     min-height: 0px;
 }
+#content{display:none;} 
+  #head{
+    text-align: center;
+    margin-top: 250px;
+}
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+} 
+  #head{
+    text-align: center;
+    margin-top: 250px;
+}
 </style>
 
     
@@ -977,11 +904,27 @@ var v=$(this).html();
     });
 });
  $(document).ready(function () {
+   $("#content").attr("hidden", true);
+
+ var img = document.createElement("img");
+img.src = "<?php  echo  base_url() ?>/asset/images/icons/loading.gif";
+var src = document.getElementById("head");
+src.appendChild(img);
+
+
+     const element = document.getElementById("content");
+
+    // clone the element
+    var clonedElement = element.cloneNode(true);
+
+    // change display of cloned element 
+    $(clonedElement).css("display", "block");
+    var pdf = new jsPDF('p','pt','a4');
 function first(callback1,callback2){
 setTimeout( function(){
-    var pdf = new jsPDF('p','pt','a4');
-    const invoice = document.getElementById("content");
-             console.log(invoice);
+   // var pdf = new jsPDF('p','pt','a4');
+  //  const invoice = document.getElementById("content");
+            // console.log(invoice);
              console.log(window);
              var pageWidth = 8.5;
              var margin=0.5;
@@ -994,16 +937,18 @@ setTimeout( function(){
                  html2canvas: { scale: 3 },
                  jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
              };
-              html2pdf().from(invoice).set(opt).toPdf().get('pdf').then(function (pdf) {
+              html2pdf().from(clonedElement).set(opt).toPdf().get('pdf').then(function (pdf) {
   var totalPages = pdf.internal.getNumberOfPages();
  for (var i = 1; i <= totalPages; i++) {
     pdf.setPage(i);
     pdf.setFontSize(10);
     pdf.setTextColor(150);
   }
-  }).save('invoice_no_<?php echo $chalan_no.'.pdf'  ?>');
+  }).save('PurchaseInvoice_<?php echo $chalan_no.'.pdf'  ?>');
     callback1();
     callback2();
+                 clonedElement.remove();
+ $("#content").attr("hidden", true);
  }, 2500 );
 }
 function second(){
@@ -1016,13 +961,13 @@ $( '.close' ).click(function() {
   $( '#myModal_ex' ).removeClass( 'open' );
   $( '.cont' ).removeClass( 'blur' );
 });
-}, 2500 );
+}, 3000 );
 }
 function third(){
     setTimeout( function(){
         window.location='<?php  echo base_url();   ?>'+'Cpurchase/manage_purchase';
         window.close();
-    }, 3500 );
+    }, 4000 );
 }
 first(second,third);
 });

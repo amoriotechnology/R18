@@ -489,7 +489,7 @@ class Lsettings {
 
     #============bank ledger=============#
 
-    public function bank_ledger($bank_id = null) {
+public function bank_ledger($bank_id = null) {
         // echo $bank_id; die();
         $CI = & get_instance();
         $CI->load->model('Settings');
@@ -508,20 +508,16 @@ class Lsettings {
         $balance = 0;
         $total_debit = 0;
         $total_credit = 0;
-
         if (!empty($ledger)) {
             foreach ($ledger as $index => $value) {
                     $ledger[$index]['debit'] = $ledger[$index]['Debit'];
                     $total_debit += $ledger[$index]['debit'];
-
                     $ledger[$index]['balance'] = $balance + ($ledger[$index]['Debit'] - $ledger[$index]['Credit']);
                     $ledger[$index]['credit']  = $ledger[$index]['Credit'];
                     $total_credit += $ledger[$index]['credit'];
                      $balance = $ledger[$index]['balance'];
-              
             }
         }
-
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
         $company_info         = $CI->Reports->retrieve_company();
         $data = array(
@@ -539,6 +535,19 @@ class Lsettings {
         );
         $bank_ledger = $CI->parser->parse('settings/bank_ledger', $data, true);
         return $bank_ledger;
+    }
+--------------------//BANK LIST
+    public function get_bank_list() {
+        $this->db->select('*');
+        $this->db->from('bank_add');
+        $this->db->where('created_by',$this->session->userdata('user_id'));
+        $this->db->order_by('bank_name','asc');
+        $this->db->where('status', 1);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
     }
 
 }

@@ -1137,7 +1137,7 @@ $('#download').on('click', function (e) {
 $('.final_submit').on('click', function (e) {
 
 window.btn_clicked = true;      //set btn_clicked to true
- var input_hdn='Your Invoice No : "'+$('#invoice_hdn').val()+" has been Updated Successfully";
+ var input_hdn='Your Invoice No : "'+$('#invoice_hdn').val()+" has been Created Successfully";
 
 console.log(input_hdn);
 $("#bodyModal1").html(input_hdn);

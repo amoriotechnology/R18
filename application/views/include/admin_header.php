@@ -105,26 +105,40 @@ ul.dropdown-submenu>li>a:hover{
             $urcolp = "pos_invoice";
           }
 
-           if($this->uri->segment(2) != $urcolp ){
+          // if($this->uri->segment(2) != $urcolp ){
 
-           if($this->permission1->method('new_invoice','create')->access()){
-         
+        
+        
+     foreach(  $this->session->userdata('admin_data') as $admtest){
+        // echo $admtest; die();
+     $split=explode('-',$admtest);
+     if(trim($split[0])=='sale'){
+      ?>
+           <a href="<?php echo base_url('Cinvoice')?>" style="color:white;margin-top:14px;border-color: #e1dee9;" class="btn btn-outline"><i class="fa fa-balance-scale"></i> <?php  echo display('invoice') ?></a>
+     <?php }}?>
 
-           ?>
-           <a href="<?php echo base_url('Cinvoice')?>" class="btn btn-success btn-outline"><i class="fa fa-balance-scale"></i> <?php  echo display('invoice') ?></a>
-     <?php }?>
-
-     
-        <?php if($this->permission1->method('customer_receive','create')->access()){ ?>
-           <a href="<?php echo base_url('accounts/customer_receive')?>" class="btn btn-success btn-outline"><i class="fa fa-money"></i> Sales Payments</a>
-       <?php } ?>
+     <?php 
+           foreach(  $this->session->userdata('admin_data') as $admtest){
+     $split=explode('-',$admtest);
+     if(trim($split[0])=='accounts'){
+        ?>
+           <a href="<?php echo base_url('accounts/customer_receive')?>" style="color:white;margin-top:14px;border-color: #e1dee9;" class="btn btn-outline"><i class="fa fa-money"></i> Sales Payments</a>
+       <?php }} ?>
       
-  <?php if($this->permission1->method('supplier_payment','create')->access()){ ?>
-          <a href="<?php echo base_url('accounts/supplier_payment')?>" class="btn btn-success btn-outline"><i class="fa fa-money" aria-hidden="true"></i> Expenses Payment</a>
-      <?php } ?>
+<?php 
+     foreach(  $this->session->userdata('admin_data') as $admtest){
+     $split=explode('-',$admtest);
+     if(trim($split[0])=='accounts'){
+      ?>
+          <a href="<?php echo base_url('accounts/supplier_payment')?>" style="color:white;margin-top:14px;border-color: #e1dee9;" class="btn btn-outline"><i class="fa fa-money" aria-hidden="true"></i> Expenses Payment</a>
+      <?php }} ?>
 
-<?php if($this->permission1->method('add_purchase','create')->access()){ ?>
-          <a href="<?php echo base_url('Cpurchase')?>" class="btn btn-success btn-outline"><i class="ti-shopping-cart"></i> <?php echo display('purchase') ?></a>
+<?php 
+     foreach(  $this->session->userdata('admin_data') as $admtest){
+     $split=explode('-',$admtest);
+     if(trim($split[0])=='expense'){
+      ?>
+          <a href="<?php echo base_url('Cpurchase')?>" style="color:white;margin-top:14px;border-color: #e1dee9;" class="btn btn-outline"><i class="ti-shopping-cart"></i> <?php echo display('purchase') ?></a>
  <?php }} ?>
 
         <div class="navbar-custom-menu">
@@ -144,12 +158,12 @@ ul.dropdown-submenu>li>a:hover{
                 </li>
 
 
-                <li class="dropdown notifications-menu">
+                <!-- <li class="dropdown notifications-menu">
                     <a href="<?php echo base_url('Creport/out_of_stock') ?>" >
                         <i class="pe-7s-attention" title="<?php echo display('out_of_stock') ?>"></i>
                         <span class="label"><?php echo html_escape($out_of_stock) ?></span>
                     </a>
-                </li>
+                </li> -->
                 <!-- settings -->
                 <li class="dropdown dropdown-user">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="pe-7s-settings"></i></a>
@@ -181,16 +195,53 @@ ul.dropdown-submenu>li>a:hover{
                   </div> -->
                   <div class="menuCol col-xl-3 col-lg-3 col-md-12">
                     <ul class="dropdown-submenu">
+
+
+                    <?php 
+     foreach(  $this->session->userdata('admin_data') as $admtest){
+     $split=explode('-',$admtest);
+     if(trim($split[0])=='setting'){
+      ?>
+
+
+            
+
+
+
+
                           <li class="menu-title" style="color:#17202a"><b><?php echo display('role_permission');  ?></b></li>
                         <li><a href=" <?php echo base_url('Permission/add_role') ?>"><i class="pe-7s-users"></i><?php echo display('add_role'); ?></a></li>
                         <li><a href="<?php echo base_url('Permission/role_list') ?>"><i class="ti-dashboard"></i><?php echo display('role_list'); ?></a></li>
                         <li><a href=" <?php echo base_url('Permission/user_assign') ?>"><i class="pe-7s-settings"></i><?php echo display('user_assign_role'); ?></a></li>
+                  
+                   
+<?php            
+            break;
+ }
+ } ?>
+
+                  
                     </ul>
                   </div>
                    <div class="menuCol col-xl-3 col-lg-3 col-md-12">
                     <ul class="dropdown-submenu">
+
+
+                    <?php 
+     foreach(  $this->session->userdata('admin_data') as $admtest){
+     $split=explode('-',$admtest);
+     if(trim($split[0])=='setting'){
+      ?>
                          <li class="menu-title" style="color:#17202a"><b>SMS</b></li>
                         <li><a href=" <?php echo base_url('Csms/configure') ?>"><i class="pe-7s-users"></i><?php echo display('sms_configure'); ?></a></li>
+                   
+                                        
+<?php            
+            break;
+ }
+ } ?>
+
+                   
                     </ul>
                   </div>
                 
@@ -205,11 +256,25 @@ ul.dropdown-submenu>li>a:hover{
                   </div>
                   <div class="menuCol col-xl-3 col-lg-3 col-md-12">
                     <ul class="dropdown-submenu">
+
+                    <?php 
+     foreach(  $this->session->userdata('admin_data') as $admtest){
+     $split=explode('-',$admtest);
+     if(trim($split[0])=='setting'){
+      ?>
+
                          <li class="menu-title" style="color:#17202a"><b><?php echo display('User Setting');  ?> </b></li>
                          <!-- <li><a href="<?php echo base_url('Admin_dashboard/logout') ?>"><i class="pe-7s-key"></i>&nbsp;&nbsp;Language </a></li> -->
                          <li><a href="<?php echo base_url('Currency/currency_form') ?>"><i class="pe-7s-key"></i>&nbsp;&nbsp;<?php echo display('currency');  ?></a></li>
                          <li><a href="<?php echo base_url('Cweb_setting/mail_setting') ?>"><i class="pe-7s-key"></i>&nbsp;&nbsp;<?php echo display('mail_setting'); ?> </a></li>
                         <li><a href=" <?php echo base_url('Admin_dashboard/dashboardsetting') ?>"><i class="ti-dashboard"></i><?php  echo  display('Dashboard Settings');?></a></li>
+                   
+                        <?php            
+            break;
+ }
+ } ?>
+                   
+                   
                     </ul>
                   </div>
               </div>
@@ -247,13 +312,13 @@ ul.dropdown-submenu>li>a:hover{
                     { ?>
                          <img src="<?php
             if (isset($Web_settings[0]['logo'])) {
-                echo html_escape($Web_settings[0]['logo']);
+                echo base_url().html_escape($Web_settings[0]['logo']);
             }
             ?>" class="img-circle" alt="User Image">
                     <?php  } elseif($_SESSION['u_type']==2) {?>
              <img src="<?php
             if (isset($Web_settings[0]['logo'])) {
-                echo html_escape($Web_settings[0]['logo']);
+                echo base_url().html_escape($Web_settings[0]['logo']);
             }
             ?>" class="img-circle" alt="User Image">
             <?php } 
@@ -262,7 +327,7 @@ ul.dropdown-submenu>li>a:hover{
                 ?>
                <img src="<?php
             if (isset($Web_settings[0]['logo'])) {
-                echo html_escape($Web_settings[0]['logo']);
+                echo base_url().html_escape($Web_settings[0]['logo']);
             }
             ?>" class="img-circle" alt="User Image">
                 <?php 
@@ -526,11 +591,11 @@ if($_SESSION['u_type']==2)
       ?>
 
              <!-- Quotation Menu Start -->
-                     <li class="treeview  ">
+                     <!-- <li class="treeview  ">
                 <a href="<?php echo base_url(); ?>/Cquotation/manage_quotation">
                     <i class="fa fa-book"></i><span><?php echo display('Quotation');?></span>               
                 </a>
-            </li>
+            </li> -->
                     <!-- quotation Menu end -->
                     <?php            
             break;
@@ -1352,13 +1417,13 @@ break;
           
             <!-- Purchase menu end -->  
              <!-- Quotation Menu Start -->
-                     <li class="treeview  ">
+                     <!-- <li class="treeview  ">
                 <a href="<?php echo base_url(); ?>/Cquotation/manage_quotation">
                     <i class="fa fa-book"></i><span><?php echo  display('Quotation');?></span>
                    
                 </a>
               
-            </li>
+            </li> -->
               <?php break;
 }
     }

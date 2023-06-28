@@ -32,10 +32,10 @@ class Csettings extends CI_Controller {
                 $headcode="102010201";
             }
 
-        $createby=$this->session->userdata('user_id');
+      //  $createby=$this->session->userdata('user_id');
         $createdate=date('Y-m-d H:i:s');
         $data = array(
-            'created_by'=> $createby,
+           'created_by'=> $this->session->userdata('user_id'),
             'bank_id'   => $this->auth->generator(10),
             'bank_name' => $this->input->post('bank_name',TRUE),
             'ac_name'   => $this->input->post('ac_name',TRUE),

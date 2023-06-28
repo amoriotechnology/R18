@@ -13,23 +13,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title">
-        <h1><?php echo display('Trucking Invoice Print') ?></h1>
-            <!-- <h1>Packing List Invoice Detail</h1>
-            <small>Packing List Invoice Detail</small>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('invoice') ?></a></li>
-                <li class="active">Packing List Invoice Detail</li> -->
-                <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('ads') ?></a></li>
-                <li class="active"><?php echo display('update_setting') ?></li>
-            </ol>
-        </div>
+       
     </section>
     <!-- Main content -->
     <div class="" id="content">
@@ -719,6 +703,12 @@ table th, table td {
     size: A3;
     margin: 0mm;
 }
+   #content{display:none;} 
+    @media print 
+{ 
+
+#content{display:block;} 
+}      
 
 
 </style>

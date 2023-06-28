@@ -2,18 +2,7 @@
 
 <div class="content-wrapper">
     <section class="content-header" >
-        <div class="header-icon">
-            <i class="pe-7s-note2"></i>
-        </div>
-        <div class="header-title" >
-            <h1><?php echo display('purchase_ledger') ?></h1>
-            <small><?php echo display('purchase_ledger') ?></small>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('purchase') ?></a></li>
-                <li class="active"><?php echo display('purchase_ledger') ?></li>
-            </ol>
-        </div>
+   
     </section>
   <!-- Invoice information -->
   <?php
@@ -390,8 +379,10 @@ if($a==$m){
   </div>
 
 
-<style>
-
+  <style>
+#content{
+  padding:10px;
+}
 .key{
     text-align:left;
 font-weight:bold;
@@ -401,6 +392,7 @@ font-weight:bold;
     text-align:left;
 }
 #one,#two{
+    border:none ;
 float:left;
 width:100%;
 }
@@ -470,21 +462,26 @@ th{
     margin-bottom: 05px;
 }
 table{
-    padding"10px;
+    padding:10px;
    font-size:15px;
-    /*background-color: #fff;*/
+    background-color: #fff;
     width: 100%;
     border-collapse: collapse;
+
    
 }
 
 table thead tr{
-    border: 1px solid #111;
+  
     background-color: #5961b3;
    
 }
+.table-bordered td, .table-bordered th {
+     border: 1px solid black !important; 
+}
 .table-bordered td{
     text-align:center;
+    
 }
 table td {
     vertical-align: middle !important;
@@ -493,7 +490,8 @@ table td {
 }
 th{
     text-align:center;
-    color:white;
+   
+    font-size:9px;
 }
 table th, table td {
     padding-top: 08px;
@@ -501,10 +499,9 @@ table th, table td {
 }
 .table-bordered{
     box-shadow: 0px 0px 5px 0.5px gray !important;
+    
 }
-.table-bordered td, .table-bordered th {
-    border: 1px solid black !important;
-}
+
 .text-right{
     text-align: right;
 }
@@ -583,10 +580,18 @@ table th, table td {
     size: A3;
     margin: 0mm;
 }
-
-
-</style>
-
+#content{display:none;} 
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+} 
+  #head{
+    text-align: center;
+    margin-top: 250px;
+}
+       
+    </style>
     
 
 

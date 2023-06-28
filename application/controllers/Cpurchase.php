@@ -985,7 +985,8 @@ public function insert_service_provider() {
         $CI->load->model('invoice_content');     
         $CI->load->model('Suppliers');
         $CI->load->model('Web_settings');
-       
+            $w = & get_instance();
+     $w->load->model('Ppurchases');
          $bank_list        = $CI->Web_settings->bank_list();
         $purchase_detail = $CI->Purchases->retrieve_purchase_order_editdata($purchase_id);
 
@@ -1008,7 +1009,7 @@ public function insert_service_provider() {
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
         $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
 
-
+ $company_info = $w->Ppurchases->retrieve_company();
 
         $datacontent = $CI->invoice_content->retrieve_info_data();
 // print_r($datacontent); die();
@@ -1046,12 +1047,16 @@ public function insert_service_provider() {
 
     // 'company_info' =>$this->Purchases->company_info(),
    
-    'cname'=>$datacontent[0]['business_name'],
-    'phone'=>$datacontent[0]['phone'],
-    'email'=>$datacontent[0]['email'],
-    'reg_number'=>$datacontent[0]['reg_number'],
-    'website'=>$datacontent[0]['website'],
-    'address'=>$datacontent[0]['address'],
+ 
+
+  'cname'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:''),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),   
+         
+
 
 
 
@@ -1093,7 +1098,7 @@ public function insert_service_provider() {
             'message_invoice'       => $purchase_detail[0]['message_invoice'],
 
               'color'=> $dataw[0]['color'],
-              'logo'=> $setting[0]['invoice_logo'],
+             'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:base_url().$company_info[0]['logo']),  
 
             'purchase_detail' =>$purchase_detail
             //  'remarks'       => $purchase_detail[0]['remarks'],
@@ -1120,7 +1125,10 @@ public function purchase_order_details_data_print($purchase_id) {
     $CI->load->model('Suppliers');
     $CI->load->model('Web_settings');
         $CI->load->model('invoice_content');     
+       $w = & get_instance();
 
+        $w->load->model('Ppurchases');
+        $company_info = $w->Ppurchases->retrieve_company();
     
      $bank_list        = $CI->Web_settings->bank_list();
     $purchase_detail = $CI->Purchases->retrieve_purchase_order_editdata($purchase_id);
@@ -1170,7 +1178,7 @@ public function purchase_order_details_data_print($purchase_id) {
     'order' => $this->Purchases->get_purchases_order($invoice_no),
     'supplier'=> $this->Purchases->get_supplier($invoice_no),
     'supplier_currency' =>$data['supplier'][0]['currency_type'],
-    'company_info' =>$this->Purchases->company_info(),
+  //  'company_info' =>$this->Purchases->company_info(),
            'curn_info_default' =>$curn_info_default[0]['currency_name'],
             'currency' => $currency_details[0]['currency'],
             'title'  => display('purchase_edit'),
@@ -1207,12 +1215,16 @@ public function purchase_order_details_data_print($purchase_id) {
             'paytype'       => $purchase_detail[0]['payment_type'],
              'payment_id'       => $purchase_detail[0]['payment_id'],
             'message_invoice'       => $purchase_detail[0]['message_invoice'],
-            'logo'=> $setting[0]['invoice_logo'],
+         'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+  'business_name'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:''),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),   
+         
 
-'business_name'    => $datacontent[0]['business_name'],
-'address'    => $datacontent[0]['address'],
-'email'    => $datacontent[0]['email'],
-'phone'    => $datacontent[0]['phone'],
+
 
 
             'purchase_detail' =>$purchase_detail
@@ -1246,8 +1258,10 @@ public function purchase_order_details_data_print($purchase_id) {
     $CI->load->model('Products');
     $CI->load->library('occational');
     $CI->load->library('Products');
+         $CI->load->model('invoice_content');
     $CI->load->model('Web_settings');
-
+ $w = & get_instance();
+     $w->load->model('Ppurchases');
 
     $purchase_detail = $CI->Purchases->purchase_details_data($purchase_id);
     //  print_r($purchase_detail); die();
@@ -1264,11 +1278,11 @@ public function purchase_order_details_data_print($purchase_id) {
             $purchase_detail[$k]['convert_date'] = $CI->occational->dateConvert($purchase_detail[$k]['purchase_date']);
         }
     }
-
+ $datacontent = $CI->invoice_content->retrieve_info_data();
     $setting=  $CI->Web_settings->retrieve_setting_editdata();
 
     $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-    $company_info = $CI->Purchases->retrieve_company();
+      $company_info = $w->Ppurchases->retrieve_company();
     $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
     $dataw = $CI->invoice_design->retrieve_data($this->session->userdata('user_id'));
  //$supplier_currency = $CI->db->select('*')->from('supplier_information')->where('supplier_name',$purchase_detail[0]['supplier_name'])->get()->result_array();
@@ -1277,7 +1291,7 @@ public function purchase_order_details_data_print($purchase_id) {
 //   print_r($purchase_detail[0]['supplier_name']);die();
  $data = array(
         'header'=> $dataw[0]['header'],
-        'logo'=> $setting[0]['invoice_logo'],
+          'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']), 
         'color'=> $dataw[0]['color'],
         'template'=> $dataw[0]['template'],
         'curn_info_default' =>$curn_info_default[0]['currency_name'],
@@ -1318,7 +1332,7 @@ public function purchase_order_details_data_print($purchase_id) {
         'discount'         => number_format((!empty($purchase_detail[0]['total_discount'])?$purchase_detail[0]['total_discount']:0),2),
         'paid_amount'      => $purchase_detail[0]['paid_amount'],
         'purchase_all_data'   => $purchase_detail,
-        'company_info'        => $company_info,
+           'company_info'=> (!empty($datacontent)?$datacontent:$company_info), 
         'currency'            => $currency_details[0]['currency'],
         'position'            => $currency_details[0]['currency_position'],
         'total_tax'           => $purchase_detail[0]['total_tax'],
@@ -1343,10 +1357,12 @@ public function purchase_order_details_data_print($purchase_id) {
     $CI->load->model('Purchases');
     $CI->load->model('Products');
     $CI->load->library('occational');
+      $CI->load->model('invoice_content');
     $CI->load->library('Products');
     $CI->load->model('Web_settings');
-
-
+ $w = & get_instance();
+     $w->load->model('Ppurchases');
+ $datacontent = $CI->invoice_content->retrieve_info_data();
     $purchase_detail = $CI->Purchases->purchase_details_data($purchase_id);
     //  print_r($purchase_detail); die();
     $Products = $CI->Products->get_invoice_product($purchase_id);
@@ -1365,7 +1381,7 @@ public function purchase_order_details_data_print($purchase_id) {
     $setting=  $CI->Web_settings->retrieve_setting_editdata();
 
     $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-    $company_info = $CI->Purchases->retrieve_company();
+   $company_info = $w->Ppurchases->retrieve_company();
     $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
     $dataw = $CI->invoice_design->retrieve_data($this->session->userdata('user_id'));
  //$supplier_currency = $CI->db->select('*')->from('supplier_information')->where('supplier_name',$purchase_detail[0]['supplier_name'])->get()->result_array();
@@ -1374,7 +1390,7 @@ public function purchase_order_details_data_print($purchase_id) {
 //   print_r($purchase_detail[0]['supplier_name']);die();
  $data = array(
         'header'=> $dataw[0]['header'],
-        'logo'=> $setting[0]['invoice_logo'],
+         'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']), 
         'color'=> $dataw[0]['color'],
         'template'=> $dataw[0]['template'],
         'curn_info_default' =>$curn_info_default[0]['currency_name'],
@@ -1416,7 +1432,7 @@ public function purchase_order_details_data_print($purchase_id) {
         'discount'         => number_format((!empty($purchase_detail[0]['total_discount'])?$purchase_detail[0]['total_discount']:0),2),
         'paid_amount'      => $purchase_detail[0]['paid_amount'],
         'purchase_all_data'   => $purchase_detail,
-        'company_info'        => $company_info,
+       'company_info'=> (!empty($datacontent)?$datacontent:$company_info), 
         'currency'            => $currency_details[0]['currency'],
         'position'            => $currency_details[0]['currency_position'],
         'total_tax'           => $purchase_detail[0]['total_tax'],

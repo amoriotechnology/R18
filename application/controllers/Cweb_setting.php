@@ -201,31 +201,26 @@ function invoice_content()
 
 function updateinvoice2()
 {
-
     $id=$_SESSION['user_id'];
     $this->db->select('*');
      $this->db->from('invoice_content');
-
     $this->db->where('uid', $id );
      $query = $this->db->get();
-
     if ( $query->num_rows() > 0 )
     {
-        $sql='update invoice_content set 
-        business_name="'.$_REQUEST['name'].'", 
-        phone="'.$_REQUEST['phone'].'", 
-        email="'.$_REQUEST['email'].'", 
-        reg_number="'.$_REQUEST['regno'].'", 
-        website="'.$_REQUEST['website'].'", 
+        $sql='update invoice_content set
+        company_name="'.$_REQUEST['name'].'",
+        mobile="'.$_REQUEST['phone'].'",
+        email="'.$_REQUEST['email'].'",
+        reg_number="'.$_REQUEST['regno'].'",
+        website="'.$_REQUEST['website'].'",
         address="'.$_REQUEST['address'].'"
         where uid=
         '.$id;
     }
-
 else
 {
-   
-     $sql = "insert into invoice_content(business_name,phone,email,reg_number,website,address,uid) VALUES(
+     $sql = "insert into invoice_content(company_name,mobile,email,reg_number,website,address,uid) VALUES(
    '".$_REQUEST['name']."',
    '".$_REQUEST['phone']."',
    '".$_REQUEST['email']."',
@@ -233,11 +228,10 @@ else
    '".$_REQUEST['website']."',
    '".$_REQUEST['address']."',
    '".$_SESSION['user_id']."'
-
 ) ";
 }
-
 $query=$this->db->query($sql);
+echo $this->db->last_query();
 if($query)
 {
     ?>
@@ -245,11 +239,8 @@ if($query)
         // alert('Updated');
         location.href='invoice_content';
     </script>
-    <?php 
+    <?php
 }
-
-
-
 }
 
 
