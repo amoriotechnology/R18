@@ -1,4 +1,4 @@
-
+<?php  error_reporting(1); ?>
 <style>
     .payTop_details p{
         display: inline-block;
