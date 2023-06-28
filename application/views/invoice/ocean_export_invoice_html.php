@@ -62,13 +62,15 @@ display:none;
         ?>
       <!-- <table id="tab"> -->
            
-         
+      <div id="head"></div>
+
  <div class="container" id="content">
  <?php 
   
   if($template==2)
   {
     ?>
+
        <div class="brand-section" style="background-color:<?php echo $color; ?>">
         <div class="row" >
      
@@ -134,6 +136,8 @@ display:none;
 elseif($template==1)
 {
 ?> 
+<div id="head"></div>
+
 <div class="brand-section" style="background-color:<?php echo $color; ?>" >
    <div class="row">
       
@@ -203,6 +207,8 @@ elseif($template==1)
 elseif($template==3)
 {
 ?>
+<div id="head"></div>
+
 <div class="brand-section" style="background-color:<?php echo $color; ?>">
 
 
@@ -487,6 +493,17 @@ table th, table td {
 .content {
     min-height: 0px;
 }
+#head{
+    text-align: center;
+    margin-top: 250px;
+}
+
+
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+}
 
 
 </style>      
@@ -509,11 +526,30 @@ table th, table td {
 
 $(document).ready(function () {
   
+
+
+    $("#content").attr("hidden", true);
+
+var img = document.createElement("img");
+img.src = "<?php  echo  base_url() ?>/asset/images/icons/loading.gif";
+var src = document.getElementById("head");
+src.appendChild(img);
+
+
+    const element = document.getElementById("content");
+    // clone the element
+    var clonedElement = element.cloneNode(true);
+    // change display of cloned element 
+    $(clonedElement).css("display", "block");
+    var pdf = new jsPDF('p','pt','a4');
+    //$('#content').css('display','block');
+      
+
+
 function first(callback1,callback2){
 setTimeout( function(){
-    var pdf = new jsPDF('p','pt','a4');
-    const invoice = document.getElementById("content");
-             console.log(invoice);
+    // const invoice = document.getElementById("content");
+    //          console.log(invoice);
              console.log(window);
              var pageWidth = 8.5;
              var margin=0.5;
@@ -526,7 +562,7 @@ setTimeout( function(){
                  html2canvas: { scale: 3 },
                  jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
              };
-              html2pdf().from(invoice).set(opt).toPdf().get('pdf').then(function (pdf) {
+              html2pdf().from(clonedElement).set(opt).toPdf().get('pdf').then(function (pdf) {
   var totalPages = pdf.internal.getNumberOfPages();
  for (var i = 1; i <= totalPages; i++) {
     pdf.setPage(i);
@@ -537,6 +573,9 @@ setTimeout( function(){
   }).save('Booking_no_<?php echo $booking_no.'.pdf'  ?>');
     callback1();
     callback2();
+
+    clonedElement.remove();
+ $("#content").attr("hidden", true);
  }, 2500 );
 
 }

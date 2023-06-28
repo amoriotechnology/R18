@@ -61,7 +61,7 @@ class Chrm extends CI_Controller {
 
         $hrate= $data['employee_data'][0]['hrate'];
         $total_hours=  $data['timesheet_data'][0]['total_hours'];    
-        $final=$hrate *$total_hours;
+        $final=$hrate * $total_hours;
 
 
 
@@ -79,22 +79,45 @@ class Chrm extends CI_Controller {
         'total' => $final,
         'adm_name'  => $adminis_data,
         'adm_address'=> $adminis_data,
+        'month'=>  $timesheetdata,
     
       );
-  
-               $data1 = array( 
-                 'totalhour_final'          => $final,
-                 'timesheet_id'   => $timesheetdata[0]['timesheet_id'],
-                 'total_hours'    => $timesheetdata[0]['total_hours'],
-                 'templ_name'     => $timesheetdata[0]['templ_name'],
-                 'employee_tax'   => $employeedata[0]['employee_tax'],
-                 'hrate'          => $employeedata[0]['hrate'],
-                 'id'             => $employeedata[0]['id'],
-                  'create_by'     => $this->session->userdata('user_id'),
-                );
 
-            $this->db->insert('info_payslip',$data1);
-        $content = $this->parser->parse('hr/pay_slip', $data, true);
+      $data1 = array( 
+        'totalhour_final'          => $final,
+        'timesheet_id'   => $timesheetdata[0]['timesheet_id'],
+        'total_hours'    => $timesheetdata[0]['total_hours'],
+        'templ_name'     => $timesheetdata[0]['templ_name'],
+        'employee_tax'   => $employeedata[0]['employee_tax'],
+        'hrate'          => $employeedata[0]['hrate'],
+        'id'             => $employeedata[0]['id'],
+         'create_by'     => $this->session->userdata('user_id'),
+       );
+
+
+     $test= $this->db->select('timesheet_id')->from('info_payslip')->where('timesheet_id',$timesheetdata[0]['timesheet_id'])->get()->row();
+
+     if(!empty($test->timesheet_id)) {
+
+    $this->db->where('timesheet_id',$timesheet_id);
+    $this->db->delete('info_payslip');
+    $this->db->insert('info_payslip',$data1);
+     }     
+     else{
+        $this->db->insert('info_payslip',$data1);
+     }
+
+              
+            $empid = $employeedata[0]['id'];
+            $info_datapay = $this->Hrm_model->get_data_pay($empid); 
+            $total_hours = $info_datapay[0]['total_hours'];
+            $addtime= $timesheetdata[0]['total_hours'];
+            $data['overalltotalhours']=$total_hours + $addtime;
+            $oatamount = $info_datapay[0]['totalhour_final'];
+            $curamount= $final;
+            $data['overalltotalamount']=$oatamount + $curamount;            
+
+        $content = $this->parser->parse('hr/pay_slip',$data,true);
         $this->template->full_admin_html_view($content);
      }
      
@@ -103,18 +126,6 @@ class Chrm extends CI_Controller {
      
      
      
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -396,7 +407,15 @@ $data['designation'] = $this->db->select('designation')->from('employee_history'
         echo json_encode($data);
     }
     
-    
+
+
+
+
+
+
+
+
+
 
 
 public function timesheet_delete($id){
@@ -684,6 +703,18 @@ public function add_designation_data(){
 
 
 
+    public function add_taxname_data(){
+        $this->load->model('Hrm_model');
+        $postData = $this->input->post('value');
+        $data = $this->Hrm_model->insert_taxesname($postData);
+        echo json_encode($data);
+    }
+
+
+
+
+
+
         public function add_office_loan() {
               $CI = & get_instance();
         $CI->load->model('Web_settings');
@@ -761,7 +792,9 @@ public function getemployee_data(){
     $CI = & get_instance();
     $this->auth->check_admin_auth();
     $CI->load->model('Hrm_model');
+
     $value = $this->input->post('value',TRUE);
+
     $customer_info = $CI->Hrm_model->getemp_data($value);
  
     echo json_encode($customer_info);

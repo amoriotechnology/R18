@@ -19,8 +19,8 @@ class Hrm_model extends CI_Model {
 
     public function office_loan_list(){
 
-        $this->db->select('*');
-        $this->db->from('person_ledger');
+         $this->db->select('*');
+         $this->db->from('person_ledger');
          $this->db->where('create_by',$this->session->userdata('user_id'));
          $query = $this->db->get();
         //  echo $this->db->last_query(); die();
@@ -31,6 +31,33 @@ class Hrm_model extends CI_Model {
     }
     
 
+
+    public function get_data_pay($empid){
+
+        $this->db->select('*');
+        $this->db->from('info_payslip');
+
+        $this->db->where('id',$empid);
+
+        $this->db->where('create_by',$this->session->userdata('user_id'));
+        $query = $this->db->get();
+        // echo $this->db->last_query(); die();
+        if ($query->num_rows() > 0) {
+          return $query->result_array();
+        }
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
     public function administrator_info($ads_id){
 
         $this->db->select('*');
@@ -39,7 +66,7 @@ class Hrm_model extends CI_Model {
         $this->db->where('create_by',$this->session->userdata('user_id'));
         $query = $this->db->get();
         
-          echo $this->db->last_query(); 
+        //   echo $this->db->last_query(); 
          if ($query->num_rows() > 0) {
            return $query->result_array();
          }
@@ -73,7 +100,7 @@ class Hrm_model extends CI_Model {
         $this->db->where('timesheet_id', $timesheet_id);
         $this->db->where('create_by',$this->session->userdata('user_id'));
         $query = $this->db->get();
-         echo $this->db->last_query(); 
+        //  echo $this->db->last_query(); /
          if ($query->num_rows() > 0) {
            return $query->result_array();
          }
@@ -243,19 +270,20 @@ class Hrm_model extends CI_Model {
 
 
 
-    public function employee_name($id) {
+    public function employee_name() {
 
         $this->db->select('*');
         $this->db->from('employee_history');
-          $this->db->where('create_by',$this->session->userdata('user_id'));
-         $this->db->where('id',$id);
+         $this->db->where('create_by',$this->session->userdata('user_id'));
          $query = $this->db->get();
-      //  echo $this->db->last_query();die();
+    //    echo $this->db->last_query();
        if ($query->num_rows() > 0) {
         return $query->result_array();
 
     }
         return false;
+
+    
 
     }
 
@@ -417,6 +445,12 @@ $data['create_by']=$this->session->userdata('user_id');
 return $this->db->insert('designation',$data);
 
 }
+
+
+
+
+
+
 public function designation_info($postData){
         $data=array(
             'designation' => $postData,
@@ -431,6 +465,27 @@ public function designation_info($postData){
         $query = $this->db->get();
         return $query->result_array();
     }
+
+
+
+    public function  insert_taxesname($postData){
+        $data=array(
+            'status' => 1,
+        );
+        $this->db->where('state',$postData);
+        $this->db->update('state_and_tax', $data);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 public function paytype_dropdown(){
         $this->db->select('payment_type');

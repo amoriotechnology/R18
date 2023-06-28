@@ -177,6 +177,8 @@ echo json_encode($result, JSON_NUMERIC_CHECK);
         $this->template->full_admin_html_view($content);
 
     }
+
+
     public function add_profarma_product_csv() {
         $CI = & get_instance();
         $data = array(
@@ -185,6 +187,8 @@ echo json_encode($result, JSON_NUMERIC_CHECK);
         $content = $CI->parser->parse('invoice/add_profarma_product_csv', $data, true);
         $this->template->full_admin_html_view($content);
     }
+
+    
    public function uploadProformacsv()
     {
         $CI = & get_instance();

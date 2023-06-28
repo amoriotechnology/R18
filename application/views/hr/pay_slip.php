@@ -90,27 +90,27 @@
     <div class="col-md-6">
         <p>
            
-           COMPANY NAME:<?php echo $company[0]['business_name']; ?><br>
-           ADDRESS:<?php echo $company[0]['address']; ?><br> 
-           EMAIL:<?php echo $company[0]['email']; ?><br>
-           PHONE:<?php echo $company[0]['phone']; ?>
+        <strong>COMPANY NAME</strong>:<?php echo $company[0]['business_name']; ?><br>
+        <strong>ADDRESS</strong>:<?php echo $company[0]['address']; ?><br> 
+        <strong>  EMAIL</strong>:<?php echo $company[0]['email']; ?><br>
+        <strong> PHONE</strong>:<?php echo $company[0]['phone']; ?>
         </p>
 
-        <div style="float: right;">TIMESHEET ID:<?php echo $infotime[0]['timesheet_id']; ?>  
+        <div style="float: right;"><strong>TIMESHEET ID</strong>:<?php echo $infotime[0]['timesheet_id']; ?>  
 <br>
-            <span>EMPLOYEE ID:<?php echo $infoemployee[0]['id']; ?></span>
+            <span><strong>EMPLOYEE ID:</strong><?php echo $infoemployee[0]['id']; ?></span>
         </div>
 
     </div>
 
 </div>
 
-<div class="Employee_details row">
+<div class="Employee_details row" >
 
   
-EMPLOYEE NAME: <?php echo $infotime[0]['templ_name']; ?>  
+<strong>EMPLOYEE NAME</strong> : <?php echo $infoemployee[0]['first_name']; ?><?php echo $infoemployee[0]['last_name']; ?>   
 <br>
-EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>  
+<strong>EMPLOYEE TITLE</strong> :<?php echo $infotime[0]['job_title']; ?>  
 
 </div>
 
@@ -119,37 +119,40 @@ EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>
                         
                         <tbody>
                            <tr>
+                             <hr>
                               <td class="col-md-4"><h3>PERSONAL AND CHECK INFORMATION</h3>
-                                
+                              <hr>
                                 <p><?php echo $adm_name[0]['adm_name']; ?></p>
 
                               <p><?php echo $adm_name[0]['adm_address']; ?></p>
                              
                              
-                              <p>Soc Sec #: xxx-xx-xxxx <span>Employee ID: 1</span> </p>
-                                <br>
-                                <br>
-                               <p>Pay Period: 12/04/22 to 12/10/22</p>
-                                <p>Check Date: 12/10/22 <span>Check #: 6176</span> </p>
-                                <hr>
+                              <p>Soc Sec #: xxx-xx-xxxx <span>Employee ID: <?php echo $infotime[0]['admin_name']; ?></span> </p>
+                               <p>Pay Period: <?php echo $infotime[0]['month']; ?></p>
 
+                                <p>Check Date:<?php echo $infotime[0]['cheque_date']; ?><span>Check #: <?php echo $infotime[0]['cheque_no']; ?></span> </p>
+
+                                <hr>
 
                                 <h3>NET PAY ALLOCATION</h3>
 
-                                <br>
+                                <hr>
+
+
+                                <!-- <br> -->
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <p>DESCRIPTION</p>
-                                          <p>Check Amount</p>
-                                            <p>Chkg 404</p>
+                                        <p><strong>DESCRIPTION</strong></p>
+                                          <p><strong>Check Amount</p>
+                                            <p><strong>Chkg 404</strong></p>
                                              <p> <strong>NET PAY</strong></p>
 
 
                                     </div>
 
                                     <div class="col-md-4">
-                                         <p>THIS PERIOD($)</p>
+                                         <p><strong>THIS PERIOD($)</strong></p>
                                           <p>0.00</p>
                                             <p>765.10</p>
                                              <p>  <strong style="border-top: 1px solid;
@@ -158,7 +161,7 @@ EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>
                                     </div>
 
                                     <div class="col-md-4">
-                                         <p>YTD($)</p>
+                                         <p><strong>YTD($)</strong></p>
                                           <p>0.00</p>
                                             <p>39114.04</p>
                                              <p> <strong style="border-top: 1px solid;
@@ -179,17 +182,17 @@ EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>
 
                                  <div class="col-md-2">
 
-                                <P>DESCRIPTION </P>
+                                <P><strong>DESCRIPTION </strong></P>
                                 <br>
                                 <p>Salary</p>
-                                <p>Total Hrs</p>
-                                <p>Gross Earnings</p>
-                                <p>Total Hrs Worked</p>
+                                <!-- <p>Total Hrs</p> -->
+                                <!-- <p>Gross Earnings</p>
+                                <p>Total Hrs Worked</p> -->
 
                                 </div>
 
                                 <div class="col-md-1">
-                                <P>HRS/ UNITS</P>
+                                <P><strong>HRS/ UNITS</strong></P>
                                 <br>
                                 <?php echo $infotime[0]['total_hours']; ?>
                                 </div>
@@ -197,37 +200,36 @@ EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>
 
 
                                  <div class="col-md-1">
-                                <P>RATE </P>
+                                <P><strong>RATE</strong> </P>
                                 <br>
                                 <?php echo $infoemployee[0]['hrate']; ?>
-                                <p><?php echo  $total_hours; ?></p>
-                                <p>1000.00</p>
-                                <p>1000.00</p>
+                                <!-- <p><?php// echo // $total_hours; ?></p> -->
+                                <!-- <p>1000.00</p>
+                                <p>1000.00</p> -->
 
                                 </div>
 
 
 
                                   <div class="col-md-2">
-                               <p>THIS PERIOD($)</p>
+                               <p><strong>THIS PERIOD($)</strong></p>
                                <br>
                                 <p><?php echo $total; ?></p>                        
                                 </div>
 
                                  <div class="col-md-2">
 
-                               <p>YTD HOURS</p>
+                               <p><strong>YTD HOURS</strong></p>
                                <br>
+                               <p><?php echo $overalltotalhours; ?></p>
 
                                 </div>
                                   <div class="col-md-2">
 
-                               <p>YTD($)</p>
+                               <p><strong>YTD($)</strong></p>
                                <br>
-                               <p><?php echo $total; ?></p>
+                               <p><?php echo $overalltotalamount; ?></p>
                                <p></p>
-                               <p><?php echo $total; ?></p>
-                                <p></p>
 
 
 
@@ -257,13 +259,16 @@ EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>
                                     <div class="col-md-2">
 
                                 <P><strong>WITHHOLDINGS</strong> </P>
+                               
+
                                 <br>
+
 
                                 </div>
 
                                  <div class="col-md-2">
 
-                                <P>DESCRIPTION </P>
+                                <P><strong>DESCRIPTION</strong> </P>
                                 <br>
                                 <p>Social Security</p>
                                 <p>Madicare</p>
@@ -279,7 +284,7 @@ EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>
 
                                 <div class="col-md-1">
 
-                                <P>FILING STATUS</P>
+                                <P><strong>FILING STATUS</strong></P>
                                 <br>
 
                                 <P>S O</P>
@@ -297,7 +302,7 @@ EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>
                                
                                   <div class="col-md-2">
 
-                               <p>THIS PERIOD($)</p>
+                               <p><strong>THIS PERIOD($)</strong></p>
                                <br>
                                <p>62.00</p>
                                 <p>14.50</p>
@@ -320,7 +325,7 @@ EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>
 
                                   <div class="col-md-2">
 
-                               <p>YTD($)</p>
+                               <p><strong>YTD($)</strong></p>
                                <br>
                                 <p>3211.00</p>
                                 <p>751.10</p>

@@ -346,8 +346,13 @@ border-top:none;
 border-collapse:collapse;'>
                 <thead style='height:25px;'>
            
-                   <th style='text-align:center;width:30px;'>".display('sl')."</th>
-                    <th style='text-align:center;'>State Name</th>
+                   <th style='text-align:center;width:50px;'>".display('sl')."</th>
+
+                   <th style='text-align:center;width:200px;'>Select Taxes</th>
+
+                   <th style='text-align:center;width:500px;'>State Name</th>
+
+
                     <th style='text-align: start;'>State Taxes</th>
                    
                 </thead><tbody>";
@@ -358,8 +363,8 @@ border-collapse:collapse;'>
                  
                   $j=1;
                
-                   echo "<tr><td>".$k."</td><td class='state_name' style='text-align:center;font-weight:bold;' rowspan='".$j."'>". $states_list[$i]['state']."</td><td><table>";
-                  
+                   echo "<tr><td>".$k."</td> <td><input style='text-align:center' type='checkbox' value=".$states_list[$i]['state']." class='checkbox_id' ></td> <td class='state_name' style='text-align:center;font-weight:bold;' rowspan='".$j."'>". $states_list[$i]['state']."</td> <td><table>";
+                
                    foreach($splt as $sp){
                    
           //  $empName = $states_list[$i];
@@ -373,7 +378,7 @@ border-collapse:collapse;'>
                
               if(!empty($sp) && $sp !==','){
             $sp_url= str_replace(" ","_",$sp);
-            echo "<tr><td style='display:none' class='state_name'>". $states_list[$i]['state']."</td><td style='width:450px;' class='tax_value'>".$sp."</td> <td>  <a  href=".base_url('Chrm/add_state_taxes_detail/'.$states_list[$i]['state']."-".$sp_url)." class='btn btnclr btn-sm' data-toggle='tooltip' data-placement='left'  data-original-title='Add Taxes Detail'><i class='fa fa-window-restore' aria-hidden='true'></i></a>
+            echo "<tr><td style='display:none' class='state_name'>". $states_list[$i]['state']." </td><td style='width:450px;' class='tax_value'>".$sp."</td> <td>  <a  href=".base_url('Chrm/add_state_taxes_detail/'.$states_list[$i]['state']."-".$sp_url)." class='btn btnclr btn-sm' data-toggle='tooltip' data-placement='left'  data-original-title='Add Taxes Detail'><i class='fa fa-window-restore' aria-hidden='true'></i></a>
                                         <a  class='delete_item btn btnclr btn-sm' ><i class='fa fa-trash' aria-hidden='true'></i></a>     </td></tr></td>";
                   }
                 else{
@@ -616,12 +621,46 @@ break;
 
 <script type="text/javascript">
 
+
+
+
+
+$('.checkbox_id').click(function() {
+
+    var tax_name=$(this).closest('tr').find('.checkbox_id').val();   
+    var data = {
+      value:tax_name
+     };
+   data[csrfName] = csrfHash;
+   $.ajax({
+      type:'POST',
+      data: data, 
+      dataType:"json",
+      url:'<?php echo base_url();?>Chrm/add_taxname_data',
+      success: function(result, statut) {
+      }
+  });
+});
+
+
+
+
+$(document).ready(function(){
+
+
+$('[type="checkbox"]').change(function(){
+
+  if(this.checked){
+     $('[type="checkbox"]').not(this).prop('checked', false);
+  }    
+});
+
+});
+
+
+
 var csrfName = '<?php echo $this->security->get_csrf_token_name();?>';
 var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
-
-
-
-
 
 
 
@@ -662,38 +701,6 @@ $(document).ready(function(){
     })
   });
 });
-//   $('#add_states').submit(function (event) {
-   
-       
-//    var dataString = {
-//        dataString : $("#add_states").serialize()
-   
-//   };
-//   dataString[csrfName] = csrfHash;
- 
-//    $.ajax({
-//        type:"POST",
-//        dataType:"json",
-//        url:"<?php echo base_url(); ?>Chrm/add_state",
-//        data:$("#add_states").serialize(),
-
-//        success: function (data) {
-      
-//        $("#bodyModal1").html("New State Added Successfully");
-   
-//         $('#myModal1').modal('show');
-//        window.setTimeout(function(){
-      
-     
-//         $('#myModal1').modal('hide');
-    
-//      }, 2000);
-     
-//       }
-
-//    });
-//    event.preventDefault();
-// });
 
 
 </script>
