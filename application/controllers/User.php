@@ -140,21 +140,7 @@ public function company_insert(){
             }
         }
         
-    //          $target_path=$_SERVER['DOCUMENT_ROOT'].'/R14/my-assets/image/logo/';  // example.com/entities/
-    // if(move_uploaded_file($_FILES['image']['tmp_name'], $target_path .$_FILES['image']['name'])) { 
-    
-    //   // echo 'uploaded'.$target_path .$_FILES['product_image']['name'];
-    
-    // } else{
-    //     //echo "There was an error uploading the file, please try again!";
-    // }
-    //     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_path)) {
-    //       //  echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
-    //     }
-        
-    
-        // $new_logo = (!empty($logo) ? $logo : $old_logo);
-            
+     
             // insert Company information///////////////
     
             $uid=$_SESSION['user_id'];
@@ -171,23 +157,33 @@ public function company_insert(){
             );
     
              $this->db->insert('company_information',$data);
-              $cid= $this->db->insert_id();
+           
+
+             $cid= $this->db->insert_id();
+             $data1 = array(
+                'create_by'     => $cid,
+                //  'template'     =>1,
+             );
+
+            //  print_r($data1); die();
+
+             $this->db->insert('web_setting',$data1);
+             $this->db->insert('invoice_design',$data1);
+
              $num_str = sprintf("%03d", mt_rand(1, 999));
-     $data = array(
+             $data = array(
             
                'unique_id'  =>   "AD".$cid.$num_str,
-               
-             
                 'create_by'     => $uid,
-               
-            );
+                
+             );
              $insert=$this->db->insert('users',$data);
             
              $data = array(
                 'username'    =>$this->input->post('username',true),
                 
                 'password' => md5("gef" . $this->input->post('password',true)),
-               'unique_id'  =>   "AD".$cid.$num_str,
+                'unique_id'  =>   "AD".$cid.$num_str,
                 'user_type'      => 1+1,
                 'u_type'      => 1+1,
                 'security_code'   => $this->input->post('mobile',true),
@@ -198,6 +194,9 @@ public function company_insert(){
                 'create_by'     => $uid,
                
             );
+
+            // print_r(); die();
+
              $insert=$this->db->insert('user_login',$data);
     
              if($insert)
@@ -210,6 +209,13 @@ public function company_insert(){
     }
     
     
+
+
+
+
+
+
+
 
     public function company_insert_branch(){
   
@@ -225,7 +231,7 @@ public function company_insert(){
         'create_by'     => $uid,
         'status'     => 0
     );
-
+// print_r($data); die();
     $insert=  $this->db->insert('company_information',$data);
      if($insert)
      {

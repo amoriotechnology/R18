@@ -6,12 +6,12 @@
             <i class="pe-7s-note2"></i>
         </div>
         <div class="header-title">
-            <h1>Add  User</h1>
-            <small>Add New  User</small>
+            <h1>Add  Company</h1>
+            <small></small>
             <ol class="breadcrumb">
                 <li><a href="index.html"><i class="pe-7s-home"></i> <?php echo display('home') ?>dsds</a></li>
                 <li><a href="#"><?php echo display('web_settings') ?></a></li>
-                <li class="active">Add Admin</li>
+                <li class="active" style="color:orange;">Add Company</li>
             </ol>
         </div>
     </section>
@@ -46,11 +46,7 @@
         ?>
 
         <div class="row">
-            <div class="col-sm-12">
-                <?php if($this->permission1->method('manage_user','read')->access()){?>
-                  <a href="<?php echo base_url('User/managecompany')?>" style="color:white;background-color:#38469f;" class="btn btn-success m-b-5 m-r-2"><i class="ti-align-justify"> </i>Manage Company</a>
-                <?php }?>
-            </div>
+       
         </div>
 
 
@@ -61,13 +57,20 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-bd lobidrag">
-              
-                    <hr>
-
+             
                     <div class="panel-heading">
-                        <div class="panel-title">
-                            <h4>Admin Info</h4>
-                        </div>
+
+                    <div class="panel-title" style="height:35px;">
+
+                    <div class="panel-title form_employee"  style="float:right ;height:35px;" >
+                  <a href="<?php echo base_url('User/managecompany')?>" style="color:white;background-color:#38469f;" class="btn btn-success m-b-5 m-r-2"><i class="ti-align-justify"> </i>Manage Company</a>
+                            </div>
+
+
+                        <!-- <h4>Admin Info</h4> -->
+
+
+                </div>
                     </div>
                     
                     <div class="panel-body">
@@ -163,10 +166,11 @@
                             <div class="col-sm-6">
                                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
                                     <input type="hidden" name="uid" value="<?php echo $_SESSION['user_id']; ?>">
-                                <input type="submit" id="add-customer" style="color:white;background-color:#38469f;" class="btn btn-primary btn-large" name="add-user" value="<?php echo display('save') ?>" tabindex="6"/>
               
-								
+                                    <input type="submit" id="add-customer" style="color:white;background-color:#38469f;" class="btn btn-primary btn-large" name="add-user" value="<?php echo display('save') ?>" tabindex="6"/>
+
                             </div>
+
                         </div>
                    <?php echo form_close(); ?>
                     </div>

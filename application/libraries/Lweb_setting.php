@@ -759,6 +759,18 @@ public function email_setting($view_email, $email_con, $del_email) {
 
         return $setting;
     }
+
+
+
+
+
+
+
+
+
+
+
+
     ////////////////INvoice Content/////////////
      public function invoice_content()
     {
@@ -774,7 +786,7 @@ public function email_setting($view_email, $email_con, $del_email) {
         'header'=> (!empty($dataw[0]['header']) ? $dataw[0]['header'] : '') , 
         'logo'=> (!empty($dataw[0]['logo']) ? $dataw[0]['logo'] : '') , 
         'color'=> (!empty($dataw[0]['color']) ? $dataw[0]['color'] : '') ,   
-'invoice_logo' =>(!empty($setting_detail[0]['invoice_logo']) ? $setting_detail[0]['invoice_logo'] : '') ,  
+        'invoice_logo' =>(!empty($setting_detail[0]['invoice_logo']) ? $setting_detail[0]['invoice_logo'] : '') ,  
         'address'=>(!empty($datacontent[0]['address']) ? $datacontent[0]['address'] : '') ,     
         'cname'=>(!empty($datacontent[0]['business_name']) ? $datacontent[0]['business_name'] : '') ,    
         'phone'=>(!empty($datacontent[0]['phone']) ? $datacontent[0]['phone'] : '') ,  

@@ -104,19 +104,7 @@ th{
           </div>
 
 
-
-
-
-
-
-
-
-
-
-
-    </div>
-
-
+         </div>
         </div>
 
 
@@ -987,17 +975,7 @@ body {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script>
                     $(document).ready(function(){
-                  // window.onload = function (){ 
-
-
-
-
-
-
-
-
-
-
+              
  $(".normalinvoice").each(function(i,v){
    if($(this).find("tbody").html().trim().length === 0){
        $(this).hide()

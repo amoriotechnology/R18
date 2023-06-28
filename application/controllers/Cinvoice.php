@@ -3116,6 +3116,7 @@ $this->db->update('bootgrid_data');
 
         $w->load->model('Ppurchases');
         $company_info = $w->Ppurchases->retrieve_company();
+        
         $CI->load->model('Invoices');
         $CI->load->model('Web_settings');
         $CA->load->model('invoice_design');
@@ -3130,7 +3131,7 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
     //  print_r($all_invoice); 
 
           $dataw = $CA->invoice_design->retrieve_data();
-          print_r( $dataw );
+        //   print_r( $dataw );
         $datacontent = $CC->invoice_content->retrieve_data();
      //   print_r($datacontent); 
 
@@ -3164,7 +3165,7 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
             'container_no'=> $invoice_detail[0]['container_no'],
             'bl_no'=> $invoice_detail[0]['bl_no'],
 
-            'company'=> $datacontent,
+            'company'=> (!empty($company_info)?$company_info:$datacontent),
 
 
             'customer_currency'=> $customer[0]['currency_type'],
@@ -3216,7 +3217,8 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
             'invoice_detail'=>$invoice_detail
          
         );
-   
+        print_r($data); 
+
          print_r($dataw[0]['color']);
     $content = $this->load->view('invoice/new_invoice_pdf_html', $data, true);
 

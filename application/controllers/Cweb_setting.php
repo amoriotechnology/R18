@@ -212,8 +212,8 @@ function updateinvoice2()
     if ( $query->num_rows() > 0 )
     {
         $sql='update invoice_content set 
-        business_name="'.$_REQUEST['name'].'", 
-        phone="'.$_REQUEST['phone'].'", 
+        company_name="'.$_REQUEST['name'].'", 
+        mobile="'.$_REQUEST['phone'].'", 
         email="'.$_REQUEST['email'].'", 
         reg_number="'.$_REQUEST['regno'].'", 
         website="'.$_REQUEST['website'].'", 
@@ -225,7 +225,7 @@ function updateinvoice2()
 else
 {
    
-     $sql = "insert into invoice_content(business_name,phone,email,reg_number,website,address,uid) VALUES(
+     $sql = "insert into invoice_content(company_name,mobile,email,reg_number,website,address,uid) VALUES(
    '".$_REQUEST['name']."',
    '".$_REQUEST['phone']."',
    '".$_REQUEST['email']."',
@@ -238,6 +238,7 @@ else
 }
 
 $query=$this->db->query($sql);
+echo $this->db->last_query();
 if($query)
 {
     ?>
