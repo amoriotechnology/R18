@@ -1703,10 +1703,10 @@ $data2 = array(
    $this->db->where('create_by', $this->session->userdata('user_id'));
     $this->db->where('bundle_no', $bundle_no[$i]);
             $this->db->delete('product_details');
-            
+              // echo $this->db->last_query();
     //    print_r($data2);
         $this->db->insert('product_details', $data2);
-    
+  //  echo $this->db->last_query();
         }
         return $purchase_id."/".$chalan_no;
     }
@@ -3559,7 +3559,18 @@ public function company_info()
         }
     }
 
-
+   public function get_po_num() {
+        $this->db->select('chalan_no');
+        $this->db->from('purchase_order');
+      
+        $this->db->where('create_by', $this->session->userdata('user_id'));
+     
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
       //Ocean Import Tracking details_data
     public function ocean_import_tracking_details_data($purchase_id) {
         $this->db->select('*');

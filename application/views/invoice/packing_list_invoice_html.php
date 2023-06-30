@@ -63,7 +63,7 @@
          <div class="body-section">
           <div class="table-responsive">
      
-   <div id="content">
+
    
 <?php 
 
@@ -140,7 +140,7 @@ if($a==$m){
             </table>
             <br>
           <h4>Remarks :</h4><?php echo $all_invoice[0]['remark']; ?>
-        </div>
+        </div>    </div>
 
         <?php 
 
@@ -196,7 +196,7 @@ elseif($template==1)
          <div class="body-section">
           <div class="table-responsive">
      
-   <div id="content">
+
    
 <?php 
 
@@ -273,7 +273,7 @@ if($a==$m){
             </table>
             <br>
           <h4>Remarks :</h4><?php echo $all_invoice[0]['remark']; ?>
-        </div>
+        </div>        </div>
 
 
         <?php 
@@ -327,7 +327,7 @@ elseif($template==2)
          <div class="body-section">
           <div class="table-responsive">
      
-   <div id="content">
+
    
 <?php 
 

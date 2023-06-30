@@ -72,7 +72,7 @@ if(1==1)
         <td style="border: none; text-align: center; color: white">'. $head[0]['header'].'</td>
 
 
-        <td style="border: none; text-align: right; color: white">'.display("Company Name").' : '.$company_content[0]['business_name'].'<br>'.display("Email").': '.$company_content[0]['email'].'<br>'.display("Mobile").': '.$company_content[0]['phone'].'<br>'.display("Address").': '.$company_content[0]['address'].'</td>
+        <td style="border: none; text-align: right; color: white">'.display("Company Name").' : '.$company_content[0]['company_name'].'<br>'.display("Email").': '.$company_content[0]['email'].'<br>'.display("Mobile").': '.$company_content[0]['mobile'].'<br>'.display("Address").': '.$company_content[0]['address'].'</td>
 
       </tr>
     </table>
@@ -184,7 +184,7 @@ $content .= '<table>
         
         
         
-        <td style="border: none; text-align: left; color: white">'.display("Company Name").' : '.$company_content[0]['business_name'].'<br>'.display("Email").': '.$company_content[0]['email'].'<br>'.display("Mobile").': '.$company_content[0]['phone'].'<br>'.display("Address").': '.$company_content[0]['address'].'</td>
+        <td style="border: none; text-align: left; color: white">'.display("Company Name").' : '.$company_content[0]['company_name'].'<br>'.display("Email").': '.$company_content[0]['email'].'<br>'.display("Mobile").': '.$company_content[0]['mobile'].'<br>'.display("Address").': '.$company_content[0]['address'].'</td>
       
               <td style="border: none; text-align: center; color: white">'. $head[0]['header'].'</td>
 
@@ -312,7 +312,7 @@ $content .= '<table>
         </td>
 
         
-        <td style="border: none; text-align: right; color: white">'.display("Company Name").' : '.$company_content[0]['business_name'].'<br>'.display("Email").': '.$company_content[0]['email'].'<br>'.display("Mobile").': '.$company_content[0]['phone'].'<br>'.display("Address").': '.$company_content[0]['address'].'</td>
+        <td style="border: none; text-align: right; color: white">'.display("Company Name").' : '.$company_content[0]['company_name'].'<br>'.display("Email").': '.$company_content[0]['email'].'<br>'.display("Mobile").': '.$company_content[0]['mobile'].'<br>'.display("Address").': '.$company_content[0]['address'].'</td>
       
       
       

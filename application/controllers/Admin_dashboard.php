@@ -503,7 +503,7 @@ $chart_label = $chart_data = '';
                  $clean = $this->security->xss_clean($email);
 
             $userInfo = $CI->Users->getUserInfoByEmail($clean);
-      print_r($userInfo);
+    //  print_r($userInfo);
                 $email = $this->input->post('email');  
                  $clean = $this->security->xss_clean($email);
 
@@ -572,9 +572,9 @@ Otherwise, please click this link to change your password:</strong><br>';
             // echo 'Message has been sent';
             echo "<script>alert('Email Send Successfully')</script>";
         
-         sleep(2);
+       //  sleep(2);
 redirect(base_url()."Admin_dashboard/login");
-  $this->session->set_flashdata('flash_message', 'Your password has been updated. You may now login');
+  //$this->session->set_flashdata('flash_message', 'Your password has been updated. You may now login');
                 // if($result){
                 //    echo "<script>alert('Inserted Success')</script>";
                 // }else{

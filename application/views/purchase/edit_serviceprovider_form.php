@@ -154,7 +154,13 @@
                 <div class="form-group row"> <label for="remarks" class="col-sm-2 col-form-label">Memo / Details</label>
                     <div class="col-sm-8"> <textarea rows="4" cols="50" name="memo_details" class=" form-control" placeholder="Memo/Details" id="" ><?php echo $details_info[0]['memo_details']; ?></textarea> </div>
                 </div>
-                <td> <input type="submit" id="add_trucking" class="btn btn-large" style="color:white;background-color:#38469f;" name="add-trucking" value="Save" /> </td>
+                <td> <input type="submit" id="add_trucking" class="btn btn-large" style="color:white;background-color:#38469f;" name="add-trucking" value="Save" />
+                <a   style="color:white;background-color:#38469f;" id="final_submit_provider" class='final_submit__provider btn btn-primary'><?php echo display('submit'); ?></a>
+<a id="download_provider"        style="color:white;background-color:#38469f;" class='btn btn-primary'><?php  echo  display('download'); ?></a>
+<a id="print_provider"        style="color:white;background-color:#38469f;" class='btn btn-primary'><?php  echo  display('print'); ?></a>                   
+ 
+            
+            </td>
             </form>
         </div>
 </div>
@@ -175,6 +181,15 @@
 </div>
 
 <script>
+            $(document).ready(function(){
+	
+	  $('#download_provider').hide();
+           $('#final_submit_provider').hide();
+            $('#print_provider').hide();
+       
+
+
+});
     var csrfName = '<?php echo $this->security->get_csrf_token_name();?>';
     var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
         $('#serviceprovider').submit(function (event) {

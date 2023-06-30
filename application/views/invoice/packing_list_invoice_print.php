@@ -49,10 +49,10 @@
 
    <div class="col-sm-3" style="color:white;font-weight:bold;" id='company_info'>
    
-   <b><?php echo display('Company name') ?> : </b><?php echo $company[0]['business_name']; ?><br>
+   <b><?php echo display('Company name') ?> : </b><?php echo $company[0]['company_name']; ?><br>
              <b>  <?php echo display('Address ') ?>: </b><?php echo $company[0]['address']; ?><br>
              <b> <?php echo display('Email ') ?>: </b><?php echo $company[0]['email']; ?><br>
-             <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['phone']; ?><br>
+             <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['mobile']; ?><br>
           </div>
    
 
@@ -173,10 +173,10 @@ elseif($template==1)
 
         <div class="col-sm-4" style="color:white;font-weight:bold;" id='company_info'>
    
-   <b><?php echo display('Company name') ?> : </b><?php echo $company[0]['business_name']; ?><br>
+   <b><?php echo display('Company name') ?> : </b><?php echo $company[0]['company_name']; ?><br>
              <b>  <?php echo display('Address ') ?>: </b><?php echo $company[0]['address']; ?><br>
              <b> <?php echo display('Email ') ?>: </b><?php echo $company[0]['email']; ?><br>
-             <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['phone']; ?><br>
+             <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['mobile']; ?><br>
           </div>
    
    
@@ -307,10 +307,10 @@ elseif($template==2)
 <div class="col-sm-3 text-center" style="color:white;     text-align: end;"><h3><?php echo $header; ?></h3></div>
 
 <div class="col-sm-6" style="color:white;font-weight:bold ;text-align: end;" id='company_info'>          
-<b><?php echo display('Company name') ?> : </b><?php echo $company[0]['business_name']; ?><br>
+<b><?php echo display('Company name') ?> : </b><?php echo $company[0]['company_name']; ?><br>
    <b>  <?php echo display('Address ') ?>: </b><?php echo $company[0]['address']; ?><br>
    <b> <?php echo display('Email ') ?>: </b><?php echo $company[0]['email']; ?><br>
-   <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['phone']; ?><br>
+   <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['mobile']; ?><br>
 </div>
 
 

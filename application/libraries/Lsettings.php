@@ -536,7 +536,7 @@ public function bank_ledger($bank_id = null) {
         $bank_ledger = $CI->parser->parse('settings/bank_ledger', $data, true);
         return $bank_ledger;
     }
---------------------//BANK LIST
+//BANK LIST
     public function get_bank_list() {
         $this->db->select('*');
         $this->db->from('bank_add');

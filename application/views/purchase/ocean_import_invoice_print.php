@@ -51,7 +51,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
         <div class="brand-section">
         <div class="row" >
      
-     <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>" style='width: 100%;'>
+     <div class="col-sm-2"><img src="<?php echo  $logo; ?>" style='width: 100%;'>
         
        </div>
      <div class="col-sm-6 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
@@ -120,7 +120,7 @@ elseif($template==1)
           <b>   <?php echo display('Contact') ?> : </b><?php echo $phone; ?><br>
         </div>
         <div class="col-sm-5 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
-        <div class="col-sm-3"><img src="<?php echo  base_url().$logo; ?>" style='width: 70%;'>
+        <div class="col-sm-3"><img src="<?php echo  $logo; ?>" style='width: 70%;'>
          
          </div>
   </div>
@@ -171,7 +171,7 @@ elseif($template==3)
 <div class="brand-section">
 <div class="row">
          <div class="col-sm-2 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
-       <div class="col-sm-4"><img src="<?php echo  base_url().$logo; ?>" style='width: 30%;float:right;'>
+       <div class="col-sm-4"><img src="<?php echo  $logo; ?>" style='width: 30%;float:right;'>
           
          </div>
          <div class="col-sm-6" style="color:white;font-weight:bold ;text-align: end;" id='company_info'>

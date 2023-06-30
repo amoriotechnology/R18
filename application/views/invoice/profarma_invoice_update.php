@@ -591,7 +591,7 @@ if($a==$m){
 
                                                 
                                             </td>
-                                            <td colspan="21" style="text-align: end;">
+                                            <td colspan="21" style="text-align: center;">
  <i id="buddle_1" class="btn-danger removebundle fa fa-minus"  aria-hidden="true"   onclick="removebundle(); "></i>    
 
                                             </td>
@@ -2159,7 +2159,7 @@ if (isNaN(value)) {
    });
    $(document).ready(function(){
     $('.hiden').css("display","none");
-       $('.removebundle').hide();
+      // $('.removebundle').hide();
 
    });
    function payment_info(){

@@ -239,10 +239,7 @@ class Lpurchase {
      ->from('tax_information')
      ->get()
      ->result_array();
-     $po_number = $CI->db->select('chalan_no')
-     ->from('purchase_order')
-     ->get()
-     ->result_array();
+     $po_number =  $CI1->Purchases->get_po_num();
         $data = array(
              'curn_info_default' =>$curn_info_default[0]['currency_name'],
             'currency' => $currency_details[0]['currency'],
@@ -1768,7 +1765,8 @@ public function purchase_details_data_print($purchase_id) {
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
         $CI->load->model('invoice_content');
-
+            $w = & get_instance();
+     $w->load->model('Ppurchases');
 
         $purchase_detail = $CI->Purchases->ocean_import_tracking_details_data($purchase_id);
         if (!empty($purchase_detail)) {
@@ -1782,26 +1780,35 @@ public function purchase_details_data_print($purchase_id) {
             }
         }
         $CI->load->model('invoice_design');
-        $dataw = $CI->invoice_design->retrieve_data1();
+            $dataw = $CI->invoice_design->retrieve_data();
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Purchases->retrieve_company();
+     
+
+ $company_info = $w->Ppurchases->retrieve_company();
         $setting=  $CI->Web_settings->retrieve_setting_editdata();
 
-		           $datacontent = $CI->invoice_content->retrieve_info_data();
+		        
                 //    print_r($datacontent); die();
-
+    $datacontent = $CI->invoice_content->retrieve_info_data();
         $customer_name = $CI->db->select('*')->from('customer_information')->where('customer_id', $purchase_detail[0]['consignee'])->get()->result_array();
         $data = array(
             'header'=> $dataw[0]['header'],
-            'logo'=> $setting[0]['invoice_logo'],
             'color'=> $dataw[0]['color'],
+             'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:base_url().$company_info[0]['logo']),  
+
             'template'=> $dataw[0]['template'],
 
+  'business_name'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:''),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),   
+         
 
-            'business_name'    => $datacontent[0]['business_name'],
-            'address'    => $datacontent[0]['address'],
-            'email'    => $datacontent[0]['email'],
-            'phone'    => $datacontent[0]['phone'],
+
+
+          
 
 
 
@@ -1847,6 +1854,10 @@ public function purchase_details_data_print($purchase_id) {
         $CI->load->model('Purchases');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+        $CI->load->model('invoice_content');
+            $w = & get_instance();
+     $w->load->model('Ppurchases');
+
         $purchase_detail = $CI->Purchases->ocean_import_tracking_details_data($purchase_id);
         if (!empty($purchase_detail)) {
             $i = 0;
@@ -1859,25 +1870,42 @@ public function purchase_details_data_print($purchase_id) {
             }
         }
         $CI->load->model('invoice_design');
-        $dataw = $CI->invoice_design->retrieve_data1();
+            $dataw = $CI->invoice_design->retrieve_data();
+        $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+     
+
+ $company_info = $w->Ppurchases->retrieve_company();
         $setting=  $CI->Web_settings->retrieve_setting_editdata();
 
-        $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Purchases->retrieve_company();
+		        
+                //    print_r($datacontent); die();
+    $datacontent = $CI->invoice_content->retrieve_info_data();
         $customer_name = $CI->db->select('*')->from('customer_information')->where('customer_id', $purchase_detail[0]['consignee'])->get()->result_array();
         $data = array(
             'header'=> $dataw[0]['header'],
-            'logo'=> $setting[0]['invoice_logo'],
             'color'=> $dataw[0]['color'],
+             'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:base_url().$company_info[0]['logo']),  
+
             'template'=> $dataw[0]['template'],
-            'company'    => $company_info[0]['company_name'],
-            'address'    => $company_info[0]['address'],
-            'email'    => $company_info[0]['email'],
-            'phone'    => $company_info[0]['mobile'],
-        'title'            => display('purchase_details'),
-        'ocean_import_tracking_id'      => $purchase_detail[0]['ocean_import_tracking_id'],
+
+  'business_name'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:''),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),   
+         
+
+
+
+          
+
+
+
+            'title'            => display('purchase_details'),
+            'ocean_import_tracking_id'      => $purchase_detail[0]['ocean_import_tracking_id'],
             'booking_no' => $purchase_detail[0]['booking_no'],
-         'remarks' => $purchase_detail[0]['remarks'],
+            'remarks' => $purchase_detail[0]['remarks'],
             'container_no'    => $purchase_detail[0]['container_no'],
             'origin'  =>$purchase_detail[0]['country_origin'],
             'seal_no'       => $purchase_detail[0]['seal_no'],
@@ -1904,7 +1932,9 @@ public function purchase_details_data_print($purchase_id) {
             'customer'  => $customer_name[0]['customer_name'],
             'remarks' => $purchase_detail[0]['remarks']
         );
-// print_r($data);
+
+ //  print_r($dataw[0]['color']);
+
         $chapterList = $CI->parser->parse('purchase/ocean_import_invoice_print', $data, true);
         return $chapterList;
     }

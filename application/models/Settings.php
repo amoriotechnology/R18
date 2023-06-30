@@ -469,11 +469,8 @@ class Settings extends CI_Model {
         return false;
     }
 
- 
-
-    //COUNT PRODUCT
-    public function bank_entry($data) {
-      //  $this->db->insert('bank_add', $data);
+     public function bank_entry($data) {
+        $this->db->insert('bank_add', $data);
         $this->db->select('bank_name');
         $this->db->from('bank_add');
         $this->db->where('created_by', $this->session->userdata('user_id'));
@@ -483,6 +480,9 @@ class Settings extends CI_Model {
             return $query->result_array();
         }
     }
+
+    //COUNT PRODUCT
+    
 
     //Add person
     public function submit_person($data) {

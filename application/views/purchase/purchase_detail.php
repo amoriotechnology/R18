@@ -19,7 +19,7 @@
     if($template==2)
     {
     ?>
-<div class="brand-section">
+ <div class="brand-section" style="background-color:<?php echo $color; ?>">
 <div class="row" >
 
 <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>" style='width: 50%;'>
@@ -83,7 +83,7 @@
 for($m=1;$m<count($purchase_all_data);$m++){ 
     ?>
     <table class="table table-bordered normalinvoice table-hover" style="border:none;" id="normalinvoice_<?php  echo $m; ?>" >
-            <thead>
+            <thead style="background-color:<?php echo $color; ?>">
                     <tr>
                     <!-- <th rowspan="1" style="border-style : hidden!important; class="text-center ">S.No</th> -->
                         <th rowspan="1" class="absorbing-column text-center " style="width:6px;">Product<br/> Name</th>
@@ -219,7 +219,7 @@ if($a==$m){
 elseif($template==1)
 {
 ?>     
-   <div class="brand-section">
+ <div class="brand-section" style="background-color:<?php echo $color; ?>">
    <div class="row">
       
 
@@ -284,7 +284,7 @@ elseif($template==1)
 for($m=1;$m<count($purchase_all_data);$m++){ 
     ?>
     <table class="table table-bordered normalinvoice table-hover" style="border:none;" id="normalinvoice_<?php  echo $m; ?>" >
-            <thead>
+            <thead style="background-color:<?php echo $color; ?>">
                     <tr>
                     <!-- <th rowspan="1" style="border-style : hidden!important; class="text-center ">S.No</th> -->
                         <th rowspan="1" class="absorbing-column text-center " style="width:6px;">Product<br/> Name</th>
@@ -420,7 +420,7 @@ if($a==$m){
 elseif($template==3)
 {
 ?>
-<div class="brand-section">
+ <div class="brand-section" style="background-color:<?php echo $color; ?>">
 <div class="row">
        
        <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>" style='width: 100%;'>
@@ -479,7 +479,7 @@ elseif($template==3)
 for($m=1;$m<count($purchase_all_data);$m++){ 
     ?>
     <table class="table table-bordered normalinvoice table-hover" style="border:none;" id="normalinvoice_<?php  echo $m; ?>" >
-            <thead>
+            <thead style="background-color:<?php echo $color; ?>">
                     <tr>
                     <!-- <th rowspan="1" style="border-style : hidden!important; class="text-center ">S.No</th> -->
                         <th rowspan="1" class="absorbing-column text-center " style="width:6px;">Product<br/> Name</th>

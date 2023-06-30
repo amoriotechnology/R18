@@ -114,7 +114,7 @@ ul.dropdown-submenu>li>a:hover{
      $split=explode('-',$admtest);
      if(trim($split[0])=='sale'){
       ?>
-           <a href="<?php echo base_url('Cinvoice')?>" style="color:white;margin-top:14px;border-color: #e1dee9;" class="btn btn-outline"><i class="fa fa-balance-scale"></i> <?php  echo display('invoice') ?></a>
+           <a href="<?php echo base_url('Cinvoice')?>" style="background-color: aliceblue;margin-top:14px;border-color: #e1dee9;" class="btn btn-outline"><i class="fa fa-balance-scale"></i> <?php  echo display('invoice') ?></a>
      <?php }}?>
 
      <?php 
@@ -122,7 +122,7 @@ ul.dropdown-submenu>li>a:hover{
      $split=explode('-',$admtest);
      if(trim($split[0])=='accounts'){
         ?>
-           <a href="<?php echo base_url('accounts/customer_receive')?>" style="color:white;margin-top:14px;border-color: #e1dee9;" class="btn btn-outline"><i class="fa fa-money"></i> Sales Payments</a>
+           <a href="<?php echo base_url('accounts/customer_receive')?>" style="background-color: aliceblue;margin-top:14px;border-color: #e1dee9;" class="btn btn-outline"><i class="fa fa-money"></i> Sales Payments</a>
        <?php }} ?>
       
 <?php 
@@ -130,7 +130,7 @@ ul.dropdown-submenu>li>a:hover{
      $split=explode('-',$admtest);
      if(trim($split[0])=='accounts'){
       ?>
-          <a href="<?php echo base_url('accounts/supplier_payment')?>" style="color:white;margin-top:14px;border-color: #e1dee9;" class="btn btn-outline"><i class="fa fa-money" aria-hidden="true"></i> Expenses Payment</a>
+          <a href="<?php echo base_url('accounts/supplier_payment')?>" style="background-color: aliceblue;margin-top:14px;border-color: #e1dee9;" class="btn btn-outline"><i class="fa fa-money" aria-hidden="true"></i> Expenses Payment</a>
       <?php }} ?>
 
 <?php 
@@ -138,7 +138,7 @@ ul.dropdown-submenu>li>a:hover{
      $split=explode('-',$admtest);
      if(trim($split[0])=='expense'){
       ?>
-          <a href="<?php echo base_url('Cpurchase')?>" style="color:white;margin-top:14px;border-color: #e1dee9;" class="btn btn-outline"><i class="ti-shopping-cart"></i> <?php echo display('purchase') ?></a>
+          <a href="<?php echo base_url('Cpurchase')?>" style="background-color: aliceblue;margin-top:14px;border-color: #e1dee9;" class="btn btn-outline"><i class="ti-shopping-cart"></i> <?php echo display('purchase') ?></a>
  <?php }} ?>
 
         <div class="navbar-custom-menu">

@@ -1416,7 +1416,7 @@ td {
                    
                     <td>
         <input type="submit" id="add-supplier-from-expense" name="add-supplier-from-expense"  style="color:white;background-color:#38469f;"  class="btn" value="<?php echo display('save') ?>">
-    <a   style="color:white;background-color:#38469f;" id="final_submit_provider" class='final_submit__provider btn btn-primary'><?php echo display('submit'); ?></a>
+    <a   style="color:white;background-color:#38469f;" id="final_submit_provider" class='final_submit_provider btn btn-primary'><?php echo display('submit'); ?></a>
 <a id="download_provider"        style="color:white;background-color:#38469f;" class='btn btn-primary'><?php  echo  display('download'); ?></a>
 <a id="print_provider"        style="color:white;background-color:#38469f;" class='btn btn-primary'><?php  echo  display('print'); ?></a>                   
       </td>
@@ -2236,39 +2236,7 @@ td {
 <a data-toggle="modal" href="#add_bank_info"  style="color:white;background-color:#38469f;" class="btn btn-primary"><i class="fa fa-university"></i></a>
       <div class="col-sm-5">
   <select name="bank" id="bank"  class="form-control bankpayment" >
-<option value="Axis Bank Ltd.">Axis Bank Ltd.</option>
-<option value="Bandhan Bank Ltd.">Bandhan Bank Ltd.</option>
-<option value="Bank of Baroda">Bank of Baroda</option>
-<option value="Bank of India">Bank of India</option>
-<option value="Bank of Maharashtra">Bank of Maharashtra</option>
-<option value="Canara Bank">Canara Bank</option>
-<option value="Central Bank of India">Central Bank of India</option>
-<option value="City Union Bank Ltd.">City Union Bank Ltd.</option>
-<option value="CSB Bank Ltd.">CSB Bank Ltd.</option>
-<option value="DCB Bank Ltd.">DCB Bank Ltd.</option>
-<option value="Dhanlaxmi Bank Ltd.">Dhanlaxmi Bank Ltd.</option>
-<option value="Federal Bank Ltd.">Federal Bank Ltd.</option>
-<option value="HDFC Bank Ltd">HDFC Bank Ltd</option>
-<option value="ICICI Bank Ltd.">ICICI Bank Ltd.</option>
-<option value="IDBI Bank Ltd.">IDBI Bank Ltd.</option>
-<option value="IDFC First Bank Ltd.">IDFC First Bank Ltd.</option>
-<option value="Indian Bank">Indian Bank</option>
-<option value="Indian Overseas Bank">Indian Overseas Bank</option>
-<option value="Induslnd Bank Ltd">Induslnd Bank Ltd</option>
-<option value="Jammu & Kashmir Bank Ltd.">Jammu & Kashmir Bank Ltd.</option>
-<option value="Karnataka Bank Ltd.">Karnataka Bank Ltd.</option>
-<option value="Karur Vysya Bank Ltd.">Karur Vysya Bank Ltd.</option>
-<option value="Kotak Mahindra Bank Ltd">Kotak Mahindra Bank Ltd</option>
-<option value="Nainital Bank Ltd.">Nainital Bank Ltd.</option>
-<option value="Punjab & Sind Bank">Punjab & Sind Bank</option>
-<option value="Punjab National Bank">Punjab National Bank</option>
-<option value="RBL Bank Ltd.">RBL Bank Ltd.</option>
-<option value="South Indian Bank Ltd.">South Indian Bank Ltd.</option>
-<option value="State Bank of India">State Bank of India</option>
-<option value="Tamilnad Mercantile Bank Ltd.">Tamilnad Mercantile Bank Ltd.</option>
-<option value="UCO Bank">UCO Bank</option>
-<option value="Union Bank of India">Union Bank of India</option>
-<option value="YES Bank Ltd.">YES Bank Ltd.</option>
+
 <?php foreach($bank_list as $b){ ?>
   <option value="<?=$b['bank_name']; ?>"><?=$b['bank_name']; ?></option>
 <?php } ?>
@@ -4789,7 +4757,7 @@ var v=$(this).val();
 
   
 $(document).ready(function(){
-   $('.removebundle').hide();
+   //$('.removebundle').hide();
 $('#amt').hide();
 $('#bal').hide();
     });

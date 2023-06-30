@@ -80,7 +80,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
  
  <div class="col-sm-5 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
  
- <div class="col-sm-3"><img src="<?php echo  base_url().$logo; ?>" style='width: 70%;'></div>
+ <div class="col-sm-3"><img src="<?php echo  $logo;  ?>" style='width: 70%;'></div>
 
 
 
@@ -212,7 +212,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 
 
 
-     <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>" style='width: 100%;'> </div>
+     <div class="col-sm-2"><img src="<?php echo  $logo;  ?>" style='width: 100%;'> </div>
 
         
 <div class="col-sm-6 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
@@ -350,7 +350,7 @@ elseif($template==3)
 
 
 <div class="col-sm-2 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
-        <div class="col-sm-4"><img src="<?php echo  base_url().$logo; ?>" style='width: 30%;float:right;'> </div>
+        <div class="col-sm-4"><img src="<?php echo  $logo;  ?>" style='width: 30%;float:right;'> </div>
 
         
     
@@ -713,7 +713,7 @@ table th, table td {
 .content {
      min-height: 0px;
 }
-  #content{display:none;} 
+   #content{display:none;} 
      #head{
     text-align: center;
     margin-top: 250px;
@@ -741,11 +741,25 @@ table th, table td {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script>
 $(document).ready(function () {
+     var img = document.createElement("img");
+img.src = "<?php  echo  base_url() ?>/asset/images/icons/loading.gif";
+var src = document.getElementById("head");
+src.appendChild(img);
+
+
+     const element = document.getElementById("content");
+
+    // clone the element
+    var clonedElement = element.cloneNode(true);
+
+    // change display of cloned element 
+    $(clonedElement).css("display", "block");
+    var pdf = new jsPDF('p','pt','a4');
 function first(callback1,callback2){
 setTimeout( function(){
-    var pdf = new jsPDF('p','pt','a4');
-    const invoice = document.getElementById("content");
-             console.log(invoice);
+   // var pdf = new jsPDF('p','pt','a4');
+   // const invoice = document.getElementById("content");
+            // console.log(invoice);
              console.log(window);
              var pageWidth = 8.5;
              var margin=0.5;
@@ -758,7 +772,7 @@ setTimeout( function(){
                  html2canvas: { scale: 3 },
                  jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
              };
-              html2pdf().from(invoice).set(opt).toPdf().get('pdf').then(function (pdf) {
+              html2pdf().from(clonedElement).set(opt).toPdf().get('pdf').then(function (pdf) {
   var totalPages = pdf.internal.getNumberOfPages();
  for (var i = 1; i <= totalPages; i++) {
     pdf.setPage(i);

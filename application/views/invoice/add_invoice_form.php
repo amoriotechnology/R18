@@ -732,7 +732,7 @@ td {
     <tr>
         <td  colspan="2" style="vertical-align:top;text-align:right;border:none;"><b><?php echo display('Overall Net Sq.Ft') ?> :</b></td>
         <td colspan="1" style="border:none;"><input type="text" id="total_net" name="total_net"  class="form-control"    readonly="readonly"  /> </td>
-         <td colspan="4" style="text-align:right;border:none;"><b><?php echo display('GRAND TOTAL') ?> :<br/><?php echo display('Preferred Currency') ?></b></td><td colspan="1" style="border:none;"> <table><tr> <td class="cus" name="cus" style="width: 40px;"></td> <td>&nbsp</td><td><input  type="text"  readonly id="customer_gtotal"     name="customer_gtotal"  required   /></td></tr></table></td>
+         <td colspan="4" style="text-align:right;border:none;"><b><?php echo display('GRAND TOTAL') ?> :<br/><?php echo display('Preferred Currency') ?></b></td><td colspan="1" style="border:none;"> <table><tr> <td class="cus" name="cus" style="width: 40px;"></td> <td style="width: 20px;">&nbsp</td><td><input  type="text"  readonly id="customer_gtotal"     name="customer_gtotal"  required   /></td></tr></table></td>
 </tr>
 
     <tr>
@@ -743,7 +743,7 @@ td {
                                         <table border="0">
       <tr class="amt">
 
-        <td class="cus" name="cus" style="width: 40px;"></td><td>&nbsp</td>
+        <td class="cus" name="cus" style="width: 40px;"></td><td style="width: 20px;">&nbsp</td>
 <td> <input  type="text"  readonly id="amount_paid" style="width:-webkit-fill-available;"  name="amount_paid"  required   /></td> 
      </tr>
    </table>

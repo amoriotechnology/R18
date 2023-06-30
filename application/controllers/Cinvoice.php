@@ -646,25 +646,29 @@ echo json_encode($data);
       $CA->load->model('Web_settings');
 
       $CI->load->model('invoice_content');
+ $w = & get_instance();
 
+        $w->load->model('Ppurchases');
       $sql='select * from invoice_content ';
       $query=$this->db->query($sql);
-      $company_content=$query->result_array();
+      $company_content= $CI->invoice_content->retrieve_info_data();
       
-    //   print_r( $company_content);
+   
     //  echo $this->db->last_query();die();
 
       $currency_details = $CI->Web_settings->retrieve_setting_editdata();
 
       $setting=  $CI->Web_settings->retrieve_setting_editdata();
-      $this->session->set_userdata('image_email', base_url().$setting[0]['invoice_logo']);
+      $company_info = $w->Ppurchases->retrieve_company();
+
+      $this->session->set_userdata('image_email', base_url().(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']));
 
       $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
     $uid=$_SESSION['user_id'];
     $sql='select c.* from company_information c join user_login as u on u.cid=c.company_id where u.user_id='.$uid;
 
     $query=$this->db->query($sql);
-    $company_info=$query->result_array();
+
     $product_sql='select c.* from invoice i join customer_information c on c.customer_id=i.customer_id where i.invoice_id='.$invoice_id;
     $query=$this->db->query($product_sql);
    // echo $this->db->last_query();
@@ -682,10 +686,11 @@ echo json_encode($data);
     $sql='select * from invoice where invoice_id='.$invoice_id;
     $query=$this->db->query($sql);
     $invoice=$query->result_array();
-    $dataw = $CA->invoice_design->retrieve_data($this->session->userdata('user_id'));
+            $dataw = $CA->invoice_design->retrieve_data();
     $data['curn_info_default'] = $curn_info_default[0]['currency_name'];
     $data['currency'] = $currency_details;
-    $data['company_info']=$company_info;
+    $data['company_info']=(!empty($company_content)?$company_content:$company_info);
+      $data['company_content']=(!empty($company_content)?$company_content:$company_info);
     $data['customer_info']=$customer_info;
     $data['product_info']=$product_info;
     $data['invoiceid']=$invoice_id;
@@ -694,14 +699,14 @@ echo json_encode($data);
 
     $data['logo'] = $setting;
 //echo $setting[0]['invoice_logo'];
- //print_r( $invoice_info) ; 
 
-    $data['company_content'] = $company_content;
+
+  //  $data['company_content'] = $company_content;
 
     $data['head']=$dataw;
 
     $data['template'] = $dataw[0]['template'];
-
+ 
     $content = $this->load->view('pdf_attach_mail/new_sale', $data, true);
 }
 
@@ -4462,6 +4467,7 @@ public function performer_ins(){
        'sales_price_sqft ' =>  $saleamt_sqf,
        'sales_slab_price'   => $sales_slab_am,
        'weight'  =>  $weig ,
+         'total_amt'       => $total_price,
        'origin'  => $orig,
        'status'             => 1
         );
@@ -4470,7 +4476,7 @@ public function performer_ins(){
     $this->db->where('bundle_no', $bundle_no[$i]);
             $this->db->delete('product_details');
         $this->db->insert('product_details', $data2);
-        // echo $this->db->last_query();
+      //   echo $this->db->last_query();
 
 
 
@@ -4693,6 +4699,10 @@ public function proforma_with_attachment_cus($invoiceid)
       $CA->load->model('invoice_design');
       $CA->load->model('invoice_content');
       $CA->load->model('Web_settings');
+       $w = & get_instance();
+
+        $w->load->model('Ppurchases');
+         
       $dataw = $CA->invoice_design->proforma_data();
       $currency_details = $CI->Web_settings->retrieve_setting_editdata();
       $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
@@ -4705,20 +4715,18 @@ public function proforma_with_attachment_cus($invoiceid)
      where u.user_id='.$_SESSION['user_id'];
     $query=$this->db->query($sql);
 // echo $this->db->last_query();
+  $company_content= $CA->invoice_content->retrieve_info_data();
+   $company_info = $w->Ppurchases->retrieve_company();
 
+  
 
-
-
-
-    $data['company_info']=$query->result_array();
-    // print_r($data['company_info']);
         //   $this->session->set_userdata('image_email', base_url().$data['company_info'][0]['logo']);
         //  echo base_url().$data['company_info'][0]['logo'];
     // print_r( $data['company_info']); die();
     
     
     $setting=  $CI->Web_settings->retrieve_setting_editdata();
-     $this->session->set_userdata('image_email', base_url().$setting[0]['invoice_logo']);
+     $this->session->set_userdata('image_email', base_url().(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']));
     
     
     
@@ -4750,7 +4758,8 @@ $sql='select * from profarma_invoice where purchase_id='.$invoiceid;
     $sql='select * from invoice_content ';
     $query=$this->db->query($sql);
     // $company_content
-    $data['company_content']=$query->result_array();
+   $data['company_info']=(!empty($company_content)?$company_content:$company_info);
+      $data['company_content']=(!empty($company_content)?$company_content:$company_info);
     $data['logo'] = $setting;
 
 
@@ -4868,12 +4877,14 @@ $content = $this->load->view('pdf_attach_mail/ocean', $data, true);
     $CI = & get_instance();
     $CA->load->model('invoice_design');
     $CA->load->model('invoice_content');
+     $w = & get_instance();
 
-    $dataw = $CA->invoice_design->retrieve_data($this->session->userdata('user_id'));
+        $w->load->model('Ppurchases');
+     $dataw = $CA->invoice_design->proforma_data();
    $sql='select c.* from user_login  u join company_information c on c.company_id=u.cid where u.user_id='.$_SESSION['user_id'];
     $query=$this->db->query($sql);
-    $data['company_info']=$query->result_array();
-        $this->session->set_userdata('image_email', base_url().$data['company_info'][0]['logo']);
+  
+     
    $sql='select b.* from ocean_export_tracking a join supplier_information b on b.supplier_id=a.supplier_id WHERE a.ocean_export_tracking_id='.$invoiceid;
     $query=$this->db->query($sql);
     $data['supplier_info']=$query->result_array();
@@ -4890,16 +4901,18 @@ $content = $this->load->view('pdf_attach_mail/ocean', $data, true);
     $data['customer_info']=$query->result_array();
 
       $setting=  $CI->Web_settings->retrieve_setting_editdata();
-      $this->session->set_userdata('image_email', base_url().$setting[0]['invoice_logo']);
+      $this->session->set_userdata('image_email', base_url().(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']));
 
     $sql='select * from invoice_content ';
     $query=$this->db->query($sql);
     // $company_content
-    $data['company_content']=$query->result_array();
+  
     
-    
-    
-    
+      $company_content= $CA->invoice_content->retrieve_info_data();
+   $company_info = $w->Ppurchases->retrieve_company();
+     $data['company_info']=(!empty($company_content)?$company_content:$company_info);
+      $data['company_content']=(!empty($company_content)?$company_content:$company_info);
+ $this->session->set_userdata('image_email', base_url().(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']));
 
    $sql='select * from invoice_email where uid='.$_SESSION['user_id'];;
     $query=$this->db->query($sql);
@@ -4960,7 +4973,11 @@ $content = $this->load->view('pdf_attach_mail/trucking', $data, true);
     $CI = & get_instance();
     $CA->load->model('invoice_design');
     $CI->load->model('Web_settings');
-    $dataw = $CA->invoice_design->retrieve_data($this->session->userdata('user_id'));
+         $CI->load->model('invoice_content');
+          $w = & get_instance();
+
+        $w->load->model('Ppurchases');
+            $dataw = $CA->invoice_design->retrieve_data();
 
 
 
@@ -4979,9 +4996,12 @@ $content = $this->load->view('pdf_attach_mail/trucking', $data, true);
     $query=$this->db->query($sql);
    
     // echo $sql;
-
+   $company_content= $CI->invoice_content->retrieve_info_data();
+     $company_info = $w->Ppurchases->retrieve_company();
     $data['head']=$dataw;
-    $data['company_info']=$query->result_array();
+   $data['company_info']=(!empty($company_content)?$company_content:$company_info);
+      $data['company_content']=(!empty($company_content)?$company_content:$company_info);
+  
 
      $this->session->set_userdata('image_email', base_url().$data['company_info'][0]['logo']);
 
@@ -4999,9 +5019,11 @@ $content = $this->load->view('pdf_attach_mail/trucking', $data, true);
     $sql='select * from sale_trucking where trucking_id='.$invoiceid;
     $query=$this->db->query($sql);
 
-    //    echo $this->db->last_query(); die();
+ 
       $setting=  $CI->Web_settings->retrieve_setting_editdata();
-      $this->session->set_userdata('image_email', base_url().$setting[0]['invoice_logo']);
+    
+
+      $this->session->set_userdata('image_email', base_url().(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']));
 
     $data['sale_trucking']=$query->result_array();
     $sql='select * from invoice_email where uid='.$_SESSION['user_id'];;
@@ -5015,7 +5037,7 @@ $content = $this->load->view('pdf_attach_mail/trucking', $data, true);
     $sql='select * from invoice_content ';
     $query=$this->db->query($sql);
     // $company_content
-    $data['company_content']=$query->result_array();
+   
 
         $data['logo'] = $setting;
 

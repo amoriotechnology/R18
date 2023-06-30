@@ -2734,7 +2734,7 @@ gt(id);
     });
    
     $(document).ready(function(){
-      $('.removebundle').hide();
+     // $('.removebundle').hide();
    $('#amt').hide();
    $('#bal').hide();
        });

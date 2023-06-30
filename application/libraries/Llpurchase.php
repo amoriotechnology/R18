@@ -1125,15 +1125,16 @@ print_r($purchase_detail);
         $CI = & get_instance();
 
         $CI->load->model('Ppurchases');
-
+   $CI->load->model('invoice_content');
         $CI->load->model('Web_settings');
 
         $CI->load->library('occational');
 
-
+   $w = & get_instance();
+     $w->load->model('Ppurchases');
 
         $purchase_detail = $CI->Ppurchases->ocean_import_tracking_details_data($purchase_id);
-
+  $datacontent = $CI->invoice_content->retrieve_info_data();
      
 
         if (!empty($purchase_detail)) {
@@ -1168,13 +1169,14 @@ print_r($purchase_detail);
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
         $customer_name = $CI->db->select('*')->from('customer_information')->where('customer_id', $purchase_detail[0]['consignee'])->get()->result_array();
     
-        $company_info = $CI->Ppurchases->retrieve_company();
+   $company_info = $w->Ppurchases->retrieve_company();
        
         $data = array(
             'header'=> $dataw[0]['header'],
-            'logo'=> $dataw[0]['logo'],
-            'color'=> $dataw[0]['color'],
-            'template'=> $dataw[0]['template'],
+      
+          'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:base_url().$company_info[0]['logo']), 
+        'color'=> $dataw[0]['color'],
+        'template'=> $dataw[0]['template'],
             'customer_name'  => $customer_name[0]['customer_name'],
             'country_origin' => $purchase_detail[0]['country'],
 
@@ -1208,7 +1210,7 @@ print_r($purchase_detail);
             'remarks' => $purchase_detail[0]['remarks'],
             // 'sub_total_amount' => number_format($purchase_detail[0]['grand_total_amount'], 2, '.', ','),
 
-       
+          'company_info'=> (!empty($datacontent)?$datacontent:$company_info)
 
         );
 
@@ -1230,9 +1232,11 @@ print_r($purchase_detail);
         $CI = & get_instance();
         $CI->load->model('Ppurchases');
         $CI->load->model('Web_settings');
+              $CI->load->model('invoice_content'); 
         $CI->load->library('occational');
         $purchase_detail = $CI->Ppurchases->trucking_details_data($purchase_id);
-      
+                  $w = & get_instance();
+     $w->load->model('Ppurchases');
         if (!empty($purchase_detail)) {
             $i = 0;
             foreach ($purchase_detail as $k => $v) {
@@ -1252,7 +1256,7 @@ print_r($purchase_detail);
     
         $CII = & get_instance();
         $CC = & get_instance();
-        $company_info = $CI->Ppurchases->retrieve_company();
+        $company_info = $w->Ppurchases->retrieve_company();
         // print_r($company_info); die();
         $CII->load->model('invoice_design');
         $CC->load->model('invoice_content');
@@ -1262,15 +1266,14 @@ print_r($purchase_detail);
         $CI1->load->model('Purchases');
         $all_supplier = $CI1->Purchases->select_all_supplier();
           // print_r($all_supplier); die();
-          $dataw = $CI->invoice_design->retrieve_data1();
-          $company_info = $CI->Purchases->retrieve_company();
+        $dataw = $CI->invoice_design->retrieve_data();
+    
        // print_r($datacontent); die();
 
        $datacontent = $CI->invoice_content->retrieve_info_data();
 
 // print_r( $datacontent);die();
 
-        $company_info = $CI->Purchases->retrieve_company();
 
 
      $data = array(
@@ -1280,22 +1283,26 @@ print_r($purchase_detail);
         'currency'  =>$currency_details[0]['currency'],
             'header'=> $dataw[0]['header'],
             'pro_no_reference' => $purchase_detail[0]['pro_no_reference'],
-            'logo'=> $setting[0]['invoice_logo'],
+          'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']), 
             'color'=> $dataw[0]['color'],
             'template'=> $dataw[0]['template'],
             'all_supplier' => $all_supplier,
            
 
-            'business_name'    => $datacontent[0]['business_name'],
-            'address'    => $datacontent[0]['address'],
-            'email'    => $datacontent[0]['email'],
-            'phone'    => $datacontent[0]['phone'],
+           
+ 
 
-
+  'business_name'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:''),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),   
+         
 
           //  'reg_number'=>$datacontent[0]['reg_number'],
          //   'website'=>$datacontent[0]['website'],
-            'address'=>$company_info[0]['address'],
+          
             'title'            => display('purchase_details'),
             'trucking_id'      => $purchase_detail[0]['trucking_id'],
             'grand_total' => $purchase_detail[0]['grand_total_amount'],
@@ -1333,10 +1340,11 @@ print_r($purchase_detail);
         $CI = & get_instance();
         $CI->load->model('Ppurchases');
         $CI->load->model('Web_settings');
+              $CI->load->model('invoice_content'); 
         $CI->load->library('occational');
-        
         $purchase_detail = $CI->Ppurchases->trucking_details_data($purchase_id);
-       //  print_r($purchase_detail); die();
+                  $w = & get_instance();
+     $w->load->model('Ppurchases');
         if (!empty($purchase_detail)) {
             $i = 0;
             foreach ($purchase_detail as $k => $v) {
@@ -1347,30 +1355,38 @@ print_r($purchase_detail);
                 $purchase_detail[$k]['convert_date'] = $CI->occational->dateConvert($purchase_detail[$k]['invoice_date']);
             }
         }
-
-        $setting=  $CI->Web_settings->retrieve_setting_editdata();
-
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+       
         $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
         $shipment_currency = $CI->db->select('*')->from('supplier_information')->where('supplier_name',$purchase_detail[0]['shipment_company'])->get()->result_array();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+    
         $CII = & get_instance();
         $CC = & get_instance();
-        $company_info = $CI->Ppurchases->retrieve_company();
+      
         // print_r($company_info); die();
         $CII->load->model('invoice_design');
         $CC->load->model('invoice_content');
+
+
         $CI1 = & get_instance();
         $CI1->load->model('Purchases');
         $all_supplier = $CI1->Purchases->select_all_supplier();
           // print_r($all_supplier); die();
-          $dataw = $CI->invoice_design->retrieve_data1();
-          $company_info = $CI->Purchases->retrieve_company();
+        $dataw = $CI->invoice_design->retrieve_data();
+       $company_info = $w->Ppurchases->retrieve_company();
        // print_r($datacontent); die();
-        $company_info = $CI->Purchases->retrieve_company();
-          $datacontent = $CI->invoice_content->retrieve_info_data();
+
+       $datacontent = $CI->invoice_content->retrieve_info_data();
+
+// print_r( $datacontent);die();
+
+
+
      $data = array(
    //     'value'=>$value,
-   'shipment_currency'  => $shipment_currency[0]['currency_type'],
+       'shipment_currency'  => $shipment_currency[0]['currency_type'],
         'curn_info_default' =>$curn_info_default[0]['currency_name'],
         'currency'  =>$currency_details[0]['currency'],
             'header'=> $dataw[0]['header'],
@@ -1379,18 +1395,22 @@ print_r($purchase_detail);
             'color'=> $dataw[0]['color'],
             'template'=> $dataw[0]['template'],
             'all_supplier' => $all_supplier,
-          
+           
 
-            'cname'    => $datacontent[0]['business_name'],
-            'address'    =>  $datacontent[0]['address'],
-            'email'    => $datacontent[0]['email'],
-            'phone'    => $datacontent[0]['phone'],
+           
+ 
 
-
+  'business_name'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:''),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),   
+         
 
           //  'reg_number'=>$datacontent[0]['reg_number'],
          //   'website'=>$datacontent[0]['website'],
-            'address'=>$company_info[0]['address'],
+          
             'title'            => display('purchase_details'),
             'trucking_id'      => $purchase_detail[0]['trucking_id'],
             'grand_total' => $purchase_detail[0]['grand_total_amount'],

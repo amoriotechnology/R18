@@ -123,8 +123,9 @@ public function proforma_data() {
         $id=$_SESSION['user_id'];
         $this->db->select('*');
         $this->db->from('invoice_design');
-        $this->db->where('uid', $id);
+        $this->db->where('create_by', $id);
         $query = $this->db->get();
+       
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }

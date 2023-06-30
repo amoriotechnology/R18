@@ -24,30 +24,27 @@ class Csettings extends CI_Controller {
 
     #================Add new bank==============#
 
-    public function add_new_bank() {
-        $coa = $this->Settings->headcode();
+public function add_new_bank() {
+   $coa = $this->Settings->headcode();
            if($coa->HeadCode!=NULL){
                 $headcode=$coa->HeadCode+1;
            }else{
                 $headcode="102010201";
             }
 
-      //  $createby=$this->session->userdata('user_id');
+        $createby=$this->session->userdata('user_id');
         $createdate=date('Y-m-d H:i:s');
         $data = array(
-           'created_by'=> $this->session->userdata('user_id'),
+            'created_by'=> $createby,
             'bank_id'   => $this->auth->generator(10),
             'bank_name' => $this->input->post('bank_name',TRUE),
             'ac_name'   => $this->input->post('ac_name',TRUE),
-            'ac_number' => $this->input->post('ac_number',TRUE),
+            'ac_number' => $this->input->post('ac_no',TRUE),
             'branch'    => $this->input->post('branch',TRUE),
-            'country' => $this->input->post('country',TRUE),
+           'country' => $this->input->post('country',TRUE),
             'currency'    => $this->input->post('currency1',TRUE),
             'status'   => 1
         );
-        // print_r($data); die();
-        $this->db->insert('bank_add',$data);
-        // echo $this->db->last_query(); die();
 
             $bank_coa = [
              'HeadCode'         => $headcode,
@@ -66,10 +63,10 @@ class Csettings extends CI_Controller {
         ];
         $bankinfo = $this->Settings->bank_entry($data);
 
-         $this->db->insert('acc_coa',$bank_coa);
-         redirect(base_url('Csettings/bank_list'));
+            $this->db->insert('acc_coa',$bank_coa);
+
         
-    //  echo json_encode($bankinfo);
+     echo json_encode($bankinfo);
        
     }
 
