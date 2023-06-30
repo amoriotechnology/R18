@@ -30,7 +30,7 @@ if($invoice_setting[0]['template']==2)
   
 
 
-  <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>"  style='width: 100%;'  /></div>
+  <div class="col-sm-2"><img src="<?php echo  $logo; ?>"  style='width: 100%;'  /></div>
 
         
 <div class="col-sm-6 text-center" style="color:white;"><h3><?php echo $invoice_setting[0]['header']; ?></h3></div>
@@ -77,7 +77,7 @@ if($invoice_setting[0]['template']==2)
 <div class="body-section">
   <div class="table-responsive">
      
-   <div id="content">     
+      
                      <?php 
 
 
@@ -86,7 +86,7 @@ for($m=1;$m<count($purchase_detail);$m++){
 <table class="table table-bordered normalinvoice table-hover" id="normalinvoice_<?php  echo $m; ?>" >
                               <thead style="background-color:<?php echo $color; ?>">
                                      <tr>
-                                         <th rowspan="1" class="text-center" style="width:4px;" >Product Name </th>
+                                         <th rowspan="1" class="text-center" style="width:14px;" >Product Name </th>
                                             <th rowspan="1" class="text-center" style="width:1px;">Bundle No</th>
                                             <th rowspan="1"  class="text-center"style="width:2px;">Descri</br>ption</th>
                                             <th rowspan="1" class="text-center" style="width:2px;">Thick ness</th>
@@ -191,7 +191,7 @@ if($a==$m){
                             </table>
                             <?php   } ?>
                           
-                         </div> </div>
+                      </div>
                                            
 <table border="0" class="overall table table-hover" style="border:none;">
   
@@ -252,7 +252,7 @@ if($a==$m){
 <h4><?php echo  display('Remarks / Details');?> :</h4><?= $invoice[0]['remarks']; ?><br>
 <h4><?php echo  display('Message on Invoice');?> :</h4><?= $invoice[0]['message_invoice']; ?><br>
 
-</div>
+
 
 <?php 
   
@@ -286,7 +286,7 @@ elseif($invoice_setting[0]['template']==1)
  <div class="col-sm-5 text-center" style="color:white;"><h3><?php echo $invoice_setting[0]['header']; ?></h3></div>
  
  
- <div class="col-sm-3"><img src="<?php echo  base_url().$logo; ?>" style='width: 70%;'  /></div>
+ <div class="col-sm-3"><img src="<?php echo  $logo; ?>" style='width: 70%;'  /></div>
 
 
 
@@ -327,7 +327,7 @@ elseif($invoice_setting[0]['template']==1)
 <div class="body-section">
   <div class="table-responsive">
      
-   <div id="content">     
+     
                      <?php 
 
 
@@ -336,7 +336,7 @@ for($m=1;$m<count($purchase_detail);$m++){
 <table class="table table-bordered normalinvoice table-hover" id="normalinvoice_<?php  echo $m; ?>" >
                               <thead style="background-color:<?php echo $color; ?>">
                                      <tr>
-                                         <th rowspan="1" class="text-center" style="width:4px;" >Product Name </th>
+                                         <th rowspan="1" class="text-center"  style="width:14px;">Product Name </th>
                                             <th rowspan="1" class="text-center" style="width:1px;">Bundle No</th>
                                             <th rowspan="1"  class="text-center"style="width:2px;">Descri</br>ption</th>
                                             <th rowspan="1" class="text-center" style="width:2px;">Thick ness</th>
@@ -441,7 +441,7 @@ if($a==$m){
                             </table>
                             <?php   } ?>
                           
-                         </div> </div>
+                         </div>
                                            
 <table border="0" class="overall table table-hover" style="border:none;">
   
@@ -502,7 +502,7 @@ if($a==$m){
 <h4><?php echo  display('Remarks / Details');?> :</h4><?= $invoice[0]['remarks']; ?><br>
 <h4><?php echo  display('Message on Invoice');?> :</h4><?= $invoice[0]['message_invoice']; ?><br>
 
-</div>
+
 
 <?php 
   
@@ -518,7 +518,7 @@ if($invoice_setting[0]['template']==3)
 
 
 <!-- <div class="col-sm-4"><img src="<?php// echo  base_url().'assets/'.$invoice_setting[0]['logo']; ?>" style='width: 30%;float:right;'></div> -->
-<div class="col-sm-4"><img src="<?php echo  base_url().$logo; ?>" style='width: 30%;float:right;'> </div>
+<div class="col-sm-4"><img src="<?php echo  $logo; ?>" style='width: 30%;float:right;'> </div>
 
 
 <div class="col-sm-6" style="color:white;font-weight:bold ;text-align: end;" id='company_info'>
@@ -566,7 +566,7 @@ if($invoice_setting[0]['template']==3)
 <div class="body-section">
   <div class="table-responsive">
      
-   <div id="content">     
+   
                      <?php 
 
 
@@ -575,7 +575,7 @@ for($m=1;$m<count($purchase_detail);$m++){
 <table class="table table-bordered normalinvoice table-hover" id="normalinvoice_<?php  echo $m; ?>" >
                               <thead style="background-color:<?php echo $color; ?>">
                                      <tr>
-                                         <th rowspan="1" class="text-center" style="width:4px;" >Product Name </th>
+                                         <th rowspan="1" class="text-center"  style="width:14px;">Product Name </th>
                                             <th rowspan="1" class="text-center" style="width:1px;">Bundle No</th>
                                             <th rowspan="1"  class="text-center"style="width:2px;">Descri</br>ption</th>
                                             <th rowspan="1" class="text-center" style="width:2px;">Thick ness</th>
@@ -680,7 +680,7 @@ if($a==$m){
                             </table>
                             <?php   } ?>
                           
-                         </div> </div>
+                         </div>
                                            
 <table border="0" class="overall table table-hover" style="border:none;">
   
@@ -741,17 +741,17 @@ if($a==$m){
 <h4><?php echo  display('Remarks / Details');?> :</h4><?= $invoice[0]['remarks']; ?><br>
 <h4><?php echo  display('Message on Invoice');?> :</h4><?= $invoice[0]['message_invoice']; ?><br>
 
-</div>
+
 
 <?php 
 
 }
 ?>
 
+</div>
 
-</div>
 </section>
-</div>
+
 <!-- Purchase ledger End  -->
 <div class="modal fade" id="myModal1" role="dialog" >
     <div class="modal-dialog">
@@ -882,7 +882,7 @@ table td {
 th{
     text-align:center;
     color:white;
-    font-size:8px;
+    font-size:10px;
 }
 
 table th, table td {

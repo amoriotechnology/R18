@@ -990,7 +990,7 @@ public function insert_service_provider() {
          $bank_list        = $CI->Web_settings->bank_list();
         $purchase_detail = $CI->Purchases->retrieve_purchase_order_editdata($purchase_id);
 
-         $dataw = $CI->invoice_design->retrieve_data1();
+          $dataw = $CI->invoice_design->retrieve_data();
 
         $taxfield1 = $CI->db->select('tax_id,tax')
         ->from('tax_information')
