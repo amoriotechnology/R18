@@ -57,7 +57,7 @@ class Hrm_model extends CI_Model {
         $this->db->from('federal_tax');
         $this->db->where($employee_status,$social_range);
        $query = $this->db->get();
-     //  echo  $this->db->last_query();
+     // echo  $this->db->last_query();
        if ($query->num_rows() > 0) {
            return $query->result_array();
         }
@@ -86,7 +86,7 @@ public function  insert_taxesname($postData){
         $this->db->from('state_localtax');
         $this->db->where($employee_status,$local_tax_range);
        $query = $this->db->get();
-    //   echo  $this->db->last_query();
+    //  echo  $this->db->last_query();
        if ($query->num_rows() > 0) {
            return $query->result_array();
         }
