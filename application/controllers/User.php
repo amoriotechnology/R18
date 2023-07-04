@@ -207,7 +207,12 @@ public function company_insert(){
                
             );
              $insert=$this->db->insert('user_login',$data);
-    
+    $data2 = array(
+                'cid'     => $cid,
+                'user_id' =>$cid,
+                'create_by'     => $uid,
+            );
+            $insert=$this->db->insert('payslip_invoice_design',$data2);
              if($insert)
              {
                 redirect('user/managecompany');

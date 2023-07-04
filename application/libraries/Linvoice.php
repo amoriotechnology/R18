@@ -1028,7 +1028,16 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
     }
 
 
-
+public function tax_data() {
+        $this->db->select('tax_id,tax');
+        $this->db->from('tax_information');
+        $this->db->where('created_by' ,$this->session->userdata('user_id'));
+        $query = $this->db->get();
+    //    echo $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+    }
 
 
 
@@ -1059,7 +1068,7 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
 
         $update_invoice_set = $CI->Web_settings->update_invoice();
 
-        
+        $taxfield1 =  $CI->Invoices->tax_data();
 
         //  echo $update_invoice_set[0]->account;
 
@@ -1071,10 +1080,10 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
         $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
        $product_no = $CI->Products->product_id_number();
        // $curn_info_customer = $CI->db->select('*')->from('currency_tbl')->where('icon',$customer_details[0]['currency_type'])->get()->result_array();
-        $taxfield1 = $CI->db->select('tax_id,tax')
-        ->from('tax_information')
-        ->get()
-        ->result_array();
+        // $taxfield1 = $CI->db->select('tax_id,tax')
+        // ->from('tax_information')
+        // ->get()
+        // ->result_array();
         $bank_name = $CI->db->select('bank_name')
         ->from('bank_add')
         ->get()
@@ -1262,10 +1271,10 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
         $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
         $taxfield = $CI->db->select('tax_name,default_value')->from('tax_settings')->get()->result_array();
-        $taxfield1 = $CI->db->select('tax_id,tax')
-        ->from('tax_information')
-        ->get()
-        ->result_array();
+        // $taxfield1 = $CI->db->select('tax_id,tax')
+        // ->from('tax_information')
+        // ->get()
+        // ->result_array();
         $company_info = $CI->Invoices->company_information();
        
        
@@ -1273,7 +1282,7 @@ public function ocean_export_tracking_details_data_print($purchase_id) {
 
     //    print_r($roadtransport_remarks);
        
-       
+       $taxfield1 =  $CI->Invoices->tax_data();
         $bank_list = $CI->Web_settings->bank_list();
         $data = array(
             'curn_info_default' =>$curn_info_default[0]['currency_name'],

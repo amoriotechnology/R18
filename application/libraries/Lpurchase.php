@@ -235,10 +235,11 @@ class Lpurchase {
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
         $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
      $products=$CI->Invoices->allproduct();
-     $taxfield1 = $CI->db->select('tax_id,tax')
-     ->from('tax_information')
-     ->get()
-     ->result_array();
+     $taxfield1 = $CI->Invoices->tax_data();
+    //  $taxfield1 = $CI->db->select('tax_id,tax')
+    //  ->from('tax_information')
+    //  ->get()
+    //  ->result_array();
      $po_number =  $CI1->Purchases->get_po_num();
         $data = array(
              'curn_info_default' =>$curn_info_default[0]['currency_name'],
@@ -496,7 +497,7 @@ class Lpurchase {
    
         $CI->load->model('Web_settings');
         $CI->load->model('Products');
-
+        $CI->load->model('Invoices');
       
 
         $all_supplier = $CI->Purchases->select_all_supplier();
@@ -514,11 +515,8 @@ class Lpurchase {
 
      
         $voucher_no = $CI->Purchases->voucher_no();
-
-        $taxfield1 = $CI->db->select('tax_id,tax')
-        ->from('tax_information')
-        ->get()
-        ->result_array();
+$taxfield1 = $CI->Invoices->tax_data();
+      
         $payment_type = $CI->Purchases->drop_payment_type();
 $payment_terms_dropdown = $CI->Purchases->payment_terms_dropdown();
 $product_no = $CI->Products->product_id_number();
