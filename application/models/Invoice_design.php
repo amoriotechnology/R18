@@ -105,10 +105,30 @@ public function retrieve_data1() {
         }
     }
 
+public function retrieve_data() {
+        $id=$_SESSION['user_id'];
+        $this->db->select('*');
+        $this->db->from('invoice_design');
+        $this->db->where('uid', trim($id));
+        $query = $this->db->get();
+        // echo $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+    }
 
 
-
-
+public function get_data_payslip() {
+        // $id=$_SESSION['user_id'];
+        $this->db->select('*');
+        $this->db->from('payslip_invoice_design');
+        // $this->db->where('uid', trim($id));
+        $query = $this->db->get();
+        // echo $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+    }
 
 public function retrieve_data() {
         $id=$_SESSION['user_id'];

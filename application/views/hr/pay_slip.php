@@ -95,6 +95,7 @@
 
     <div class="col-md-6">
         <p>
+<<<<<<< HEAD
         <strong>NAME</strong>:<?php echo $business_name; ?><br> 
         <strong>PHONE</strong>:<?php echo $phone; ?><br> 
         <strong>ADDRESS</strong>:<?php echo $address; ?><br> 
@@ -102,6 +103,13 @@
         </p>
   </div>
    <!-- <div class="col-md-2"><img src="<?php //echo  $logo; ?>" width="50px;" height="50px;" /></div> -->
+=======
+           
+        <strong>ADDRESS</strong>:<?php echo $company[0]['address']; ?><br> 
+        <strong>  EMAIL</strong>:<?php echo $company[0]['email']; ?><br>
+        </p>
+  </div>
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
    <div class="col-md-6">
         <div style="float: right;"><strong>TIMESHEET ID</strong>:<?php echo $infotime[0]['timesheet_id']; ?>  
 <br>
@@ -140,7 +148,11 @@
             border: none;
     text-align: center;
     table-layout: fixed;
+<<<<<<< HEAD
 
+=======
+    width: 100%;
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
      
     margin: 0 auto; /* or margin: 0 auto 0 auto */
   }
@@ -151,7 +163,12 @@
    padding: 8px 14px;
     } */
     table th {
+<<<<<<< HEAD
 
+=======
+                    border-top: ridge;
+    border-bottom: groove;
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
   padding: 8px 14px;
   text-align: center;
  
@@ -159,7 +176,11 @@
     </style>
     
    
+<<<<<<< HEAD
 <table class="table" >
+=======
+<table >
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
     <tr style="outline: thin solid" rowspan="6">
     <th colspan="6">Earnings</th>
 
@@ -168,18 +189,30 @@
     <th>DESCRIPTION</th>
      <th>HRS/ UNITS</th>
       <th>RATE</th>
+<<<<<<< HEAD
        <th>THIS PERIOD(<?php  echo $currency; ?>)</th>
         <th>YTD HOURS</th>
          <th>YTD(<?php  echo $currency; ?>)</th>
+=======
+       <th>THIS PERIOD($)</th>
+        <th>YTD HOURS</th>
+         <th>YTD($)</th>
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
 </tr>
 
     <tr style="height: 70px;">
         <td>Salary</td>
            <td>  <?php echo $infotime[0]['total_hours']; ?></td>
               <td>  <?php echo $infoemployee[0]['hrate']; ?></td>
+<<<<<<< HEAD
                  <td id="total_period"><?php echo $total; ?></td>
                     <td><?php echo $overalltotalhours; ?></td>
                        <td id="total_ytd"><?php echo $overalltotalamount; ?></td>
+=======
+                 <td><?php echo $total; ?></td>
+                    <td><?php echo $overalltotalhours; ?></td>
+                       <td><?php echo $overalltotalamount; ?></td>
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
 
     </tr>
 
@@ -190,8 +223,13 @@
  <div class="col-md-12"><br/></div>
   <div class="col-md-12">
  <div class="col-md-6">
+<<<<<<< HEAD
  <table class="proposedWork pay_table table" id="price">
   <tr  rowspan="6" style="outline: thin solid">
+=======
+ <table class="proposedWork pay_table" id="price">
+  <tr  rowspan="6">
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
     <th colspan="6">PERSONAL AND CHECK INFORMATION</th>
 
     </tr>
@@ -203,6 +241,7 @@
                              
                              <tr style="text-align:left;"><td style="font-weight:bold;width:100px;text-wrap:nowrap;">Emp.ID </td><td style="width:10px;"> :</td><td><?php echo $infotime[0]['admin_name']; ?></td></tr>
                               <tr style="text-align:left;"><td style="font-weight:bold;width:100px;">Pay Period</td><td style="width:10px;"> :</td><td style="text-wrap:nowrap;"><?php echo $infotime[0]['month']; ?></td></tr>
+<<<<<<< HEAD
 <?php if(!empty($infotime[0]['cheque_date'])) { ?>
                                <tr style="text-align:left;"><td style="font-weight:bold;width:100px;text-wrap:nowrap;">Chq Date</td><td style="width:10px;"> :</td><td><?php echo $infotime[0]['cheque_date']; ?></td></tr>
  <tr style="text-align:left;"><td style="font-weight:bold;width:100px;text-wrap:nowrap;">Chq No</td><td style="width:10px;"> :</td><td> <?php echo $infotime[0]['cheque_no']; ?></td></tr>
@@ -214,12 +253,21 @@
 <?php  }  ?>
 
 
+=======
+
+                               <tr style="text-align:left;"><td style="font-weight:bold;width:100px;text-wrap:nowrap;">Chq Date</td><td style="width:10px;"> :</td><td><?php echo $infotime[0]['cheque_date']; ?></td></tr>
+ <tr style="text-align:left;"><td style="font-weight:bold;width:100px;text-wrap:nowrap;">Chq No</td><td style="width:10px;"> :</td><td> <?php echo $infotime[0]['cheque_no']; ?></td></tr>
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
 </table>
 
 
 
                                <br/>
+<<<<<<< HEAD
 <table class="table">
+=======
+<table>
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
     <tr style="outline: thin solid" rowspan="3">
     <th colspan="3">NET PAY ALLOCATION</th>
 
@@ -227,18 +275,31 @@
 <tr>
     <th style="text-align:left;"><strong>DESCRIPTION</strong>
 </th>
+<<<<<<< HEAD
     <th><strong>THIS PERIOD(<?php  echo $currency; ?>)</strong>
 </th>
     <th><strong>YTD(<?php  echo $currency; ?>)</strong>
+=======
+    <th><strong>THIS PERIOD($)</strong>
+</th>
+    <th><strong>YTD($)</strong>
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
 </th>
 </tr>
 <tr>
    <td style="text-align:left;"><strong>Check Amount</strong>
 </td>
+<<<<<<< HEAD
    <td class="net_period"> <strong style="
     padding-top: 2px;">765.10</strong>
 </td>
    <td class="net_ytd">
+=======
+   <td> <strong style="border-top: 1px solid;
+    padding-top: 2px;">765.10</strong>
+</td>
+   <td>0.00
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
 </td>
 </tr>
 <tr>
@@ -252,15 +313,25 @@
 <tr>
    <td style="text-align:left;"><strong>NET PAY</strong>
 </td>
+<<<<<<< HEAD
    <td class="net_period" style="font-weight:bold;border-top: groove;">
 </td>
    <td class="net_ytd" style="font-weight:bold;border-top: groove;">
+=======
+   <td>0.00
+</td>
+   <td>0.00
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
 </td>
 </tr>
 </table>
  </div>
 <div class="col-md-6">
+<<<<<<< HEAD
 <table class="table" id="table" style=" width: 100%; display: table-cell;">
+=======
+<table class="table" style=" width: 100%; display: table-cell;">
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
         <tr style="outline: thin solid" rowspan="6">
     <th colspan="6">WITHHOLDINGS</th>
 
@@ -268,6 +339,7 @@
     <tr>
     <th style="text-align:left;">DESCRIPTION</th>
      <th>FILING STATUS</th>
+<<<<<<< HEAD
       <th>THIS PERIOD(<?php  echo $currency; ?>)</th>
        <th>YTD(<?php  echo $currency; ?>)</th>
        
@@ -306,6 +378,45 @@
 <?php  } ?>
  <?php foreach($state_tax as $k=>$v){
 
+=======
+      <th>THIS PERIOD($)</th>
+       <th>YTD($)</th>
+       
+</tr>
+
+<tr>
+<td style="text-align:left;"> Social Security</td>
+<td></td>
+<td><?php if($s){echo $s; } ?></td>
+<td><?php if($s_tax){echo $s_tax; } ?></td>
+</tr>
+
+
+<tr>
+<td style="text-align:left;">Madicare</td>
+<td></td>
+<td><?php if($m){echo $m;}  ?></td>
+<td><?php if($m_tax){echo $m_tax; } ?></td>
+</tr>
+
+
+<tr>
+<td style="text-align:left;">Fed Income Tax</td>
+<td></td>
+<td><?php if($f){echo $f; } ?></td>
+<td><?php if($f_tax){echo $f_tax; } ?></td>
+</tr>
+
+
+<tr>
+<td style="text-align:left;">Unemployment Tax</td>
+<td></td>
+<td><?php if($u){echo $u; } ?></td>
+<td><?php if($u_tax){echo $u_tax; } ?></td>
+</tr>
+
+ <?php foreach($state_tax as $k=>$v){
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
 $split=explode('-',$k);
 $rep=str_replace("'",'',$split[1]);
 
@@ -316,6 +427,7 @@ $rep=str_replace("'",'',$split[1]);
        <td></td>
           
             
+<<<<<<< HEAD
               <td class="current">  <?php echo $v; ?></td>
             
                  <td class="ytd"><?php echo round($sum[$rep],2); ?></td>
@@ -327,6 +439,15 @@ $rep=str_replace("'",'',$split[1]);
         <td></td><td></td>
         <td style="border-top: groove;" id="Total_current"></td><td style="border-top: groove;" id="Total_ytd"></td>
  </tr>
+=======
+              <td>  <?php echo $v; ?></td>
+            
+                 <td><?php echo $total; ?></td>
+                
+
+    </tr>
+      <?php } ?>
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
 </table>
 </div>
 </div>
@@ -334,7 +455,11 @@ $rep=str_replace("'",'',$split[1]);
  
                       
                
+<<<<<<< HEAD
 
+=======
+                     <!-- <a id="download" style="color:white;background-color:#38469f;" class='btn btn-primary'><?php echo display('Download') ?></a>   -->
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
 
             </div>
 
@@ -859,5 +984,9 @@ first(second,third);
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
  
 

@@ -114,14 +114,23 @@ public function  insert_taxesname($postData){
 }
 
 
+<<<<<<< HEAD
 public function get_data_pay($empid,$timesheetid){
+=======
+public function get_data_pay($empid){
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
         $this->db->select('*');
         $this->db->from('info_payslip');
         $this->db->where('id',$empid);
         $this->db->where('create_by',$this->session->userdata('user_id'));
+<<<<<<< HEAD
          $this->db->where('timesheet_id',$timesheetid);
         $query = $this->db->get();
         //echo $this->db->last_query(); die();
+=======
+        $query = $this->db->get();
+        // echo $this->db->last_query(); die();
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
         if ($query->num_rows() > 0) {
           return $query->result_array();
         }
@@ -146,7 +155,11 @@ public function get_data_pay($empid,$timesheetid){
         $this->db->from('state_localtax');
         $this->db->where($employee_status,$local_tax_range);
        $query = $this->db->get();
+<<<<<<< HEAD
      // echo  $this->db->last_query();
+=======
+      echo  $this->db->last_query();
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
        if ($query->num_rows() > 0) {
            return $query->result_array();
         }
@@ -326,6 +339,23 @@ public function administrator_info($ads_id){
     }
     
  public function tax_info($id){
+<<<<<<< HEAD
+=======
+    $this->db->select('*');
+    $this->db->from('info_payslip');
+ 
+    //    $this->db->join('timesheet_info_details b' , 'a.timesheet_id = b.timesheet_id');
+   $this->db->where('timesheet_id' , $id);
+   // $this->db->where('a.created_by' ,$this->session->userdata('user_id'));
+ $query = $this->db->get(); 
+// echo $this->db->last_query();
+    if ($query->num_rows() > 0) {
+        return $query->result_array();
+    }
+
+  }
+  public function time_sheet_data($id){
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
     $this->db->select('*');
     $this->db->from('info_payslip');
  

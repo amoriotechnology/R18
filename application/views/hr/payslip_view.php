@@ -95,12 +95,20 @@ border: 1px solid orange;
             <i class="pe-7s-note2"></i>
         </div>
         <div class="header-title">
+<<<<<<< HEAD
             <h1><?php echo ('Payslip Setting') ?></h1>
+=======
+            <h1><?php echo ('Payslip Design') ?></h1>
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
 <small><?php echo display('') ?></small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('web_settings') ?></a></li>
+<<<<<<< HEAD
                 <li class="active" style="color:orange;" ><?php echo ('Payslip Setting') ?></li>
+=======
+                <li class="active" style="color:orange;" ><?php echo ('Payslip Design') ?></li>
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
             </ol>
         </div>
     </section>
@@ -134,7 +142,11 @@ border: 1px solid orange;
 
         <!-- New customer -->
         <div class="row">
+<<<<<<< HEAD
             <div class="col-sm-12">
+=======
+            <div class="col-sm-6">
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
                 <div class="panel panel-bd lobidrag" >
                     <div class="panel-heading" >
                     <!-- <div class="panel-body"> -->
@@ -179,6 +191,7 @@ border: 1px solid orange;
             {
             ?>
 
+<<<<<<< HEAD
       
     <div class="col-sm-12">
 
@@ -415,17 +428,270 @@ padding-top: 2px;">765.10</strong>
               
        
 
+=======
+        <div class="col-sm-8" > <div class="panel panel-default" style="    width: max-content;">
+    <div class="panel-body">
+        
+        <div class="row">
+        
+              <div class="col-sm-3" id='company_info'>
+                  
+              <strong>ADDRESS</strong>:<br> 
+        <strong>  EMAIL</strong>:<br>
+        </p>
+
+        <div style="float: right;"><strong>TIMESHEET ID</strong>:  
+<br>
+            <span><strong>EMPLOYEE ID:</strong></span>
+        </div>
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
 
     </div>
 
 </div>
 
+<<<<<<< HEAD
+=======
+<div class="Employee_details row" >
+
+  
+<strong>EMPLOYEE NAME</strong> : 
+<br>
+<strong>EMPLOYEE TITLE</strong> :
+
+</div>
+
+
+           <table class="proposedWork pay_table" id="price" width="100%" style="margin-top:20px">
+                        
+                        <tbody>
+                           <tr>
+                             <hr>
+                              <td class="col-md-4"><h3>PERSONAL AND CHECK INFORMATION</h3>
+                              <hr>
+
+                             
+                             
+                              <p>Soc Sec #: xxx-xx-xxxx <span>Employee ID: <?php ?></span> </p>
+                               <p>Pay Period: <?php  ?></p>
+
+                                <p>Check Date:<?php ?><span>Check #: <?php ?></span> </p>
+
+                                <hr>
+
+                                <h3>NET PAY ALLOCATION</h3>
+
+                                <hr>
+
+
+                                <!-- <br> -->
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><strong>DESCRIPTION</strong></p>
+                                          <p><strong>Check Amount</p>
+                                            <p><strong>Chkg 404</strong></p>
+                                             <p> <strong>NET PAY</strong></p>
+
+
+                                    </div>
+
+                                    <div class="col-md-4">
+                                         <p><strong>THIS PERIOD($)</strong></p>
+                                          <p>0.00</p>
+                                            <p>765.10</p>
+                                             <p>  <strong style="border-top: 1px solid;
+    padding-top: 2px;">765.10</strong> </p>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+                                         <p><strong>YTD($)</strong></p>
+                                          <p>0.00</p>
+                                            <p>39114.04</p>
+                                             <p> <strong style="border-top: 1px solid;
+    padding-top: 2px;">39114.04</strong> </p>
+                                    </div>      
+                                </div>
+                                 
+                              </td>
+                              <td class="col-md-8">
+
+                                <div class="row">
+                                    <div class="col-md-2">
+
+                                <P><strong>EARNINGS</strong> </P>
+                                <br>
+
+                                </div>
+
+                                 <div class="col-md-2">
+
+                                <P><strong>DESCRIPTION </strong></P>
+                                <br>
+                                <p>Salary</p>
+                                <!-- <p>Total Hrs</p> -->
+                                <!-- <p>Gross Earnings</p>
+                                <p>Total Hrs Worked</p> -->
+
+                                </div>
+
+                                <div class="col-md-1">
+                                <P><strong>HRS/ UNITS</strong></P>
+                                <br>
+                                </div>
+
+
+
+                                 <div class="col-md-1">
+                                <P><strong>RATE</strong> </P>
+                                <br>
+                                <!-- <p><?php// echo // $total_hours; ?></p> -->
+                                <!-- <p>1000.00</p>
+                                <p>1000.00</p> -->
+
+                                </div>
+
+
+
+                                  <div class="col-md-2">
+                               <p><strong>THIS PERIOD($)</strong></p>
+                               <br>
+                                </div>
+
+                                 <div class="col-md-2">
+
+                               <p><strong>YTD HOURS</strong></p>
+                               <br>
+
+                                </div>
+                                  <div class="col-md-2">
+
+                               <p><strong>YTD($)</strong></p>
+                               <br>
+                               <p></p>
+
+
+
+
+                                </div>
+                                </div>
+                               
+
+
+
+
+
+                                <hr>
+
+
+
+
+
+
+
+
+
+
+
+
+                                 <div class="row">
+                                    <div class="col-md-2">
+
+                                <P><strong>WITHHOLDINGS</strong> </P>
+                               
+
+                                <br>
+
+
+                                </div>
+
+                                 <div class="col-md-2">
+
+                                <P><strong>DESCRIPTION</strong> </P>
+                                <br>
+                                <p>Social Security</p>
+                                <p>Madicare</p>
+                                <p>Fed Income Tax</p>
+                                <p>NJ Income Tax</p>
+                                <p>NJ Disability</p>
+                                 <p>NJ Unemploy</p>
+                                  <p>NJ EE Work Dev</p>
+                                  <br>
+                                  <p> <strong>TOTAL</strong> </p>
+                               
+                                </div>
+
+                                <div class="col-md-1">
+
+                                <P><strong>FILING STATUS</strong></P>
+                                <br>
+
+                                <P>S O</P>
+
+                                <P>SMCU O</P>
+
+                                </div>
+
+
+                                <div class="col-md-1">
+
+                            
+
+                                </div>
+                               
+                                  <div class="col-md-2">
+
+                               <p><strong>THIS PERIOD($)</strong></p>
+                               <br>
+                               <p>62.00</p>
+                                <p>14.50</p>
+                                 <p>121.53</p>
+                                  <p>29.37</p>
+                                   <p>7.50</p>
+                                    <p></p>
+                                     <p></p>
+                                     <br>
+                                      <p> <strong style="border-top: 1px solid;
+    padding-top: 2px;"> 234.90</strong></p>
+
+
+                                </div>
+
+                                     <div class="col-md-2">
+
+
+                                </div>
+
+                                  <div class="col-md-2">
+
+                               <p><strong>YTD($)</strong></p>
+                               <br>
+                                <p>3211.00</p>
+                                <p>751.10</p>
+                                 <p>6570.97</p>
+                                  <p>1609.93</p>
+                                   <p>388.50</p>
+                                    <p>138.47</p>
+                                     <p>15.39</p>
+                                     <br>
+                                      <p> <strong style="border-top: 1px solid;
+    padding-top: 2px;">12685.95 </strong> </p>
+   <br><button type="button"  class="btnclr btn m-b-5 m-r-2"   style="color:white;background-color: #337ab7;border-color: #2e6da4;"  data-toggle="modal" data-target="#myModal">
+Preview
+</button>
+        </div>
+    </div>
+  </div></div>
+
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
             <?php 
 
             }
     elseif($template==2)
     {
             ?>
+<<<<<<< HEAD
        <div class="col-sm-12">
 
 
@@ -641,6 +907,463 @@ padding-top: 2px;">765.10</strong>
 </div>
 </div>
 </div>
+=======
+          <div class="col-sm-8" > 
+            <div class="panel panel-default">
+
+
+            <div class="salary-slip" >
+            <table class="empDetail">
+              <tr height="100px" style='background-color: #c2d69b'>
+                <td colspan='4'>
+                  <img height="90px" src='https://organisationmedia.toggleflow.com/demo/logo.png' />
+
+                </td>
+
+              
+                  <td colspan='4' class="companyName"> Co-Operative Bank Ltd.</td>
+              </tr>
+              <tr>
+                <th>
+                  Name
+      </th>
+                <td>
+                  Example
+      </td>
+                <td></td>
+                <th>
+                  Bank Code
+      </th>
+                <td>
+                  ABC123
+      </td>
+                <td></td>
+                <th>
+                  Branch Name
+      </th>
+                <td>
+                  ABC123
+      </td>
+              </tr>
+              <tr>
+                <th>
+                  Employee Code
+      </th>
+                <td>
+                  XXXXXXXXXXX
+      </td>
+                <td></td>
+                <th>
+                  Bank Name
+      </th>
+                <td>
+                  XXXXXXXXXXX
+      </td>
+                <td></td>
+                <th>
+                  Payslip no.
+      </th>
+                <td>
+                  XXXXXXXXXX
+      </td>
+              </tr>
+              <tr>
+                <th>
+                  Cost Centre
+      </th>
+                <td>
+                  XXXXXXXXXXX
+      </td><td></td>
+                <th>
+                  Bank Branch
+      </th>
+                <td>
+                  XXXXXXXXXX
+      </td><td></td>
+                <th>
+                  Pay Period
+      </th>
+                <td>
+                  XXXXXXXXXXX
+      </td>
+              </tr>
+              <tr>
+                <th>
+                  CC Description:
+      </th>
+                <td>
+                  XXXXXXXXXXX
+      </td><td></td>
+                <th>
+                  Bank A/C no.
+      </th>
+                <td>
+                  XXXXXXXXXX
+      </td><td></td>
+                <th>
+                  Personel Area
+      </th>
+                <td>
+                  XXXXXXXXXX
+      </td>
+              </tr>
+              <tr>
+                <th>
+                  Grade:
+      </th>
+                <td>
+                  18
+      </td><td></td>
+                <th>
+                  Employee Group
+      </th>
+                <td>
+                  Sales Manager
+      </td><td></td>
+                <th>
+                  PAN No:
+      </th>
+                <td>
+                  MOP72182E
+      </td>
+              </tr>
+              <tr class="myBackground">
+                <th colspan="2">
+                  Payments
+      </th>
+                <th >
+                  Particular
+      </th>
+                <th class="table-border-right">
+                  Amount (Rs.)
+      </th>
+                <th colspan="2">
+                  Deductions
+      </th>
+                <th >
+                  Particular
+      </th>
+                <th >
+                  Amount (Rs.)
+      </th>
+              </tr>
+              <tr>
+                <th colspan="2">
+                  Basic Salary
+      </th>
+                <td></td>
+                <td class="myAlign">
+                  4935.00
+      </td>
+                <th colspan="2" >
+                  Provident Fund
+      </th >
+                <td></td>
+
+                <td class="myAlign">
+                  00.00
+      </td>
+              </tr >
+              <tr>
+                <th colspan="2">
+                  Fixed Dearness Allowance
+      </th>
+                <td></td>
+
+                <td class="myAlign">
+                  00.00
+      </td>
+                <th colspan="2" >
+                  LIC
+      </th >
+                <td></td>
+
+                <td class="myAlign">
+                  00.00
+      </td>
+              </tr >
+              <tr>
+                <th colspan="2">
+                  Variable Dearness Allowance
+      </th>
+                <td></td>
+
+                <td class="myAlign">
+                  00.00
+      </td>
+                <th colspan="2" >
+                  Loan
+      </th >
+                <td></td>
+
+                <td class="myAlign">
+                  00.00
+      </td>
+              </tr >
+              <tr>
+                <th colspan="2">
+                  House Rent Allowance
+      </th>
+                <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+                <th colspan="2" >
+                  Professional Tax
+      </th >
+                <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+              </tr >
+              <tr>
+                <th colspan="2">
+                  Graduation Allowance
+      </th>
+                <td></td>
+
+                <td class="myAlign">
+                  00.00
+      </td>
+                <th colspan="2" >
+                  Security Deposite(SD)
+      </th >
+                <td></td>
+
+                <td class="myAlign">
+                  00.00
+      </td>
+              </tr >
+              <tr>
+                <th colspan="2">
+                  Conveyance Allowance
+      </th> <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+                <th colspan="2" >
+                  Staff Benefit(SB)
+      </th >
+                <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+              </tr >
+              <tr>
+                <th colspan="2">
+                  Post Allowance
+      </th>
+                <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+                <th colspan="2" >
+                  Labour Welfare Fund
+      </th >
+                <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+              </tr >
+              <tr>
+                <th colspan="2">
+                  Special Allowance
+      </th>
+                <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+                <th colspan="2" >
+                  NSC
+      </th >
+                <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+              </tr >
+              <tr>
+                <td colspan="4" class="table-border-right"></td>
+                <th colspan="2" >
+                  Union Thanco Officer(UTO)
+      </th >
+                <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+              </tr >
+              <tr>
+                <td colspan="4" class="table-border-right"></td>
+                <th colspan="2" >
+                  Advance
+      </th >
+                <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+              </tr >
+              <tr>
+                <td colspan="4" class="table-border-right"></td>
+                <th colspan="2" >
+                  Income Tax
+      </th > <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+              </tr >
+              <tr class="myBackground">
+                <th colspan="3">
+                  Total Payments
+      </th>
+                <td class="myAlign">
+                  10000
+      </td>
+                <th colspan="3" >
+                  Total Deductions
+      </th >
+                <td class="myAlign">
+                  1000
+      </td>
+              </tr >
+              <tr height="40px">
+                <th colspan="2">
+                  Projection for Financial Year:
+                </th>
+                <th>
+                </th>
+                <td class="table-border-right">
+                </td>
+                <th colspan="2" class="table-border-bottom" >
+                  Net Salary
+                </th >
+                <td >
+                </td>
+                <td >
+                  XXXXXXXXXX
+                </td>
+              </tr >
+              <tr>
+                <td colspan="2">
+                  Gross Salary
+                </td> <td></td>
+                <td class="myAlign">
+                  00.00
+      </td><td colspan="4"></td>
+              </tr >
+              <tr>
+                <td colspan="2">
+                  Aggr. Dedu - P.Tax & Std Ded
+      </td> <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+                <th colspan="2" >
+                  Cumulative
+      </th >
+                <td colspan="2"></td>
+              </tr >
+              <tr>
+                <td colspan="2">
+                  Gross Total Income
+      </td> <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+                <td colspan="2" >
+                  Empl PF Contribution
+      </td > <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+              </tr >
+              <tr>
+                <td colspan="2">
+                  Aggr of Chapter "PF"
+      </td> <td></td>
+                <td class="myAlign">
+                  00.00
+      </td><td colspan="4"></td>
+              </tr >
+              <tr>
+                <td colspan="2">
+                  Total Income
+      </td> <td></td>
+                <td class="myAlign">
+                  00.00
+      </td>
+                <td colspan="4"></td>
+              </tr >
+              <tbody class="border-center">
+                <tr>
+                  <th>
+                    Attend/ Absence
+      </th>
+                  <th>
+                    Days in Month
+      </th>
+                  <th>
+                    Days Paid
+      </th>
+                  <th>
+                    Days Not Paid
+      </th>
+                  <th>
+                    Leave Position
+      </th>
+                  <th>
+                    Privilege Leave
+      </th>
+                  <th>
+                    Sick Leave
+      </th>
+                  <th>
+                    Casual Leave
+      </th>
+                </tr>
+                <tr>
+                  <td ></td>
+                  <td ></td>
+                  <td ></td>
+                  <td ></td>
+                  <td>Yrly Open Balance</td>
+                  <td>0.0</td> <td>0.0</td>
+                  <td>0.0</td>
+                </tr >
+                <tr>
+                  <th >Current Month</th>
+                  <td >31.0</td>
+                  <td >31.0</td>
+                  <td >31.0</td>
+                  <td>Availed</td>
+                  <td>0.0</td> <td>0.0</td>
+                  <td>0.0</td>
+                </tr >
+                <tr>
+                  <td colspan="4"></td>
+                  <td>Closing Balance</td>
+                  <td>0.0</td> <td>0.0</td>
+                  <td>0.0</td>
+                </tr >
+                <tr>
+                  <td colspan="4"> &nbsp; </td>
+                  <td > </td>
+                  <td > </td>
+                  <td > </td>
+                  <td > </td>
+                </tr >
+                <tr>
+                  <td colspan="4"></td>
+                  <td>Company Pool Leave Balance</td>
+                  <td>1500</td>
+                  <td ></td>
+                  <td ></td>
+                </tr >
+              </tbody>
+            </table >
+
+          </div >
+
+  </div>
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
 </div>
 
            
@@ -1106,6 +1829,7 @@ url:"<?php echo base_url(); ?>Cweb_setting/update_templates",
 </div>
 
 
+<<<<<<< HEAD
 <style>
     .salary-slip{
       margin: 15px;
@@ -1202,3 +1926,5 @@ url:"<?php echo base_url(); ?>Cweb_setting/update_templates",
 
 }
 </style>  
+=======
+>>>>>>> dffda8f6e82574e4422d8aa8dfec7d070ddffcd0
