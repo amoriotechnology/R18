@@ -24,51 +24,76 @@ class Csettings extends CI_Controller {
 
     #================Add new bank==============#
 
-public function add_new_bank() {
-   $coa = $this->Settings->headcode();
-           if($coa->HeadCode!=NULL){
-                $headcode=$coa->HeadCode+1;
-           }else{
-                $headcode="102010201";
-            }
 
-        $createby=$this->session->userdata('user_id');
-        $createdate=date('Y-m-d H:i:s');
-        $data = array(
-            'created_by'=> $createby,
-            'bank_id'   => $this->auth->generator(10),
-            'bank_name' => $this->input->post('bank_name',TRUE),
-            'ac_name'   => $this->input->post('ac_name',TRUE),
-            'ac_number' => $this->input->post('ac_no',TRUE),
-            'branch'    => $this->input->post('branch',TRUE),
-           'country' => $this->input->post('country',TRUE),
-            'currency'    => $this->input->post('currency1',TRUE),
-            'status'   => 1
-        );
+   
+         public function add_new_bank() {
+            $coa = $this->Settings->headcode();
+                    if($coa->HeadCode!=NULL){
+                         $headcode=$coa->HeadCode+1;
+                    }else{
+                         $headcode="102010201";
+                     }
+                 $createby=$this->session->userdata('user_id');
+                 $createdate=date('Y-m-d H:i:s');
+                 $data = array(
+                     'created_by'=> $createby,
+                     'bank_id'   => $this->auth->generator(10),
+                     'bank_name' => $this->input->post('bank_name',TRUE),
+                     'ac_name'   => $this->input->post('ac_name',TRUE),
+                     'ac_number' => $this->input->post('ac_no',TRUE),
+                     'branch'    => $this->input->post('branch',TRUE),
+                    'country' => $this->input->post('country',TRUE),
+                     'currency'    => $this->input->post('currency1',TRUE),
+                     'status'   => 1
+                 );
+                     $bank_coa = [
+                      'HeadCode'         => $headcode,
+                      'HeadName'         => $this->input->post('bank_name',TRUE),
+                      'PHeadName'        => 'Cash At Bank',
+                      'HeadLevel'        => '4',
+                      'IsActive'         => '1',
+                      'IsTransaction'    => '1',
+                      'IsGL'             => '0',
+                      'HeadType'         => 'A',
+                      'IsBudget'         => '0',
+                      'IsDepreciation'   => '0',
+                      'DepreciationRate' => '0',
+                      'CreateBy'         => $createby,
+                      'CreateDate'       => $createdate,
+                 ];
+                 $bankinfo = $this->Settings->bank_entry($data);
+                     $this->db->insert('acc_coa',$bank_coa);
+              echo json_encode($bankinfo);
+                    //  redirect(base_url('Csettings/bank_list'));
 
-            $bank_coa = [
-             'HeadCode'         => $headcode,
-             'HeadName'         => $this->input->post('bank_name',TRUE),
-             'PHeadName'        => 'Cash At Bank',
-             'HeadLevel'        => '4',
-             'IsActive'         => '1',
-             'IsTransaction'    => '1',
-             'IsGL'             => '0',
-             'HeadType'         => 'A',
-             'IsBudget'         => '0',
-             'IsDepreciation'   => '0',
-             'DepreciationRate' => '0',
-             'CreateBy'         => $createby,
-             'CreateDate'       => $createdate,
-        ];
-        $bankinfo = $this->Settings->bank_entry($data);
+             }
 
-            $this->db->insert('acc_coa',$bank_coa);
 
-        
-     echo json_encode($bankinfo);
-       
-    }
+
+
+           
+             public function add_new_bank_manage() {
+
+                $createby=$this->session->userdata('user_id');
+
+                     $data = array(
+                         'created_by'=> $createby,
+                         'bank_id'   => $this->auth->generator(10),
+                         'bank_name' => $this->input->post('bank_name',TRUE),
+                         'ac_name'   => $this->input->post('ac_name',TRUE),
+                         'ac_number' => $this->input->post('ac_no',TRUE),
+                         'branch'    => $this->input->post('branch',TRUE),
+                        'country' => $this->input->post('country',TRUE),
+                         'currency'    => $this->input->post('currency1',TRUE),
+                         'status'   => 1
+                     );
+                     $this->db->insert('bank_add', $data); 
+
+                    //  echo $this->db->last_query(); die();
+                        //  $this->db->insert('acc_coa',$bank_coa);
+                         redirect(base_url('Csettings/bank_list'));
+    
+                 }
 
 
     public function bank_transaction() {
@@ -83,6 +108,30 @@ public function add_new_bank() {
         $this->template->full_admin_html_view($content);
     }
 
+
+    public function bank_transaction_list() {
+        $transaction_information = $this->Settings->transaction_information();
+  $currency_details = $this->Web_settings->retrieve_setting_editdata();
+        $data = array(
+            'title' => display('bank_transaction'),
+            'transaction_information' => $transaction_information,
+            'currency' => $currency_details[0]['currency']
+        );
+        $content = $this->parser->parse('settings/bank_transaction_view', $data, true);
+        $this->template->full_admin_html_view($content);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public function bank_debit_credit_manage() {
         $bank_list = $this->Settings->get_bank_list();
         $data = array(
@@ -96,7 +145,6 @@ public function add_new_bank() {
     #===========Bank Debit Credit Manage==========#
 
     public function bank_debit_credit_manage_add() {
-
         if ($this->input->post('account_type',TRUE) == "Debit(+)") {
             $dr = $this->input->post('ammount',TRUE);
         } else {
@@ -106,8 +154,8 @@ public function add_new_bank() {
         $receive_date=date('Y-m-d');
         $bankname = $this->db->select('bank_name')->from('bank_add')->where('bank_id',$this->input->post('bank_id'))->get()->row()->bank_name;
        $coaid = $this->db->select('HeadCode')->from('acc_coa')->where('HeadName',$bankname)->get()->row()->HeadCode;
-       
         $coabanktransaction = array(
+            'rand_id' => $this->input->post('dynamic_id',TRUE),
           'VNo'            =>  $this->input->post('withdraw_deposite_id',TRUE),
           'Vtype'          =>  'Bank Transaction',
           'VDate'          =>  $this->input->post('date',TRUE),
@@ -118,25 +166,40 @@ public function add_new_bank() {
           'IsPosted'       =>  1,
           'CreateBy'       =>  $receive_by,
           'CreateDate'     =>  date('Y-m-d H:i:s'),
+          'create_user'       =>  1,
           'IsAppove'       =>  1
-        ); 
+        );
+   $query = $this->db->select("*")
+                  ->from("acc_transaction")
+                  ->where("rand_id",$this->input->post('dynamic_id',TRUE))
+                  ->get();
+if($query->num_rows() > 0){
+    $this->db->where('rand_id',$this->input->post('dynamic_id',TRUE));
+    $this->db->delete('acc_transaction');
         $this->db->insert('acc_transaction',$coabanktransaction);
+}else{
+     $this->db->insert('acc_transaction',$coabanktransaction);
+}
         $this->session->set_userdata(array('message' => display('successfully_added')));
-        redirect(base_url('Csettings/bank_list'));
+        redirect(base_url('Csettings/bank_transaction_list'));
         exit;
     }
 
     #==============Bank Ledger============#
 
-    public function bank_ledgers($bank_id) {
-        // $bank_id = $this->input->post('bank_id',TRUE);
-        // $from    = $this->input->post('from_date',TRUE);
-        // $to      = $this->input->post('to_date',TRUE);
-        // $content = $this->lsettings->bank_ledger($bank_id,$from,$to);
-        $content = $this->lsettings->bank_ledger($bank_id);
+    public function bank_ledgers() {
+        $bank_id = $this->uri->segment(3);
+
+        $content = $this->lsettings->bank_led_view($bank_id);
         $this->template->full_admin_html_view($content);
     }
-
+    public function bank_ledger() {
+        $bank_id = $this->input->post('bank_id',TRUE);
+        $from    = $this->input->post('from_date',TRUE);
+        $to      = $this->input->post('to_date',TRUE);
+        $content = $this->lsettings->bank_ledger($bank_id,$from,$to);
+        $this->template->full_admin_html_view($content);
+    }
     #================Add Person==============#
 
     public function add_person() {
@@ -469,14 +532,44 @@ public function add_new_bank() {
     }
 
     public function delete_bank($bank_id)
-    {
-        // $delete_banks = $this->Settings->banks_delete($bank_id);
-  
+    {  
         $this->db->where('bank_id', $bank_id);
         $this->db->delete('bank_add');
         redirect('Csettings/bank_list');
         $this->template->full_admin_html_view($content);
     }
+
+
+
+
+
+
+    public function delete_transaction($VNo)
+    {  
+        $this->db->where('VNo', $VNo);
+        $this->db->delete('acc_transaction');
+        
+        // echo $this->db->last_query(); die();
+
+        redirect('Csettings/bank_transaction_list');
+        $this->template->full_admin_html_view($content);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     #==============Bank list============#
 
@@ -492,14 +585,22 @@ public function add_new_bank() {
         $this->template->full_admin_html_view($content);
     }
 
-    #============Update Bank=============#
 
+
+    public function edit_transaction($VNo) {
+        $content = $this->lsettings->transaction_show_by_id($VNo);
+        $this->template->full_admin_html_view($content);
+    }
+
+
+
+
+    #============Update Bank=============#
     public function update_bank($bank_id) {
         $content = $this->lsettings->bank_update_by_id($bank_id);
         $this->session->set_userdata(array('message' => display('successfully_updated')));
         redirect('Csettings/bank_list');
     }
-
     #==============Table list============#
 
     public function table_list() {

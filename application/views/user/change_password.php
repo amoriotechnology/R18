@@ -46,7 +46,6 @@
                 <div class="login-widget">
                     <div class="panel panel-bd">
                         <div class="panel-heading">
-                            <h4><?php// echo display('change_your_information') ?></h4>
                         </div>
                          <?php echo form_open_multipart('Admin_dashboard/change_password',array('id' => 'insert_product','class' => 'form-horizontal'))?>
                             <div class="panel-body">

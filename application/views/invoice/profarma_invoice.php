@@ -1202,8 +1202,8 @@ td {
 
 <div class="col-sm-8">
 
-<select name="sales_taxes" class="form-control"  id="tax_dropdown" tabindex="3">
-                                      <option value=""selected><?php echo display('Select Sales Tax') ?></option>
+<select name="sales_taxes" class="form-control" required id="tax_dropdown" tabindex="3">
+                                      <option value="" selected><?php echo display('Select Sales Tax') ?></option>
                                     <option value="1"><?php echo display('NO') ?></option>
                                     <option value="2"><?php echo display('YES') ?></option>
                      </select>

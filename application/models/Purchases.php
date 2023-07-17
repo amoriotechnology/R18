@@ -38,6 +38,20 @@ public function add_payment_terms($postData){
         return false;
     }
 
+
+
+  public function tax_info() {
+      $this->db->select('tax_id,tax');
+      $this->db->from('tax_information');
+      $this->db->where('created_by',$this->session->userdata('user_id'));
+      $query = $this->db->get();
+    //  echo $this->db->last_query(); die();
+      return $query->result_array();
+  }
+
+
+
+
    public function edit_oceanimport() {
         $this->db->select('*');
         $this->db->from('customer_information');
@@ -1715,17 +1729,33 @@ $data2 = array(
 public function payment_type_dropdown() {
         $this->db->select('*');
         $this->db->from('payment_type');
+        $this->db->where('create_by',$this->session->userdata('user_id'));
         $query = $this->db->get();
     //    echo $this->db->last_query(); die();
         return $query->result_array();
     }
+    
+    
+    
+    
+    
+    
+    
+    
     public function payment_terms_dropdown() {
         $this->db->select('*');
         $this->db->from('payment_terms');
+        
+                $this->db->where('create_by',$this->session->userdata('user_id'));
+
         $query = $this->db->get();
     //    echo $this->db->last_query(); die();
         return $query->result_array();
     }
+    
+    
+    
+    
     public function drop_payment_type(){
       $this->db->select('*');
       $this->db->from('payment_type');

@@ -1,3 +1,9 @@
+<?php error_reporting(1);  ?>
+
+
+
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+
 <?php
     $GLOBALS['TotalAssertF']   = 0;
     $GLOBALS['TotalLiabilityF']= 0;
@@ -71,7 +77,7 @@
         </div>
         <div class="header-title">
             <h1><?php echo display('accounts') ?></h1>
-            <small><?php echo display('profit_loss') ?></small>
+            <small></small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('accounts') ?></a></li>
@@ -86,9 +92,7 @@
     <div class="col-sm-12 col-md-12">
         <div class="panel panel-bd lobidrag">
             <div class="panel-heading">
-                <div class="panel-title">
-                    <h4></h4>
-                </div>
+         
             </div>
             <div id="printArea">
                 <div class="panel-body">
@@ -149,7 +153,7 @@
                 </div>
             </div>
             <div class="text-center" id="print">
-                <input type="button" class="btn btn-warning" name="btnPrint" id="btnPrint" value="Print" onclick="printDiv('printArea');"/>
+                <input type="button"   class="btn btnclr"   name="btnPrint" id="btnPrint" value="Print" onclick="printDiv('printArea');"/>
             </div>
         </div>
     </div>

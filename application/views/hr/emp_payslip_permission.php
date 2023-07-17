@@ -639,7 +639,7 @@ $.ajax({
     data:$("#insert_adm").serialize(),
     success:function (data1) {
 
-    var $select = $('select#insert_adm');
+    var $select = $('select#administrator_person');
         $select.empty();
 
           for(var i = 0; i < data1.length; i++) {

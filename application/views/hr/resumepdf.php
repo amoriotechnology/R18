@@ -32,7 +32,7 @@
             <ol class="breadcrumb">
                 <li><a href=""><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('hrm') ?></a></li>
-                <li class="active"><?php echo display('manage_employee') ?></li>
+                <li class="active"><?php echo display('Employee Details') ?></li>
             </ol>
         </div>
     </section>
@@ -62,6 +62,7 @@
             $this->session->unset_userdata('error_message');
         }
         ?>
+                               <a style="float:right;background-color:#38469f;color:white;" href="<?php echo base_url('Chrm/manage_employee') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo ('Manage Employee')?> </a>
 
    <div class="row">
     <div class="col-sm-12 col-md-4">

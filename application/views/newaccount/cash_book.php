@@ -1,3 +1,23 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <?php
 include ('Class/CConManager.php');
@@ -43,11 +63,11 @@ if(isset($_POST['btnSave']))
         </div>
         <div class="header-title">
             <h1><?php echo display('accounts') ?></h1>
-            <small><?php echo display('cash_book') ?></small>
+            <small></small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('accounts') ?></a></li>
-                <li class="active"><?php echo display('cash_book') ?></li>
+                <li class="active" style="color:orange;"><?php echo display('cash_book') ?></li>
             </ol>
         </div>
     </section>
@@ -70,11 +90,11 @@ if(isset($_POST['btnSave']))
                         <input type="hidden" id="txtCode" name="txtCode" value="1020101"/>
                         <input type="hidden"  id="txtName" name="txtName" size="40" value="Cash In Hand"/>
                          <label class="select"><?php echo display('from_date') ?></label> 
-                       <input type="text" name="dtpFromDate" value="<?php echo (!empty($FromDate)?html_escape($FromDate):'')?>" placeholder="<?php echo display('from_date') ?>" class="datepicker form-control">
+                       <input type="date" name="dtpFromDate" value="<?php echo (!empty($FromDate)?html_escape($FromDate):'')?>" placeholder="<?php echo display('from_date') ?>" class="datepicker form-control">
                         <label class="select"><?php echo display('to_date') ?></label>
-                          <input type="text"  name="dtpToDate" value="<?php echo (!empty($ToDate)?html_escape($ToDate):'')?>" placeholder="<?php echo display('to_date') ?>" class="datepicker form-control">
-                       <button type="submit" name="btnSave" class="btn btn-success"><?php echo display('find') ?></button>
-                        <input type="button" class="btn btn-warning" name="btnPrint" id="btnPrint" value="Print" onclick="printDiv('printArea');"/>
+                          <input type="date"  name="dtpToDate" value="<?php echo (!empty($ToDate)?html_escape($ToDate):'')?>" placeholder="<?php echo display('to_date') ?>" class="datepicker form-control">
+                       <button type="submit" name="btnSave" style="background-color: #3CA5DE; color: #fff;" class="btn btnclr" ><?php echo display('find') ?></button>
+                        <input type="button" style="background-color: #3CA5DE; color: #fff;" class="btn btnclr" name="btnPrint" id="btnPrint" value="Print" onclick="printDiv('printArea');"/>
                     
                
                <?php echo form_close()?>
@@ -98,18 +118,14 @@ if(isset($_POST['btnSave']))
                                                 
                                                 <tr>
                                                     <td align="left" class="print-table-tr">
-                                                        <img src="<?php echo $software_info[0]->logo;?>" alt="logo">
+                                                    <img src="<?php echo  base_url().$logo; ?>"   style='width: 90px;'  />
                                                     </td>
                                                     <td align="center" class="print-cominfo">
                                                         <span class="company-txt">
-                                                            <?php echo html_escape($company[0]['company_name']);?>
-                                                           
-                                                        </span><br>
-                                                        <?php echo html_escape($company[0]['address']);?>
-                                                        <br>
-                                                        <?php echo html_escape($company[0]['email']);?>
-                                                        <br>
-                                                         <?php echo html_escape($company[0]['mobile']);?>
+                                                        <h3> <?php echo $company; ?> </h3>
+                                                         <h4></b><?php echo $address; ?> </h4>
+                                                         <h4></b><?php echo $email; ?> </h4>
+                                                         <h4></b><?php echo $phone; ?> </h4>
                                                         
                                                     </td>
                                                    

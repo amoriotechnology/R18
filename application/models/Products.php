@@ -128,12 +128,36 @@ public function get_products() {
         $this->db->join('supplier_information c', 'b.supplier_id =c.supplier_id');
         $this->db->where('a.created_by',$this->session->userdata('user_id'));
         $query = $this->db->get();
-     
+     echo $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
         
         }
+              public function get_all_products_with_supplier() {
+    //     $this->db->select('a.*,b.*');
+    //     $this->db->from('product_information a');
+   
+    //     $this->db->join('supplier_information b', 'b.supplier_id =a.supplier_name');
+    //     $this->db->where('a.created_by',$this->session->userdata('user_id'));
+    //     $query = $this->db->get();
+    // // echo $this->db->last_query();
+    //     if ($query->num_rows() > 0) {
+    //         return $query->result_array();
+    //     }else{
+              $this->db->select('*');
+        $this->db->from('product_information');
+   
+    
+        $this->db->where('created_by',$this->session->userdata('user_id'));
+        $query = $this->db->get();
+    // echo $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        }
+        
+        
  public function sales_product_all() {
 
      $this->db->select('a.product_id,a.product_name,COUNT(*) as available ,b.p_quantity');

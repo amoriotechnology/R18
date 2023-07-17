@@ -105,7 +105,9 @@ https://cdn.jsdelivr.net/npm/jquery-base64-js@1.0.1/jquery.base64.min.js
 
 
 
-         
+       <script>
+    $('.alert').delay(1000).fadeOut('slow');
+</script>  
 
 
 
@@ -323,35 +325,54 @@ https://cdn.jsdelivr.net/npm/jquery-base64-js@1.0.1/jquery.base64.min.js
 
 
 
+  <td data-col="19" class="19 text-center Action">
 
 
 <?php    foreach(  $this->session->userdata('perm_data') as $test){
     $split=explode('-',$test);
-
-    if(trim($split[0])=='customer' && $_SESSION['u_type'] ==3 && trim($split[1])=='0010'){
-      
-      
+    if(trim($split[0])=='customer' && $_SESSION['u_type'] ==3 && trim($split[1])=='0010'  ){    
        ?>
-
-<td data-col="21" class="21"><a class="btnclr btn  btn-sm" style="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Ccustomer/customer_update_form/<?php echo  $arr['customer_id'];  ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                    
-                    <?php break;}} 
+<a class="btnclr btn btn-sm" style="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Ccustomer/customer_update_form/<?php echo  $arr['customer_id'];  ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+         <?php break;}} 
 
 
+   foreach(  $this->session->userdata('perm_data') as $test){
+  $split=explode('-',$test);
+  if(trim($split[0])=='customer' && $_SESSION['u_type'] ==3 && trim($split[1])=='0001'  ){    
+     ?>
+     <a class="btnclr btn  btn-sm" onclick="return confirm('<?php echo display('are_you_sure') ?>')"  style="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Ccustomer/customer_delete/<?php echo  $arr['customer_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>          
+     <?php break;}}   ?>
+ 
+</td>
 
-                    if($_SESSION['u_type'] ==2){ ?>
+
+
+
+
+
+
+
+
+
+             <?php       if($_SESSION['u_type'] ==2){ ?>
 
 <td data-col="21" class="21"><a class="btnclr btn btn-sm" style="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Ccustomer/customer_update_form/<?php echo  $arr['customer_id'];  ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-<a class="btnclr btn  btn-sm" style="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Ccustomer/customer_delete/<?php echo  $arr['customer_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+<a class="btnclr btn  btn-sm" onclick="return confirm('<?php echo display('are_you_sure') ?>')"  style="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Ccustomer/customer_delete/<?php echo  $arr['customer_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
 
                         <?php  } ?> 
 
        
 
 
-    
 
-                        
+
+
+
+
+
+
+
+
 
                      
   </div>

@@ -956,6 +956,16 @@ th{
                         </div>
                     </div>
 
+
+
+
+
+
+
+
+
+
+
                     
                     <div id="search_area" style="border:4px solid #004d99;border-radius:7px;">
                       <table class="table">
@@ -1086,8 +1096,8 @@ $unique_supplier_name = array_unique($supplier_name);
         <th class="I4 value" data-col="4" data-control-column="4"><?php echo display('Inventry')?></th>
         <th class="5 value"data-col="5" data-control-column="5" ><?php echo display('category') ?></th>
           <th class="6 value" data-col="6"data-control-column="6"><?php echo display('Unit') ?></th>
-            <th class="7 value"data-col="7" data-control-column="7"><?php echo display('Vendor') ?></th>
-              <th class="8 value" data-col="8"data-control-column="8"><?php echo display('Vendor')." ".display('price') ?></th>
+            <!--<th class="7 value"data-col="7" data-control-column="7"><?php echo display('Vendor') ?></th>-->
+              <!--<th class="8 value" data-col="8"data-control-column="8"><?php //echo display('Vendor')." ".display('price') ?></th>-->
                 <th class="9 value "data-col="9" data-control-column="9"><?php echo display('Origin') ?></th>
                   <th class="10 value"data-col="10" data-control-column="10"><?php echo display('Account Category') ?></th>
 
@@ -1187,8 +1197,8 @@ $total =$s+$e;
 
                 <td data-col="5" class="5"><?php echo $product['category_id']; ?></td>
                        <td data-col="6" class="6"><?php echo $product['unit'];  ?></td>
-                         <td data-col="7" class="7"><?php echo $product['supplier_name'];  ?></td>
-                           <td data-col="8" class="8"><?php echo $product['supplier_price'];  ?></td>
+                         <!--<td data-col="7" class="7"><?php echo $product['supplier_name'];  ?></td>-->
+                           <!--<td data-col="8" class="8"><?php //echo $product['supplier_price'];  ?></td>-->
                              <td data-col="9" class="9"><?php echo $product['country'];  ?></td>
                                <td data-col="10" class="10"><?php echo $product['account_category'];  ?></td>
                                   <td data-col="11" class="11"><?php echo $product['sub_category'];  ?></td>
@@ -1205,10 +1215,10 @@ $total =$s+$e;
                 
 
 
-          
 
 
-
+        <td data-col="19" class="19 text-center Action">
+                 
 <?php    foreach(  $this->session->userdata('perm_data') as $test){
     $split=explode('-',$test);
     if(trim($split[0])=='product' && $_SESSION['u_type'] ==3 && trim($split[1])=='0010'){
@@ -1216,21 +1226,33 @@ $total =$s+$e;
       
        ?>
 
-<td data-col="19" class="19 text-center Action"><a class="btnclr btn  btn-sm" style="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Cproduct/product_update_form/<?php  echo  $product['product_id'];  ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                    
+<a class="btnclr btn  btn-sm" style="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Cproduct/product_update_form/<?php  echo  $product['product_id'];  ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+  
+                  
                     <?php break;}} 
-                    if($_SESSION['u_type'] ==2){ ?>
 
-<td data-col="19" class="19 text-center Action"><a class="btnclr btn  btn-sm" style="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Cproduct/product_update_form/<?php  echo  $product['product_id'];  ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-<a class="btnclr btn  btn-sm" style="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Cproduct/product_delete_form/<?php  echo  $product['product_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+
+
+  foreach(  $this->session->userdata('perm_data') as $test){
+    $split=explode('-',$test);
+    if(trim($split[0])=='product' && $_SESSION['u_type'] ==3 && trim($split[1])=='0001'){
+      
+      
+       ?>
+
+<a class="btnclr btn  btn-sm" onclick="return confirm('<?php echo display('are_you_sure') ?>')" fstyle="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Cproduct/product_delete_form/<?php  echo  $product['product_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                  
+                    <?php break;}} ?>
+
+
+                    <?php          if($_SESSION['u_type'] ==2){ ?>
+
+<a class="btnclr btn  btn-sm" style="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Cproduct/product_update_form/<?php  echo  $product['product_id'];  ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+<a class="btnclr btn  btn-sm" onclick="return confirm('<?php echo display('are_you_sure') ?>')" fstyle="background-color: #3CA5DE; color: #fff;" href="<?php echo base_url()?>Cproduct/product_delete_form/<?php  echo  $product['product_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 
                         <?php  } ?>
 
-
-
-
-
-
+</td>
 
 
 
@@ -1299,8 +1321,8 @@ $total =$s+$e;
         <div class="col-sm-2" ><br>
         <div class="form-group row"  >
         <br><input type="checkbox"  data-control-column="6" checked = "checked" class="6"   value="6"/>&nbsp;<?php echo display('Unit') ?><br>
-        <br><input type="checkbox"  data-control-column="7" checked = "checked" class="7"  value="7"/>&nbsp;<?php echo display('Vendor') ?><br>
-        <br><input type="checkbox"  data-control-column="8" checked = "checked" class="8"   value="8"/>&nbsp;<?php echo display('Vendor')." ".display('price') ?><br>
+        <!--<br><input type="checkbox"  data-control-column="7" checked = "checked" class="7"  value="7"/>&nbsp;<?php echo display('Vendor') ?><br>-->
+        <!--<br><input type="checkbox"  data-control-column="8" checked = "checked" class="8"   value="8"/>&nbsp;<?php //echo display('Vendor')." ".display('price') ?><br>-->
         <br><input type="checkbox"  data-control-column="9" checked = "checked" class="9"   value="9"/>&nbsp;<?php echo display('Origin') ?><br>
         <br><input type="checkbox"  data-control-column="10" checked = "checked" class="10"   value="10"/>&nbsp;<?php echo display('Account Category') ?><br>
 
@@ -1375,6 +1397,10 @@ $total =$s+$e;
 
 <script type="text/javascript" src="<?php echo base_url()?>my-assets/js/profarma.js"></script>
 <script>
+  $(document).ready(function(){
+   
+   $(".sidebar-mini").addClass('sidebar-collapse') ;
+   });
     function pdf() {
   $(".myButtonClass").hide();
   var doc = new jsPDF("p", "pt");
@@ -1458,13 +1484,7 @@ $('#supplier-filter').on('change', function() {
   changeFilter.call(this, 'supplier');
 });
 
-/*
-future use for a text input filter
-$('#search').on('click', function() {
-    $('.box').hide().filter(function() {
-        return $(this).data('order-number') == $('#search-criteria').val().trim();
-    }).show();
-});*/
+
 $("#search").on("keyup", function() {
   var value = $(this).val().toLowerCase();
     $("#ProfarmaInvList tr:not(:eq(0))").filter(function() {

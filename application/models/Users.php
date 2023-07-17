@@ -170,7 +170,7 @@ public function insertToken($user_id)
         $query = $this->db->insert('tokens',$string);
 
         $this->db->query($query);
-        
+     //   echo $this->db->last_query();die();
         return $token . $user_id;
         
     }
@@ -183,7 +183,7 @@ public function insertToken($user_id)
         $this->db->where('email_id', $email);
 
         $query = $this->db->get();
-
+   //echo $this->db->last_query();die();
         if ($query->num_rows() > 0) {
 
             return $query->result_array();
@@ -306,6 +306,9 @@ public function insertToken($user_id)
     }
 
     //Update Profile
+    
+    
+    
     public function profile_update() {
       //  $this->load->library('upload');
         if ($_FILES['logo']['name']) {
@@ -314,12 +317,19 @@ public function insertToken($user_id)
         $config['upload_path']    = 'my-assets/image/logo/';
         $config['allowed_types']  = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG'; 
         $config['encrypt_name']   = TRUE;
+ 
+
 
             $this->load->library('upload', $config);
+
+            // print_r( $config); die();
+
+
             if (!$this->upload->do_upload('logo')) {
                 $error = array('error' => $this->upload->display_errors());
+                // print_r($error); 
                 $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
-                redirect(base_url('Admin_dashboard/edit_profile'));
+                // redirect(base_url('Admin_dashboard/edit_profile'));
             } else {
             $data = $this->upload->data();  
             $logo = $config['upload_path'].$data['file_name']; 
@@ -332,24 +342,52 @@ public function insertToken($user_id)
             $this->load->library('image_lib', $config);
             $this->image_lib->resize();
             $logo =  $logo;
-
+           
             }
-        }
     
+        }
 
         $old_logo = $this->input->post('old_logo');
-
         $user_id = $this->session->userdata('unique_id');
         $first_name = $this->input->post('first_name');
         $last_name = $this->input->post('last_name');
         $gender = $this->input->post('gender');
-          $dob = $this->input->post('dob');
+        $dob = $this->input->post('dob');
         $new_logo = (!empty($logo) ? $logo : $old_logo);
-$user=$this->session->userdata('user_id');
+        $user=$this->session->userdata('user_id');
+
+    //    print_r($old_logo);   die();
+
+
+if($this->session->userdata('u_type')==2){
       return   $this->db->query("UPDATE `users` AS `a`,`user_login` AS `b`,`web_setting` AS `c` SET `a`.`first_name` = '$first_name', `a`.`last_name` = '$last_name', `a`.`gender` = '$gender',`a`.`date_of_birth` = '$dob',`c`.`logo` = '$new_logo' WHERE `c`.`create_by` = '$user' AND `a`.`unique_id` = '$user_id' AND `a`.`unique_id` = `b`.`unique_id`");
-// echo $this->db->last_query();die();
+    
+
+    }else{
+          return $this->db->query("UPDATE `users` AS `a`,`user_login` AS `b`,`users` AS `c` SET `a`.`first_name` = '$first_name', `a`.`last_name` = '$last_name', `a`.`gender` = '$gender',`a`.`date_of_birth` = '$dob',`c`.`userlogo` = '$new_logo' WHERE `c`.`create_by` = '$user' AND `a`.`unique_id` = '$user_id' AND `a`.`unique_id` = `b`.`unique_id`"); 
+    // echo $this->db->last_query();die();
+    
+
+}
+    
+    
     
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     //Change Password
     public function change_password($email, $old_password, $new_password) {

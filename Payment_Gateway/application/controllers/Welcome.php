@@ -57,8 +57,8 @@ $mysqltime = date ('Y-m-d H:i:s');
                     "value" => $val[0]['grand_total_amount']
                 ],
                 "description" => $val[0]['message_invoice'],
-                "redirectUrl" => "http://amoriotech.net/R17/Payment_Gateway/welcome/returnURL/".$orderId,
-                "webhookUrl"  =>"http://amoriotech.net/R17/Payment_Gateway/welcome/webhookURL",
+                "redirectUrl" => "http://amoriotech.net/Stockeai/R18_demo/Payment_Gateway/welcome/returnURL/".$orderId,
+                "webhookUrl"  =>"http://amoriotech.net/Stockeai/R18_demo/Payment_Gateway/welcome/webhookURL",
                 "metadata" => ["order_id" => $orderId]
              ]);
             redirect($payment->getCheckoutUrl(),'refresh',303);

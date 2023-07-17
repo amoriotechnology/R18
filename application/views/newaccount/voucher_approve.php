@@ -21,12 +21,12 @@
             <i class="pe-7s-note2"></i>
         </div>
         <div class="header-title">
-            <h1><?php echo display('debit_voucher') ?></h1>
+            <h1><?php echo ('Voucher Approval') ?></h1>
             <small><?php //echo display('debit_voucher') ?></small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('accounts') ?></a></li>
-                <li class="active" style="color:orange"><?php echo display('debit_voucher') ?></li>
+                <li class="active" style="color:orange"><?php echo ('voucher Approval') ?></li>
             </ol>
         </div>
     </section>
@@ -54,34 +54,65 @@
             $this->session->unset_userdata('error_message');
         }
         ?>
+
+
+
+
+
+
+
 <div class="row">
-    <div class="col-sm-12">
-         <div class="col-sm-10"></div>
-        <div class="col-sm-2">
+                <div class="panel panel-bd lobidrag">
+
+                    <div class="panel-heading" style="height: 60px;">
+   <div class="col-sm-10">
+                
+
+
+
+
+                    <a onclick="reload();"  >  <i class="fa fa-refresh" style="font-size:25px;float:right;" aria-hidden="true"></i> </a>
+                  </div>
+
+                           <div class="col-sm-2">
+
+
                     <i class="fa fa-cog"  aria-hidden="true" id="myBtn" style="font-size:25px;" onClick="columnSwitchMODAL()"></i> <!-- onclick opens MODAL -->
-                   
+
                     <div class="dropdown bootcol" id="drop" style="float:right;padding-right:20px;padding-bottom:10px;">
-    <button class="btn btnclr dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-       <span class="glyphicon glyphicon-th-list"></span> Download
+                    <button class="btn btnclr dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+       <span class="glyphicon glyphicon-th-list"></span>  <?php echo display('download') ?>
      
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
    
   
                 
-      <li><a href="#" id="cmd"> <img src="<?php echo base_url()?>assets/images/pdf.png" width="24px"> PDF</a></li>
+      <li><a href="#" onclick="generate()"> <img src="<?php echo base_url()?>assets/images/pdf.png" width="24px"><?php echo display('PDF') ?> </a></li>
       
       <li class="divider"></li>         
                   
-      <li><a href="#" onclick="$('#ProfarmaInvList').tableExport({type:'excel',escape:'false'});"> <img src="<?php echo base_url()?>assets/images/xls.png" width="24px"> XLS</a></li>
+      <li><a href="#" onclick="$('#ProfarmaInvList').tableExport({type:'excel',escape:'false'});"> <img src="<?php echo base_url()?>assets/images/xls.png" width="24px">  <?php echo display('XLS') ?></a></li>
                  
     </ul>
+
+    &nbsp;
+    <input type="button" class="btn btnclr" name="btnPrint" id="btnPrint"   value="Print" onclick="printDiv('printArea');"/>
+  </div>
+  </div>
+  </div>      
   </div>
 
-  </div>  
-  </div>
 
-  </div> 
+
+
+
+
+
+
+
+
+
 
 <div class="row">
     <div class="col-sm-12 col-md-12">
@@ -105,9 +136,9 @@
                   </select> <input id="filterinput" style="border-radius:5px;height:25px;" type="text"></div>
                 </div>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" id="printArea">
  
-                <div class="" id="content">
+                <div class="" id="content" >
                                        <div class="sortableTable__container">
   <div class="sortableTable__discard">
   </div>
@@ -166,25 +197,54 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.0-alpha.1/jspdf.plugin.autotable.js"></script>
 
-  <div id="myModal_colSwitch" class="modal_colSwitch" >
-                    <div class="modal-content_colSwitch" style="width:25%;height:30%;">
-                          <span class="close_colSwitch">&times;</span>
-                          <div class="col-sm-6"><br><br>
-                          <div class="form-group row">
-                          <input type="checkbox"  data-control-column="1" checked = "checked" class="1"  value="1"/>S.NO<br>
-<input type="checkbox"  data-control-column="2" checked = "checked" class="2"  value="2"/>Voucher No<br>
-<input type="checkbox"  data-control-column="3" checked = "checked" class="3"   value="3"/>Date<br>
-<input type="checkbox"  data-control-column="4" checked = "checked" class="4"   value="4"/>Remark<br>
-<input type="checkbox"  data-control-column="5" checked = "checked" class="5"   value="5"/>Debit<br>
-<input type="checkbox"  data-control-column="6" checked = "checked" class="6"  value="6"/>Credit<br>
-<input type="checkbox"  data-control-column="7" checked = "checked" class="7"   value="7"/>Action<br>
+<div id="myModal_colSwitch"  class="modal_colSwitch">
+                    <div class="modal-content_colSwitch" style="width:25%;height:25%;">
+                    <span class="close_colSwitch">&times;</span>
+                       
+                          <div class="col-sm-2" ></div>
+
+
+                          <div class="col-sm-3" ><br>
+                          <div class="form-group row"  > 
+                         
+                          <br><input type="checkbox"  data-control-column="1" checked = "checked" class="1"  value="1"/>&nbsp; <?php echo display('Sl')?><br>
+                          <br><input type="checkbox"  data-control-column="2" checked = "checked" class="2"  value="2"/>&nbsp;<?php echo ('Voucher No')?><br>
+                          <br><input type="checkbox"  data-control-column="4" checked = "checked" class="4"   value="4"/>&nbsp;<?php echo display('Date')?><br>
+             </div>
+        </div>
 
 
 
-                          </div> </div> </div> </div>
+
+                      <div class="col-sm-3"  ><br>
+                          <div class="form-group row"  >
+                          <br><input type="checkbox"  data-control-column="3" checked = "checked" class="3"   value="3"/>&nbsp;<?php echo display('Remark')?><br>
+                          <br><input type="checkbox"  data-control-column="5" checked = "checked" class="5"  value="5"/>&nbsp;<?php echo display('Debit')?><br>
+
+                          <br><input type="checkbox"  data-control-column="6" checked = "checked" class="6"   value="6"/>&nbsp;<?php echo display('Credit')?><br>
+
+                        </div>
+                        </div>
+     
+
+   
+                          <div class="col-sm-3"  ><br>
+                          <div class="form-group row"  >
+
+                          <br><input type="checkbox"  data-control-column="7" checked = "checked" class="7"   value="7"/>&nbsp;<?php echo display('action')?><br>
+
+                 
+                        </div>
+                        </div>
 
 
+
+
+                    </div>
+                </div>
+    </section>
 </div>
+
 <script type="text/javascript" src="<?php echo base_url()?>my-assets/js/profarma.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
@@ -258,3 +318,9 @@ $('#cmd').click(function() {
 </section>
 </div>
  
+
+<script>
+    function reload(){
+    location.reload();
+}
+</script>

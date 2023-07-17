@@ -29,12 +29,12 @@ class Lproduct {
         $company_info = $CI->Products->retrieve_company();
 
         $data['total_product']    = $CI->Products->count_product();
-        $data['products']    = $CI->Products->get_all_products_with_supplier_details();
+        $data['products']    = $CI->Products->get_all_products_with_supplier();
 
         $data['company_info']     = $company_info;
         $data['sale_count']     = $CI->Products->sales_product_all();
         $data['expense_count']     = $CI->Products->expense_product_all();
-$data['category']= $CI->Products->get_products();
+        $data['category']= $CI->Products->get_products();
       
         //   echo "<br/>";
         //   print_r($data['expense_count']);
@@ -50,6 +50,13 @@ $data['category']= $CI->Products->get_products();
 
     }
 
+
+
+
+
+
+
+
      public function product_view($id)
     {
         $CI =& get_instance();
@@ -64,7 +71,8 @@ $data['category']= $CI->Products->get_products();
           if($products[0]['supplier_name']){
             $supplier_name = $CI->db->select('supplier_name')->from('supplier_information')->where('supplier_id',$products[0]['supplier_name'])->get()->row()->supplier_name;
           
-      
+            // print_r( $supplier_name);
+
       $supplier_price = $CI->db->select('supplier_price')->from('supplier_product')->where('supplier_id',$products[0]['supplier_name'])->get()->row()->supplier_price;
      
            }
@@ -99,13 +107,16 @@ $data['category']= $CI->Products->get_products();
              $data['product_info']     =  $products;
              $data['supplier_name']   = (isset($supplier_name) ? isset($supplier_name): NULL); 
              $data['supplier_price']  = (isset($supplier_price) ? isset($supplier_price): NULL) ;
-    
+            
+             $data['supplier_name1']   =(isset($supplier_name) ? isset($supplier_name): NULL); 
        //  $data['products']=$products;
         $data['sale_history']     = $CI->Products->get_sales_product_history($product_details_pdv[0]['product_id']);
         $data['expense_history']     = $CI->Products->get_expense_product_history($product_details_pdv[0]['product_id']);
          $data['sale_count']     = $CI->Products->sales_product_all();
         $data['expense_count']     = $CI->Products->expense_product_all();
   
+        // print_r($data['supplier_name1']);
+
         $productList = $CI->parser->parse('product/product-details',$data,true);
         return $productList;
              }
@@ -238,18 +249,20 @@ public function product_add_form() {
         $category_list = $CI->Categories->category_list_product();
         $unit_list = $CI->Units->unit_list();
         $category_selected = $CI->Categories->category_search_item($product_detail[0]['category_id']);
-                
+   //   print_r($product_detail);
+   $supplierid='';
+      if(!empty($product_detail[0]['supplier_name'])){
+                  $supplierid = $CI->db->select('supplier_name')->from('supplier_information')->where('supplier_id',$product_detail[0]['supplier_name'])->get()->row()->supplier_name;
+      }        //  echo $this->db->last_query();die();
           $taxfield = $CI->db->select('tax_name,default_value')
                 ->from('tax_settings')
                 ->get()
                 ->result_array();
                  $i = 0;
-                 $sup_names = $CI->db->select('supplier_id,supplier_name')
-                ->from('supplier_information')
-                ->get()
-                ->result_array();
+                 $sup_names = $CI->Suppliers->supplier_list();
                  $i = 0;
 //  print_r( $sup_names);
+  $data['supid']    = $supplierid;
           $data['sup_names_dropdown']    = $sup_names;
             $data['supplier_list']    = $supplier_list;
             $data['supplier_selected']= $supplier_selected;

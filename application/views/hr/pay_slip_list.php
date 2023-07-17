@@ -1,3 +1,5 @@
+<?php error_reporting(1);  ?>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
@@ -74,7 +76,7 @@
 
                     <div class="panel-body">
 
-                        <div class="table-responsive" >
+                        <div class="table-responsive" style="overflow-x:hidden;">
 
                             <table class="table table-hover table-bordered" cellspacing="0" width="100%" id=""> 
 
@@ -107,7 +109,7 @@
                                     <tr role="row" class="odd">
  
                                         <td style="text-align:center;" tabindex="0"><?php echo $s; ?></td>
-                                        <td style="text-align:center;"><?php echo $list['templ_name']; ?></td>
+                                     <td style="text-align:center;"><?php echo $list['first_name']." ".$list['last_name']; ?></td>
                                         <td style="text-align:center;"><?php echo $list['job_title']; ?></td>
                                         <td style="text-align:center;"><?php echo $list['dailybreak']; ?></td>
                                         <td style="text-align:center;"><?php echo $list['payment_term']; ?></td>

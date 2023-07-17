@@ -704,14 +704,14 @@ $('#add_pay_terms').submit(function(e){
     }
    $('#new_payment_terms').val('');
 
-
-    
-      $("#bodyModal1").html("Payment Terms Added Successfully");
-      $('#payment_type').modal('hide');
+ $('#payment_type').modal('hide');
+      $('#payment_type_new').modal('hide');
+      $('#bodyModal1').html('Payment Terms Added Successfully');
+     
       $('#terms').show();
        $('#myModal1').modal('show');
       window.setTimeout(function(){
-        $('#payment_type_new').modal('hide');
+      
        $('#myModal1').modal('hide');
         $('.modal-backdrop').remove();
     }, 2500);

@@ -9,11 +9,11 @@
       <i class="pe-7s-note2"></i>
    </div>
    <div class="header-title">
-      <h1><?php echo display('Edit Expense') ?></h1>
+      <h1><?php echo ('Edit Expense') ?></h1>
       <ol class="breadcrumb">
          <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
          <li><a href="#"><?php echo display('purchase') ?></a></li>
-         <li class="active" style="color:orange"><?php echo display('Edit Expense') ?></li>
+         <li class="active" style="color:orange"><?php echo ('Edit Expense') ?></li>
       </ol>
    </div>
 </section>
@@ -90,9 +90,7 @@
                      </form>
                   </div>
                   <div class="Column" style="float: right;">
-                     <?php if($this->permission1->method('manage_invoice','read')->access()){ ?>
-                     <a style="background-color:#38469f;color:white;" href="<?php echo base_url('Cinvoice/manage_invoice') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo "Manage Expense"; ?> </a>
-                     <?php }?>
+                     <a style="background-color:#38469f;color:white;" href="<?php echo base_url('Cpurchase/manage_purchase') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo "Manage Expense"; ?> </a>
                   </div>
                </div>
             </div>
@@ -183,6 +181,12 @@
                               <option value="75DAYS">75<?php echo display('DAYS');?></option>
                               <option value="90DAYS">90<?php echo display('DAYS');?></option>
                               <option value="180DAYS">180<?php echo display('DAYS');?></option>
+                              
+                              <?php foreach($payment_terms as $inv){ ?>
+          <option value="<?php echo $inv['payment_terms'] ; ?>"><?php echo $inv['payment_terms'] ; ?></option>
+                               <?php    }?>
+                              
+                              
                            </select>
                         </div>
                      </div>

@@ -309,7 +309,7 @@ $today = date('Y-m-d');
             
 <th class="19 value" data-col="19" data-control-column="19" style="width: 190.011px; height: 44.0114px;"><?php echo display('Tax Details') ?></th>
 <th class="20 value" data-col="20" data-control-column="20" style="width: 190.011px; height: 44.0114px;"><?php echo display('Grand Total') ?></th>
-<th class="21 value" data-col="21" data-control-column="21" style="width: 190.011px; height: 44.0114px;"><?php echo display('Grand Total(Preferred Currency)') ?></th>
+<th class="21 value" data-col="21" data-control-column="21" style="width: 190.011px; height: 44.0114px;"><?php echo 'Grand Total(Preferred Currency)' ?></th>
 <th class="22 value" data-col="22" data-control-column="22" style="width: 190.011px; height: 44.0114px;"><?php echo display('Remarks / Details') ?></th>
         <th class="text-center 23" data-column-id="23" data-formatter="commands" data-sortable="false" style="    width: 650.011px; height: 49.0114px;" ><?php echo display('Action') ?></th>
       </tr>
@@ -362,7 +362,6 @@ $today = date('Y-m-d');
                     if($_SESSION['u_type'] ==2){ ?>
 
 <a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Cinvoice/profarma_invoice_update_form/<?php echo  $arr['purchase_id'];  ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-<a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Cinvoice/profarma_invoice_delete_form/<?php echo  $arr['purchase_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 
                         <?php  } ?>
 
@@ -372,6 +371,21 @@ $today = date('Y-m-d');
 
 
 
+   <?php    foreach(  $this->session->userdata('perm_data') as $test){
+    $split=explode('-',$test);
+    if(trim($split[0])=='sales' && $_SESSION['u_type'] ==3 && trim($split[1])=='0001'){
+      
+      
+       ?>
+
+<a class="btnclr btn  btn-sm" onclick="return confirm('<?php echo display('are_you_sure') ?>')" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Cinvoice/profarma_invoice_delete_form/<?php echo  $arr['purchase_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    
+                    <?php break;}} 
+                    if($_SESSION['u_type'] ==2){ ?>
+
+<a class="btnclr btn  btn-sm" onclick="return confirm('<?php echo display('are_you_sure') ?>')" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Cinvoice/profarma_invoice_delete_form/<?php echo  $arr['purchase_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+                        <?php  } ?>
 
 
 
@@ -458,7 +472,7 @@ $count++;
 <input type="checkbox"  data-control-column="18" class="18" value="18"/><?php echo display('Place of Receipt') ?><br>
     <input type="checkbox"  data-control-column="19"  class="19 " value="19"/><?php echo display('Tax Details') ?><br>
 <input type="checkbox"  data-control-column="20"  class="20 " value="20"/><?php echo display('Grand Total') ?><br>
-<input type="checkbox"  data-control-column="21"  class="21 " value="21"/><?php echo display('Grand Total') ?><?php echo display('preferred') ?><br>
+<input type="checkbox"  data-control-column="21"  class="21 " value="21"/><?php echo 'Grand Total(Preferred Currency)' ?><br>
 <input type="checkbox"  data-control-column="22"  class="22 " value="22"/><?php echo display('Remarks / Details') ?><br>
 <input type="checkbox"  data-control-column="23" class="23" checked = "checked" value="23"/><?php echo display('Action') ?><br>
                           </div>

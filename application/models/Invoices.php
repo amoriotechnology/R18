@@ -37,6 +37,29 @@ class Invoices extends CI_Model {
         }
       
     }
+
+
+
+
+    public function tax_data() {
+        $this->db->select('tax_id,tax');
+        $this->db->from('tax_information');
+        $this->db->where('created_by' ,$this->session->userdata('user_id'));
+        $query = $this->db->get();
+    //    echo $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+    }
+
+
+
+
+
+
+
+
+
 public function getvendor_products($value){
     $this->db->select('*');
     $this->db->from('supplier_product a');
@@ -88,6 +111,7 @@ public function getvendor_products($value){
         return  $data = $this->db->select("invoice_no as voucher")
         ->from('sale_trucking') 
         ->like('invoice_no', 'T', 'after')
+         ->where('create_by',$this->session->userdata('user_id'))
         ->order_by('ID','desc')
         ->get()
         ->result_array();
@@ -128,6 +152,7 @@ public function getvendor_products($value){
       return  $data = $this->db->select("chalan_no as voucher")
             ->from('profarma_invoice') 
             ->like('chalan_no', 'PI', 'after')
+            ->where('sales_by',$this->session->userdata('user_id'))
             ->order_by('ID','desc')
             ->get()
             ->result_array();

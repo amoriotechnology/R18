@@ -33,12 +33,12 @@ th{
             <i class="pe-7s-note2"></i>
         </div>
         <div class="header-title">
-            <h1><?php echo display('Employee Details') ?></h1>
-        
+            <h1><?php echo ('Employee Invoice') ?></h1>
+            <small></small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('hrm') ?></a></li>
-                <li class="active"><?php echo display('Employee Details') ?></li>
+                <li class="active" style="color:orange;"><?php echo ('Employee Invoice') ?></li>
             </ol>
         </div>
     </section>
@@ -67,15 +67,23 @@ th{
             $this->session->unset_userdata('error_message');
         }
         ?>
-<?php
-  $myArray = explode('(',$tax_details); 
- $tax_amt=$myArray[0];
- $tax_des=$myArray[1];
 
 
-?>
-    <div class="container" id="content">
-        <?php
+
+
+
+<div id="head"></div>
+
+
+
+
+
+
+
+    <div class="container" id="content" >
+
+
+    <?php
   
     if($template==3)
             {
@@ -88,16 +96,16 @@ th{
 
 
 
-     <div class="col-sm-4 text-center" style="color:white;"><h3><?php echo $header; ?></h3></div>
+     <div class="col-sm-4 text-center" style="color:white;"><h3><?php echo "Employee Info"; ?></h3></div>
    
    <div class="col-sm-5"><img src="<?php echo  base_url().$logo; ?>"   style='width: 50%;'  /></div>
 
    <div class="col-sm-3" style="color:white;font-weight:bold;" id='company_info'>
    
-   <b><?php echo display('Company name') ?> : </b><?php echo $company[0]['business_name']; ?><br>
-             <b>  <?php echo display('Address ') ?>: </b><?php echo $company[0]['address']; ?><br>
-             <b> <?php echo display('Email ') ?>: </b><?php echo $company[0]['email']; ?><br>
-             <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['phone']; ?><br>
+<b><?php echo display('Company name') ?> : </b><?php echo $business_name; ?><br>
+        <b>  <?php echo display('Address ') ?>: </b><?php echo $address; ?><br>
+        <b> <?php echo display('Email ') ?>: </b><?php echo $email; ?><br>
+        <b>  <?php echo display('Contact ') ?>: </b><?php echo $phone; ?><br>
           </div>
   </div>
 
@@ -115,8 +123,9 @@ th{
         <tr><td  class="key"><?php echo display('Payment Type') ?></td><td style="width:10px;">:</td><td calss="value"><?php  echo  $rate_type ; ?></td></tr>
         <tr><td  class="key"><?php echo display('phone') ?></td><td style="width:10px;">:</td><td calss="value"><?php echo $phone; ?></td></tr>
         <tr><td  class="key"><?php echo ('Per hour cost') ?></td><td style="width:7px;">:</td><td calss="value" style="white-space: pre-wrap;"><?php echo $hrate; ?> </td></tr>
-        <tr><td  class="key"><?php echo display('email') ?></td><td style="width:7px;">:</td><td calss="value" style="white-space: pre-wrap;"><?php  echo $email; ?> </td></tr>
         <tr><td  class="key"><?php echo display('zip') ?></td><td style="width:7px;">:</td><td calss="value" style="white-space: pre-wrap;"> <?php  echo $zip; ?></td></tr>
+
+        <tr><td  class="key"><?php echo display('email') ?></td><td style="width:7px;">:</td><td calss="value" style="white-space: pre-wrap;"><?php  echo $email; ?> </td></tr>
     
 </table>
 
@@ -161,16 +170,17 @@ elseif($template==1)
 
 
 
-<div class="col-sm-5"><img src="<?php echo  base_url().$logo; ?>"   style='width: 50%;'  /></div>
 
 <div class="col-sm-3" style="color:white;font-weight:bold;" id='company_info'>
 
-<b><?php echo display('Company name') ?> : </b><?php echo $company[0]['business_name']; ?><br>
-        <b>  <?php echo display('Address ') ?>: </b><?php echo $company[0]['address']; ?><br>
-        <b> <?php echo display('Email ') ?>: </b><?php echo $company[0]['email']; ?><br>
-        <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['phone']; ?><br>
+<b><?php echo display('Company name') ?> : </b><?php echo $business_name; ?><br>
+        <b>  <?php echo display('Address ') ?>: </b><?php echo $address; ?><br>
+        <b> <?php echo display('Email ') ?>: </b><?php echo $email; ?><br>
+        <b>  <?php echo display('Contact ') ?>: </b><?php echo $phone; ?><br>
      </div>
 
+     <div class="col-sm-3 text-center" style="color:white;     text-align: end;"><h3><?php echo "Employee Info"; ?></h3></div>
+     <div class="col-sm-5"><img src="<?php echo  base_url().$logo; ?>"   style='width: 50%;'  /></div>
 
      </div>
      </div>
@@ -185,9 +195,9 @@ elseif($template==1)
         <tr><td  class="key"><?php echo display('Payment Type') ?></td><td style="width:10px;">:</td><td calss="value"><?php  echo  $rate_type ; ?></td></tr>
         <tr><td  class="key"><?php echo display('phone') ?></td><td style="width:10px;">:</td><td calss="value"><?php echo $phone; ?></td></tr>
         <tr><td  class="key"><?php echo ('Per hour cost') ?></td><td style="width:7px;">:</td><td calss="value" style="white-space: pre-wrap;"><?php echo $hrate; ?> </td></tr>
-        <tr><td  class="key"><?php echo display('email') ?></td><td style="width:7px;">:</td><td calss="value" style="white-space: pre-wrap;"><?php  echo $email; ?> </td></tr>
         <tr><td  class="key"><?php echo display('zip') ?></td><td style="width:7px;">:</td><td calss="value" style="white-space: pre-wrap;"> <?php  echo $zip; ?></td></tr>
-    
+        <tr><td  class="key"><?php echo display('email') ?></td><td style="width:7px;">:</td><td calss="value" style="white-space: pre-wrap;"><?php  echo $email; ?> </td></tr>
+
 </table>
 
                 </div>
@@ -221,13 +231,13 @@ elseif($template==2)
 
        <div class="col-sm-3"><img src="<?php echo  base_url().$logo; ?>"   style='width: 70%;'  /></div>
 
-       <div class="col-sm-3 text-center" style="color:white;     text-align: end;"><h3><?php echo $header; ?></h3></div>
+       <div class="col-sm-3 text-center" style="color:white;     text-align: end;"><h3><?php echo "Employee Info"; ?></h3></div>
 
        <div class="col-sm-6" style="color:white;font-weight:bold ;text-align: end;" id='company_info'>          
-     <b><?php echo display('Company name') ?> : </b><?php echo $company[0]['business_name']; ?><br>
-          <b>  <?php echo display('Address ') ?>: </b><?php echo $company[0]['address']; ?><br>
-          <b> <?php echo display('Email ') ?>: </b><?php echo $company[0]['email']; ?><br>
-          <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['phone']; ?><br>
+       <b><?php echo display('Company name') ?> : </b><?php echo $business_name; ?><br>
+        <b>  <?php echo display('Address ') ?>: </b><?php echo $address; ?><br>
+        <b> <?php echo display('Email ') ?>: </b><?php echo $email; ?><br>
+        <b>  <?php echo display('Contact ') ?>: </b><?php echo $phone; ?><br>
        </div>
 
 
@@ -245,9 +255,9 @@ elseif($template==2)
         <tr><td  class="key"><?php echo display('Payment Type') ?></td><td style="width:10px;">:</td><td calss="value"><?php  echo  $rate_type ; ?></td></tr>
         <tr><td  class="key"><?php echo display('phone') ?></td><td style="width:10px;">:</td><td calss="value"><?php echo $phone; ?></td></tr>
         <tr><td  class="key"><?php echo ('Per hour cost') ?></td><td style="width:7px;">:</td><td calss="value" style="white-space: pre-wrap;"><?php echo $hrate; ?> </td></tr>
-        <tr><td  class="key"><?php echo display('email') ?></td><td style="width:7px;">:</td><td calss="value" style="white-space: pre-wrap;"><?php  echo $email; ?> </td></tr>
         <tr><td  class="key"><?php echo display('zip') ?></td><td style="width:7px;">:</td><td calss="value" style="white-space: pre-wrap;"> <?php  echo $zip; ?></td></tr>
-    
+        <tr><td  class="key"><?php echo display('email') ?></td><td style="width:7px;">:</td><td calss="value" style="white-space: pre-wrap;"><?php  echo $email; ?> </td></tr>
+
 </table>
 
                 </div>
@@ -276,14 +286,15 @@ elseif($template==2)
 
 }
 ?>
-        
-    </div>   
-    </div>
 
+</div>
+</div>
+  
     
-    </section> <!-- /.content -->
+    
 </div> <!-- /.content-wrapper -->
-
+</section> <!-- /.content -->
+</div>
 <style>
 
 .key{
@@ -362,7 +373,7 @@ p{
 }
 table{
    
-    background-color: #fff;
+    /*background-color: #fff;*/
     width: 100%;
     border-collapse: collapse;
     /* text-align: center; */
@@ -463,7 +474,44 @@ body {
     padding: 0;
     background: #38469f;
 }
+#head{
+    text-align: center;
+    margin-top: 250px;
+}
+
+
+@media print 
+{ 
+#head{display:none;} 
+#content{display:block;} 
+}
+
 </style>
+
+<div class="modal fade" id="myModal_sale" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="width: 500px;height:100px;text-align:center;margin-bottom: 300px;">
+        <div class="modal-header" style="color:white;background-color:#38469f;">
+      
+          <h4 class="modal-title">Human Resources</h4>
+        </div>
+        <div class="content">
+
+        <div class="modal-body" style="text-align:center;font-weight:bold;">
+          
+          <h4>Employee Info Download Successfully</h4>
+     
+        </div>
+        <div class="modal-footer">
+        </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -474,17 +522,34 @@ body {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<script>
+
+ $(document).ready(function () {
+ $("#content").attr("hidden", true);
+
+ var img = document.createElement("img");
+img.src = "<?php  echo  base_url() ?>/asset/images/icons/loading.gif";
+var src = document.getElementById("head");
+src.appendChild(img);
 
 
-<script>$(document).ready(function () {
-  // window.onload =function (){
+     const element = document.getElementById("content");
+
+    // clone the element
+    var clonedElement = element.cloneNode(true);
+
+    // change display of cloned element 
+    $(clonedElement).css("display", "block");
+    var pdf = new jsPDF('p','pt','a4');
+      //$('#content').css('display','block');
+       
    
 
 function first(callback1,callback2){
 setTimeout( function(){
-    var pdf = new jsPDF('p','pt','a4');
-    const invoice = document.getElementById("content");
-             console.log(invoice);
+
+  //  const invoice = document.getElementById("content");
+          //   console.log(invoice);
              console.log(window);
              var pageWidth = 8.5;
              var margin=0.5;
@@ -497,16 +562,18 @@ setTimeout( function(){
                  html2canvas: { scale: 3 },
                  jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
              };
-              html2pdf().from(invoice).set(opt).toPdf().get('pdf').then(function (pdf) {
+              html2pdf().from(clonedElement).set(opt).toPdf().get('pdf').then(function (pdf) {
   var totalPages = pdf.internal.getNumberOfPages();
  for (var i = 1; i <= totalPages; i++) {
     pdf.setPage(i);
     pdf.setFontSize(10);
     pdf.setTextColor(150);
   }
-  }).save('timesheet_<?php echo $invoicenumber.'.pdf'  ?>');
+  }).save('Employee_<?php echo $employee_name."_".$time_sheet[0]["month"].".pdf"?>');
     callback1();
     callback2();
+     clonedElement.remove();
+ $("#content").attr("hidden", true);
  }, 3000 );
 }
 function second(){
@@ -529,4 +596,7 @@ function third(){
 }
 first(second,third);
 });
-</script>
+
+
+   </script>
+

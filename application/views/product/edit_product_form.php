@@ -179,9 +179,9 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group row">
-                                    <label for="product_model" class="col-sm-4 col-form-label"><?php echo display('model') ?> <i class="text-danger"></i></label>
+                                    <label for="product_model" class="col-sm-4 col-form-label"><?php echo display('model') ?> <i class="text-danger">*</i></label>
                                     <div class="col-sm-8">
-                                        <input type="text" tabindex="" class="form-control" id="model"  value="{product_model}"  name="model" placeholder="<?php echo display('model') ?>" />
+                                        <input type="text" tabindex="" class="form-control" id="model"  value="{product_model}"  name="model" required placeholder="<?php echo display('model') ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -190,10 +190,10 @@
                                     <label for="category_id" class="col-sm-4 col-form-label"><?php echo display('category') ?></label>
                                     <div class="col-sm-7">
                                     <select class="form-control" id="category_id"  style="width:115%;" name="category_id" tabindex="3">
-                                            <option value="<?php echo $category_id;  ?>"><?php echo $category_name; ?></option>
+                                            <option value="<?php echo $category_name;  ?>"><?php echo $category_name; ?></option>
                                             <?php if ($category_list) { ?>
                                                 {category_list}
-                                                <option value="{category_id}">{category_name}</option>
+                                                <option value="{category_name}">{category_name}</option>
                                                 {/category_list}
                                             <?php } ?>
                                         </select>
@@ -225,9 +225,9 @@
                                     <!-- <input class="form-control text-right" id="supplier_id" name="supplier_id" type="text" value="{supplier_name}" required="" style="width:115%;">  -->
 
                                     <select   name="supplier_id"  style="width: 115%;" class="form-control"  required="">
-                                                <option value="<?php echo $sup_names_dropdown[0]['supplier_id'];  ?>"><?php echo $sup_names_dropdown[0]['supplier_name'];  ?> </option>
+                                                <option value="<?php echo $supplier_name;  ?>"><?php echo $supid;  ?> </option>
                                                 <?php foreach($sup_names_dropdown as $snd) { ?>           
-                                       <option value="<?php echo $snd['supplier_name'];?>"><?php echo $snd['supplier_name'];?></option>
+                                       <option value="<?php echo $snd['supplier_id'];?>"><?php echo $snd['supplier_name'];?></option>
                                                 <?php } ?>
 
 
@@ -526,7 +526,7 @@
                   <input type="text"   style="width:60px;"id="gross_sq_ft_<?php echo $k;  ?>" value=" <?php echo trim($dps['gross_sqft'])?>" name="gross_sq_ft[]" class="gross_sq_ft form-control"/>
               </td>
               <td>
-                  <input type="text" id="bundle_no_<?php echo $k;  ?>" name="bundle_no[]" value="<?php echo $dps['bundle_no'] ?>" required="" class="bundle_no form-control" />
+                  <input type="text" id="bundle_no_<?php echo $k;  ?>" style="width:70px;" name="bundle_no[]" value="<?php echo $dps['bundle_no'] ?>" required="" class="bundle_no form-control" />
               </td>
           
              
@@ -583,7 +583,7 @@
               </td>
           
               <td >
-                  <input type="text"  id="origin_<?php echo $k;  ?>" name="origin[]" style="width:50px;" value="<?php echo $dps['origin'] ?>" class="form-control"/>
+                  <input type="text"  id="origin_<?php echo $k;  ?>" name="origin[]" style="width:60px;" value="<?php echo $dps['origin'] ?>" class="form-control"/>
               </td>
 
               <td >
@@ -629,7 +629,7 @@
                   <input type="text"   style="width:60px;"id="gross_sq_ft_<?php echo $k;  ?>" readonly value="" name="gross_sq_ft[]" class="gross_sq_ft form-control"/>
               </td>
               <td>
-                  <input type="text" id="bundle_no_<?php echo $k;  ?>" name="bundle_no[]" value="" required="" class="bundle_no form-control" />
+                  <input type="text" id="bundle_no_<?php echo $k;  ?>" style="width:70px;" name="bundle_no[]" value="" required="" class="bundle_no form-control" />
               </td>
           
              
@@ -653,12 +653,12 @@
               <td>
 
 
-<span class="input-symbol-euro"><input type="text" id="cost_sq_ft_<?php echo $k;  ?>"  name="cost_sq_ft[]"  style="width:40px;" value="0.00"  class="cost_sq_ft form-control" ></span>
+<span class="input-symbol-euro"><input type="text" id="cost_sq_ft_<?php echo $k;  ?>"  name="cost_sq_ft[]"  style="width:70px;" placeholder="0.00"  class="cost_sq_ft form-control" ></span>
 
           
               <td >
 
-<span class="input-symbol-euro"> <input type="text"  id="cost_sq_slab_<?php echo $k;  ?>" name="cost_sq_slab[]"   style="width:40px;" value="0.00"  class="form-control"/></span>
+<span class="input-symbol-euro"> <input type="text"  id="cost_sq_slab_<?php echo $k;  ?>" name="cost_sq_slab[]"   style="width:70px;" placeholder="0.00"  class="form-control"/></span>
 
 
 
@@ -666,7 +666,7 @@
               </td>
               <td>
           
-<span class="input-symbol-euro">  <input type="text" id="sales_amt_sq_ft_<?php echo $k;  ?>"  readonly name="sales_amt_sq_ft[]"  style="width:40px;"  value="0.00" class="sales_amt_sq_ft form-control" /></span>
+<span class="input-symbol-euro">  <input type="text" id="sales_amt_sq_ft_<?php echo $k;  ?>"  readonly name="sales_amt_sq_ft[]"  style="width:70px;"  placeholder="0.00" class="sales_amt_sq_ft form-control" /></span>
 
 
 
@@ -675,7 +675,7 @@
           
               <td >
       
-<span class="input-symbol-euro">   <input type="text"  id="sales_slab_amt_<?php echo $k;  ?>" readonly name="sales_slab_amt[]"  style="width:45px;" value="0.00"  class="sales_slab_amt form-control"/></td> </span>
+<span class="input-symbol-euro">   <input type="text"  id="sales_slab_amt_<?php echo $k;  ?>" readonly name="sales_slab_amt[]"  style="width:70px;" placeholder="0.00"  class="sales_slab_amt form-control"/></td> </span>
 
 
 
@@ -686,7 +686,7 @@
               </td>
           
               <td >
-                  <input type="text"  id="origin_<?php echo $k;  ?>" name="origin[]" value="" class="form-control"/>
+                  <input type="text"  id="origin_<?php echo $k;  ?>" name="origin[]" style="width:60px;" value="" class="form-control"/>
               </td>
 
               <td >
@@ -833,7 +833,10 @@
 <script>  
 
 
-
+   $(document).ready(function(){
+   
+   $(".sidebar-mini").addClass('sidebar-collapse') ;
+   });
 
 
 

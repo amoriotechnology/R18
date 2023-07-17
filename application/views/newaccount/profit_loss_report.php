@@ -1,3 +1,13 @@
+
+
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+
+
+
+
+
+
+
 <div class="content-wrapper">
     <section class="content-header">
         <div class="header-icon">
@@ -5,11 +15,11 @@
         </div>
         <div class="header-title">
             <h1><?php echo display('accounts') ?></h1>
-            <small><?php echo display('profit_loss') ?></small>
+            <small></small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('accounts') ?></a></li>
-                <li class="active"><?php echo display('profit_loss') ?></li>
+                <li class="active" style="color:orange;"><?php echo display('profit_loss') ?></li>
             </ol>
         </div>
     </section>
@@ -53,18 +63,18 @@
                         <div class="form-group row">
                             <label for="date" class="col-sm-4 col-form-label"><?php echo display('from_date') ?></label>
                             <div class="col-sm-8">
-                                <input type="text" name="dtpFromDate" value="" placeholder="<?php echo display('from_date') ?>" class="datepicker form-control">
+                                <input type="date" name="dtpFromDate" value="" placeholder="<?php echo display('from_date') ?>" class="datepicker form-control">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="date" class="col-sm-4 col-form-label"><?php echo display('to_date') ?></label>
                             <div class="col-sm-8">
-                                <input type="text"  name="dtpToDate" value="" placeholder="<?php echo display('to_date') ?>" class="datepicker form-control">
+                                <input type="date"  name="dtpToDate" value="" placeholder="<?php echo display('to_date') ?>" class="datepicker form-control">
                             </div>
                         </div>
                         <div class="form-group text-right">
-                            <button type="submit" class="btn btn-success w-md m-b-5"><?php echo display('find') ?></button>
+                            <button type="submit"  class="btn btnclr"><?php echo display('find') ?></button>
                         </div>
                     </div>
                 </div>

@@ -73,7 +73,8 @@
                         <?php echo form_open('Admin_dashboard/user_sales_report', array('class' => 'form-inline', 'method' => 'get')) ?>
 
                          <div class="form-group">
-                            <label class="" for="user_name"><?php echo display('user_name') ?></label>
+                            <label class="" for="user_name"><?php echo display('user_name') ?></label>&nbsp;
+
                            <select name="user_id" class="form-control">
                                <option value=""> Select User</option>
                                <?php foreach($user_list as $users){?>
@@ -81,7 +82,8 @@
                                <?php }?>
                            </select>
                         </div> 
-                       
+                        &nbsp;
+
                         <div class="form-group">
                             <label class="" for="from_date"><?php echo display('start_date') ?><i class="text-danger">*</i></label>
                             <input type="date" name="from_date" class="form-control datepicker" id="from_date" placeholder="<?php echo display('start_date') ?>" value="<?php echo date('Y-m-d') ?>">
@@ -95,7 +97,7 @@
                         <button type="submit" name="btnSave" class="btn btnclr"><?php echo display('find') ?></button>
    <?php if(isset($_GET['btnSave']))
 {
- ?><a  class="btn btnclr"  href="#"  onclick="printDiv('content')"><?php echo display('print') ?></a>
+ ?>
  <?php  } ?>
                         <?php echo form_close() ?>
                     </div>
@@ -103,10 +105,15 @@
 {
  ?>
                     <div class="col-sm-4" style="text-align:center;">
-                      
-                        <i class="fa fa-cog"  aria-hidden="true"  id="myBtn" style="font-size:25px;" onClick="columnSwitchMODAL()"></i>
-                        
+              
+
+     
+
                         <div class="dropdown bootcol" id="drop" style="float:right;padding-right:20px;padding-bottom:10px;">
+                        <i class="fa fa-cog"  aria-hidden="true"  id="myBtn" style="font-size:25px;" onClick="columnSwitchMODAL()"></i>
+
+&nbsp;
+
        <button class="btnclr btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           <span class="glyphicon glyphicon-th-list"></span> Download
         
@@ -122,6 +129,9 @@
          <li><a href="#" onclick="$('#ProfarmaInvList').tableExport({type:'excel',escape:'false'});"> <img src="<?php echo base_url()?>assets/images/xls.png" width="24px"> XLS</a></li>
                     
        </ul>
+       &nbsp;
+
+       <a  class="btn btnclr"  href="#"  onclick="printDiv('content')"><?php echo display('print') ?></a>
      </div>
      </div>
                       
@@ -156,18 +166,19 @@
                                                 
                                                 <tr>
                                                     <td align="left" class="print-table-tr">
-                                                    <img src="<?php echo base_url().$software_info[0]['invoice_logo'];?>" alt="logo" width="100px" height="80px">
-                                                    </td>
+                                                    <img src="<?php echo  base_url().$logo; ?>"   style='width: 90px;'  />
+
+                                                </td>
                                                     <td align="center" class="print-cominfo">
                                                         <span class="company-txt">
-                                                            <?php echo $company[0]['company_name'];?>
-                                                           
-                                                        </span><br>
-                                                        <?php echo $company[0]['address'];?>
-                                                        <br>
-                                                        <?php echo $company[0]['email'];?>
-                                                        <br>
-                                                         <?php echo $company[0]['mobile'];?>
+                                                          
+
+
+                                                        <h3> <?php echo $company; ?> </h3>
+                                                         <h4></b><?php echo $address; ?> </h4>
+                                                         <h4></b><?php echo $email; ?> </h4>
+                                                         <h4></b><?php echo $phone; ?> </h4>
+
                                                         
                                                     </td>
                                                    

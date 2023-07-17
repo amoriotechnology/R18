@@ -200,12 +200,16 @@ public function edit_perm($id){
         $this->template->full_admin_html_view($content);
     }
     
+
+
      public function create()
             {
                 $sql = "insert into sec_role (type,uid)values ('".$_POST['rolename']."','".$this->session->userdata('user_id')."')";
         $this->db->query($sql);
           $id = $this->db->insert_id();
-        //  print_r($_POST);die();
+        //  print_r($_POST);
+        //  echo $this->db->last_query();
+        //  die();
           foreach($_POST as $key=>$value)
               {
                 if($key!='rolename')
@@ -215,7 +219,7 @@ public function edit_perm($id){
  $fk_id = $this->db->select('id')->from('module')->where('name',$menu)->get()->row()->id;
                      $col=strtolower($input[1]);
                       $sql="insert into  role_permission(`".$col."`,`menu`,`role_id`,`fk_module_id`) values(1,'$menu',$id,$fk_id)";
-                      // echo $sql; die();
+                    //   echo $sql; die();
                      $this->db->query($sql);
                      $this->session->set_flashdata('message', display('role_permission_added_successfully'));
                             }
@@ -390,11 +394,20 @@ public function edit_perm($id){
             'accounts' => $account,
             'modules' => $this->db->select('*')->from('sub_module')->group_by('module')->get()->result()
         );
-        
+        // print_r($data);
         $account = $CI->parser->parse('permission/role_form',$data,true);
   
         $this->template->full_admin_html_view($account);
     }
+
+
+
+
+
+
+
+
+
     public function role_list(){
 
         $content = $this->lpermission->role_view();

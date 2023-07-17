@@ -50,7 +50,26 @@
                    
                     <div class="card-content">
                         <div class="card-content-member">
-                              <div > <?php echo "<img src='".base_url()."{logo}' width=100px; height=100px; class=img-circle>";?></div>
+                              <div >
+                                 <!-- <?php //echo "<img src='".base_url()."{logo}' width=100px; height=100px; class=img-circle>";?> -->
+                     
+                              <?php  if(  $edit_data[0]['create_by'] == 2){?>
+
+     <?php echo "<img src='".base_url()."{logo}' width=100px; height=100px; class=img-circle>";?>
+
+ <?php }else{?> 
+ <?php echo "<img src='".base_url()."{userlogo}' width=100px; height=100px; class=img-circle>";?>
+<?php } ?>
+
+
+
+
+
+
+
+
+
+                                </div>
                               <br>
                             <h4 class="m-t-0">{first_name} {last_name}</h4>
                         </div>

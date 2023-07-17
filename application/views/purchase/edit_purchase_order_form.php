@@ -34,7 +34,7 @@
 
                 <li><a href="#"><?php echo display('purchase') ?></a></li>
 
-                <li class="active" style="color:orange;"><?php  echo  display('Purchase Order');?></li>
+                <li class="active" style="color:orange;"><?php  echo  display('Edit Purchase Order');?></li>
 
             </ol>
 
@@ -121,11 +121,9 @@ $tax_des= str_replace(")","",$myArray[1]);
 <input type="submit" id="payment_history" name="payment_history" class="btn" style="float:right;color:white;background-color: #38469f;" value="<?php echo  display('Payment History')?>" style="float:right;margin-bottom:30px;"/>
                                             </form> </div> 
                              <div class="Column" style="float: right;">
-                            <?php if($this->permission1->method('manage_invoice','read')->access()){ ?>
 
-                    <a style="background-color:#38469f;color:white;" href="<?php echo base_url('Cinvoice/manage_invoice') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo display('manage_invoice') ?> </a>
+                    <a style="background-color:#38469f;color:white;" href="<?php echo base_url('Cpurchase/manage_purchase_order') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo ('Manage Purchase Order') ?> </a>
 
-                    <?php }?>
            
                      </div>    </div>
                           
@@ -135,14 +133,9 @@ $tax_des= str_replace(")","",$myArray[1]);
                     </div>
 
 
-
                     <div class="panel-body">
-
-                    <form id="insert_purchase"  method="post">      
-                        
-
-
-                    <div class="row">
+                    <form id="insert_purchase"  method="post">
+                        <div class="row">
                             <div class="col-sm-6">
                                <div class="form-group row">
                                     <label for="supplier_sss" class="col-sm-4 col-form-label"><?php echo  display('Vendor');?>
@@ -162,28 +155,28 @@ $tax_des= str_replace(")","",$myArray[1]);
                                             {/supplier_selected}
                                         </select>
                                     </div>
-                                </div> 
+
+                                    
+                                                                </div>
+
                             </div>
-
-
-
                             <div class="col-sm-6">
                                <div class="form-group row">
                                     <label for="supplier_sss" class="col-sm-4 col-form-label"><?php echo display('Ship To');?>
                                         <i class="text-danger">*</i>
                                     </label>
-                                    <div class="col-sm-6">
-                                         <input rows="4" cols="50" name="ship_to" class=" form-control" value="<?php echo "{ship_to}" ?>" id="" style="width: 135%;"> </input>
-
-                                  
-                                        </div>  
-                                </div> 
+                                    <div class="col-sm-8">
+                                    <input rows="4" cols="50" name="ship_to" class=" form-control" value="<?php echo "{ship_to}" ?>" id="" > </input>
+                                       
+                                    </div>
+                                </div>
                             </div>
-
                         </div>
 
-                        <div class="row">
 
+
+
+                        <div class="row">
                              <div class="col-sm-6">
                                 <div class="form-group row">
                                     <label for="" class="col-sm-4 col-form-label"> <?php echo display('Vendor Address');?>
@@ -191,12 +184,18 @@ $tax_des= str_replace(")","",$myArray[1]);
                                     </label>
                                     <div class="col-sm-8">
                                     <textarea class="form-control" tabindex="4" id="vendor_add" name="vendor_add" placeholder="vendor address"  value="<?php echo $vendor_add; ?>" rows="3" col="5" required></textarea>
-
                                 </div>
                                 </div>
                             </div>
 
-                      
+
+
+
+
+
+
+
+
 
                             <div class="col-sm-6">
                                 <div class="form-group row">
@@ -211,95 +210,39 @@ $tax_des= str_replace(")","",$myArray[1]);
                                     </div>
                                 </div>
                             </div>
-
-                           
                         </div>
+                
 
 
-                        <div class="row">
-
-
-                             <div class="col-sm-6">
-                               <div class="form-group row">
-                                    <label for="date" class="col-sm-4 col-form-label"><?php  echo display('Purchase order date');?>
-                                    <i class="text-danger">*</i></label>
-                                    <div class="col-sm-8">
-                                        <?php $date = date('Y-m-d'); ?>
-                                        <input type="date" required tabindex="2" class="form-control datepicker" name="purchase_date" value="<?php echo $date; ?>" id="date"  required/>
-                                    </div>
-                                </div> 
-                            </div>
-
-
-
-                            <div class="col-sm-6">
-                               <div class="form-group row">
-                                    <label for="adress" class="col-sm-4 col-form-label"><?php echo  display('Payment Terms');?> <i class="text-danger">*</i>
-                                    </label>
-                                    <div class="col-sm-8">
-                                    <select class="form-control" tabindex="4" id="adress"  name="payment_terms" id="payment_terms" class=" form-control" placeholder='Payment Terms' id="payment_terms" rows="1">{payment_terms}   >
-
-<option value="{payment_terms}">{payment_terms}</option>
-<option value="100%">100%</option>
-<option value="30-70">30-70%</option>
-<option value="70-30">70-30%</option>
-<option value="75-25">75-25%</option>
-<option value="25-75">25-75%</option>
-</select>
-                                    </div>
-                                </div> 
-                                                           <div class="form-group row">
-                                    <label for="adress" class="col-sm-4 col-form-label"><?php  echo display('payment_type'); ?> <i class="text-danger">*</i>
-                                    </label>
-                                    <div class="col-sm-8">
-                                    <select name="paytype_drop" id="paytype_drop" class="form-control" required=""  tabindex="3" >
-   <option value="{paytype}">{paytype}</option>
-        <option value="CHEQUE"><?php echo display('cheque'); ?></option>
-    <option value="CASH"><?php echo display('cash'); ?></option>
-    <option value="CREDIT/DEBIT CARD"><?php echo display('CREDIT/DEBIT CARD');?></option>
-    <option value="BANK TRANSFER"><?php echo display('BANK TRANSFER');?></option>
-
-<?php foreach($payment_type as $ptype){?>
-    <option value="<?php echo $ptype['payment_type'];?>"><?php echo $ptype['payment_type'] ;?></option>
-<?php }?>
-        </select>   
-                                    </div>
-                                </div> 
-                            </div>
-
-                        </div>
-
-
-
-
+                      
                         <div class="row">
                                <div class="col-sm-6">
                                <div class="form-group row">
                                     <label for="adress" class="col-sm-4 col-form-label"><?php echo display('Created By');?>
                                     <i class="text-danger">*</i>  </label>
                                     <div class="col-sm-8">
-                                        <textarea class="form-control" tabindex="4" id="adress" name="created_by" value="" placeholder="Created By" rows="1">{created_by}</textarea>
-                                    </div>
+                                    <textarea class="form-control" tabindex="4" id="adress" name="created_by" value="" placeholder="Created By" rows="1">{created_by}</textarea>
+                                </div>
                                 </div>
                             </div>
 
 
+                            
                             <div class="col-sm-6">
                                 <div class="form-group row">
-                                    <label for="date" class="col-sm-4 col-form-label">Est. Shipment date
+                                    <label for="date" class="col-sm-4 col-form-label"><?php echo display('Estimated Shipment Date');?>
                                         <i class="text-danger">*</i>
                                     </label>
                                     <div class="col-sm-8">
-                                       
+                                        <?php $date5 = date('Y-m-d'); ?>
                                         <input type="date" required tabindex="2" class="form-control datepicker" name="est_ship_date" value="<?php echo $est_ship_date; ?>" id="date5"  required/>
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
-
-                        <div class="row">
+                        <input type="hidden"  value="<?php echo $payment_id; ?>"  name="payment_id"/>
+                       
+                             <div class="row">
                                <div class="col-sm-6">
                                <div class="form-group row">
                                     <label for="adress" class="col-sm-4 col-form-label"><?php echo  display('Shipment Terms');?>
@@ -315,13 +258,85 @@ $tax_des= str_replace(")","",$myArray[1]);
                                 </div>
                             </div>
 
-<input type="hidden"  value="<?php echo $payment_id; ?>"  name="payment_id"/>
+
+
+
+
+
                             <div class="col-sm-6">
+                                <div class="form-group row">
+                                        <label for="adress" class="col-sm-4 col-form-label"><?php  echo display('Purchase order date');?>
+                                    </label>
+                                    <div class="col-sm-8">
+                                    <?php $date = date('Y-m-d'); ?>
+                                        <input type="date" required tabindex="2"     style="    width: 98.7%;" class="form-control datepicker" name="purchase_date" value="<?php echo $purchase_date; ?>" id="date"  required/>                                  
+                                                          
+                                      </div>                        
+                                      </div>
+                                     </div>
+ 
+
+
+
+                               <div class="col-sm-6">
+                               <div class="form-group row">
+                                    <label for="adress" class="col-sm-4 col-form-label"><?php  echo display('payment_type'); ?>
+                                    </label>
+                                    <div class="col-sm-7">
+                                    <select name="paytype_drop" id="paytype_drop" style="width:561px;" class="form-control" required=""  tabindex="3" >
+   <option value="{paytype}">{paytype}</option>
+        <option value="CHEQUE"><?php echo display('cheque'); ?></option>
+    <option value="CASH"><?php echo display('cash'); ?></option>
+    <option value="CREDIT/DEBIT CARD"><?php echo display('CREDIT/DEBIT CARD');?></option>
+    <option value="BANK TRANSFER"><?php echo display('BANK TRANSFER');?></option>
+
+<?php foreach($payment_type as $ptype){?>
+    <option value="<?php echo $ptype['payment_type'];?>"><?php echo $ptype['payment_type'] ;?></option>
+<?php }?>
+        </select>   
+                                </div>
+                               
+                              
+                     
+                           </div>
+                           <div class="form-group row">
+    <label for="billing_address" class="col-sm-4     col-form-label"><?php echo display('Payment Terms');?>
+    <i class="text-danger">*</i></label>
+    <div class="col-sm-7">
+    <select class="form-control" tabindex="4" id="adress" style="width:561px;"  name="payment_terms" id="payment_terms" class=" form-control" placeholder='Payment Terms' id="payment_terms" rows="1">{payment_terms}   >
+
+<option value="{payment_terms}">{payment_terms}</option>
+        <option value="CAD">CAD</option>
+        <option value="COD">COD</option>
+        <option value="ADVANCE"><?php echo display('ADVANCE');?></option>
+        <option value="7DAYS">7<?php echo display('DAYS');?></option>
+        <option value="15DAYS">15<?php echo display('DAYS');?></option>
+        <option value="30DAYS">30<?php echo display('DAYS');?></option>
+        <option value="45DAYS">45<?php echo display('DAYS');?></option>
+        <option value="60DAYS">60<?php echo display('DAYS');?></option>
+        <option value="75DAYS">75<?php echo display('DAYS');?></option>
+        <option value="90DAYS">90<?php echo display('DAYS');?></option>
+        <option value="180DAYS">180<?php echo display('DAYS');?></option>
+        <?php foreach($payment_terms as $inv){ ?>
+          <option value="<?php echo $inv['payment_terms'] ; ?>"><?php echo $inv['payment_terms'] ; ?></option>
+                               <?php    }?>
+        </select>
+    </div>
+  
+    </div>
+                           </div> 
+
+
+
+
+
+
+                           <div class="col-sm-6">
                                 <div class="form-group row">
                                         <label for="adress" class="col-sm-4 col-form-label"><?php  echo display('Attachments');?>
                                     </label>
                                     <div class="col-sm-8">
-                                       <input type="file" name="attachments" class="form-control">
+                                       <input type="file" name="attachments"  style="width: 98%;" class="form-control">
                                     </div>
                                 </div>
                             </div>

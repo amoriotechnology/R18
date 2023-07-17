@@ -446,6 +446,47 @@ class Lsettings {
         return $bankList;
     }
 
+
+
+    public function  transaction_show_by_id($VNo){
+
+        $CI = & get_instance();
+        $CI->load->model('Settings');
+        $CI->load->model('Web_settings');
+
+        $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+    
+        $bank_list = $CI->Settings->get_bank_list();
+
+        $edit_transaction_information = $CI->Settings->edit_transaction_information($VNo);
+
+        $data = array(
+            'title'     => display('bank_edit'),
+            'bank_list' => $bank_list,
+
+            'edit_transaction_information' => $edit_transaction_information,
+
+            'currency'  => $currency_details[0]['currency'],
+            
+
+        );
+        // print_r($edit_transaction_information); 
+
+        $bankList = $CI->parser->parse('settings/edit_transaction', $data, true);
+        return $bankList;
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
     // Expense Edit Data
     public function expense_show_by_id($id)
     {
@@ -484,72 +525,216 @@ class Lsettings {
         $CI = & get_instance();
         $CI->load->model('Settings');
         $bank_list = $CI->Settings->bank_update_by_id($bank_id);
+        // print_r($bank_list); die();
         return true;
     }
-
     #============bank ledger=============#
 
-public function bank_ledger($bank_id = null) {
-        // echo $bank_id; die();
-        $CI = & get_instance();
-        $CI->load->model('Settings');
-        $CI->load->model('Reports');
-        $CI->load->model('Web_settings');
-        $bank_list = $CI->Settings->get_bank_list();
-        // $from_date = (!empty($from)?$from:date('Y-m-d'));
-        // $to_date = (!empty($to)?$to:date('Y-m-d'));
-        $bank_info = $CI->Settings->bank_info($bank_id);
-        // print_r($bank_info); die();
-        $ledger = $CI->Settings->bank_ledger($bank_info[0]['bank_name']);
-        // $ledger = $CI->Settings->bank_ledger($bank_info[0]['bank_name'],$from_date,$to_date);
-        $total_ammount = 0;
-        $total_credit = 0;
-        $total_debit = 0;
-        $balance = 0;
-        $total_debit = 0;
-        $total_credit = 0;
-        if (!empty($ledger)) {
-            foreach ($ledger as $index => $value) {
-                    $ledger[$index]['debit'] = $ledger[$index]['Debit'];
-                    $total_debit += $ledger[$index]['debit'];
-                    $ledger[$index]['balance'] = $balance + ($ledger[$index]['Debit'] - $ledger[$index]['Credit']);
-                    $ledger[$index]['credit']  = $ledger[$index]['Credit'];
-                    $total_credit += $ledger[$index]['credit'];
-                     $balance = $ledger[$index]['balance'];
-            }
-        }
-        $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info         = $CI->Reports->retrieve_company();
-        $data = array(
-            'title'        => display('bank_ledger'),
-            'ledger'       => $ledger,
-            'bank_info'    => $bank_info,
-            'bank_list'    => $bank_list,
-            'total_credit' => number_format($total_credit, 2, '.', ','),
-            'total_debit'  => number_format($total_debit, 2, '.', ','),
-            'balance'      => number_format($balance, 2, '.', ','),
-            'currency'     => $currency_details[0]['currency'],
-            'position'     => $currency_details[0]['currency_position'],
-            'software_info'=> $currency_details,
-            'company'      => $company_info,
-        );
-        $bank_ledger = $CI->parser->parse('settings/bank_ledger', $data, true);
-        return $bank_ledger;
-    }
-//BANK LIST
-    public function get_bank_list() {
-        $this->db->select('*');
-        $this->db->from('bank_add');
-        $this->db->where('created_by',$this->session->userdata('user_id'));
-        $this->db->order_by('bank_name','asc');
-        $this->db->where('status', 1);
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        }
-        return false;
-    }
+// public function bank_ledger($bank_id = null,$from= null,$to= null) {
+//         // echo $bank_id; die();
+//         $CI = & get_instance();
+//         $CI->load->model('Settings');
+//         $CI->load->model('Reports');
+//         $CI->load->model('Web_settings');
+//         $bank_list = $CI->Settings->get_bank_list();
+//         $from_date = (!empty($from)?$from:date('Y-m-d'));
+//         $to_date = (!empty($to)?$to:date('Y-m-d'));
+//         $bank_info = $CI->Settings->bank_info($bank_id);
+//         // print_r($bank_info); die();
+//         // $ledger = $CI->Settings->bank_ledger($bank_info[0]['bank_name']);
+//         $ledger = $CI->Settings->bank_ledger($bank_info[0]['bank_name'],$from_date,$to_date);
+//         $total_ammount = 0;
+//         $total_credit = 0;
+//         $total_debit = 0;
+//         $balance = 0;
+//         $total_debit = 0;
+//         $total_credit = 0;
+//         if (!empty($ledger)) {
+//             foreach ($ledger as $index => $value) {
+//                     $ledger[$index]['debit'] = $ledger[$index]['Debit'];
+//                     $total_debit += $ledger[$index]['debit'];
+//                     $ledger[$index]['balance'] = $balance + ($ledger[$index]['Debit'] - $ledger[$index]['Credit']);
+//                     $ledger[$index]['credit']  = $ledger[$index]['Credit'];
+//                     $total_credit += $ledger[$index]['credit'];
+//                      $balance = $ledger[$index]['balance'];
+//             }
+//         }
+//         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+//         $company_info         = $CI->Reports->retrieve_company();
+//         $data = array(
+//             'title'        => display('bank_ledger'),
+//             'ledger'       => $ledger,
+//             'bank_info'    => $bank_info,
+//             'bank_list'    => $bank_list,
+//             'total_credit' => number_format($total_credit, 2, '.', ','),
+//             'total_debit'  => number_format($total_debit, 2, '.', ','),
+//             'balance'      => number_format($balance, 2, '.', ','),
+//             'currency'     => $currency_details[0]['currency'],
+//             'position'     => $currency_details[0]['currency_position'],
+//             'software_info'=> $currency_details,
+//             'company'      => $company_info,
+//         );
+//         $bank_ledger = $CI->parser->parse('settings/bank_ledger', $data, true);
+//         return $bank_ledger;
+//     }
+// //BANK LIST
+//     public function get_bank_list() {
+//         $this->db->select('*');
+//         $this->db->from('bank_add');
+//         $this->db->where('created_by',$this->session->userdata('user_id'));
+//         $this->db->order_by('bank_name','asc');
+//         $this->db->where('status', 1);
+//         $query = $this->db->get();
+//         if ($query->num_rows() > 0) {
+//             return $query->result_array();
+//         }
+//         return false;
+//     }
 
+
+public function bank_ledger($bank_id = null,$from= null,$to= null) {
+    $CI = & get_instance();
+    $CI->load->model('Settings');
+    $CI->load->model('Reports');
+    $CI->load->model('Web_settings');
+    $w = & get_instance();
+    $w->load->model('Ppurchases');
+    $CC = & get_instance();
+
+    $CI->load->model('Web_settings');
+    $CC->load->model('invoice_content');
+
+
+    $bank_list = $CI->Settings->get_bank_list();
+    $from_date = (!empty($from)?$from:date('Y-m-d'));
+    $to_date = (!empty($to)?$to:date('Y-m-d'));
+    $bank_info = $CI->Settings->bank_info($bank_id);
+    $ledger = $CI->Settings->bank_ledger($bank_info[0]['bank_name'],$from_date,$to_date);
+    $total_ammount = 0;
+    $total_credit = 0;
+    $total_debit = 0;
+    $balance = 0;
+    $total_debit = 0;
+    $total_credit = 0;
+
+    if (!empty($ledger)) {
+        foreach ($ledger as $index => $value) {
+                $ledger[$index]['debit'] = $ledger[$index]['Debit'];
+                $total_debit += $ledger[$index]['debit'];
+
+                $ledger[$index]['balance'] = $balance + ($ledger[$index]['Debit'] - $ledger[$index]['Credit']);
+                $ledger[$index]['credit']  = $ledger[$index]['Credit'];
+                $total_credit += $ledger[$index]['credit'];
+                 $balance = $ledger[$index]['balance'];
+          
+        }
+    }
+    $datacontent = $CC->invoice_content->retrieve_data();
+    $company_info = $w->Ppurchases->retrieve_company();
+
+    $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+    // $company_info         = $CI->Reports->retrieve_company();
+    $data = array(
+        'title'        => display('bank_ledger'),
+        'ledger'       => $ledger,
+        'bank_info'    => $bank_info,
+        'bank_list'    => $bank_list,
+        'total_credit' => number_format($total_credit, 2, '.', ','),
+        'total_debit'  => number_format($total_debit, 2, '.', ','),
+        'balance'      => number_format($balance, 2, '.', ','),
+        'currency'     => $currency_details[0]['currency'],
+        'position'     => $currency_details[0]['currency_position'],
+        'software_info'=> $currency_details,
+        // 'company'      => $company_info,
+        'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+
+        'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+        'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+        'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+        // 'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:$company_info[0]['reg_number']),  
+        'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+        'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),
+
+    );
+    $bank_ledger = $CI->parser->parse('settings/bank_ledger', $data, true);
+    return $bank_ledger;
+}
+public function bank_led_view($bank_id = null) {
+    $CI = & get_instance();
+    $CI->load->model('Settings');
+    $CI->load->model('Reports');
+    $CI->load->model('Web_settings');
+    $w = & get_instance();
+    $w->load->model('Ppurchases');
+    $CC = & get_instance();
+
+    $CI->load->model('Web_settings');
+    $CC->load->model('invoice_content');
+
+
+    $bank_list = $CI->Settings->get_bank_list();
+
+    $bank_info = $CI->Settings->bank_info($bank_id);
+//print_r($bank_info);die();
+    
+    $ledger = $CI->Settings->bank_led($bank_info[0]['bank_name']);
+
+
+
+
+
+
+
+    $total_ammount = 0;
+    $total_credit = 0;
+    $total_debit = 0;
+    $balance = 0;
+    $total_debit = 0;
+    $total_credit = 0;
+
+    if (!empty($ledger)) {
+        foreach ($ledger as $index => $value) {
+                $ledger[$index]['debit'] = $ledger[$index]['Debit'];
+                $total_debit += $ledger[$index]['debit'];
+
+                $ledger[$index]['balance'] = $balance + ($ledger[$index]['Debit'] - $ledger[$index]['Credit']);
+                $ledger[$index]['credit']  = $ledger[$index]['Credit'];
+                $total_credit += $ledger[$index]['credit'];
+                 $balance = $ledger[$index]['balance'];
+          
+        }
+    }
+    $datacontent = $CC->invoice_content->retrieve_data();
+    $company_info = $w->Ppurchases->retrieve_company();
+
+    $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+    // $company_info         = $CI->Reports->retrieve_company();
+    $data = array(
+        'title'        => display('bank_ledger'),
+        'ledger'       => $ledger,
+        'bank_info'    => $bank_info,
+        'bank_list'    => $bank_list,
+        'total_credit' => number_format($total_credit, 2, '.', ','),
+        'total_debit'  => number_format($total_debit, 2, '.', ','),
+        'balance'      => number_format($balance, 2, '.', ','),
+        'currency'     => $currency_details[0]['currency'],
+        'position'     => $currency_details[0]['currency_position'],
+        'software_info'=> $currency_details,
+        // 'company'      => $company_info,
+        'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+
+        'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+        'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+        'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+        // 'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:$company_info[0]['reg_number']),  
+        'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+        'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),
+
+    );
+    // print_r($data);
+    $bank_ledger = $CI->parser->parse('settings/bank_ledger', $data, true);
+    return $bank_ledger;
+}
 }
 
 ?>

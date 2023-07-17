@@ -235,10 +235,11 @@ class Lpurchase {
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
         $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
      $products=$CI->Invoices->allproduct();
-     $taxfield1 = $CI->db->select('tax_id,tax')
-     ->from('tax_information')
-     ->get()
-     ->result_array();
+     $taxfield1 = $CI->Invoices->tax_data();
+    //  $taxfield1 = $CI->db->select('tax_id,tax')
+    //  ->from('tax_information')
+    //  ->get()
+    //  ->result_array();
      $po_number =  $CI1->Purchases->get_po_num();
         $data = array(
              'curn_info_default' =>$curn_info_default[0]['currency_name'],
@@ -496,7 +497,7 @@ class Lpurchase {
    
         $CI->load->model('Web_settings');
         $CI->load->model('Products');
-
+        $CI->load->model('Invoices');
       
 
         $all_supplier = $CI->Purchases->select_all_supplier();
@@ -514,11 +515,8 @@ class Lpurchase {
 
      
         $voucher_no = $CI->Purchases->voucher_no();
-
-        $taxfield1 = $CI->db->select('tax_id,tax')
-        ->from('tax_information')
-        ->get()
-        ->result_array();
+$taxfield1 = $CI->Invoices->tax_data();
+      
         $payment_type = $CI->Purchases->drop_payment_type();
 $payment_terms_dropdown = $CI->Purchases->payment_terms_dropdown();
 $product_no = $CI->Products->product_id_number();
@@ -991,10 +989,8 @@ public function purchase_edit_data($purchase_id) {
         $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
         $bank_list        = $CI->Web_settings->bank_list();
         $expense_packing_list        = $CI->Purchases->expense_package();
-        $taxfield1 = $CI->db->select('tax_id,tax')
-        ->from('tax_information')
-        ->get()
-        ->result_array();
+           $taxfield1 = $CI->Purchases->tax_info();
+
         $po_number = $CI->db->select('chalan_no')
         ->from('purchase_order')
         ->get()
@@ -1884,11 +1880,13 @@ public function purchase_details_data_print($purchase_id) {
         $data = array(
             'header'=> $dataw[0]['header'],
             'color'=> $dataw[0]['color'],
+            // 'logo'=> $setting[0]['invoice_logo'],
+
              'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:base_url().$company_info[0]['logo']),  
 
             'template'=> $dataw[0]['template'],
 
-  'business_name'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'business_name'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
             'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
             'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
             'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:''),  

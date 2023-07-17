@@ -1,5 +1,9 @@
 <script src="<?php echo base_url() ?>my-assets/js/admin_js/account.js" type="text/javascript"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+
+
 <style>
     .select2{
         display:none;
@@ -90,7 +94,7 @@
                      <div class="form-group row">
                         <label for="date" class="col-sm-2 col-form-label"> <?php echo display('date')?><i class="text-danger">*</i></label>
                         <div class="col-sm-4">
-                             <input type="text" name="dtpDate" id="dtpDate" class="form-control datepicker" value="<?php echo  date('Y-m-d')?>" required>
+                             <input type="date" name="dtpDate" id="dtpDate" class="form-control datepicker" value="<?php echo  date('Y-m-d')?>" required>
                         </div>
                     </div> 
                     <div class="form-group row">
@@ -115,7 +119,7 @@
                                     <tr>
                                         <td class="" width="300">  
        <select name="cmbCode[]" id="cmbCode_1" class="form-control" onchange="load_dbtvouchercode(this.value,1)" required="">
-        <option value="">Select One</option>
+        <option value="">Select Account Name</option>
          <?php foreach ($acc as $acc1) {?>
    <option value="<?php echo $acc1->HeadCode;?>"><?php echo $acc1->HeadName;?></option>
          <?php }?>
@@ -127,7 +131,7 @@
                                            </td>
                                             <td ><span class="input-symbol-euro"><input type="number" name="txtAmountcr[]" placeholder="0.00" class="form-control total_price1 text-left"  id="txtAmount1_1" onkeyup="calculationContravoucher(1)" ></span>
                                            </td>
-                                       <td>
+                                       <td style="text-align:center;">
                                                 <button  class="btn btn-danger red" type="button"  onclick="deleteRowContravoucher(this)"><i class="fa fa-trash-o"></i></button>
                                             </td>
                                     </tr>                              
@@ -143,10 +147,10 @@
                                         <td class="text-left">
                                             <span class="input-symbol-euro"><input type="text" id="grandTotal" class="form-control text-left " name="grand_total" value="0.00" readonly="readonly" /></span>
                                         </td>
-                                         <td class="text-left">
+                                         <td  class="text-left">
                                           <span class="input-symbol-euro">  <input type="text" id="grandTotal1" class="form-control text-left " name="grand_total1" value="0.00" readonly="readonly" /></span>
                                         </td>
-                                        <td><a id="add_more" class="btn" style="color:white;background-color:#38469f;" name="add_more"  onClick="addaccountContravoucher('debitvoucher')"><i class="fa fa-plus"></i></a>
+                                        <td style="text-align:center;" ><a id="add_more" class="btn" style="color:white;background-color:#38469f;" name="add_more"  onClick="addaccountContravoucher('debitvoucher')"><i class="fa fa-plus"></i></a>
                                          
                                         </td>
                                     </tr>
@@ -155,7 +159,7 @@
                         </div>
                         <div class="form-group row">
                            
-                            <div class="col-sm-12 text-right">
+                            <div class="col-sm-12 text-left">
 
                                 <input type="submit" id="add_receive" class="btn" style="color:white;background-color:#38469f;" name="save" value="<?php echo display('save') ?>" tabindex="9"/>
                                

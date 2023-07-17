@@ -733,16 +733,18 @@ public function email_setting($view_email, $email_con, $del_email) {
         $CI->load->model('invoice_design');
         $CD->load->model('Companies');
         $CI->load->model('Web_settings');
- $CI->load->model('invoice_content');
+        $CI->load->model('invoice_content');
+        
        $setting_detail = $CI->Web_settings->retrieve_setting_editdata();
        $dataw = $CI->invoice_design->retrieve_data();
        $datac = $CD->Companies->company_details();
-           $datacontent = $CI->invoice_content->retrieve_data();
+       $datacontent = $CI->invoice_content->retrieve_data();
+
        $data= array(
-            'header'=> (!empty($dataw[0]['header']) ? $dataw[0]['header'] : '') , 
+        'header'=> (!empty($dataw[0]['header']) ? $dataw[0]['header'] : '') , 
         'logo'=> (!empty($dataw[0]['logo']) ? $dataw[0]['logo'] : '') , 
         'color'=> (!empty($dataw[0]['color']) ? $dataw[0]['color'] : '') ,   
-'invoice_logo' =>(!empty($setting_detail[0]['invoice_logo']) ? $setting_detail[0]['invoice_logo'] : '') ,  
+        'invoice_logo' =>(!empty($setting_detail[0]['invoice_logo']) ? $setting_detail[0]['invoice_logo'] : '') ,  
         'address'=>(!empty($datacontent[0]['address']) ? $datacontent[0]['address'] : '') ,     
         'cname'=>(!empty($datacontent[0]['business_name']) ? $datacontent[0]['business_name'] : '') ,    
         'mobile'=>(!empty($datacontent[0]['phone']) ? $datacontent[0]['phone'] : '') ,  

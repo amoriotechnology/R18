@@ -706,8 +706,7 @@ var data = {
 
 
 
-
-  $('#add_duration').submit(function(e){
+$('#add_duration').submit(function(e){
     e.preventDefault();
       var data = {
         duration_name : $('#duration_name').val()
@@ -724,7 +723,7 @@ var data = {
             $select.empty();
             console.log(data);
               for(var i = 0; i < data1.length; i++) {
-        var option = $('<option/>').attr('value', data1[i].payment_terms).text(data1[i].payment_terms);
+        var option = $('<option/>').attr('value', data1[i].duration_name).text(data1[i].duration_name);
         $select.append(option); // append new options
     }
     $('#duration_name').val('');
@@ -747,8 +746,7 @@ var data = {
 
 
 
-
-  $('#insert_daily_break').submit(function(e){
+$('#insert_daily_break').submit(function(e){
     e.preventDefault();
       var data = {
         dailybreak_name : $('#dbreak').val()
@@ -761,17 +759,17 @@ var data = {
           url:'<?php echo base_url();?>Chrm/add_dailybreak_info',
           success: function(data1, statut) {
     
-       var $select = $('select#duration');
+       var $select = $('select#dailybreak');
             $select.empty();
             console.log(data);
               for(var i = 0; i < data1.length; i++) {
-        var option = $('<option/>').attr('value', data1[i].payment_terms).text(data1[i].payment_terms);
+        var option = $('<option/>').attr('value', data1[i].dailybreak_name).text(data1[i].dailybreak_name);
         $select.append(option); // append new options
     }
     $('#dailybreak_name').val('');
       $("#bodyModal1").html("Daily Break Added Successfully");
       $('#dailybreak_add').modal('hide');
-      $('#duration').show();
+      $('#dailybreak').show();
        $('#myModal1').modal('show');
       window.setTimeout(function(){
         $('#payment_type_new').modal('hide');
@@ -781,6 +779,7 @@ var data = {
      }
       });
   });
+
 
 
 

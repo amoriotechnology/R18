@@ -1,3 +1,4 @@
+<?php error_reporting(1); ?>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
@@ -54,7 +55,11 @@
 
     </section>
 
-
+<style>
+#content{
+      padding: 0px;
+}
+  </style>
 
     <section class="content">
 
@@ -70,7 +75,7 @@
 
             ?>
 
-            <div class="alert alert-info alert-dismissable">
+            <div class="alert alert-info alert-dismissable" style="color:white;background-color: #38469f;">
 
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 
@@ -90,7 +95,7 @@
 
             ?>
 
-            <div class="alert alert-danger alert-dismissable">
+            <div class="alert alert-danger alert-dismissable" style="color:white;background-color: #38469f;">
 
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 
@@ -107,176 +112,216 @@
         ?>
 
 
+<script>
+    $('.alert').delay(1000).fadeOut('slow');
+    </script>
 
-        <!-- Manage Category -->
+<div class="row">
+                <div class="panel panel-bd lobidrag">
 
-        <div class="row">
+                    <div class="panel-heading" style="height: 60px;">
+   <div class="col-sm-10">
 
-            <div class="col-sm-12">
+          
+   
+   
+   
+   
+   
+   
+   
+   <?php    foreach(  $this->session->userdata('perm_data') as $test){
+    $split=explode('-',$test);
+    if(trim($split[0])=='hrm' && $_SESSION['u_type'] ==3 && trim($split[1])=='1000'){
+      
+      
+       ?>
 
-
-                
-
-
-
-
-
-
-
-
-
+<a href="<?php echo base_url('Chrm/add_office_loan') ?>" class="btn btnclr dropdown-toggle" style="color:white;background-color: #337ab7;border-color: #2e6da4;"> <?php echo ('Add Office Loan') ?></a>
                     
+                    <?php break;}} 
+                    if($_SESSION['u_type'] ==2){ ?>
 
-                    <div class="panel panel-default">
-                       <div class="panel-body"> 
-                        <div class="row">
+<a href="<?php echo base_url('Chrm/add_office_loan') ?>" class="btn btnclr dropdown-toggle" style="color:white;background-color: #337ab7;border-color: #2e6da4;"> <?php echo ('Add Office Loan') ?></a>
+
+                        <?php  } ?>
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   <a onclick="reload();"  >  <i class="fa fa-refresh" style="font-size:25px;float:right;" aria-hidden="true"></i> </a>
+                  </div>
+
+                           <div class="col-sm-2">
 
 
-                    <div class="col-sm-3">
-                    <a href="<?php echo base_url('Chrm/add_office_loan') ?>" class="btn btnclr dropdown-toggle" style="color:white;background-color: #337ab7;border-color: #2e6da4;"> <?php echo ('Add Office Loan') ?></a>
-                
+                    <i class="fa fa-cog"  aria-hidden="true" id="myBtn" style="font-size:25px;" onClick="columnSwitchMODAL()"></i> <!-- onclick opens MODAL -->
 
-                </div>
-
-
-
-             
-
-                      
-                    <div class="col-sm-6">
-                    <a onclick="reload();"  >  <i class="fa fa-refresh" style="font-size:25px;float:right;" aria-hidden="true"></i> </a>
-                    </div>  
-                    
-                    
-                    <div class="col-sm-1">
-                    <i class="fa fa-cog"  aria-hidden="true" id="myBtn" style="font-size:25px ;" onClick="columnSwitchMODAL()"></i> <!-- onclick opens MODAL -->
-                    </div>  
-
-                
-                            <div class="dropdown bootcol" id="drop" style="float:right;padding-right:20px;padding-bottom:10px;">
-    <button class="btn btnclr dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <div class="dropdown bootcol" id="drop" style="float:right;padding-right:20px;padding-bottom:10px;">
+                    <button class="btn btnclr dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
        <span class="glyphicon glyphicon-th-list"></span>  <?php echo display('download') ?>
      
     </button>
-
-        
-
-
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">          
-      <li><a href="#" id="cmd"> <img src="<?php echo base_url()?>assets/images/pdf.png" width="24px"> PDF</a></li>
-      <li class="divider"></li>                   
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
    
-      <li><a href="#" onclick="$('#ProfarmaInvList').tableExport({type:'excel',escape:'false'});"> <img src="<?php echo base_url()?>assets/images/xls.png" width="24px"> XLS</a></li>           
-
+  
+                
+      <li><a href="#" onclick="generate()"> <img src="<?php echo base_url()?>assets/images/pdf.png" width="24px"><?php echo display('PDF') ?> </a></li>
+      
+      <li class="divider"></li>         
+                  
+      <li><a href="#" onclick="$('#ProfarmaInvList').tableExport({type:'excel',escape:'false'});"> <img src="<?php echo base_url()?>assets/images/xls.png" width="24px">  <?php echo display('XLS') ?></a></li>
+                 
     </ul>
 
-
     &nbsp;
-    <button type="button" style="float:right;"  class="btn btnclr dropdown-toggle"  onclick="printDiv('printableArea')"><?php echo display('print') ?></button>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
+    <input type="button" class="btn btnclr" name="btnPrint" id="btnPrint"   value="Print" onclick="printDiv('printArea');"/>
+  </div>
+  </div>
+  </div>      
+  </div>
 
 
 
-              
-                <div class="panel panel-bd lobidrag">
 
-<div class="panel-body"  id="dataTableExample3" >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 <div class="row">
-<div class="col-sm-0"  style="text-align:right;">
 
+<div class="col-sm-12">
 
-<div class="panel-title" >
-<div id="for_filter_by" class="for_filter_by" style="display: inline;text-align:right;"><label for="filter_by"><?php echo display('Filter By') ?>&nbsp;&nbsp;
+    <div class="panel panel-bd lobidrag">
 
-</label><select id="filterby" style="border-radius:5px;height:25px;">
-<option value="1"><?php echo display('Sl') ?></option>
+        <div class="panel-heading">
+<div class="row"> 
+<div id="for_filter_by" class="for_filter_by" style="display: inline;"><label for="filter_by"> <?php echo display('Filter By') ?> &nbsp;&nbsp;
+      
+       </label><select id="filterby" style="border-radius:7px;height:25px;">
+       <option value="1"><?php echo display('Sl') ?></option>
 <option value="2"><?php echo ('Transaction Id') ?></option>
 <option value="3"><?php echo ('Person Id') ?></option>
 <option value="4"><?php echo ('Amount') ?></option>
 <option value="5"><?php echo ('Phone') ?></option>
 <option value="6"><?php echo ('Details') ?></option>
 
-</select> <input id="filterinput" style="border-radius:5px;height:25px;" type="text">
-
+      </select> <input id="filterinput" style="border-radius:5px;height:25px;" type="text"></div>
 </div>
+        </div>
+
+
+
+
+
+        <div class="panel-body" style="padding-top: 0px;">
+<div class="sortableTable__container">
+
+<div  id="printArea">
+             <div id="content" id="printArea">
+<div class="sortableTable__discard">
 </div>
+        <div id="customers">
+
+
+<table class="table table-bordered" cellspacing="0" width="100%" id="ProfarmaInvList">
+
+
+<thead class="sortableTable">
+<tr style="background-color: #337AB7;border-color: #2E6DA4;" class="sortableTable__header">
+
+<th class="1 value"  data-col="1"  data-resizable-column-id="1"    ><?php echo display('sl') ?></th>
+
+<th class="2 value"  data-col="2"  data-resizable-column-id="2"    ><?php echo ('Transaction Id') ?></th>
+
+<th class="3 value"  data-col="3"  data-resizable-column-id="3"   ><?php echo ('Person Id') ?></th>
+
+<th class="4 value"  data-col="4"  data-resizable-column-id="4"   ><?php echo ('Amount') ?></th>
+
+<th class="5 value"  data-col="5"  data-resizable-column-id="5"   ><?php echo ('Phone') ?></th>
+
+<th class="6 value"  data-col="6"  data-resizable-column-id="6" ><?php echo display('Details') ?></th>
+
+<th class="7 value"  data-col="7"  data-resizable-column-id="7"><?php echo ('Date') ?></th>
+
+
+<th class="8 value"  data-col="8"  data-resizable-column-id="8"><?php echo ('Action') ?></th>
+
+
+</tr>
+</thead>
+
+
+
+<tbody class="sortableTable__body" id="tab" >
+
+
+<?php
 
 
 
 
+if ($office_loan_list) {
 
+    ?>
 
-</div>
-</div>
+   
 
-<div id="printableArea">
+    <?php
 
-    <div class="table-responsive"  id="content">
+    $sl = 1;
 
-        <table id="ProfarmaInvList" class="table table-bordered table-striped table-hover datatable" id="ProfarmaInvList" >
-
-            <thead class="sortableTable" >
-
-    <tr  class="sortableTable__header">
-
-    <th class="1 value"  data-col="1"  data-resizable-column-id="1"    ><?php echo display('sl') ?></th>
-
-    <th class="2 value"  data-col="2"  data-resizable-column-id="2"    ><?php echo ('Transaction Id') ?></th>
-
-    <th class="3 value"  data-col="3"  data-resizable-column-id="3"   ><?php echo ('Person Id') ?></th>
-
-    <th class="4 value"  data-col="4"  data-resizable-column-id="4"   ><?php echo ('Amount') ?></th>
-
-    <th class="5 value"  data-col="5"  data-resizable-column-id="5"   ><?php echo ('Phone') ?></th>
-
-    <th class="6 value"  data-col="6"  data-resizable-column-id="6" ><?php echo display('Details') ?></th>
-
-    <th class="7 value"  data-col="7"  data-resizable-column-id="7"><?php echo ('Date') ?></th>
-
-
-    <th class="8 value"  data-col="8"  data-resizable-column-id="8"><?php echo ('Action') ?></th>
-
-    </tr>
-
-            </thead>
-
-            <tbody class="sortableTable__body" id="tab" >
-
-
-                <?php
+     foreach($office_loan_list as $officeloan){?>
 
 
 
 
-                if ($office_loan_list) {
+    <tr>
 
-                    ?>
+    <td class="1 value" data-col="1"><?php echo $sl;?></td>
 
-                   
-
-                    <?php
-
-                    $sl = 1;
-
-                     foreach($office_loan_list as $officeloan){?>
-
-
-
-
-                    <tr>
-
-                    <td class="1 value" data-col="1"><?php echo $sl;?></td>
-
- <td class="2 value"  data-col="2">  <?php echo html_escape($officeloan['transaction_id']);?></a></td>
+<td class="2 value"  data-col="2">  <?php echo html_escape($officeloan['transaction_id']);?></a></td>
 <td class="3 value"  data-col="3"><?php echo html_escape($officeloan['person_id']);?></td>
 
 <td class="4 value"  data-col="4"><?php echo html_escape($officeloan['debit']);?></td>
@@ -292,63 +337,126 @@
 
 
 
- <td class="8 value"  data-col="8" >
+<td class="8 value"  data-col="8" >
 
-                <center>
+<center>
 
-                    <?php echo form_open() ?>
-
-
-          <a href="<?php echo base_url() . 'Chrm/officeloan_edit/'.$officeloan['transaction_id']; ?>" class="btnclr btn m-b-5 m-r-2" data-toggle="tooltip" data-placement="left" title="<?php echo display('update') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-
-              
-
-               <a class="btnclr btn m-b-5 m-r-2" href="<?php echo base_url('Chrm/office_loan_inserthtml/'.$officeloan['transaction_id'])?>"><i class="fa fa-download" aria-hidden="true"></i></a>
-             
-             
-               <a href="<?php echo base_url('Chrm/office_loan_delete/'.$officeloan['transaction_id']) ?>" class="btnclr btn m-b-5 m-r-2" onclick="return confirm('<?php echo display('are_you_sure') ?>')" data-toggle="tooltip" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+    <?php echo form_open() ?>
 
 
 
-                        <?php echo form_close() ?>
 
-                </center>
 
-                </td> 
+<a class="btnclr btn m-b-5 m-r-2" href="<?php echo base_url('Chrm/office_loan_inserthtml/'.$officeloan['transaction_id'])?>"><i class="fa fa-download" aria-hidden="true"></i></a>
 
-                </tr>
 
-               
 
-                <?php
 
-                $sl++;
 
-            }
-        }
 
-            ?>
 
-            </tbody>
 
-            <tfoot></tfoot>
 
-        </table>
 
-    </div>
 
+
+
+
+
+
+
+
+<?php    foreach(  $this->session->userdata('perm_data') as $test){
+    $split=explode('-',$test);
+    if(trim($split[0])=='hrm' && $_SESSION['u_type'] ==3 && trim($split[1])=='0010'){
+      
+      
+       ?>
+
+<a href="<?php echo base_url() . 'Chrm/officeloan_edit/'.$officeloan['transaction_id']; ?>" class="btnclr btn m-b-5 m-r-2" data-toggle="tooltip" data-placement="left" title="<?php echo display('update') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    
+                    <?php break;}} 
+                    if($_SESSION['u_type'] ==2){ ?>
+
+<a href="<?php echo base_url() . 'Chrm/officeloan_edit/'.$officeloan['transaction_id']; ?>" class="btnclr btn m-b-5 m-r-2" data-toggle="tooltip" data-placement="left" title="<?php echo display('update') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+                        <?php  } ?>
+
+
+
+
+
+
+
+
+                        <?php    foreach(  $this->session->userdata('perm_data') as $test){
+    $split=explode('-',$test);
+    if(trim($split[0])=='hrm' && $_SESSION['u_type'] ==3 && trim($split[1])=='0001'){
+      
+      
+       ?>
+
+<a href="<?php echo base_url('Chrm/office_loan_delete/'.$officeloan['transaction_id']) ?>" class="btnclr btn m-b-5 m-r-2" onclick="return confirm('<?php echo display('are_you_sure') ?>')" data-toggle="tooltip" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    
+                    <?php break;}} 
+                    if($_SESSION['u_type'] ==2){ ?>
+
+<a href="<?php echo base_url('Chrm/office_loan_delete/'.$officeloan['transaction_id']) ?>" class="btnclr btn m-b-5 m-r-2" onclick="return confirm('<?php echo display('are_you_sure') ?>')" data-toggle="tooltip" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+                        <?php  } ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <?php echo form_close() ?>
+
+</center>
+
+</td> 
+
+</tr>
+
+
+
+<?php
+
+$sl++;
+
+}
+}
+
+?>
+
+</tbody>
+
+</table>
+
+
+</div> 
 </div>
-
-</div>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </section>
-
+</div> 
+</div> 
+</div> 
 </div>
 
 

@@ -408,7 +408,7 @@ $today = date('Y-m-d');
 
 
 
-      <a class="btnclr btn  btn-sm"   href="<?php if(!empty($arr['purchase_id'])) 
+      <a class="btnclr btn  btn-sm"  onclick="return confirm('<?php echo display('are_you_sure') ?>')"  href="<?php if(!empty($arr['purchase_id'])) 
       { 
         echo base_url()?>Cpurchase/purchase_delete_form/<?php echo  $arr['purchase_id']; }else{
            echo base_url()?>Cpurchase/servicepro_delete_data/<?php echo  $arr['serviceprovider_id'];
@@ -460,7 +460,7 @@ $today = date('Y-m-d');
   $count++;
   } }  else{
       ?>
-       <tr><td colspan="15" style="text-align:center;font-weight:bold;"><?php  echo "No Records Found"  ;?></td></tr>
+       <tr><td colspan="24" style="text-align:center;font-weight:bold;"><?php  echo "No Records Found"  ;?></td></tr>
       <?php
             }
   ?>

@@ -13,7 +13,11 @@ class Admin_dashboard extends CI_Controller {
         $this->load->model('Reports');
         $this->load->database();
     }
-    public function dashboardsetting()
+
+
+
+
+public function dashboardsetting()
     {
         $CI = & get_instance();
         $CI->load->library('lreport');
@@ -24,52 +28,37 @@ class Admin_dashboard extends CI_Controller {
             $this->output->set_header("Location: " . base_url() . 'Admin_dashboard/login', TRUE, 302);
         }
         $pageen=array();
-        $data['page_setting']=$page_setting=array(array("slug"=>"TotalSale","status"=>"enable"),array("slug"=>"TotalExpense","status"=>"enable"),array("slug"=>"Profit","status"=>"enable"),array("slug"=>"NoofProduct","status"=>"enable"),array("slug"=>"Sale_Expense_Overview","status"=>"enable"),array("slug"=>"Pie_Chart","status"=>"enable"),array("slug"=>"No_of_Vendor","status"=>"enable"),array("slug"=>"No_of_Customer","status"=>"enable"),array("slug"=>"No_of_Employee","status"=>"enable"),array("slug"=>"Best_10_Sales_Product","status"=>"enable")); 
-   
-
+        $data['page_setting']=$page_setting=array(array("slug"=>"TotalSale","status"=>"enable"),array("slug"=>"TotalExpense","status"=>"enable"),array("slug"=>"Profit","status"=>"enable"),array("slug"=>"NoofProduct","status"=>"enable"),array("slug"=>"Sale_Expense_Overview","status"=>"enable"),array("slug"=>"Pie_Chart","status"=>"enable"),array("slug"=>"No_of_Vendor","status"=>"enable"),array("slug"=>"No_of_Customer","status"=>"enable"),array("slug"=>"No_of_Employee","status"=>"enable"),array("slug"=>"Best_10_Sales_Product","status"=>"enable"));
         if($this->input->post('page_status')){
         $pagedata=$this->input->post('page_status');
 //    echo $pagedata;
   // echo "sadasd";
         foreach ($page_setting as  $single) {
-         
               //die();
             if(isset($pagedata[$single['slug']])){
                 $pageen[]=array("slug"=>$single['slug'],"status"=>"enable");
             }else{
-               $pageen[]=array("slug"=>$single['slug'],"status"=>"disable"); 
+               $pageen[]=array("slug"=>$single['slug'],"status"=>"disable");
             }
         }
- 
-        
         $arr['section_setting']=json_encode($pageen);
-           
               $CI->Web_settings->update_user_setting($this->session->userdata('user_id'),$arr);
               $this->session->set_userdata(array('message'=>'Settings successfully updated'));
         }
-       
         $page_details    = $CI->Web_settings->get_user_setting($this->session->userdata('user_id'));
-     
          if(isset($page_details['section_setting']) && $page_details['section_setting']!='')
          {
             $pagen=array();
             $da=json_decode($page_details['section_setting']);
             foreach ($da as $single) {
-            
                 $pagen[]=array("slug"=>$single->slug,"status"=>$single->status);
-            
         }
             $data['page_setting']=$pagen;
-       
          }
         $content = $CI->parser->parse('include/dashboard_setting', $data, true);
 //  print_r($data);die();
        $this->template->full_admin_html_view($content);
     }
-
-
-
-
 
 
 
@@ -323,6 +312,8 @@ $chart_label = $chart_data = '';
         $this->template->full_admin_html_view($content);
     }
 
+
+
 //    ============ its for todays_customer_receipt =============
     public function todays_customer_receipt() {
         $CI = & get_instance();
@@ -336,7 +327,16 @@ $chart_label = $chart_data = '';
         $today = date('Y-m-d');
 
         $company_info = $CI->Customers->retrieve_company();
-        $all_customer = $this->db->select('*')->from('customer_information')->get()->result();
+        // $all_customer = $this->db->select('*')->from('customer_information')->get()->result();
+        
+        $created_by   = $this->session->userdata('user_id');
+        $all_customer = $this->db->select('*')
+        ->from('customer_information')
+        ->where('create_by',$created_by)
+        ->get()
+        ->result();
+
+        
         $todays_customer_receipt = $CI->Invoices->todays_customer_receipt($today);
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
         $data = array(
@@ -351,7 +351,6 @@ $chart_label = $chart_data = '';
             'customer_info'           => '',
             'company'                 => $company_info,
         );
-
         $content = $CI->parser->parse('report/todays_customer_receipt', $data, true);
         $this->template->full_admin_html_view($content);
     }
@@ -361,6 +360,15 @@ $chart_label = $chart_data = '';
         $CI = & get_instance();
         $CI->load->library('lreport');
         $CI->load->library('occational');
+
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        // print_r( $company_info); 
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+        // print_r( $setting); die();
         if (!$this->auth->is_logged()) {
             $this->output->set_header("Location: " . base_url() . 'Admin_dashboard/login', TRUE, 302);
         }
@@ -369,9 +377,20 @@ $chart_label = $chart_data = '';
         $customer_id = $this->input->post('customer_id',TRUE);
         $from_date   = $this->input->post('from_date',TRUE);
         $today       = date('Y-m-d');
+            
+        // $company_info = $CI->Customers->retrieve_company();
 
-        $company_info = $CI->Customers->retrieve_company();
-        $all_customer = $this->db->select('*')->from('customer_information')->get()->result();
+        $created_by   = $this->session->userdata('user_id');
+        $all_customer = $this->db->select('*')
+        ->from('customer_information')
+        ->where('create_by',$created_by)
+        ->get()
+        ->result();
+
+        // ->where('created_by',$purchase_detail[0]['create_by'])
+
+
+        // print_r( $all_customer); die();
         $filter_customer_wise_receipt = $CI->Invoices->filter_customer_wise_receipt($customer_id, $from_date);
         $todays_customer_receipt = $CI->Invoices->todays_customer_receipt($today);
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
@@ -383,16 +402,26 @@ $chart_label = $chart_data = '';
             'todays_customer_receipt' => $filter_customer_wise_receipt,
             'today'                   => $today,
             'customer_info'           =>  $CI->Invoices->customerinfo_rpt($customer_id),
-            'company_info'            => $company_info,
+            // 'company_info'            => $company_info,
             'currency'                => $currency_details[0]['currency'],
             'position'                => $currency_details[0]['currency_position'],
-            'software_info'           => $currency_details,
-            'company'                 => $company_info,
+            // 'software_info'           => $currency_details,
+            // 'company'                 => $company_info,
+            'logo'  =>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
         );
+// print_r($data);
 
-        $content = $CI->parser->parse('report/todays_customer_receipt', $data, true);
+        $content = $CI->parser->parse('report/todays_customer_receipt', $data,true);
         $this->template->full_admin_html_view($content);
     }
+
+
+
+
 
     //Today All Report
     public function all_report() {
@@ -492,7 +521,7 @@ $chart_label = $chart_data = '';
         $content = $CI->lreport->user_sales_report($links, $config["per_page"], $page,$star_date,$end_date,$user_id);
         $this->template->full_admin_html_view($content);
     }
-      public function forgot()
+       public function forgot()
         {
                  $CI = & get_instance();
         $this->load->model('Users');
@@ -503,10 +532,10 @@ $chart_label = $chart_data = '';
                  $clean = $this->security->xss_clean($email);
 
             $userInfo = $CI->Users->getUserInfoByEmail($clean);
-    //  print_r($userInfo);
+      print_r($userInfo);
                 $email = $this->input->post('email');  
                  $clean = $this->security->xss_clean($email);
-
+   $to = $email;
                 
                 
                 if(empty($userInfo)){
@@ -522,7 +551,7 @@ $chart_label = $chart_data = '';
                 $qstring = $this->base64url_encode($token);                  
                 $url = site_url() . 'Admin_dashboard/reset_password/token/' . $qstring;
                 $link = '<a href="' . $url . '">' . $url . '</a>'; 
-                
+                $subject="Stockeai - Reset Password";
                 $message = '';                     
                 $message .= '<strong>Greeting from Stockeai</strong><br>
 There was a request to change your password!
@@ -530,51 +559,54 @@ If you did not make this request then please ignore this email.
 Otherwise, please click this link to change your password:</strong><br>';
                 $message .= '<strong>' . $link.'</strong> ';             
 
-            //    echo $message; //send this through mail
-            //      $CI = & get_instance();
-     $CI->load->library('phpmailer_lib');
-           $mail = $CI->phpmailer_lib->load();
-  
-
-        $to = $email;
-      
-        $subject = "Reset Password - Stockeai";
-       $mailsetting = $this->db->select('*')->from('email_config')->get()->result_array();
-        $created = $this->session->userdata('user_id');
-
-            // print_r($created); die();
-
-        // echo '<pre>';
-        // print_r($_POST); die;
-        // echo '</pre>';
+        
 
         try {
-            //Server settings
-            // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
-            $mail->isSMTP();                                           
-            $mail->Host       = $mailsetting[0]['smtp_host'];                     
-            $mail->SMTPAuth   = true;                                  
-            $mail->Username   = $mailsetting[0]['smtp_user'];              
-            $mail->Password   = $mailsetting[0]['smtp_pass'];                            
-            $mail->SMTPSecure = $mailsetting[0]['protocol'];            
-            $mail->Port       =$mailsetting[0]['smtp_port'];                                   
-            $mail->setFrom($to, 'Mailer');
-            $mail->addAddress($to, 'Mailer');     //Add a recipient
-          //  $mail->addCC($cc);
+          $setting_detail = $this->db->select('*')->from('email_config')->get()->row();
 
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = $subject;
-            $mail->Body    = "$message "."<br>";
-          //  $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    
 
-            $mail->send();
+        $config = Array(
+
+        'protocol'  => $setting_detail->protocol,
+
+        'smtp_host' => $setting_detail->smtp_host,
+
+        'smtp_port' => $setting_detail->smtp_port,
+
+        'smtp_user' => $setting_detail->smtp_user,
+
+        'smtp_pass' => $setting_detail->smtp_pass,
+
+        'mailtype'  => 'html', 
+
+        'charset'   => 'utf-8',
+
+        'wordwrap'  => TRUE
+
+        );
+     $this->load->library('email', $config);
+
+        $this->email->set_newline("\r\n");
+
+        $this->email->from($setting_detail->smtp_user);
+
+        $this->email->to($to);
+
+        $this->email->subject($subject);
+
+        $this->email->message($message);
+
+       // $this->email->attach($file_path);
+
+        $check_email = $this->test_input($email);
+        $this->email->send();
             // echo 'Message has been sent';
             echo "<script>alert('Email Send Successfully')</script>";
         
-       //  sleep(2);
+         sleep(2);
 redirect(base_url()."Admin_dashboard/login");
-  //$this->session->set_flashdata('flash_message', 'Your password has been updated. You may now login');
+  $this->session->set_flashdata('flash_message', 'Your password has been updated. You may now login');
                 // if($result){
                 //    echo "<script>alert('Inserted Success')</script>";
                 // }else{
@@ -591,6 +623,18 @@ redirect(base_url()."Admin_dashboard/login");
             
     
     }
+      public function test_input($data) {
+
+        $data = trim($data);
+
+        $data = stripslashes($data);
+
+        $data = htmlspecialchars($data);
+
+        return $data;
+
+    }
+
            public function reset_password()
         {
                 $CI = & get_instance();
@@ -1172,7 +1216,7 @@ $logo=$row1[0]['logo'];
 
 $sql='select * from sec_userrole  where user_id="'.$user_id.'"';
 
-// echo $sql;s
+echo $sql;
 
 $query=$this->db->query($sql);
 $row=$query->result_array();
@@ -1182,7 +1226,7 @@ $row=$query->result_array();
  $roleid=$row[0]['roleid'];
 
  $sql='SELECT GROUP_CONCAT(CONCAT(`menu`, " - ", `create`,`read`,`update`,`delete`) SEPARATOR ", ") AS items FROM role_permission where role_id="'.$roleid.'"';
- // echo $sql;
+ echo $sql;
 
 $query=$this->db->query($sql);
 $row=$query->result_array();

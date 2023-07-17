@@ -324,6 +324,20 @@ $data['category']= $CI->Products->get_products();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+        
+        
+        
+          $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+        
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+        
+        
+        
+        
+        
 
         $sales_report = $CI->Reports->todays_sales_report($per_page, $page);
         $sales_amount = 0;
@@ -349,7 +363,6 @@ $data['category']= $CI->Products->get_products();
             }
         }
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'           => display('todays_report'),
             'sales_report'    => $sales_report,
@@ -360,8 +373,14 @@ $data['category']= $CI->Products->get_products();
             'company_info'    => $company_info,
             'currency'        => $currency_details[0]['currency'],
             'position'        => $currency_details[0]['currency_position'],
-            'software_info'   => $currency_details,
-            'company'         => $company_info,
+
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),
+
+
         );
 
 // report/all_report
@@ -402,12 +421,27 @@ $data['category']= $CI->Products->get_products();
         $reportList = $CI->parser->parse('report/sales_report', $data, true);
         return $reportList;
     }
+    
+    
+    
+    
+    
+    
+    
+    
     //======================= user sales report ================================
         public function user_sales_report($links = null, $per_page = null, $page = null,$from_date = null,$to_date = null,$user_id) {
         $CI = & get_instance();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
         $sales_report = $CI->Reports->user_sales_report($per_page, $page,$from_date,$to_date,$user_id);
         $sales_amount = 0;
         if (!empty($sales_report)) {
@@ -420,31 +454,67 @@ $data['category']= $CI->Products->get_products();
             }
         }
         $user_list = $CI->Reports->userList();
+        // print_r($user_list); 
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
+        // $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'         => display('user_sales_report'),
             'sales_amount'  => number_format($sales_amount, 2, '.', ','),
             'sales_report'  => $sales_report,
-            'company_info'  => $company_info,
+            // 'company_info'  => $company_info,
             'from'          => $CI->occational->dateConvert($from_date),
             'to'            => $CI->occational->dateConvert($to_date),
             'currency'      => $currency_details[0]['currency'],
             'user_list'     => $user_list,
             'position'      => $currency_details[0]['currency_position'],
             'links'         => $links,
-            'software_info' => $currency_details,
-            'company'       => $company_info,
+            // 'software_info' => $currency_details,
+            // 'company'       => $company_info,
+
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),
+
+
+
+
         );
         $reportList = $CI->parser->parse('report/user_wise_sales_report', $data, true);
         return $reportList;
     }
+
+    
+    
+    
+    
+    
+    
+    
+    
+
 
     public function retrieve_dateWise_SalesReports($from_date, $to_date, $links, $per_page, $page) {
         $CI = & get_instance();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+
+
+
+
+
+
+
         $sales_report = $CI->Reports->retrieve_dateWise_SalesReports($from_date, $to_date, $per_page, $page);
         $sales_amount = 0;
         if (!empty($sales_report)) {
@@ -457,29 +527,58 @@ $data['category']= $CI->Products->get_products();
             }
         }
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
+        // $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'        => display('sales_report'),
             'sales_amount' => $sales_amount,
             'sales_report' => $sales_report,
-            'company_info' => $company_info,
+            // 'company_info' => $company_info,
             'from_date'    => $from_date,
             'to_date'      => $to_date,
             'currency'     => $currency_details[0]['currency'],
             'position'     => $currency_details[0]['currency_position'],
             'links'        => $links,
-             'software_info' => $currency_details,
-            'company'      => $company_info,
+            //  'software_info' => $currency_details,
+            // 'company'      => $company_info,
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),  
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+
         );
         $reportList = $CI->parser->parse('report/sales_report', $data, true);
         return $reportList;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
  // ======================= Due Report start ===============================
-     public function retrieve_dateWise_DueReports($from_date, $to_date, $links, $per_page, $page) {
+      public function retrieve_dateWise_DueReports($from_date, $to_date, $links, $per_page, $page) {
         $CI = & get_instance();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
         $sales_report = $CI->Reports->retrieve_dateWise_DueReports($from_date, $to_date, $per_page, $page);
         $sales_amount = 0;
         if (!empty($sales_report)) {
@@ -492,19 +591,25 @@ $data['category']= $CI->Products->get_products();
             }
         }
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
+        // $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'        => display('due_report'),
             'sales_amount' => $sales_amount,
             'sales_report' => $sales_report,
-            'company_info' => $company_info,
+            // 'company_info' => $company_info,
             'from_date'    => $from_date,
             'to_date'      => $to_date,
             'currency'     => $currency_details[0]['currency'],
             'position'     => $currency_details[0]['currency_position'],
             'links'        => $links,
-            'software_info'=> $currency_details,
-            'company'      => $company_info,
+            // 'software_info'=> $currency_details,
+            // 'company'      => $company_info,
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
+
         );
         $reportList = $CI->parser->parse('report/due_report', $data, true);
         return $reportList;
@@ -572,30 +677,59 @@ $data['category']= $CI->Products->get_products();
         return $reportList;
     }
 
-    public function filter_purchase_report_category_wise($category = null, $from_date = null, $to_date = null, $links = null) {
+     public function filter_purchase_report_category_wise($category = null, $from_date = null, $to_date = null, $links = null) {
         $CI = & get_instance();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
         $CI->load->model('Categories');
+
+
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+
+
+
+
+
+
+
         $category_list = $CI->Categories->category_list_product();
         $filter_purchase_report_category_wise = $CI->Reports->filter_purchase_report_category_wise($category, $from_date, $to_date);
 
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
+        // $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'             => display('category_wise_purchase_report'),
             'category_list'     => $category_list,
             'from_date'         => $from_date,
             'to_date'           => $to_date,
             'purchase_report_category_wise' => $filter_purchase_report_category_wise,
-            'company_info'      => $company_info,
+            // 'company_info'      => $company_info,
             'currency'          => $currency_details[0]['currency'],
             'position'          => $currency_details[0]['currency_position'],
             'links'             => $links,
-            'software_info'     => $currency_details,
-            'company'           => $company_info,
+            // 'software_info'     => $currency_details,
+            // 'company'           => $company_info,
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),  
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+
         );
+
+
+
+
+
         $reportList = $CI->parser->parse('report/purchase_report_category_wise', $data, true);
         return $reportList;
     }
@@ -633,23 +767,34 @@ $data['category']= $CI->Products->get_products();
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
         $CI->load->model('Categories');
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+
+
         $category_list = $CI->Categories->category_list_product();
         $filter_sales_report_category_wise = $CI->Reports->filter_sales_report_category_wise($category, $from_date, $to_date);
 
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'                      => display('category_wise_purchase_report'),
             'category_list'              => $category_list,
             'from_date'                  => $from_date,
             'to_date'                    => $to_date,
             'sales_report_category_wise' => $filter_sales_report_category_wise,
-            'company_info'               => $company_info,
             'currency'                   => $currency_details[0]['currency'],
             'position'                   => $currency_details[0]['currency_position'],
             'links'                      => $links,
-             'software_info'             => $currency_details,
-            'company'                    => $company_info,
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
+
         );
 
         $reportList = $CI->parser->parse('report/sales_report_category_wise', $data, true);
@@ -657,11 +802,27 @@ $data['category']= $CI->Products->get_products();
     }
 
 //Retrive date wise purchase report
+
+
+
     public function retrieve_dateWise_PurchaseReports($start_date, $end_date, $links, $per_page, $page) {
         $CI = & get_instance();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+
+
+
         $purchase_report = $CI->Reports->retrieve_dateWise_PurchaseReports($start_date, $end_date, $per_page, $page);
         $purchase_amount = 0;
         if (!empty($purchase_report)) {
@@ -674,23 +835,54 @@ $data['category']= $CI->Products->get_products();
             }
         }
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
+        // $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'           => display('purchase_report'),
             'purchase_amount' => number_format($purchase_amount,2),
             'purchase_report' => $purchase_report,
-            'company_info'    => $company_info,
+            // 'company_info'    => $company_info,
             'from_date'       => $start_date,
             'to_date'         => $end_date,
             'currency'        => $currency_details[0]['currency'],
             'position'        => $currency_details[0]['currency_position'],
             'links'           => $links,
-             'software_info'  => $currency_details,
-            'company'         => $company_info,
+            //  'software_info'  => $currency_details,
+            // 'company'         => $company_info,
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
         );
         $reportList = $CI->parser->parse('report/purchase_report', $data, true);
         return $reportList;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Product report sales wise
     public function get_products_report_sales_view($links, $per_page, $page) {
@@ -698,6 +890,15 @@ $data['category']= $CI->Products->get_products();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+    // print_r($company_info); die();
         $product_report = $CI->Reports->retrieve_product_sales_report($per_page, $page);
         $product_list = $CI->Reports->product_list();
         if (!empty($product_report)) {
@@ -715,7 +916,7 @@ $data['category']= $CI->Products->get_products();
         }
         }
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
+        // $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'          => display('sales_report_product_wise'),
             'sub_total'      => number_format($sub_total, 2, '.', ','),
@@ -725,12 +926,18 @@ $data['category']= $CI->Products->get_products();
             'product_id'     => '',
             'from_date'      => '',
             'to_date'        => '',
-            'company_info'   => $company_info,
             'currency'       => $currency_details[0]['currency'],
             'position'       => $currency_details[0]['currency_position'],
-             'software_info' => $currency_details,
-            'company'        => $company_info,
+          
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
+  
         );
+
+        // print_r( $data);  
         $reportList = $CI->parser->parse('report/product_report', $data, true);
         return $reportList;
     }
@@ -741,6 +948,14 @@ $data['category']= $CI->Products->get_products();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
         $product_report = $CI->Reports->retrieve_product_search_sales_report($from_date, $to_date,$product_id, $per_page, $page);
         $product_list = $CI->Reports->product_list();
 //print_r($product_report);
@@ -759,7 +974,6 @@ $data['category']= $CI->Products->get_products();
             }
         }
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'          => display('sales_report_product_wise'),
             'sub_total'      => number_format($sub_total, 2, '.', ','),
@@ -770,15 +984,37 @@ $data['category']= $CI->Products->get_products();
             'from_date'      => $from_date,
             'to_date'        => $to_date,
             'links'          => $links,
-            'company_info'   => $company_info,
             'currency'       => $currency_details[0]['currency'],
             'position'       => $currency_details[0]['currency_position'],
-            'software_info'  => $currency_details,
-            'company'        => $company_info,
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
         );
         $reportList = $CI->parser->parse('report/product_report', $data, true);
         return $reportList;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Total profit report
     public function total_profit_report($links, $per_page, $page) {
@@ -821,12 +1057,22 @@ $data['category']= $CI->Products->get_products();
         return $reportList;
     }
 
-//Retrive date wise total profit report
-    public function retrieve_dateWise_profit_report($start_date, $end_date, $links, $per_page, $page) {
+  public function retrieve_dateWise_profit_report($start_date, $end_date, $links, $per_page, $page) {
         $CI = & get_instance();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+
+
+
+
         $total_profit_report = $CI->Reports->retrieve_dateWise_profit_report($start_date, $end_date, $per_page, $page);
 
         $profit_ammount = 0;
@@ -844,7 +1090,6 @@ $data['category']= $CI->Products->get_products();
         }
 
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'              => display('profit_report'),
             'profit_ammount'     => number_format($profit_ammount, 2, '.', ','),
@@ -852,9 +1097,11 @@ $data['category']= $CI->Products->get_products();
             'SubTotalSupAmnt'    => number_format($SubTotalSupAmnt, 2, '.', ','),
             'SubTotalSaleAmnt'   => number_format($SubTotalSaleAmnt, 2, '.', ','),
             'links'              => $links,
-            'company_info'       => $company_info,
-            'company'             => $company_info,
-            'software_info'       => $currency_details,
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
             'currency'           => $currency_details[0]['currency'],
             'position'           => $currency_details[0]['currency_position'],
         );
@@ -862,11 +1109,27 @@ $data['category']= $CI->Products->get_products();
         return $reportList;
     }
     // ==================================== Shippin cost report ===================
-     public function retrieve_dateWise_shippingcost($from_date, $to_date, $links, $per_page, $page) {
+  
+         public function retrieve_dateWise_shippingcost($from_date, $to_date, $links, $per_page, $page) {
         $CI = & get_instance();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+
+
+
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+
+
+
+
+
         $sales_report = $CI->Reports->retrieve_dateWise_Shippingcost($from_date, $to_date, $per_page, $page);
         $sales_amount = 0;
         if (!empty($sales_report)) {
@@ -879,23 +1142,38 @@ $data['category']= $CI->Products->get_products();
             }
         }
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
+        // $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'        => display('shipping_cost_report'),
             'sales_amount' => $sales_amount,
             'sales_report' => $sales_report,
-            'company_info' => $company_info,
+            // 'company_info' => $company_info,
             'from_date'    => $from_date,
             'to_date'      => $to_date,
             'currency'     => $currency_details[0]['currency'],
             'position'     => $currency_details[0]['currency_position'],
             'links'        => $links,
-             'software_info' => $currency_details,
-            'company'       => $company_info,
+            //  'software_info' => $currency_details,
+            // 'company'       => $company_info,
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
         );
         $reportList = $CI->parser->parse('report/shippincost_report', $data, true);
         return $reportList;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
     //sales return report
         public function sales_return_data($links, $perpage, $page,$start,$end) {
 
@@ -903,6 +1181,14 @@ $data['category']= $CI->Products->get_products();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+
+
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
 
         $return_list = $CI->Reports->sales_return_list($perpage, $page,$start,$end);
         if (!empty($return_list)) {
@@ -918,29 +1204,50 @@ $data['category']= $CI->Products->get_products();
             }
         }
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-         $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'      => display('invoice_return'),
             'return_list'=> $return_list,
-            'company'    => $company_info,
             'links'      => $links,
             'from_date'  => $start,
             'to_date'    => $end,
-            'software_info' => $currency_details,
             'currency'   => $currency_details[0]['currency'],
             'position'   => $currency_details[0]['currency_position'],
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
         );
         $returnList = $CI->parser->parse('report/sales_return', $data, true);
         return $returnList;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // supplier return report
-       public function supplier_return_data($links, $perpage, $page,$start,$end) {
+  public function supplier_return_data($links, $perpage, $page,$start,$end) {
 
         $CI = & get_instance();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
 
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
         $return_list = $CI->Reports->supplier_return($perpage,$page,$start,$end);
         if (!empty($return_list)) {
             foreach ($return_list as $k => $v) {
@@ -955,28 +1262,47 @@ $data['category']= $CI->Products->get_products();
             }
         }
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'       => display('supplier_return'),
             'return_list' => $return_list,
-            'company'    => $company_info,
             'start_date'  => $start,
             'end_date'    => $end,
             'links'       => $links,
-            'software_info' => $currency_details,
             'currency'    => $currency_details[0]['currency'],
             'position'    => $currency_details[0]['currency_position'],
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
         );
         $returnList = $CI->parser->parse('report/supplier_return', $data, true);
         return $returnList;
     }
 
+
+
+
+
+
+
+
+
+
+
 // Tax report 
-         public function retrieve_dateWise_tax($from_date, $to_date, $links, $per_page, $page) {
+    public function retrieve_dateWise_tax($from_date, $to_date, $links, $per_page, $page) {
         $CI = & get_instance();
         $CI->load->model('Reports');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
+
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
         $sales_report = $CI->Reports->retrieve_dateWise_tax($from_date, $to_date, $per_page, $page);
         $sales_amount = 0;
         if (!empty($sales_report)) {
@@ -989,24 +1315,24 @@ $data['category']= $CI->Products->get_products();
             }
         }
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
         $data = array(
             'title'        => display('tax_report'),
             'sales_amount' => $sales_amount,
             'sales_report' => $sales_report,
-            'company_info' => $company_info,
             'from_date'    => $from_date,
             'to_date'      => $to_date,
             'currency'     => $currency_details[0]['currency'],
             'position'     => $currency_details[0]['currency_position'],
             'links'        => $links,
-            'software_info'=> $currency_details,
-            'company'      => $company_info,
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
         );
         $reportList = $CI->parser->parse('report/tax_report', $data, true);
         return $reportList;
     }
-
 }
 
 ?>

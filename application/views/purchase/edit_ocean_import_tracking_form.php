@@ -27,12 +27,13 @@
             <i class="pe-7s-note2"></i>
         </div>
         <div class="header-title">
-            <h1><?php   echo  display('Create Ocean Import Tracking')?></h1>
-         
+            <h1><?php   echo  ('Edit Ocean Import Tracking')?></h1>
+                  <small><?php  ?></small>
+
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php  echo  display('purchase'); ?></a></li>
-                <li class="active" style="color:orange;"><?php   echo  display('Ocean Import Tracking')?></li>
+                <li class="active" style="color:orange;"><?php   echo  ('Edit Ocean Import Tracking')?></li>
             </ol>
         </div>
     </section>

@@ -1751,8 +1751,9 @@ $('#insert_trucking').submit(function (event) {
 
         success:function (data) {
         console.log(data);
-        var input_hdn="Trucking invoice Created Successfully";
-        $("#bodyModal1").html(input_hdn);
+        // var input_hdn="Trucking invoice Created Successfully";
+        // $("#bodyModal1").html(input_hdn);
+         $("#bodyModal1").html("Trucking invoice Created Successfully");
         $('#myModal1').modal('show');
         $('#final_submit').show();
         $('#download').show();

@@ -25,12 +25,12 @@
             <i class="pe-7s-note2"></i>
         </div>
         <div class="header-title">
-            <h1><?php echo display('Add Admin User') ?></h1>
+            <h1><?php echo ('Add Admin User') ?></h1>
             <small></small>
             <ol class="breadcrumb">
                 <li><a href="index.html"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('web_settings') ?></a></li>
-                <li class="active" style="color:orange;"><?php echo display('Add Admin User') ?></li>
+                <li class="active" style="color:orange;"><?php echo ('Add Admin User') ?></li>
             </ol>
         </div>
     </section>
@@ -77,11 +77,16 @@
             <div class="col-sm-12">
                 <div class="panel panel-bd lobidrag">
               
-                    <hr>
 
-                    <div class="panel-heading">
+                <div class="panel-heading" style="height: 50px;">
                         <div class="panel-title">
-                            <h4></h4>
+                               <a style="float:right;background-color:#38469f;color:white;" href="<?php echo base_url('User/manage_user') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo ('Manage User')?> </a>
+                        </div>
+                    
+
+
+
+                        <div class="panel-title">
                         </div>
                     </div>
                    

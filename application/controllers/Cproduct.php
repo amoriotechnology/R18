@@ -279,6 +279,8 @@ class Cproduct extends CI_Controller {
 
   
 public function insert_product_from_expense(){
+
+
   //  echo "sss";
         $CI = & get_instance();
         $CI->auth->check_admin_auth();
@@ -305,7 +307,11 @@ public function insert_product_from_expense(){
                        'supplier_price' => $supplier_price,
                        'products_model' => $product_model,
                    );
-                  // print_r($supp_prd);
+                //   print_r($supp_prd); die();
+
+
+
+
                     $purchase_id_1 = $this->db->where('product_id',$product_id);
         $q=$this->db->get('supplier_product');
         $row = $q->row_array();
@@ -696,6 +702,10 @@ echo json_encode($all_product);
 
     
     }
+
+
+
+
     public function scrape(){
       
         $this->load->library('simple_html_dom');
@@ -763,7 +773,7 @@ public function product_details_edit()
                                 }
                for ($i = 0, $n = count($desc); $i < $n; $i++) {
                 // print_r($i); die();
-                 $target_path=$_SERVER['DOCUMENT_ROOT'].'/R17/my-assets/image/product/';
+                 $target_path=$_SERVER['DOCUMENT_ROOT'].'/Stockeai/R18_demo/my-assets/image/product/';
     $file='';
 if (file_exists($_FILES['image']['tmp_name'][$i]) || is_uploaded_file($_FILES['image']['tmp_name'][$i])) {
 
@@ -771,7 +781,7 @@ if (file_exists($_FILES['image']['tmp_name'][$i]) || is_uploaded_file($_FILES['i
 
 
 // If no errors, upload the file
-  $target=$_SERVER['DOCUMENT_ROOT'].'/R17/my-assets/image/product/';  // example.com/entities/
+  $target=$_SERVER['DOCUMENT_ROOT'].'/Stockeai/R18_demo/my-assets/image/product/';  // example.com/entities/
 //$target = "../fisiere_pub/"; //choose your upload folder
 move_uploaded_file($_FILES["image"]["tmp_name"][$i], $target. $_FILES["image"]["name"][$i]);
 $file = $target . $_FILES["image"]["name"][$i];
@@ -816,6 +826,15 @@ $this->db->update("product_details",$data1);
      $content =$this->lproduct->product_view($id);
         $this->template->full_admin_html_view($content);
     }
+
+
+
+
+
+
+
+
+    
     public function get_all_product1(){
         $CI = & get_instance();
         $prodt = $CI->db->select('product_name,product_model,p_quantity')
@@ -1061,8 +1080,8 @@ if(!empty($insert_csv['category_id']) && $insert_csv['category_id']!="Category N
                                         ->row();
                     if (empty($result)){
                         $this->db->insert('product_information',$data);
-                       // echo $this->db->last_query();
-                        $product_id = $product_id;
+                     //  echo $this->db->last_query();
+                        $product_id = $product_id;//die();
                          }else {
                     $product_id = $result->product_id;      
                       $udata = array(
@@ -1080,7 +1099,7 @@ if(!empty($insert_csv['category_id']) && $insert_csv['category_id']!="Category N
                      );
                    $this->db->where('product_id',$result->product_id);
                    $this->db->update('product_information',$udata);
-                      //   echo $this->db->last_query();
+                      // echo $this->db->last_query();die();
                     }
 
                      $supp_prd = array(

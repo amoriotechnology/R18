@@ -1,5 +1,11 @@
-<?php  error_reporting(1); ?>
+
 <style>
+    #download{
+        margin-left: 830px;
+    }
+  th{
+    background-color:<?php echo '#'.$color; ?>;
+  }
     .payTop_details p{
         display: inline-block;
     }
@@ -37,7 +43,7 @@
 </style>
 <div class="content-wrapper">
 
-    <section class="content-header">
+    <section class="content-header" style="height:70px;">
 
         <div class="header-icon">
 
@@ -82,288 +88,767 @@
 
 
             <div class="panel-body">
-
-            <div class="container" id="content">
+<?php   if($template==1){ ?>
+            <div  id="content">
 
 <div class="payTop_details row">
 
     <div class="col-md-6">
         <p>
-           
-           COMPANY NAME:<?php echo $company[0]['business_name']; ?><br>
-           ADDRESS:<?php echo $company[0]['address']; ?><br> 
-           EMAIL:<?php echo $company[0]['email']; ?><br>
-           PHONE:<?php echo $company[0]['phone']; ?>
+        <strong>NAME</strong>:<?php echo $business_name; ?><br> 
+        <strong>PHONE</strong>:<?php echo $phone; ?><br> 
+        <strong>ADDRESS</strong>:<?php echo $address; ?><br> 
+        <strong>  EMAIL</strong>:<?php echo $email; ?><br>
         </p>
-
-        <div style="float: right;">TIMESHEET ID:<?php echo $infotime[0]['timesheet_id']; ?>  
+  </div>
+   <!-- <div class="col-md-2"><img src="<?php //echo  $logo; ?>" width="50px;" height="50px;" /></div> -->
+   <div class="col-md-6">
+        <div style="float: right;"><strong>TIMESHEET ID</strong>:<?php echo $infotime[0]['timesheet_id']; ?>  
 <br>
-            <span>EMPLOYEE ID:<?php echo $infoemployee[0]['id']; ?></span>
+            <span><strong>EMPLOYEE ID:</strong><?php echo $infoemployee[0]['id']; ?></span>
         </div>
 
-    </div>
+  
 
 </div>
-
-<div class="Employee_details row">
+ <div class="col-md-12">
+ <div class="col-md-4"></div>
+<div class="col-md-4 Employee_details row" >
 
   
-EMPLOYEE NAME: <?php echo $infotime[0]['templ_name']; ?>  
+<strong>EMPLOYEE NAME</strong> : <?php echo $infoemployee[0]['first_name']; ?><?php echo $infoemployee[0]['last_name']; ?>   
 <br>
-EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>  
+<strong>EMPLOYEE TITLE</strong> :<?php echo $infotime[0]['job_title']; ?>  
 
 </div>
+ <div class="col-md-4"></div>
+</div>
+ <div class="col-md-12"><br/></div>
+ <div class="col-md-12" style="float:center;">
+  <style>
+    .table td{
+        padding:10px;
+      
+    }
+    table {
+         /* border: 3px #00000099 solid;
+            background-color: #fff; */
+            /* border-radius: 10px; */
+        
+         
+
+            border: none;
+    text-align: center;
+    table-layout: fixed;
+
+     
+    margin: 0 auto; /* or margin: 0 auto 0 auto */
+  }
+    /* table{
+         border: 1px solid black;
+  border-collapse: collapse;
+   text-align: center;
+   padding: 8px 14px;
+    } */
+    table th {
+
+  padding: 8px 14px;
+  text-align: center;
+ 
+}
+    </style>
+    
+   
+<table class="table" >
+    <tr style="outline: thin solid" rowspan="6">
+    <th colspan="6">Earnings</th>
+
+    </tr>
+    <tr style="height: 50px;">
+    <th>DESCRIPTION</th>
+     <th>HRS/ UNITS</th>
+      <th>RATE</th>
+       <th>THIS PERIOD(<?php  echo $currency; ?>)</th>
+        <th>YTD HOURS</th>
+         <th>YTD(<?php  echo $currency; ?>)</th>
+</tr>
+
+    <tr style="height: 70px;">
+        <td>Salary</td>
+           <td>  <?php echo $infotime[0]['total_hours']; ?></td>
+              <td>  <?php echo $infoemployee[0]['hrate']; ?></td>
+                 <td id="total_period"><?php echo $total; ?></td>
+                    <td><?php echo $overalltotalhours; ?></td>
+                       <td id="total_ytd"><?php echo $overalltotalamount; ?></td>
+
+    </tr>
+
+</table>
 
 
-           <table class="proposedWork pay_table" id="price" width="100%" style="margin-top:20px">
-                        
-                        <tbody>
-                           <tr>
-                              <td class="col-md-4"><h3>PERSONAL AND CHECK INFORMATION</h3>
-                                
-                                <p><?php echo $adm_name[0]['adm_name']; ?></p>
+ </div>
+ <div class="col-md-12"><br/></div>
+  <div class="col-md-12">
+ <div class="col-md-6">
+ <table class="proposedWork pay_table table" id="price">
+  <tr  rowspan="6" style="outline: thin solid">
+    <th colspan="6">PERSONAL AND CHECK INFORMATION</th>
 
-                              <p><?php echo $adm_name[0]['adm_address']; ?></p>
+    </tr>
+
+                            <tr style="text-align:left;"><td style="font-weight:bold;width:100px;">Name  </td><td style="width:10px;"> :</td><td><?php echo $adm_name[0]['adm_name']; ?></td></tr>
+
+                             <tr style="text-align:left;"><td style="font-weight:bold;width:100px;">Address  </td><td style="width:10px;"> :</td><td ><?php echo $adm_name[0]['adm_address']; ?></td></tr>
                              
                              
-                              <p>Soc Sec #: xxx-xx-xxxx <span>Employee ID: 1</span> </p>
-                                <br>
-                                <br>
-                               <p>Pay Period: 12/04/22 to 12/10/22</p>
-                                <p>Check Date: 12/10/22 <span>Check #: 6176</span> </p>
-                                <hr>
+                             <tr style="text-align:left;"><td style="font-weight:bold;width:100px;text-wrap:nowrap;">Emp.ID </td><td style="width:10px;"> :</td><td><?php echo $infotime[0]['admin_name']; ?></td></tr>
+                              <tr style="text-align:left;"><td style="font-weight:bold;width:100px;">Pay Period</td><td style="width:10px;"> :</td><td style="text-wrap:nowrap;"><?php echo $infotime[0]['month']; ?></td></tr>
+<?php if(!empty($infotime[0]['cheque_date'])) { ?>
+                               <tr style="text-align:left;"><td style="font-weight:bold;width:100px;text-wrap:nowrap;">Chq Date</td><td style="width:10px;"> :</td><td><?php echo $infotime[0]['cheque_date']; ?></td></tr>
+ <tr style="text-align:left;"><td style="font-weight:bold;width:100px;text-wrap:nowrap;">Chq No</td><td style="width:10px;"> :</td><td> <?php echo $infotime[0]['cheque_no']; ?></td></tr>
+<?php }else{ ?>
+ <tr style="text-align:left;"><td style="font-weight:bold;width:100px;text-wrap:nowrap;">Bank Name</td><td style="width:10px;"> :</td><td><?php echo $infotime[0]['bank_name']; ?></td></tr>
+ <tr style="text-align:left;"><td style="font-weight:bold;width:100px;text-wrap:nowrap;">Ref No</td><td style="width:10px;"> :</td><td> <?php echo $infotime[0]['payment_ref_no']; ?></td></tr>
+
+
+<?php  }  ?>
+
+
+</table>
+
+
+
+                               <br/>
+<table class="table">
+    <tr style="outline: thin solid" rowspan="3">
+    <th colspan="3">NET PAY ALLOCATION</th>
+
+    </tr>
+<tr>
+    <th style="text-align:left;"><strong>DESCRIPTION</strong>
+</th>
+    <th><strong>THIS PERIOD(<?php  echo $currency; ?>)</strong>
+</th>
+    <th><strong>YTD(<?php  echo $currency; ?>)</strong>
+</th>
+</tr>
+<tr>
+   <td style="text-align:left;"><strong>Check Amount</strong>
+</td>
+   <td class="net_period"> <strong style="
+    padding-top: 2px;">765.10</strong>
+</td>
+   <td class="net_ytd">
+</td>
+</tr>
+<tr>
+   <td style="text-align:left;"><strong>Chkg 404</strong>
+</td>
+   <td>0.00
+</td>
+   <td>0.00
+</td>
+</tr>
+<tr>
+   <td style="text-align:left;"><strong>NET PAY</strong>
+</td>
+   <td class="net_period" style="font-weight:bold;border-top: groove;">
+</td>
+   <td class="net_ytd" style="font-weight:bold;border-top: groove;">
+</td>
+</tr>
+</table>
+ </div>
+<div class="col-md-6">
+<table class="table" id="table" style=" width: 100%; display: table-cell;">
+        <tr style="outline: thin solid" rowspan="6">
+    <th colspan="6">WITHHOLDINGS</th>
+
+    </tr>
+    <tr>
+    <th style="text-align:left;">DESCRIPTION</th>
+     <th>FILING STATUS</th>
+      <th>THIS PERIOD(<?php  echo $currency; ?>)</th>
+       <th>YTD(<?php  echo $currency; ?>)</th>
+       
+</tr>
+<?php if($s){ ?>
+<tr>
+<td style="text-align:left;"> Social Security</td>
+<td>S O</td>
+<td class="current"><?php if($s){echo $s; } ?></td>
+<td class="ytd"><?php if($s_tax){echo round($s_tax,2); } ?></td>
+</tr>
+<?php  } ?>
+<?php if($m){ ?>
+<tr>
+<td style="text-align:left;">Madicare</td>
+<td>SMCU O</td>
+<td class="current"><?php if($m){echo $m;}  ?></td>
+<td class="ytd"><?php if($m_tax){echo round($m_tax,2); } ?></td>
+</tr>
+<?php  } ?>
+<?php if($f){ ?>
+<tr>
+<td style="text-align:left;">Fed Income Tax</td>
+<td></td>
+<td class="current"><?php if($f){echo $f; } ?></td>
+<td class="ytd"><?php if($f_tax){echo round($f_tax,2); } ?></td>
+</tr>
+<?php  } ?>
+<?php if($u){ ?>
+<tr>
+<td style="text-align:left;">Unemployment Tax</td>
+<td></td>
+<td class="current"><?php if($u){echo $u; } ?></td>
+<td class="ytd"><?php if($u_tax){echo round($u_tax,2); } ?></td>
+</tr>
+<?php  } ?>
+ <?php foreach($state_tax as $k=>$v){
+
+$split=explode('-',$k);
+$rep=str_replace("'",'',$split[1]);
+
+    ?>
+    <tr>
+       
+        <td style="text-align:left;"><?php echo $rep;  ?></td>
+       <td></td>
+          
+            
+              <td class="current">  <?php echo $v; ?></td>
+            
+                 <td class="ytd"><?php echo round($sum[$rep],2); ?></td>
+                
+
+    </tr>
+      <?php  } ?>
+      <tr>
+        <td></td><td></td>
+        <td style="border-top: groove;" id="Total_current"></td><td style="border-top: groove;" id="Total_ytd"></td>
+ </tr>
+</table>
+</div>
+</div>
+    
+ 
+                      
+               
 
-
-                                <h3>NET PAY ALLOCATION</h3>
-
-                                <br>
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <p>DESCRIPTION</p>
-                                          <p>Check Amount</p>
-                                            <p>Chkg 404</p>
-                                             <p> <strong>NET PAY</strong></p>
-
-
-                                    </div>
-
-                                    <div class="col-md-4">
-                                         <p>THIS PERIOD($)</p>
-                                          <p>0.00</p>
-                                            <p>765.10</p>
-                                             <p>  <strong style="border-top: 1px solid;
-    padding-top: 2px;">765.10</strong> </p>
-
-                                    </div>
-
-                                    <div class="col-md-4">
-                                         <p>YTD($)</p>
-                                          <p>0.00</p>
-                                            <p>39114.04</p>
-                                             <p> <strong style="border-top: 1px solid;
-    padding-top: 2px;">39114.04</strong> </p>
-                                    </div>      
-                                </div>
-                                 
-                              </td>
-                              <td class="col-md-8">
-
-                                <div class="row">
-                                    <div class="col-md-2">
-
-                                <P><strong>EARNINGS</strong> </P>
-                                <br>
-
-                                </div>
-
-                                 <div class="col-md-2">
-
-                                <P>DESCRIPTION </P>
-                                <br>
-                                <p>Salary</p>
-                                <p>Total Hrs</p>
-                                <p>Gross Earnings</p>
-                                <p>Total Hrs Worked</p>
-
-                                </div>
-
-                                <div class="col-md-1">
-                                <P>HRS/ UNITS</P>
-                                <br>
-                                <?php echo $infotime[0]['total_hours']; ?>
-                                </div>
-
-
-
-                                 <div class="col-md-1">
-                                <P>RATE </P>
-                                <br>
-                                <?php echo $infoemployee[0]['hrate']; ?>
-
-                                <p><?php echo  $total_hours; ?></p>
-                                <p>1000.00</p>
-                                <p>1000.00</p>
-
-
-                                </div>
-
-
-
-                                  <div class="col-md-2">
-                               <p>THIS PERIOD($)</p>
-                               <br>
-                                <p><?php echo $total; ?></p>                        
-                                </div>
-
-                                 <div class="col-md-2">
-
-                               <p>YTD HOURS</p>
-                               <br>
-
-                                </div>
-                                  <div class="col-md-2">
-
-                               <p>YTD($)</p>
-                               <br>
-                               <p><?php echo $total; ?></p>
-                               <p></p>
-                               <p><?php echo $total; ?></p>
-                                <p></p>
-
-
-
-
-                                </div>
-                                </div>
-                               
-
-
-
-
-
-                                <hr>
-
-
-
-
-
-
-
-
-
-
-
-
-                                 <div class="row">
-                                    <div class="col-md-2">
-
-                                <P><strong>WITHHOLDINGS</strong> </P>
-                                <br>
-
-                                </div>
-
-                                 <div class="col-md-2">
-
-                                <P>DESCRIPTION </P>
-                                <br>
-                                <p>Social Security</p>
-                                <p>Madicare</p>
-                                <p>Fed Income Tax</p>
-                                <p>NJ Income Tax</p>
-                                <p>NJ Disability</p>
-                                 <p>NJ Unemploy</p>
-                                  <p>NJ EE Work Dev</p>
-                                  <br>
-                                  <p> <strong>TOTAL</strong> </p>
-                               
-                                </div>
-
-                                <div class="col-md-1">
-
-                                <P>FILING STATUS</P>
-                                <br>
-
-                                <P>S O</P>
-
-                                <P>SMCU O</P>
-
-                                </div>
-
-
-                                <div class="col-md-1">
-
-                            
-
-                                </div>
-                               
-                                  <div class="col-md-2">
-
-                               <p>THIS PERIOD($)</p>
-                               <br>
-                               <p><?php echo $s_tax; ?></p>
-                                <p><?php echo $m_tax; ?></p>
-                                 <p><?php echo $f_tax; ?></p>
-                                  <p><?php echo $s_tax; ?></p>
-                                   <p><?php echo $s_tax; ?></p>
-                                    <p></p>
-                                     <p></p>
-                                     <br>
-                                      <p> <strong style="border-top: 1px solid;
-    padding-top: 2px;"> 234.90</strong></p>
-
-
-                                </div>
-
-                                     <div class="col-md-2">
-
-
-                                </div>
-
-                                  <div class="col-md-2">
-
-                               <p>YTD($)</p>
-                               <br>
-                                <p>3211.00</p>
-                                <p>751.10</p>
-                                 <p>6570.97</p>
-                                  <p>1609.93</p>
-                                   <p>388.50</p>
-                                    <p>138.47</p>
-                                     <p>15.39</p>
-                                     <br>
-                                      <p> <strong style="border-top: 1px solid;
-    padding-top: 2px;">12685.95 </strong> </p>
-
-                                </div>
-
-
-                                </div>
-
-                            
-
-                              </td>
-                             
-                           </tr>
-                        </tbody>
-                        
-                        <tfoot>
-                          
-                         
-                        </tfoot>
-                     </table>
-                     <a id="download" style="color:white;background-color:#38469f;" class='btn btn-primary'><?php echo display('Download') ?></a>  
 
             </div>
 
         </div>
+        <script>
+  $(document).ready(function(){
+ 
+  var sum=0;
 
-    </div>
-    </div>
+ $('.table').find('.current').each(function() {
+var v=$(this).html();
+  sum += parseFloat(v);
 
+});
+debugger;
+ $('#Total_current').html(sum.toFixed(3));
+  var sum_ytd=0;
+
+ $('#table').find('.ytd').each(function() {
+var v=$(this).html();
+  sum_ytd += parseFloat(v);
+   sum_ytd = isNaN(parseInt(sum_ytd)) ? 0 : parseInt(sum_ytd);
+
+});
+
+ $('#Total_ytd').html(sum_ytd.toFixed(3));
+//net_period
+ var period_wise_total=$('#total_period').html();
+ var tax_deduction_period_wise=$('#Total_current').html();
+ var net_period=period_wise_total-tax_deduction_period_wise;
+ $('.net_period').html(net_period.toFixed(3));
+//net_ytd
+  var ytd_wise_total=$('#total_ytd').html();
+ var tax_deduction_ytd_wise=$('#Total_ytd').html();
+ var net_ytd=ytd_wise_total-tax_deduction_ytd_wise;
+ $('.net_ytd').html(net_ytd.toFixed(3));
+
+
+    });
+    </script>
+        <?php }else { ?>
+            <style>
+    .salary-slip{
+      margin: 15px;
+      .empDetail {
+        width: 100%;
+        text-align: left;
+        border: 2px solid black;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+      
+      .head {
+        margin: 10px;
+        margin-bottom: 50px;
+        width: 100%;
+      }
+      
+      .companyName {
+        text-align: right;
+        font-size: 25px;
+        font-weight: bold;
+      }
+      
+      .salaryMonth {
+        text-align: center;
+      }
+      
+      .table-border-bottom {
+        border-bottom: 1px solid;
+      }
+      
+      .table-border-right {
+        border-right: 1px solid;
+      }
+      
+      .myBackground {
+        padding-top: 10px;
+        text-align: left;
+        border: 1px solid black;
+        height: 40px;
+      }
+      
+      .myAlign {
+        text-align: center;
+        border-right: 1px solid black;
+      }
+      
+      .myTotalBackground {
+        padding-top: 10px;
+        text-align: left;
+        background-color: #EBF1DE;
+        border-spacing: 0px;
+      }
+      
+      .align-4 {
+        width: 25%;
+        float: left;
+      }
+      
+      .tail {
+        margin-top: 35px;
+      }
+      
+      .align-2 {
+        margin-top: 25px;
+        width: 50%;
+        float: left;
+      }
+      
+      .border-center {
+        text-align: center;
+      }
+      .border-center th, .border-center td {
+        border: 1px solid black;
+      }
+      
+      th, td {
+        padding-left: 6px;
+      }
+}
+.top {
+      border: 3px #00000099 solid ;
+            background-color: #fff; 
+            border-radius: 10px;
+   border-collapse: collapse;
+  width: 100%;
+
+ table-layout: fixed;
+   border: 1px solid #ddd;
+  text-align: left;
+
+}
+
+.top td{
+         border: 1px #00000099 solid ;
+            background-color: #fff; 
+     padding: 10px;
+
+}
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 0px; 
+    padding-left: 0px;
+}
+
+/* th{
+    background-color:#D6A195;
+} */
+</style> 
+                       <div  id="content">
+
+<div class="payTop_details row">
+
+<div class="col-md-12">
+    <div class="col-md-4">
+   <table class="top" style="border:none;">
+       <tr  style="text-align:center;">
+<th colspan="2" style="    height: 40px;
+   text-align: center;">EMPLOYEE INFO</th>
+</tr>
+       <tr>
+       <td><strong>NAME</strong></td>
+   <td><?php echo $infoemployee[0]['first_name']; ?><?php echo $infoemployee[0]['last_name']; ?></td>
+</tr>
+<tr>
+<td><strong>TITLE</strong> :</td>
+<td><?php echo $infotime[0]['job_title']; ?>  </td>
+
+</tr>
+<tr>
+<td><strong>ID</strong> </td>
+<td><?php echo $infoemployee[0]['id']; ?>  </td>
+
+</tr>
+<tr>
+<td><strong>TIMESHEET ID</strong>:</td>
+<td><?php echo $infotime[0]['timesheet_id']; ?>  </td>
+
+</tr>
+</table>
 </div>
+ <div class="col-md-4">
+     <table class="top" style="border:none;">
+              <tr  style="text-align:center;text-wrap: nowrap;">
+<th colspan="2"     style="height: 40px;
+   text-align: center;">PERSONAL AND CHECK INFO</th>
+</tr>
+       <tr>
+       <td><strong> NAME</strong></td>
+   <td><?php echo $infoemployee[0]['first_name']; ?><?php echo $infoemployee[0]['last_name']; ?></td>
+</tr>
+
+<tr>
+<td><strong>ID</strong> :</td>
+<td><?php echo $infoemployee[0]['id']; ?>  </td>
+
+</tr>
+<tr>
+<td><strong>Bank Name</strong>:</td>
+<td><?php echo $infotime[0]['timesheet_id']; ?>  </td>
+
+</tr>
+<tr>
+<td><strong>Ref No</strong>:</td>
+<td><?php echo $infotime[0]['timesheet_id']; ?>  </td>
+
+</tr>
+</table>
+</div>
+<div class="col-md-4">
+      <table class="top" style="border:none;">
+                   <tr  style="text-align:center;">
+<th colspan="2"  style="height: 40px;
+   text-align: center;">COMPANY INFO</th>
+</tr>
+       <tr>
+       <td><strong>NAME </strong></td>
+   <td><?php  echo $address; ?></td>
+</tr>
+<tr>
+<td><strong>Address</strong> :</td>
+<td><?php echo $infotime[0]['job_title']; ?>  </td>
+
+</tr>
+<tr>
+<td><strong>Phone</strong> :</td>
+<td><?php echo $infoemployee[0]['id']; ?>  </td>
+
+</tr>
+<tr>
+<td><strong>Email</strong>:</td>
+<td><?php echo $infotime[0]['timesheet_id']; ?>  </td>
+
+</tr>
+</table>
+</div>
+</div>
+</div>
+<br/>
+<div class="row">
+<div class="col-md-12">
+<div class="col-md-6">
+<table class="top">
+                      <tr  style="text-align:center;">
+<th style="    text-align: center;
+   height: 40px;" colspan="2">EARNINGS</th>
+</tr>
+   <tr><td><strong>DESCRIPTION</strong></td><td>Salary</td></tr>
+<tr><td><strong>HRS/ UNITS</strong></td><td> <?php echo $infotime[0]['total_hours']; ?></td></tr>
+<tr><td><strong>RATE</strong></td><td> <?php echo $infoemployee[0]['hrate']; ?></td></tr>
+<tr><td><strong>THIS PERIOD(<?php  echo $currency; ?>)</strong></td>  <td id="total_period"><?php echo $total; ?></td></tr>
+<tr><td><strong>YTD HOURS</strong></td> <td><?php echo $overalltotalhours; ?></td></tr>
+<tr><td><strong>YTD(<?php  echo $currency; ?>)</strong></td><td id="total_ytd"><?php echo $overalltotalamount; ?></td></tr>
+</table>
+
+<table class="top">
+   <tr  rowspan="3">
+   <th style="height: 30px;
+    text-align: center;" colspan="3">NET PAY ALLOCATION</th>
+
+   </tr>
+<tr>
+   <td style="text-align:left;"><strong>DESCRIPTION</strong>
+</td>
+   <td><strong>THIS PERIOD(<?php  echo $currency; ?>)</strong>
+</td>
+   <td><strong>YTD(<?php  echo $currency; ?>)</strong>
+</td>
+</tr>
+<tr>
+  <td style="text-align:left;"><strong>Check Amount</strong>
+</td>
+  <td class="net_period"> <strong style="border-top: 1px solid;
+   padding-top: 2px;">765.10</strong>
+</td>
+  <td class="net_ytd">
+</td>
+</tr>
+<tr>
+  <td style="text-align:left;"><strong>Chkg 404</strong>
+</td>
+  <td>0.00
+</td>
+  <td>0.00
+</td>
+</tr>
+<tr>
+  <td style="text-align:left;"><strong>NET PAY</strong>
+</td>
+  <td class="net_period" style="font-weight:bold;border-top: groove;">
+</td>
+  <td class="net_ytd" style="font-weight:bold;border-top: groove;">
+</td>
+</tr>
+</table>
+</div>
+<div class="col-md-6">
+<table class="top">
+<tr  rowspan="6">
+   <th style="height: 40px;text-align: center;" colspan="4">WITHHOLDINGS</th>
+
+   </tr>
+   <tr>
+   <td style="font-size:10px;font-weight:bold;">DESCRIPTION</td>
+    <td style="font-size:10px;font-weight:bold;">FILING STATUS</td>
+     <td style="font-size:10px;font-weight:bold;">THIS PERIOD(<?php  echo $currency; ?>)</td>
+      <td style="font-size:10px;font-weight:bold;">YTD(<?php  echo $currency; ?>)</td>
+      
+</tr>
+<?php if($s){ ?>
+<tr>
+<td style="text-align:left;font-weight:bold;"> Social Security</td>
+<td>S O</td>
+<td class="current"><?php if($s){echo $s; } ?></td>
+<td class="ytd"><?php if($s_tax){echo round($s_tax,2); } ?></td>
+</tr>
+<?php  } ?>
+<?php if($m){ ?>
+<tr>
+<td style="text-align:left;font-weight:bold;">Madicare</td>
+<td>SMCU O</td>
+<td class="current"><?php if($m){echo $m;}  ?></td>
+<td class="ytd"><?php if($m_tax){echo round($m_tax,2); } ?></td>
+</tr>
+<?php  } ?>
+<?php if($f){ ?>
+<tr>
+<td style="text-align:left;font-weight:bold;">Fed Income Tax</td>
+<td></td>
+<td class="current"><?php if($f){echo $f; } ?></td>
+<td class="ytd"><?php if($f_tax){echo round($f_tax,2); } ?></td>
+</tr>
+<?php  } ?>
+<?php if($u){ ?>
+<tr>
+<td style="text-align:left;font-weight:bold;">Unemployment Tax</td>
+<td></td>
+<td class="current"><?php if($u){echo $u; } ?></td>
+<td class="ytd"><?php if($u_tax){echo round($u_tax,2); } ?></td>
+</tr>
+<?php  } ?>
+<?php foreach($state_tax as $k=>$v){
+
+$split=explode('-',$k);
+$rep=str_replace("'",'',$split[1]);
+
+   ?>
+   <tr>
+      
+       <td style="text-align:left;font-weight:bold;"><?php echo $rep;  ?></td>
+      <td></td>
+         
+           
+             <td class="current">  <?php echo $v; ?></td>
+           
+                <td class="ytd"><?php echo round($sum[$rep],2); ?></td>
+               
+
+   </tr>
+     <?php  } ?>
+     <tr>
+       <td></td><td></td>
+       <td style="border-top: groove;" id="Total_current"></td><td style="border-top: groove;" id="Total_ytd"></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+       </div>
+            <script>
+  $(document).ready(function(){
+ 
+  var sum=0;
+
+ $('.table').find('.current').each(function() {
+var v=$(this).html();
+  sum += parseFloat(v);
+
+});
+
+ $('#Total_current').html(sum.toFixed(3));
+  var sum_ytd=0;
+
+ $('.table').find('.ytd').each(function() {
+var v=$(this).html();
+  sum_ytd += parseFloat(v);
+    sum_ytd = isNaN(parseInt(sum_ytd)) ? 0 : parseInt(sum_ytd);
+
+});
+
+ $('#Total_ytd').html(sum_ytd.toFixed(3));
+//net_period
+ var period_wise_total=$('#total_period').html();
+ var tax_deduction_period_wise=$('#Total_current').html();
+ var net_period=period_wise_total-tax_deduction_period_wise;
+ $('.net_period').html(net_period.toFixed(3));
+//net_ytd
+  var ytd_wise_total=$('#total_ytd').html();
+ var tax_deduction_ytd_wise=$('#Total_ytd').html();
+ var net_ytd=ytd_wise_total-tax_deduction_ytd_wise;
+ $('.net_ytd').html(net_ytd.toFixed(3));
 
 
+    });
+    </script>
+            <?php }?>
+
+    </div>
+      <a id="download" style="color:white;background-color:#38469f;" class='btn btn-primary'><?php echo display('Download') ?></a>  
+</div>
+    </div>
+                   
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<script>
+//   $(document).ready(function(){
+ 
+//   var sum=0;
+
+//  $('.table').find('.current').each(function() {
+// var v=$(this).html();
+//   sum += parseFloat(v);
+
+// });
+
+//  $('#Total_current').html(sum.toFixed(3));
+//   var sum_ytd=0;
+
+//  $('.table').find('.ytd').each(function() {
+// var v=$(this).html();
+//   sum_ytd += parseFloat(v);
+
+// });
+
+//  $('#Total_ytd').html(sum_ytd.toFixed(3));
+// //net_period
+//  var period_wise_total=$('#total_period').html();
+//  var tax_deduction_period_wise=$('#Total_current').html();
+//  var net_period=period_wise_total-tax_deduction_period_wise;
+//  $('.net_period').html(net_period.toFixed(3));
+// //net_ytd
+//   var ytd_wise_total=$('#total_ytd').html();
+//  var tax_deduction_ytd_wise=$('#Total_ytd').html();
+//  var net_ytd=ytd_wise_total-tax_deduction_ytd_wise;
+//  $('.net_ytd').html(net_ytd.toFixed(3));
+
+
+//     });
+    $('#download').on('click',function () {
+
+
+function first(callback1,callback2){
+setTimeout( function(){
+     var pdf = new jsPDF('p','pt','a4');
+     const invoice = document.getElementById("content");
+            // console.log(invoice);
+             console.log(window);
+             var pageWidth = 8.5;
+             var margin=0.5;
+             var opt = {
+   lineHeight : 1.2,
+   margin : 0,
+   maxLineWidth : pageWidth - margin *1,
+                 filename: 'invoice'+'.pdf',
+                 allowTaint: true,
+                 html2canvas: { scale: 3 },
+                 jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+             };
+              html2pdf().from(invoice).set(opt).toPdf().get('pdf').then(function (pdf) {
+  var totalPages = pdf.internal.getNumberOfPages();
+ for (var i = 1; i <= totalPages; i++) {
+    pdf.setPage(i);
+    pdf.setFontSize(10);
+    pdf.setTextColor(150);
+  }
+  }).save('PaySlip_<?php echo $infoemployee[0]['first_name']." ".$infoemployee[0]['last_name']."_".$infotime[0]['month']?>.pdf');
+    callback1();
+    callback2();
+         clonedElement.remove();
+ $("#content").attr("hidden", true);
+ }, 3000 );
+}
+function second(){
+setTimeout( function(){
+    $( '#myModal_sale' ).addClass( 'open' );
+if ( $( '#myModal_sale' ).hasClass( 'open' ) ) {
+  $( '.container' ).addClass( 'blur' );
+}
+$( '.close' ).click(function() {
+  $( '#myModal_sale' ).removeClass( 'open' );
+  $( '.cont' ).removeClass( 'blur' );
+});
+}, 3500 );
+}
+function third(){
+    setTimeout( function(){
+        window.location='<?php  echo base_url();   ?>'+'Cinvoice/manage_invoice';
+        window.close();
+    }, 4000 );
+}
+first(second,third);
+});
+
+    </script>
 
     
 
@@ -374,5 +859,5 @@ EMPLOYEE JOB:<?php echo $infotime[0]['job_title']; ?>
 
 
 
-
+ 
 

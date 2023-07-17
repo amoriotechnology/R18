@@ -241,35 +241,41 @@ class Cloan extends CI_Controller {
 
 
 
-    public function officeloan_update($transaction_id){
-        $this->load->model('Hrm_model');
+   public function officeloan_update($transaction_id){
 
-        
-        // $headname = $this->input->post('id',true).'-'.$this->input->post('old_first_name',true).''.$this->input->post('old_last_name',true);
-         $postData = [
+        $this->load->model('Hrm_model');
+    //      $bankname = $this->db->select('bank_name')->from('bank_add')->where('bank_id',$this->input->post('bank_id',true))->get()->row()->bank_name;
+    // echo $this->db->last_query();
+           $postData = [
+
+                'transaction_id' =>$transaction_id,
                 'person_id'            => $this->input->post('person_id',true),
                 'phone'    => $this->input->post('phone',true),
-                'ammount'     => $this->input->post('ammount',true),
+                'debit'     => $this->input->post('ammount',true),
                 'paytype'   => $this->input->post('paytype',true),
                 'phone'         => $this->input->post('phone',true),
+                'bank_name' =>$this->input->post('bank_id',true),
+                'create_by'       =>  $this->session->userdata('user_id'),
                 'bank_id'     => $this->input->post('bank_id',true),
                 'date'         => $this->input->post('date',true),
                 'details'         => $this->input->post('details',true),
-                // 'transaction_id'   => $this->input->post('transaction_id',true),
-            ];   
-            // $transaction_id;
-            // print_r($postData); die();
 
+            ];   
+          //   print_r( $postData); die();
              if ($this->Settings->update_employee($postData,$transaction_id)) { 
+$this->db->insert('person_ledger',$postData);
+echo $this->db->last_query();
                 $this->session->set_flashdata('message', display('successfully_updated'));
             } else {
+
+              //  $this->db->insert('acc_transaction',$cc);
+
                 $this->session->set_flashdata('error_message',  display('please_try_again'));
             }
-            //  redirect("Chrm/manage_officeloan");
+             redirect("Chrm/manage_officeloan");
     }
 
  
-
 
 
 

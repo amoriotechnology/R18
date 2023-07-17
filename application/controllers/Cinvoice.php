@@ -2224,6 +2224,10 @@ $this->db->update('bootgrid_data');
         echo json_encode($content);
       $this->template->full_admin_html_view($content);
     }
+
+
+
+    
       public function ocean_export_tracking_details_data_print($purchase_id) {
 
         $CI = & get_instance();
@@ -3108,8 +3112,6 @@ $this->db->update('bootgrid_data');
 
     public function invoice_inserted_data($invoice_id) {
 
-     //   echo $invoice_id; 
-
         $CI = & get_instance();
         $CC = & get_instance();
         $CA = & get_instance();
@@ -3122,32 +3124,21 @@ $this->db->update('bootgrid_data');
         $CA->load->model('invoice_design');
         $CC->load->model('invoice_content');
         
-        $invoice_detail = $CI->Invoices->invoice_pdf($invoice_id);
+         $invoice_detail = $CI->Invoices->invoice_pdf($invoice_id);
+         $all_invoice = $CI->Invoices->all_invoice($invoice_id);
+         $setting=  $CI->Web_settings->retrieve_setting_editdata(); 
+         $dataw = $CA->invoice_design->retrieve_data();
 
-      //  print_r($invoice_detail); 
+        //  print_r($dataw); 
 
-        $all_invoice = $CI->Invoices->all_invoice($invoice_id);
-$setting=  $CI->Web_settings->retrieve_setting_editdata();
-    //  print_r($all_invoice); 
+        //  die();
 
-          $dataw = $CA->invoice_design->retrieve_data();
-    //      print_r( $dataw );
-        $datacontent = $CC->invoice_content->retrieve_data();
-     //   print_r($datacontent); 
-
-
-
-        $customer = $this->db->select('*')->from('customer_information')->where("customer_id",$invoice_detail[0]['customer_id'])->get()->result_array();
-
-        $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
-      
-
+         $datacontent = $CC->invoice_content->retrieve_data();
+         $customer = $this->db->select('*')->from('customer_information')->where("customer_id",$invoice_detail[0]['customer_id'])->get()->result_array();
+         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+         $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
          $product_name = $this->db->select('*')->from('product_information')->where("product_id",$all_invoice[0]['product_id'])->get()->result_array();
 
-        //  echo $this->db->last_query(); die();
-
-          // print_r($product_name); die();
 
         $data=array(
             'curn_info_default' =>$curn_info_default[0]['currency_name'],
@@ -3155,8 +3146,8 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
             'header'=> $dataw[0]['header'],
             'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),   
             'color'=> $dataw[0]['color'],
-            'template'=> $dataw[0]['template'],
-           'invoice_id'      => $invoice_detail[0]['invoice_id'],
+           'template'=> $dataw[0]['template'],
+            'invoice_id'      => $invoice_detail[0]['invoice_id'],
             'customer_id'     => $invoice_detail[0]['customer_id'],
             'customer_name'   => $invoice_detail[0]['customer_name'],
             'date'            => $invoice_detail[0]['date'],
@@ -3164,15 +3155,10 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
             'billing_address' => $invoice_detail[0]['billing_address'],
             'container_no'=> $invoice_detail[0]['container_no'],
             'bl_no'=> $invoice_detail[0]['bl_no'],
-
             'company'=> (!empty($datacontent)?$datacontent:$company_info),     
- 
-
             'customer_currency'=> $customer[0]['currency_type'],
             'customername'=> $customer[0]['customer_name'],
-   
             'mobile'=> $customer[0]['customer_mobile'],
-       
             'all_products'=>$product_name,
              'port_of_discharge' => $invoice_detail[0]['port_of_discharge'],
             'invoice_detail' => $invoice_detail[0]['invoice_details'],
@@ -3196,7 +3182,6 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
             'shipping_cost'   => $invoice_detail[0]['shipping_cost'],
             'total_tax'       => $invoice_detail[0]['taxs'],
             'Port_of_discharge'       => $invoice_detail[0]['Port_of_discharge'],
-
             'invoice_all_data'=> $invoice_detail,
             'taxvalu'         => $taxinfo,
             'payment_type'  =>$paytype,
@@ -3217,7 +3202,7 @@ $setting=  $CI->Web_settings->retrieve_setting_editdata();
             'invoice_detail'=>$invoice_detail
          
         );
- // print_r($data);die();
+//  print_r($data);die();
          print_r($dataw[0]['color']);
     $content = $this->load->view('invoice/new_invoice_pdf_html', $data, true);
 

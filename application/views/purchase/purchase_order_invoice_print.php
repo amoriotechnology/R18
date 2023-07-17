@@ -170,7 +170,7 @@ if($a==$m){
          <!-- <td colspan="4" style="text-align:right;border:none;"><b>TAX DETAILS :</b></td><td colspan="1" style="border:none;">  <?php  echo $currency ; ?>    <?php echo $purchase_detail[0]['tax_details'];  ?></td> -->
         
    
-    <td style="text-align:right;border:none;" colspan="5"><b><?php echo  display('tax')." (".$tax_des;  ?></b></td>
+         <td style="text-align:right;border:none;" colspan="5"><b><?php echo  display('tax')." (".$tax_des;  ?></b></td>
                                  
                                  <td style='border:none;'><?php  echo $currency; ?><?php echo $tax_amt;  ?></td>
         
@@ -376,13 +376,13 @@ if($a==$m){
                                            
 <table border="0" class="overall table table-hover" style="border:none;">
   
-  <tr style="border:none;">
+<tr style="border:none;">
         <td  colspan="2" style="vertical-align:top;text-align:right;border:none;"><b><?php  echo display('Overall TOTAL');?> :</b></td>
         <td colspan="1" style="border:none;"><?php  echo $currency ; ?><?php echo $purchase_detail[0]['total'];  ?> </td>
          <!-- <td colspan="4" style="text-align:right;border:none;"><b>TAX DETAILS :</b></td><td colspan="1" style="border:none;">  <?php  echo $currency ; ?>    <?php echo $purchase_detail[0]['tax_details'];  ?></td> -->
         
    
-    <td style="text-align:right;border:none;" colspan="5"><b><?php echo  display('tax')." (".$tax_des;  ?></b></td>
+         <td style="text-align:right;border:none;" colspan="5"><b><?php echo  display('tax')." (".$tax_des;  ?></b></td>
                                  
                                  <td style='border:none;'><?php  echo $currency; ?><?php echo $tax_amt;  ?></td>
         
@@ -580,18 +580,24 @@ if($a==$m){
                                            
 <table border="0" class="overall table table-hover" style="border:none;">
   
-  <tr style="border:none;">
+<tr style="border:none;">
         <td  colspan="2" style="vertical-align:top;text-align:right;border:none;"><b><?php  echo display('Overall TOTAL');?> :</b></td>
         <td colspan="1" style="border:none;"><?php  echo $currency ; ?><?php echo $purchase_detail[0]['total'];  ?> </td>
          <!-- <td colspan="4" style="text-align:right;border:none;"><b>TAX DETAILS :</b></td><td colspan="1" style="border:none;">  <?php  echo $currency ; ?>    <?php echo $purchase_detail[0]['tax_details'];  ?></td> -->
         
    
-    <td style="text-align:right;border:none;" colspan="5"><b><?php echo  display('tax')." (".$tax_des;  ?></b></td>
+         <td style="text-align:right;border:none;" colspan="5"><b><?php echo  display('tax')." (".$tax_des;  ?></b></td>
                                  
-                                 <td style='border:none;'><?php  echo $currency; ?><?php echo $$tax_amt;  ?></td>
+                                 <td style='border:none;'><?php  echo $currency; ?><?php echo $tax_amt;  ?></td>
         
 
 </tr>
+
+
+
+
+
+
    <tr>
         <td  colspan="2" style="vertical-align:top;text-align:right;border:none;"><b><?php  echo display('Overall Gross Sq.Ft');?> :</b></td>
         <td colspan="1" style="border:none;"><?php echo  $purchase_detail[0]['total_gross'];  ?></td>

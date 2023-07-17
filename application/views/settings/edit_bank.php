@@ -20,7 +20,7 @@
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('bank') ?></a></li>
-                <li class="active"><?php echo display('bank_edit') ?></li>
+                <li class="active" style="color:orange;"><?php echo display('bank_edit') ?></li>
             </ol>
         </div>
     </section>
@@ -56,10 +56,22 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-bd lobidrag">
-                    <div class="panel-heading">
+                    <!-- <div class="panel-heading">
                         <div class="panel-title">
                         </div>
+                    </div> -->
+
+
+                    <div class="panel-heading" style="height: 50px;">
+                        <div class="panel-title">
+                               <a style="float:right;background-color:#38469f;color:white;" href="<?php echo base_url('Csettings/bank_list') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo display('manage_bank')?> </a>
+                        </div>
                     </div>
+
+
+
+
+
                    <?php echo form_open_multipart('Csettings/update_bank/'.$bank_list[0]['bank_id'],array('class' => 'form-vertical','id' => 'validate' ))?>
                     <div class="panel-body">
 
@@ -109,7 +121,7 @@
 
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-4 col-form-label"></label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-2">
                                 <input type="submit" id="add-deposit" class="btnclr btn m-b-5 m-r-2" name="add-deposit" value="<?php echo display('save_changes') ?>" tabindex="6"/>
                             </div>
                         </div>

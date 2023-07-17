@@ -231,7 +231,7 @@ else
 ) ";
 }
 $query=$this->db->query($sql);
-echo $this->db->last_query();
+// echo $this->db->last_query();
 if($query)
 {
     ?>
@@ -349,6 +349,8 @@ public function insert_email() {
         $content = $this->lweb_setting->expense_invoice_setting();
         $this->template->full_admin_html_view($content);
     }
+
+    
     public function web_Invoice(){
         $CI = & get_instance();
         $CI->auth->check_admin_auth();

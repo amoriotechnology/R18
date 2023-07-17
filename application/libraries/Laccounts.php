@@ -12,6 +12,11 @@ class Laccounts {
         $CI->load->model('Web_settings');
         $CI->load->model('Reports');
         $CI->load->library('occational');
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+
         $daily_closing_data = $CI->Accounts->get_closing_report($per_page, $page);
 
         $i = 0;
@@ -25,7 +30,13 @@ class Laccounts {
             }
         }
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Reports->retrieve_company();
+        // $company_info = $CI->Reports->retrieve_company();
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+
+
         $data = array(
             'title'              => display('closing_report'),
             'daily_closing_data' => $daily_closing_data,
@@ -34,11 +45,22 @@ class Laccounts {
             'company_info'       => $company_info,
             'links'              => $links,
             'software_info'      => $currency_details,
-            'company'            => $company_info,
+            // 'company'            => $company_info,
+
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
+
+
+
+
         );
         $reportList = $CI->parser->parse('accounts/closing_report', $data, true);
         return $reportList;
     }
+
 
     //Retrieve  Customer List	
       public function get_date_wise_closing_reports($links = null, $per_page = null, $page = null, $from_date = null, $to_date = null ) {

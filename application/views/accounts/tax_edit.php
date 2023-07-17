@@ -73,7 +73,15 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-bd lobidrag">
-                    <div class="panel-heading">
+
+
+            
+
+                    <div class="panel-heading" style="height: 60px;">
+
+                    <div class="Column" style="float: right;">
+                    <a style="background-color:#38469f;color:white;" href="<?php echo base_url('Caccounts/manage_tax') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo ('Manage Tax') ?> </a>
+                     </div>    
                         <div class="panel-title">
                         </div>
                     </div>

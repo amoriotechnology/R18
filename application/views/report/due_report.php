@@ -78,19 +78,19 @@
                         $today = date('Y-m-d');
                         ?>
                         <div class="form-group">
-                            <label class="" for="from_date"><?php echo display('start_date') ?><i class="text-danger">*</i></label>
+                            <label class="" for="from_date"><?php echo display('start_date') ?>: &nbsp;<i class="text-danger">*</i></label>
                             <input type="date" required name="from_date" class="form-control datepicker" id="from_date" placeholder="<?php echo display('start_date') ?>" value="<?php echo (!empty($from_date)?$from_date:$today) ?>">
                         </div> 
 
                         <div class="form-group">
-                            <label class="" for="to_date"><?php echo display('end_date') ?><i class="text-danger">*</i></label>
+                            <label class="" for="to_date"><?php echo display('end_date') ?>:&nbsp;<i class="text-danger">*</i></label>
                             <input type="date" required name="to_date" class="form-control datepicker" id="to_date" placeholder="<?php echo display('end_date') ?>" value="<?php echo (!empty($to_date)?$to_date:$today) ?>">
                         </div>  
 
-                        <button type="submit" class="btn btnclr" name="btnSave"><?php echo display('find') ?></button>
+                        <button type="submit" class="btn btnclr" name="btnSave">&nbsp;<?php echo display('find') ?></button>
                                       <?php if(isset($_GET['btnSave']))
 {
- ?>        <a  class="btn btnclr" href="#" onclick="printDiv('printable')"><?php echo display('print') ?></a>
+ ?>        
  <?php } ?>
                         <?php echo form_close() ?>
                     </div>
@@ -118,6 +118,8 @@
          <li><a href="#" onclick="$('#ProfarmaInvList').tableExport({type:'excel',escape:'false'});"> <img src="<?php echo base_url()?>assets/images/xls.png" width="24px"> XLS</a></li>
                     
        </ul>
+       &nbsp;
+       <a  class="btn btnclr" href="#" onclick="printDiv('printable')"><?php echo display('print') ?></a>
      </div></div>
             
                         
@@ -155,19 +157,15 @@
                                                 
                                                 <tr>
                                                     <td align="left" class="print-table-tr">
-                                                    <img src="<?php echo base_url().$software_info[0]['invoice_logo'];?>" alt="logo" width="100px" height="80px">
+                                                    <img src="<?php echo  base_url().$logo; ?>"   style='width: 90px;'  />
                                                     </td>
                                                     <td align="center" class="print-cominfo">
                                                         <span class="company-txt">
-                                                            <?php echo $company[0]['company_name'];?>
-                                                           
-                                                        </span><br>
-                                                        <?php echo $company[0]['address'];?>
-                                                        <br>
-                                                        <?php echo $company[0]['email'];?>
-                                                        <br>
-                                                         <?php echo $company[0]['mobile'];?>
-                                                        
+                                          
+                                                        <h3> <?php echo $company; ?> </h3>
+                                                         <h4></b><?php echo $address; ?> </h4>
+                                                         <h4></b><?php echo $email; ?> </h4>
+                                                         <h4></b><?php echo $phone; ?> </h4>
                                                     </td>
                                                    
                                                      <td align="right" class="print-table-tr">
@@ -274,33 +272,66 @@
       </div> </div> </div> </div>
 </section>
 <input type="hidden" value="Sale/New Sale" id="url"/>
-<script src="<?php echo base_url()?>assets/js/jquery.bootgrid.min.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script> -->
 
+
+
+
+
+                <script src="<?php echo base_url()?>assets/js/jquery.bootgrid.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.0-alpha.1/jspdf.plugin.autotable.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+
+<div id="myModal_colSwitch"  class="modal_colSwitch">
+                    <div class="modal-content_colSwitch" style="width:25%;height:30%;">
+                    <span class="close_colSwitch">&times;</span>
+                       
+                          <div class="col-sm-2" ></div>
+
+
+                          <div class="col-sm-4" ><br>
+                          <div class="form-group row"  > 
+                         
+                          <br><input type="checkbox"  data-control-column="1" checked = "checked" class="1" value="1"/>&nbsp;<?php echo ('Sale Date')?><br>
+                          <br><input type="checkbox"  data-control-column="2" checked = "checked" class="2" value="2"/>&nbsp;<?php echo ('Invoice No')?><br>
+                          <br><input type="checkbox"  data-control-column="3" checked = "checked" class="3 " value="3  "/>&nbsp;<?php echo ('Customer Name')?> <br>
+             </div>
+        </div>
 
 
 
-    <!-- The Modal Column Switch -->
-           <div id="myModal_colSwitch" class="modal_colSwitch" >
-                    <div class="modal-content_colSwitch" style="width:10%;height:25%;">
-                          <span class="close_colSwitch">&times;</span>
-                          <input type="checkbox"  data-control-column="1" checked = "checked" class="1"  value="1"/>Sale Date<br>
-<input type="checkbox"  data-control-column="2" checked = "checked" class="2"  value="2"/>Invoice No<br>
-<input type="checkbox"  data-control-column="3" checked = "checked" class="3"   value="3"/> Customer Name<br>
-<input type="checkbox"  data-control-column="4" checked = "checked" class="4"   value="4"/>Total Amount<br>
-<input type="checkbox"  data-control-column="5" checked = "checked" class="5"   value="5"/>Paid Amount<br>
-<input type="checkbox"  data-control-column="6" checked = "checked" class="6"  value="6"/>Due Amount<br>
+        <div class="col-sm-4" ><br>
+        <div class="form-group row"  >
+        <br><input type="checkbox"  data-control-column="4" checked = "checked" class="4" value="4"/>&nbsp;<?php echo ('Total Amount')?><br>
 
-            </div>
-                </div>
-               </div>
-                </div>
+        <br><input type="checkbox"  data-control-column="5" checked = "checked" class="5" value="5"/>&nbsp;<?php echo ('Paid Amount')?><br>
+        <br><input type="checkbox"  data-control-column="6" checked = "checked" class="6" value="6"/>&nbsp;<?php echo ('Due Amount')?><br>
+
+
+
+                          </div>
+                       </div>
+                    
+
+
+
+     
                     </div>
-                </div>
+    </section>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <input type="hidden" id="total_invoice" value="<?php echo $total_invoice;?>" name="">
      <input type="hidden" id="currency" value="{currency}" name="">

@@ -263,7 +263,7 @@ border:none;
                                      </tr>
 
                               
-                                <tr><td style="text-align:center"><?php echo display('product_name') ?></td><td style="text-align:center"><?php echo $product_info[0]['product_id']; ?></td></tr> 
+                                <tr><td style="text-align:center"><?php echo display('product_name') ?></td><td style="text-align:center"><?php echo $product_info[0]['product_name']; ?></td></tr> 
                                 <tr><td style="text-align:center"><?php echo display('product_model') ?></td><td style="text-align:center"><?php echo $product_info[0]['product_model']; ?></td></tr>
                              
                                <tr><td style="text-align:center"><?php echo display('price') ?></td><td style="text-align:center"><?php echo $product_info[0]['price']; ?></td></tr>
@@ -276,10 +276,10 @@ border:none;
                                      </tr>
 
                               
-                                <tr><td style="text-align:center"><?php echo display('Vendor')?></td><td style="text-align:center"><?php echo $supplier_name; ?></td></tr> 
+                                <tr><td style="text-align:center"><?php echo display('Vendor')?></td><td style="text-align:center"><?php echo $supplier_name1;  ?></td></tr> 
                               
                               
-                               <tr><td style="text-align:center"><?php echo display('Vendor')." ".display('price');?></td><td style="text-align:center"><?php echo $supplier_price; ?></td></tr>
+                               <!--<tr><td style="text-align:center"><?php //echo display('Vendor')." ".display('price');?></td><td style="text-align:center"><?php // echo $product_info[0]['price']; ?></td></tr>-->
                              </table>
                          </div>
                          <div class="col-sm-4">
@@ -366,7 +366,7 @@ $total =$s+$e;
                                      <th colspan="2" style="text-align:center;"><?php  echo  display('Additional Information')?></th>
 
                                  </tr>
-                                <tr><td style="text-align:center"><?php  echo  display('category')?></td><td style="text-align:center"><?php echo $category_name; ?></td></tr> 
+                                <tr><td style="text-align:center"><?php  echo  display('category')?></td><td style="text-align:center"><?php echo $product_info[0]['category_id']; ?></td></tr> 
                              <tr><td style="text-align:center"><?php  echo  display('Product Sub Category')?></td><td style="text-align:center"><?php echo $product_info[0]['product_sub_category']; ?></td></tr> 
                                 <tr><td style="text-align:center"><?php  echo  display('Units')?></td><td style="text-align:center"><?php echo $product_info[0]['unit']; ?></td></tr> 
                              </table>
@@ -470,10 +470,10 @@ $total =$s+$e;
                                         
                                         
                                                <td>
-                                                <input type="text" id="gross_width_1_<?php echo $i; ?>" id="gross_width_1_<?php echo $i; ?>" name="gross_width[]" required="" class="gross_width  form-control" value="<?php echo $apd['g_width']; ?>" />
+                                                <input type="text" id="gross_width_1_<?php echo $i; ?>" id="gross_width_1_<?php echo $i; ?>" name="gross_width[]" readonly required="" class="gross_width  form-control" value="<?php echo $apd['g_width']; ?>" />
                                             </td>
                                             <td>
-                                                <input type="text" id="gross_height_1_<?php echo $i; ?>" id="gross_height_1_<?php echo $i; ?>" name="gross_height[]"  required="" class="gross_height form-control" value="<?php echo $apd['g_height']; ?>" />
+                                                <input type="text" id="gross_height_1_<?php echo $i; ?>" id="gross_height_1_<?php echo $i; ?>" name="gross_height[]" readonly required="" class="gross_height form-control" value="<?php echo $apd['g_height']; ?>" />
                                             </td>
                                         
                                         
@@ -485,14 +485,14 @@ $total =$s+$e;
                                             </td>
                                         
                                             <td style="text-align:center;">
-                                                <input type="text"  id="slab_no_<?php echo $i; ?>" name="slab_no[]" style="width:40px;" readonly  class="form-control"     value="1"  required=""/>
+                                                <input type="text"  id="slab_no_<?php echo $i; ?>" name="slab_no[]" style="width:40px;" readonly  class="form-control"     value="<?php echo $i; ?>"  required=""/>
                                             </td>
        
                                              <td>
-                                                <input type="text" id="net_width_1_<?php echo $i; ?>" name="net_width[]"  required="" class="net_width form-control" value="<?php echo $apd['n_width']; ?>" />
+                                                <input type="text" id="net_width_1_<?php echo $i; ?>" name="net_width[]"  required="" readonly class="net_width form-control" value="<?php echo $apd['n_width']; ?>" />
                                             </td>
                                             <td>
-                                                <input type="text" id="net_height_1_<?php echo $i; ?>" name="net_height[]"   required="" class="net_height form-control" value="<?php echo $apd['n_height']; ?>" />
+                                                <input type="text" id="net_height_1_<?php echo $i; ?>" name="net_height[]"   required="" readonly class="net_height form-control" value="<?php echo $apd['n_height']; ?>" />
                                             </td>
        
                                             <td style="text-align:center;">
@@ -1199,6 +1199,17 @@ $('#cartdata').submit(function (event) {
     });
     event.preventDefault();
 });
+var overall_sum=0;
+     $('.table').find('.total_price').each(function() {
+var v=$(this).val();
+  overall_sum += parseFloat(v);
+ // overall_sum +=parseFloat(v);
+});
+ $('#Total').val(overall_sum.toFixed(3)).trigger('change');
+    $(document).ready(function(){
+   
+   $(".sidebar-mini").addClass('sidebar-collapse') ;
+   });
   </script>
 <style type="text/css">
     .size_view{

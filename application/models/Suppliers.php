@@ -354,9 +354,9 @@ $query = '';
         $this->db->select('*');
         $this->db->from('supplier_information');
         $this->db->where('created_by',$this->session->userdata('user_id'));
-        $this->db->order_by('supplier_id', 'desc');
+     //   $this->db->order_by('supplier_id', 'desc');
         $query = $this->db->get();
-       // echo $this->db->last_query();
+      //  echo $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }

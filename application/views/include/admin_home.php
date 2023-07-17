@@ -739,8 +739,8 @@ $searchdate =(!empty($s)?$s:$dat2);
 
   <input type="hidden" id="today_n_sale" value="<?php
      echo html_escape($this->Reports->today_no_of_sale())?>" name="">
-     <!-- <input type="text" id="today_sal" value="<?php
-     echo html_escape($this->Reports->todays_total_sales_amount())?>" name=""> -->
+     <input type="text" id="today_sal" value="<?php
+     echo html_escape($this->Reports->todays_total_sales_amount())?>" name=""> 
     
      <input type="hidden" id="today_sale_due" value="<?php
      echo html_escape($this->Reports->today_sale_due())?>" name="">

@@ -1278,11 +1278,13 @@ public function purchase_order_details_data_print($purchase_id) {
             $purchase_detail[$k]['convert_date'] = $CI->occational->dateConvert($purchase_detail[$k]['purchase_date']);
         }
     }
- $datacontent = $CI->invoice_content->retrieve_info_data();
-    $setting=  $CI->Web_settings->retrieve_setting_editdata();
 
+    $setting=  $CI->Web_settings->retrieve_setting_editdata();
+ $company_info = $w->Ppurchases->retrieve_company();
+
+        $datacontent = $CI->invoice_content->retrieve_info_data();
     $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-      $company_info = $w->Ppurchases->retrieve_company();
+  
     $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
     $dataw = $CI->invoice_design->retrieve_data($this->session->userdata('user_id'));
  //$supplier_currency = $CI->db->select('*')->from('supplier_information')->where('supplier_name',$purchase_detail[0]['supplier_name'])->get()->result_array();
@@ -1296,13 +1298,28 @@ public function purchase_order_details_data_print($purchase_id) {
         'template'=> $dataw[0]['template'],
         'curn_info_default' =>$curn_info_default[0]['currency_name'],
         'title'            => display('purchase_details'),
-         'address' => $supplier_currency[0]['address'],
-         'city' => $supplier_currency[0]['city'],
-         'state' => $supplier_currency[0]['state'],
-         'zip' => $supplier_currency[0]['zip'],
-         'country' => $supplier_currency[0]['country'],
-         'primaryemail' => $supplier_currency[0]['primaryemail'],
-         'mobile' => $supplier_currency[0]['mobile'],
+        
+        
+        
+  'cname'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+            'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:''),  
+            'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
+            'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),   
+            
+            
+            
+            
+            
+            
+        //  'address' => $supplier_currency[0]['address'],
+        //  'city' => $supplier_currency[0]['city'],
+        //  'state' => $supplier_currency[0]['state'],
+        //  'zip' => $supplier_currency[0]['zip'],
+        //  'country' => $supplier_currency[0]['country'],
+        //  'primaryemail' => $supplier_currency[0]['primaryemail'],
+        //  'mobile' => $supplier_currency[0]['mobile'],
         'purchase_id'      => $purchase_detail[0]['purchase_id'],
       'overall_total'      => $purchase_detail[0]['total_amt'],
         'mobile'      => $purchase_detail[0]['mobile'],
@@ -1395,13 +1412,13 @@ public function purchase_order_details_data_print($purchase_id) {
         'template'=> $dataw[0]['template'],
         'curn_info_default' =>$curn_info_default[0]['currency_name'],
         'title'            => display('purchase_details'),
-         'address' => $supplier_currency[0]['address'],
-         'city' => $supplier_currency[0]['city'],
-         'state' => $supplier_currency[0]['state'],
-         'zip' => $supplier_currency[0]['zip'],
-         'country' => $supplier_currency[0]['country'],
-         'primaryemail' => $supplier_currency[0]['primaryemail'],
-         'mobile' => $supplier_currency[0]['mobile'],
+        //  'address' => $supplier_currency[0]['address'],
+        //  'city' => $supplier_currency[0]['city'],
+        //  'state' => $supplier_currency[0]['state'],
+        //  'zip' => $supplier_currency[0]['zip'],
+        //  'country' => $supplier_currency[0]['country'],
+        //  'primaryemail' => $supplier_currency[0]['primaryemail'],
+        //  'mobile' => $supplier_currency[0]['mobile'],
         'purchase_id'      => $purchase_detail[0]['purchase_id'],
       'overall_total'      => $purchase_detail[0]['total_amt'],
         'mobile'      => $purchase_detail[0]['mobile'],

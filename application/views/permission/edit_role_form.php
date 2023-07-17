@@ -1,5 +1,43 @@
 <!-- Add new role start -->
 
+
+
+
+<?php error_reporting(1);  ?>
+
+<!-- Manage Invoice Start -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.base64.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/drag_drop_index_table.js"></script>
+  <script type="text/javascript" src="<?php echo base_url()?>assets/js/html2canvas.js"></script>
+ <script type="text/javascript" src="<?php echo base_url()?>assets/js/jspdf.plugin.autotable"></script>
+  <script type="text/javascript" src="<?php echo base_url()?>assets/js/jspdf.umd.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+ <script type="text/javascript" src="<?php echo base_url()?>my-assets/js/tableManager.js"></script>
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script type="text/javascript" src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
+<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+<script type="text/javascript" src="http://www.bacubacu.com/colresizable/js/colResizable-1.5.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style type="text/css">
     .alert-success
     {
@@ -15,11 +53,11 @@
         </div>
         <div class="header-title">
             <h1><?php echo $title ?></h1>
-            <small><?php echo $title ?></small>
+            <small></small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('permission') ?></a></li>
-                <li class="active"><?php echo $title ?></li>
+                <li class="active" style="color:orange;"><?php echo $title ?></li>
             </ol>
         </div>
     </section>
@@ -37,9 +75,16 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-bd lobidrag">
-                    <div class="panel-heading">
+                    <!-- <div class="panel-heading"> -->
+
+
+                    <div class="panel-heading" style="height: 50px;">
+                        <!-- <div class="panel-title"> -->
+                               <a style="float:right;background-color:#38469f;color:white;" href="<?php echo base_url('Permission/role_list') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo ('Manage Role List')?> </a>
+              
+
+
                         <div class="panel-title">
-                            <h4><?php echo $title ?></h4>
                         </div>
                     </div>
                      <form action="<?php echo base_url('Permission/update_roles'); ?>"  method="post">
@@ -128,9 +173,12 @@ foreach($split as $sp){
        //  } 
            }  ?>
                 </table>
-                <div class="form-group text-right">
+                <br>
+                <div class="form-group text-left">
+                    
                 <input type="hidden" name="uid" value="<?php echo $_SESSION['user_id'];?>">  
-                <button type="submit" class="btn btn-warning w-md m-b-5"><?php echo display('update') ?></button>
+                
+                <button type="submit" class="btnclr btn m-b-5 m-r-2"><?php echo display('update') ?></button>
             </div>
     </form>
                     </div>

@@ -131,17 +131,21 @@ if(isset($_POST['btnSave']))
                        <button type="submit" name="btnSave"  class="btn btnclr"><?php echo display('find') ?></button>
                                    <?php
 if(isset($_POST['btnSave']))
-{?>   <input type="button" class="btnclr btn" name="btnPrint" id="btnPrint" value="Print" onclick="printDiv('printArea');"/><?php  } ?>
+{?>   <?php  } ?>
                 
                 <?php echo form_close()?>
             </div>
               <div class="col-sm-2"></div>
               <?php
 if(isset($_POST['btnSave']))
-{?>
+
+{?>           
+
+
             <div class="col-sm-2">
+
                     <i class="fa fa-cog"  aria-hidden="true" id="myBtn" style="font-size:25px;" onClick="columnSwitchMODAL()"></i> <!-- onclick opens MODAL -->
-                   
+
                     <div class="dropdown bootcol" id="drop" style="float:right;padding-right:20px;padding-bottom:10px;">
     <button class="btn btnclr dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
        <span class="glyphicon glyphicon-th-list"></span> Download
@@ -158,9 +162,13 @@ if(isset($_POST['btnSave']))
       <li><a href="#" onclick="$('#ProfarmaInvList').tableExport({type:'excel',escape:'false'});"> <img src="<?php echo base_url()?>assets/images/xls.png" width="24px"> XLS</a></li>
                  
     </ul>
+    <input type="button" class="btnclr btn" name="btnPrint" id="btnPrint" value="Print" onclick="printDiv('printArea');"/>
+    <!-- <a onclick="reload();"  >  <i class="fa fa-refresh" style="font-size:25px;float:right;" aria-hidden="true"></i> </a> -->
+
   </div>
 
   </div>  
+
   <?php  } ?>
         </div>
     </div>
@@ -204,19 +212,16 @@ if(isset($_POST['btnSave']))
                                                 
                                                 <tr>
                                                     <td align="left" class="print-table-tr">
-                                                        <img src="<?php echo base_url().$software_info[0]->invoice_logo;?>" alt="logo" style="height:80px;width:100px;">
+                                                    <img src="<?php echo  base_url().$logo; ?>"   style='width: 90px;'  />
+
                                                     </td>
                                                     <td align="center" class="print-cominfo">
                                                         <span class="company-txt">
-                                                            <?php echo $company[0]['company_name'];?>
-                                                           
-                                                        </span><br>
-                                                        <?php echo $company[0]['address'];?>
-                                                        <br>
-                                                        <?php echo $company[0]['email'];?>
-                                                        <br>
-                                                         <?php echo $company[0]['mobile'];?>
-                                                        
+                                   
+                                                        <h3> <?php echo $company; ?> </h3>
+                                                         <h4></b><?php echo $address; ?> </h4>
+                                                         <h4></b><?php echo $email; ?> </h4>
+                                                         <h4></b><?php echo $phone; ?> </h4>
                                                     </td>
                                                    
                                                      <td align="right" class="print-table-tr">
@@ -334,32 +339,76 @@ if(isset($_POST['btnSave']))
 </div>
 <?php  } ?>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script src="<?php echo base_url()?>assets/js/jquery.bootgrid.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.0-alpha.1/jspdf.plugin.autotable.js"></script>
-  <div id="myModal_colSwitch" class="modal_colSwitch" >
-                    <div class="modal-content_colSwitch" style="width:25%;height:30%;">
-                          <span class="close_colSwitch">&times;</span>
-                          <div class="col-sm-6"><br><br>
-                          <div class="form-group row">
-                          <input type="checkbox"  data-control-column="1" checked = "checked" class="1"  value="1"/>S.NO<br>
-<input type="checkbox"  data-control-column="2" checked = "checked" class="2"  value="2"/>Date<br>
-<input type="checkbox"  data-control-column="3" checked = "checked" class="3"   value="3"/>Voucher No<br>
-<input type="checkbox"  data-control-column="4" checked = "checked" class="4"   value="4"/>Voucher Type<br>
-<input type="checkbox"  data-control-column="5" checked = "checked" class="5"   value="5"/>Remark<br>
-<input type="checkbox"  data-control-column="6" checked = "checked" class="6"  value="6"/>Debit<br>
-<input type="checkbox"  data-control-column="7" checked = "checked" class="7"   value="7"/>Credit<br>
-<input type="checkbox"  data-control-column="8" checked = "checked" class="8"   value="8"/>Balance<br>
+
+<div id="myModal_colSwitch"  class="modal_colSwitch">
+                    <div class="modal-content_colSwitch" style="width:30%;height:25%;">
+                    <span class="close_colSwitch">&times;</span>
+                       
+                          <div class="col-sm-2" ></div>
 
 
-                          </div> </div> </div> </div>
+                          <div class="col-sm-3" ><br>
+                          <div class="form-group row"  > 
+                         
+                          <br><input type="checkbox"  data-control-column="1" checked = "checked" class="1"  value="1"/>&nbsp; <?php echo display('Sl')?><br>
+                          <br><input type="checkbox"  data-control-column="2" checked = "checked" class="2"  value="2"/>&nbsp;<?php echo ('Date')?><br>
+                          <br><input type="checkbox"  data-control-column="3" checked = "checked" class="4"   value="4"/>&nbsp;<?php echo ('Voucher No')?><br>
+             </div>
+        </div>
 
 
+
+
+                      <div class="col-sm-3"  ><br>
+                          <div class="form-group row"  >
+                          <br><input type="checkbox"  data-control-column="4" checked = "checked" class="3"   value="3"/>&nbsp;<?php echo ('Voucher Type')?><br>
+                          <br><input type="checkbox"  data-control-column="5" checked = "checked" class="5"  value="5"/>&nbsp;<?php echo display('Remark')?><br>
+
+                          <br><input type="checkbox"  data-control-column="6" checked = "checked" class="6"   value="6"/>&nbsp;<?php echo display('Debit')?><br>
+
+                        </div>
+                        </div>
+     
+
+   
+                          <div class="col-sm-3"  ><br>
+                          <div class="form-group row"  >
+
+                          <br><input type="checkbox"  data-control-column="7" checked = "checked" class="7"   value="7"/>&nbsp;<?php echo display('Credit')?><br>
+                          <br><input type="checkbox"  data-control-column="8" checked = "checked" class="8"   value="8"/>&nbsp;<?php echo display('Balance')?><br>
+
+                 
+                        </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+    </section>
 </div>
 
 
-</div>
+
+
 
 <script type="text/javascript" src="<?php echo base_url()?>my-assets/js/profarma.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>

@@ -1391,26 +1391,21 @@ print_r($purchase_detail);
         'currency'  =>$currency_details[0]['currency'],
             'header'=> $dataw[0]['header'],
             'pro_no_reference' => $purchase_detail[0]['pro_no_reference'],
-            'logo'=> $setting[0]['invoice_logo'],
+            // 'logo'=> $setting[0]['invoice_logo'],
             'color'=> $dataw[0]['color'],
             'template'=> $dataw[0]['template'],
             'all_supplier' => $all_supplier,
            
 
-           
+          
  
-
-  'business_name'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:base_url().$company_info[0]['logo']),  
+            'business_name'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
             'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
             'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
             'reg_number'=>(!empty($datacontent[0]['reg_number'])?$datacontent[0]['reg_number']:''),  
             'website'=>(!empty($datacontent[0]['website'])?$datacontent[0]['website']:$company_info[0]['website']),   
             'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']),   
-         
-
-          //  'reg_number'=>$datacontent[0]['reg_number'],
-         //   'website'=>$datacontent[0]['website'],
-          
             'title'            => display('purchase_details'),
             'trucking_id'      => $purchase_detail[0]['trucking_id'],
             'grand_total' => $purchase_detail[0]['grand_total_amount'],

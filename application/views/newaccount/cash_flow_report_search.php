@@ -1,3 +1,9 @@
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+<script type="text/javascript" src="http://www.bacubacu.com/colresizable/js/colResizable-1.5.min.js"></script>
 
 <!-- Printable area end -->
 <div class="content-wrapper">
@@ -7,11 +13,11 @@
         </div>
         <div class="header-title">
             <h1><?php echo display('accounts') ?></h1>
-            <small><?php echo display('cash_flow_statement') ?></small>
+            <small></small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('accounts') ?></a></li>
-                <li class="active"><?php echo display('cash_flow_statement') ?></li>
+                <li class="active" style="color:orange;"><?php echo display('cash_flow_statement') ?></li>
             </ol>
         </div>
     </section>
@@ -23,7 +29,6 @@
         <div class="panel panel-bd lobidrag">
             <div class="panel-heading">
                 <div class="panel-title">
-                    <h4><?php echo display('cash_flow_statement') ?></h4>
                 </div>
             </div>
             <div id="printArea">
@@ -34,19 +39,18 @@
                                                 
                                                 <tr>
                                                     <td align="left" class="print-table-tr">
-                                                        <img src="<?php echo base_url().$software_info[0]->invoice_logo;?>" style="width:100px;height:80px;" alt="logo">
+                                                    <img src="<?php echo  base_url().$logo; ?>"   style='width: 90px;'  />
+
+
                                                     </td>
                                                     <td align="center" class="print-cominfo">
                                                         <span class="company-txt">
-                                                            <?php echo $company[0]['company_name'];?>
-                                                           
-                                                        </span><br>
-                                                        <?php echo $company[0]['address'];?>
-                                                        <br>
-                                                        <?php echo $company[0]['email'];?>
-                                                        <br>
-                                                         <?php echo $company[0]['mobile'];?>
-                                                        
+                                               
+                                                                    <h3> <?php echo $company; ?> </h3>
+                                                         <h4></b><?php echo $address; ?> </h4>
+                                                         <h4></b><?php echo $email; ?> </h4>
+                                                         <h4></b><?php echo $phone; ?> </h4>
+
                                                     </td>
                                                    
                                                      <td align="right" class="print-table-tr">
@@ -517,9 +521,9 @@
                 </div>
             </div>
             <div class="text-center" id="print" >
-                <input type="button" class="btn btn-warning" name="btnPrint" id="btnPrint" value="Print" onclick="printDiv('printArea');"/>
+                <input type="button" class="btn btnclr" name="btnPrint" id="btnPrint" value="Print" onclick="printDiv('printArea');"/>
                 <a href="<?php echo base_url($pdf)?>" download>
-                    <input type="button" class="btn btn-success" name="btnPdf" id="btnPdf" value="PDF"/>
+                    <input type="button" class="btn btnclr" name="btnPdf" id="btnPdf" value="PDF"/>
                 </a>
             </div>
         </div>

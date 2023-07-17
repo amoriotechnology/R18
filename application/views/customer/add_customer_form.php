@@ -501,7 +501,7 @@
 <div class="form-group row" id="tax">
     <div class="row">
            <div class="col-sm-12">
-    <label for="sales" class="col-sm-4 col-form-label"><?php echo display('Sales Tax') ?></label>
+    <label for="sales" class="col-sm-4 col-form-label"><?php echo ('State Tax') ?></label>
     <div class="col-sm-8">
     <select  class="form-control" name="tax" value="" tabindex="3" style=" width: 100%;"   >
     <option value=""  ><?php echo display('state') ?></option>

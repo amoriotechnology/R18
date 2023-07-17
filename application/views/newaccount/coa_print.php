@@ -1,3 +1,9 @@
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+
 
 <?php
 include ('Class/CConManager.php');
@@ -53,24 +59,31 @@ include ('Class/CAccount.php');
                                                 
                                                 <tr>
                                                     <td align="left" class="print-table-tr">
-                                                        <img src="<?php echo base_url().$software_info[0]->invoice_logo;?>" alt="logo" style="height:80px;width:100px;">
+                                                    <img src="<?php echo  base_url().$logo; ?>"   style='width: 90px;'  />
+
                                                     </td>
                                                     <td align="center" class="print-cominfo">
                                                         <span class="company-txt">
-                                                            <?php echo $company[0]['company_name'];?>
-                                                           
-                                                        </span><br>
-                                                        <?php echo $company[0]['address'];?>
-                                                        <br>
-                                                        <?php echo $company[0]['email'];?>
-                                                        <br>
-                                                         <?php echo $company[0]['mobile'];?>
-                                                        
+                                         
+
+
+                                                        <h3> <?php echo $company; ?> </h3>
+                                                         <h4></b><?php echo $address; ?> </h4>
+                                                         <h4></b><?php echo $email; ?> </h4>
+                                                         <h4></b><?php echo $phone; ?> </h4>
+
+
+
+
+
+
+
+
                                                     </td>
                                                    
                                                      <td align="right" class="print-table-tr">
                                                         <date>
-                                                        <?php echo display('date')?>: <?php
+                                                                                     <?php echo display('date')?>: <?php
                                                         echo date('d-M-Y');
                                                         ?> 
                                                     </date>
@@ -87,7 +100,10 @@ include ('Class/CAccount.php');
                             $oResult=$oAccount->SqlQuery($sql);
                             for ($i = 0; $i < $oResult->num_rows; $i++)
                             {
-                                $sql="SELECT MAX(HeadLevel) as MHL FROM acc_coa WHERE IsActive=1";
+                                $sql="SELECT MAX(HeadLevel) as MHL FROM acc_coa WHERE IsActive=1"  ;
+                            
+                                // $this->db->where('CreateBy', $this->session->userdata('id')) ;
+
                                 $oResultLevel=$oAccount->SqlQuery($sql);
                                 $maxLevel=$oResultLevel->row['MHL'];
 
@@ -110,7 +126,7 @@ include ('Class/CAccount.php');
 
                     </div>
                     <div class="text-center" id="print">
-                        <input type="button" class="btn btn-warning" name="btnPrint" id="btnPrint" value="Print" onclick="printDiv('printArea');"/>
+                        <input type="button" class="btn btnclr" name="btnPrint" id="btnPrint" value="Print" onclick="printDiv('printArea');"/>
                     </div>
                 </div>
             </div>

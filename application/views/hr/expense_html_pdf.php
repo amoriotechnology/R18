@@ -67,91 +67,275 @@ th{
             $this->session->unset_userdata('error_message');
         }
         ?> 
+
+
+
+
+
+
+
+
     <div class="container" id="content">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="invoice-title">
-                <h2>Expense</h2>
-                <img style="float: right; width:110px; position: relative; bottom: 64px; right: 7px;" src="<?php echo  base_url().$logo; ?>"  />
+
+
+
+    <?php
+  
+  if($template==2)
+          {
+          ?>
+
+<div class="brand-section"  style="background-color:<?php echo $color; ?>" >
+
+
+          
+<div class="row" >
+
+
+<div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>"   style='width: 100%;'  /></div>
+
+
+<div class="col-sm-6 text-center" style="color:white;"><h3><?php  echo "Expenses"; ?></h3></div>
+<div class="col-sm-4" style="color:white;font-weight:bold;" id='company_info'>
+
+     <b> <?php echo display('Company name') ?> : </b><?php echo $company; ?><br>
+     <b>   <?php echo display('Address') ?>  : </b><?php echo $address; ?><br>
+     <b>   <?php echo display('Email') ?>  : </b><?php echo $email; ?><br>
+     <b>   <?php echo display('Contact') ?>  : </b><?php echo $phone; ?><br>
+  </div>
+
+
+
+
+
+
+
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-condensed">
+
+
+                          <thead style="background-color:<?php echo $color; ?>">
+            <tr>
+
+  
+
+
+                        <th style="font-size: 12px;" rowspan="1" class="absorbing-column text-center text-white"><?php echo display('S.No') ?></th>
+                        <th style="font-size: 12px;" rowspan="1" class="text-center text-white"><?php echo ('Expense Name') ?></th>
+                        <th style="font-size: 12px;" rowspan="1" class="text-center text-white"><?php echo ('Expense Date') ?></th>
+                        <th style="font-size: 12px;" rowspan="1" class="text-center text-white"><?php echo ('Expense Amount') ?></th>
+                        <th style="font-size: 12px;" rowspan="1" class="text-center text-white"><?php echo ('Total Amount') ?></th>
+                        <th style="font-size: 12px;" rowspan="1" class="text-center text-white"><?php echo ('Expense Payment Date') ?></th>
+                        <th style="font-size: 12px;" rowspan="1" class="text-center text-white"><?php echo ('Description') ?></th>
+
+
+
+
+            </tr>
+        </thead>
+
+
+        <tbody>
+                        <?php $s= 1; foreach ($expense_pdf as $key => $value) { ?>
+                        <tr>
+                            <td><?php echo $s; ?></td>
+                            <td class="text-center"><?php echo $value['expense_name']; ?></td>
+                            <td class="text-center"><?php echo $value['expense_date']; ?></td>
+                            <td class="text-center"><?php  echo $currency; ?><?php echo $value['expense_amount']; ?></td>
+                            <td class="text-center"><?php  echo $currency; ?><?php echo $value['total_amount']; ?></td>
+                            <td class="text-center"><?php echo $value['expense_payment_date']; ?></td>
+                            <td class="text-center"><?php echo $value['description']; ?></td>
+                        </tr>
+                        <?php $s++; } ?>
+                    </tbody>
+
+
+
+
+                </table>
             </div>
-            <br>
-            <hr>
-            <div class="row">
-                <div class="col-xs-6">
-                    <address>
-                    <strong>Details:</strong><br>
-                        <?php echo $company[0]['business_name']; ?><br>
-                        <?php echo $company[0]['address']; ?><br>
-                        <?php echo $company[0]['email']; ?><br>
-                        <?php echo $company[0]['phone']; ?>
-                    </address>
-                </div>
-               <!--  <div class="col-xs-6 text-right">
-                    <address>
-                    <strong>Shipped To:</strong><br>
-                        Jane Smith<br>
-                        1234 Main<br>
-                        Apt. 4B<br>
-                        Springfield, ST 54321
-                    </address>
-                </div> -->
-            </div>
-            <!-- <div class="row">
-                <div class="col-xs-6">
-                    <address>
-                        <strong>Payment Method:</strong><br>
-                        Visa ending **** 4242<br>
-                        jsmith@email.com
-                    </address>
-                </div>
-                <div class="col-xs-6 text-right">
-                    <address>
-                        <strong>Order Date:</strong><br>
-                        March 7, 2014<br><br>
-                    </address>
-                </div>
-            </div> -->
         </div>
     </div>
+</div>
+
+
+<?php 
+}
+elseif($template==1)
+{ 
+?>
+<div class="brand-section"  style="background-color:<?php echo $color; ?>" >
+
+
+          
+<div class="row" >
+
+
+
+<div class="col-sm-4" id='company_info' style="color:white;">
+            
+     <b> <?php echo display('Company name') ?> : </b><?php echo $company; ?><br>
+          <b>   <?php echo display('Address') ?>  : </b><?php echo $address; ?><br>
+          <b>   <?php echo display('Email') ?>  : </b><?php echo $email; ?><br>
+          <b>   <?php echo display('Contact') ?>  : </b><?php echo $phone; ?><br>
+        </div>
+        <div class="col-sm-6 text-center" style="color:white;"><h3><?php  echo "Expenses"; ?></h3></div>
     
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Expense List</strong></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-condensed">
-                            <thead>
-                                <tr>
-                                    <td><strong>S.No</strong></td>
-                                    <td class="text-center"><strong>Expense Name</strong></td>
-                                    <td class="text-center"><strong>Expense Date</strong></td>
-                                    <td class="text-center"><strong>Expense Amount</strong></td>
-                                    <td class="text-center"><strong>Total Amount</strong></td>
-                                    <td class="text-center"><strong>Expense Payment Date</strong></td>
-                                    <td class="text-center"><strong>Description</strong></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $s= 1; foreach ($expense_pdf as $key => $value) { ?>
-                                <tr>
-                                    <td><?php echo $s; ?></td>
-                                    <td class="text-center"><?php echo $value['expense_name']; ?></td>
-                                    <td class="text-center"><?php echo $value['expense_date']; ?></td>
-                                    <td class="text-center"><?php  echo $currency; ?><?php echo $value['expense_amount']; ?></td>
-                                    <td class="text-center"><?php  echo $currency; ?><?php echo $value['total_amount']; ?></td>
-                                    <td class="text-center"><?php echo $value['expense_payment_date']; ?></td>
-                                    <td class="text-center"><?php echo $value['description']; ?></td>
-                                </tr>
-                                <?php $s++; } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+
+
+         <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>"   style='width: 100%;'  /></div>
+
+
+
+
+
+
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-condensed">
+
+
+                          <thead style="background-color:<?php echo $color; ?>">
+            <tr>
+
+                <th data-column-id="id" class="ID"   style="width:30px;" ><?php echo display('S.No') ?></th>
+                <th class="text-center text-white"><?php echo ('Expense Name') ?></th>
+                <th class="text-center text-white"><?php echo ('Expense Date') ?></th>
+                <th class="text-center text-white"><?php echo ('Expense Amount') ?></th>
+                <th class="text-center text-white"><?php echo ('Total Amount') ?></th>
+                <th class="text-center text-white"><?php echo ('Expense Payment Date') ?></th>
+                <th class="text-center text-white"><?php echo ('Description') ?></th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+                        <?php $s= 1; foreach ($expense_pdf as $key => $value) { ?>
+                        <tr>
+                            <td><?php echo $s; ?></td>
+                            <td class="text-center"><?php echo $value['expense_name']; ?></td>
+                            <td class="text-center"><?php echo $value['expense_date']; ?></td>
+                            <td class="text-center"><?php  echo $currency; ?><?php echo $value['expense_amount']; ?></td>
+                            <td class="text-center"><?php  echo $currency; ?><?php echo $value['total_amount']; ?></td>
+                            <td class="text-center"><?php echo $value['expense_payment_date']; ?></td>
+                            <td class="text-center"><?php echo $value['description']; ?></td>
+                        </tr>
+                        <?php $s++; } ?>
+                    </tbody>
+
+
+
+
+                </table>
             </div>
         </div>
+    </div>
+</div>
+
+<?php 
+}
+elseif($template==3)
+{
+?>
+<div class="brand-section"  style="background-color:<?php echo $color; ?>" >
+
+
+          
+<div class="row" >
+
+
+<div class="col-sm-2 text-center" style="color:white;"><h3><?php  echo "Expenses"; ?></h3></div>
+
+<div class="col-sm-4"><img src="<?php echo  base_url().$logo; ?>"   style='width: 30%;float:right;'  /></div>
+
+
+<div class="col-sm-6" style="color:white;font-weight:bold ;text-align: end;" id='company_info'>
+   
+<b> <?php echo display('Company name') ?> : </b><?php echo $company; ?><br>
+  <b>   <?php echo display('Address') ?>  : </b><?php echo $address; ?><br>
+  <b>   <?php echo display('Email') ?>  : </b><?php echo $email; ?><br>
+  <b>   <?php echo display('Contact') ?>  : </b><?php echo $phone; ?><br>
+</div>
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-condensed">
+
+
+                          <thead style="background-color:<?php echo $color; ?>">
+            <tr>
+
+                <th data-column-id="id" class="ID"   style="width:30px;" ><?php echo display('S.No') ?></th>
+                <th class="text-center text-white"><?php echo ('Expense Name') ?></th>
+                <th class="text-center text-white"><?php echo ('Expense Date') ?></th>
+                <th class="text-center text-white"><?php echo ('Expense Amount') ?></th>
+                <th class="text-center text-white"><?php echo ('Total Amount') ?></th>
+                <th class="text-center text-white"><?php echo ('Expense Payment Date') ?></th>
+                <th class="text-center text-white"><?php echo ('Description') ?></th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+                        <?php $s= 1; foreach ($expense_pdf as $key => $value) { ?>
+                        <tr>
+                            <td><?php echo $s; ?></td>
+                            <td class="text-center"><?php echo $value['expense_name']; ?></td>
+                            <td class="text-center"><?php echo $value['expense_date']; ?></td>
+                            <td class="text-center"><?php  echo $currency; ?><?php echo $value['expense_amount']; ?></td>
+                            <td class="text-center"><?php  echo $currency; ?><?php echo $value['total_amount']; ?></td>
+                            <td class="text-center"><?php echo $value['expense_payment_date']; ?></td>
+                            <td class="text-center"><?php echo $value['description']; ?></td>
+                        </tr>
+                        <?php $s++; } ?>
+                    </tbody>
+
+
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php 
+
+}
+?>
+   
     </div>
 </div>  
     </section> <!-- /.content -->

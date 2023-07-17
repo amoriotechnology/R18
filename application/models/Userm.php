@@ -147,12 +147,11 @@ on l.user_id=u.id where u.id='.$user_id;
     }
 
     #===========Delete user item========#
-
-    public function delete_user($user_id) {
-        $this->db->where('id', $user_id);
+   public function delete_user($user_id) {
+        $this->db->where('unique_id', $user_id);
         $this->db->delete('users');
 
-        $this->db->where('user_delete_id', $user_id);
+        $this->db->where('unique_id', $user_id);
         $this->db->delete('user_login');
 
         $this->db->select('*');

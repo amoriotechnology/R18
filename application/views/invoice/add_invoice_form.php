@@ -690,11 +690,11 @@ td {
                             </div>
                              <table class="taxtab table table-bordered table-hover">
                         <tr>
-                        <td class="hiden" style="width:35%;border:none;text-align:end;font-weight:bold;">
+                        <td class="hiden" style="width:31%;border:none;text-align:end;font-weight:bold;">
                            <?php echo display('Live Rate') ?> : 
                          </td>
                 
-                               <td class="hiden" style="width:12%;text-align-last: center;padding:5px;background-color: #38469f;border:none;font-weight:bold;color:white;">1 <?php  echo $curn_info_default;  ?>
+                               <td class="hiden" style="width:13%;text-align-last: center;padding:5px;background-color: #38469f;border:none;font-weight:bold;color:white;">1 <?php  echo $curn_info_default;  ?>
                                  = <input style="width: 80px;text-align:center;color:black;padding:5px;" type="text" class="custocurrency_rate"/>&nbsp;<label for="custocurrency" style="color:white;background-color: #38469f;"></label></td>
                     <td style="border:none;text-align:right;font-weight:bold;"><?php echo display('Tax') ?> : 
                                  </td>
@@ -721,7 +721,7 @@ td {
   <tr>
  
         <td  colspan="2" style="vertical-align:top;text-align:right;border:none;"><b><?php echo display('Overall TOTAL') ?> :</b></td>
-        <td colspan="1" style="border:none;padding-bottom: 40px;"><span class="input-symbol-euro"><input type="text" id="Over_all_Total" name="Over_all_Total"  style="width:230px;" class="form-control" value="0.00"  readonly="readonly"  /> </span></td>
+        <td colspan="1" style="border:none;padding-bottom: 40px;"><span class="input-symbol-euro"><input type="text" id="Over_all_Total" name="Over_all_Total"  style="width:270px;" class="form-control" value="0.00"  readonly="readonly"  /> </span></td>
          <td colspan="4" style="text-align:right;border:none;"><b><?php echo display('TAX DETAILS') ?> :</b></td><td colspan="1" style="border:none;">  <span class="input-symbol-euro">     <input type="text" class="form-control" style="width:150px;"  id="tax_details" value="0.00" name="tax_details"  readonly="readonly" /></span></td>
 </tr>
    <tr>
@@ -760,8 +760,8 @@ td {
         <td class="amt" style="border:none;" colspan="1">
             <table border="0">
       <tr class="amt">
-        <td class="cus" name="cus" style="border:none;width: 40px;"></td> <td>&nbsp</td> <td style="border:none;">
-                                          <input  type="text"   readonly id="balance"  name="balance"  required   />                     
+        <td class="cus" name="cus" style="border:none;width: 40px;"></td> <td style="width: 20px;">&nbsp</td>
+        <td>    <input  type="text"   readonly id="balance"  name="balance"  required   />                     
                                             </td>     </tr>
    </table>
               </td>
@@ -852,7 +852,7 @@ td {
                                     <label for="remark" class="col-sm-2 col-form-label"><?php echo display('Remarks/Conditions') ?></label>
                                     <div class="col-sm-8">
 
-<textarea rows="4" cols="50" id="remarks" name="remark" class=" form-control"    ><?php   if(!empty($update_invoice_set[0]->remarks)){echo trim($update_invoice_set[0]->remarks);} ?></textarea>
+<textarea rows="4" cols="50" id="remarks" name="remark" class=" form-control" placeholder='Remarks/Conditions'     ><?php   if(!empty($update_invoice_set[0]->remarks)){echo trim($update_invoice_set[0]->remarks);} ?></textarea>
 
 
                                     </div>
@@ -3092,7 +3092,7 @@ function payment_info(){
                          <div class="col-sm-12">
                          <div class="col-sm-6">
                          <div class="form-group row">
-                             <label for="cost_per_sqft" class="col-sm-4 col-form-label"><?php echo display('Cost per Sq. Ft') ?> </label>
+                             <label for="cost_per_sqft" class="col-sm-4 col-form-label"><?php echo display('Cost per Sq.Ft') ?> </label>
                              <div class="col-sm-8">
                                  <input type="text" name="costpersqft" class="form-control" id="cost_per_sqft" tabindex="4" placeholder="cost persqft" />
                              </div>
@@ -3106,8 +3106,8 @@ function payment_info(){
                          </div>
                          <div class="col-sm-6">
                       <div class="form-group row">
-                          <label for="sales_price" class="col-sm-4 col-form-label"><?php echo display('Sales
-                             Price per Sq.Ft') ?> </label>
+                          <label for="sales_price" class="col-sm-4 col-form-label"><?php echo display('Sales Price per Sq.Ft') ?> </label>
+                             
                           <div class="col-sm-8">
                               <input type="text" name="salespricepersqft" class="form-control" id="sales_price_per_sqft" tabindex="4"  placeholder=" Sales Price perSq.Ft" />
                           </div>

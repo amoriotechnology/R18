@@ -93,7 +93,7 @@ textarea:focus, input:focus{
                     	<div class="form-group row">
                             <label for="name" class="col-sm-3 col-form-label"><?php echo display('name') ?> <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <select class="form-control" name="person_id" id="nameofficeloanperson" tabindex="1">
+                                <select class="form-control" name="person_id"  style="width:704px;" id="nameofficeloanperson" tabindex="1">
                                     <option><?php echo display('select_one')?></option>
                                 <?php  foreach($person_list as $person) {?>  
                                     <option value="<?php  echo $person['first_name']." ".$person['last_name']?>"><?php  echo $person['first_name']." ".$person['last_name']?></option>
@@ -105,25 +105,41 @@ textarea:focus, input:focus{
                         <div class="form-group row">
                             <label for="phone" class="col-sm-3 col-form-label"><?php echo display('phone') ?> <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <input type="number" class="form-control phone" name="phone" id="phone" required="" placeholder="<?php echo display('phone') ?>" min="0" tabindex="2"/>
+                                <input type="number" class="form-control phone" name="phone" id="phone" style="width:705px;" required="" placeholder="<?php echo display('phone') ?>" min="0" tabindex="2"/>
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label for="ammount" class="col-sm-3 col-form-label"><?php echo display('ammount') ?> <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
                             <span class='form-control' style='background-color: #eee;'><?php   echo $currency; ?>  
-                               <input type="number"  name="ammount" id="ammount" required="" placeholder="<?php echo display('ammount') ?>" min="0" tabindex="3"/>
+                               <input type="number"  name="ammount" id="ammount"  style="width:704px;"  required="" placeholder="<?php echo display('ammount') ?>" min="0" tabindex="3"/>
                </span>
                             </div>
+                        </div> -->
+
+
+
+                        <div class="form-group row">
+                        <label for="ammount" class="col-sm-3 col-form-label"><?php echo display('ammount') ?> <i class="text-danger">*</i></label>
+                            <div class="col-sm-6">
+                            
+                            <input type="number"  name="ammount" id="ammount" class="form-control ammount" style="width:705px;background-color: #eee;"  required="" placeholder="<?php   echo $currency; ?> <?php echo display('ammount') ?>" min="0" tabindex="3"/>
+                            
                         </div>
+                        </div>
+
+
+
+
+
                          <div class="form-group row" id="payment_from">
                                 
                                     <label for="payment_type" class="col-sm-3 col-form-label"><?php
                                         echo display('payment_type');
                                         ?> <i class="text-danger">*</i></label>
-                                    <div class="col-sm-6">
-                                        <select name="paytype" id="paytype" class="form-control" required="" onchange="bank_paymet(this.value)" tabindex="3">
+                                    <div class="col-sm-5">
+                                        <select name="paytype" id="paytype"  class="form-control" required="" onchange="bank_paymet(this.value)" tabindex="3">
                                          <option value="" selected disabled> <?php echo display('Select Payment Type') ?></option>
                             <option value="<?php echo display('cash_payment')?>"><?php echo display('cash_payment')?></option>
                             <option value="<?php echo display('bank_payment')?>"><?php echo display('bank_payment')?></option> 
@@ -133,20 +149,20 @@ textarea:focus, input:focus{
                                         <?php  } ?>
                                         </select>
                                       
-
-                                     
-                                    </div>
-                                    <div  class=" col-sm-2">
-     <a  class="client-add-btn btn" aria-hidden="true" style="color:white;background-color:#38469f;"  data-toggle="modal" data-target="#payment_type" ><i class="fa fa-plus"></i></a>
-    </div>
+                            
                                 
                             </div>
+                            <div  class=" col-sm-0">
+     <a  class="client-add-btn btn" aria-hidden="true" style="color:white;background-color:#38469f;"  data-toggle="modal" data-target="#payment_type" ><i class="fa fa-plus"></i></a>
+    </div>  
+                                    </div>
+                             
                               
                             <div class="form-group row" id="bank_div">
                                 <label for="bank" class="col-sm-3 col-form-label"><?php
                                     echo display('bank');
                                     ?> <i class="text-danger">*</i></label>
-                                <div class="col-sm-6">
+                                <div class="col-sm-5">
                                    <select name="bank_id" class="form-control"  id="bankpayment">
                                         <option value=""><?php echo display('select_one') ?></option>
                                         <?php foreach($bank_name as $bank){ ?>                                          
@@ -156,7 +172,7 @@ textarea:focus, input:focus{
                                  
                                 </div>
 
-                                 <div class="col-sm-2">
+                                 <div class="col-sm-0">
                                  <a data-toggle="modal" href="#add_bank_info"  style="color:white;background-color:#38469f;" class="btn btn-primary"><i class="fa fa-university"></i></a>
                                </div>
 
@@ -167,14 +183,14 @@ textarea:focus, input:focus{
                         <div class="form-group row">
                             <label for="date" class="col-sm-3 col-form-label"><?php echo display('date') ?> <i class="text-danger"></i></label>
                             <div class="col-sm-6">
-                               <input type="date" class="form-control datepicker" name="date" id="date" value="<?php echo date("Y-m-d");?>" placeholder="<?php echo display('date') ?>" tabindex="4"/>
+                               <input type="date" class="form-control datepicker" name="date" id="date" style="width:704px;"        value="<?php echo date("Y-m-d");?>" placeholder="<?php echo display('date') ?>" tabindex="4"/>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="details" class="col-sm-3 col-form-label"><?php echo display('details') ?> <i class="text-danger"></i></label>
                             <div class="col-sm-6">
-                                <textarea class="form-control" name="details" id="details" placeholder="<?php echo display('details') ?>" tabindex="5"></textarea>
+                                <textarea class="form-control" name="details" id="details"  style="    width: 708px;height: 49px;" placeholder="<?php echo display('details') ?>" tabindex="5"></textarea>
                             </div>
                         </div>
 

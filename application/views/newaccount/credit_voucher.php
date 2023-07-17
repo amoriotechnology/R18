@@ -1,5 +1,9 @@
 <script src="<?php echo base_url() ?>my-assets/js/admin_js/account.js" type="text/javascript"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+
+
 <style>
     .select2{
         display:none;
@@ -90,7 +94,10 @@
                         <label for="ac" class="col-sm-2 col-form-label"><?php echo display('debit_account_head')?><i class="text-danger">*</i></label>
                         <div class="col-sm-4">
                           <select name="cmbDebit" id="cmbDebit" class="form-control" required="">
-                            <option value='1020101'><?php echo display('cash_in_hand')?></option>
+                         
+                          <option > Select Debit Account Head</option>
+
+                          <option value='1020101'><?php echo display('cash_in_hand')?></option>
                             <?php foreach ($crcc as $cracc) { ?>
                             <option value="<?php echo $cracc->HeadCode?>"><?php echo $cracc->HeadName?></option>
                            <?php  } ?>
@@ -101,7 +108,7 @@
                      <div class="form-group row">
                         <label for="date" class="col-sm-2 col-form-label"><?php echo display('date')?><i class="text-danger">*</i></label>
                         <div class="col-sm-4">
-                             <input type="text" name="dtpDate" id="dtpDate" class="form-control datepicker" value="<?php echo  date('Y-m-d')?>" required>
+                             <input type="date" name="dtpDate" id="dtpDate" class="form-control datepicker" value="<?php echo  date('Y-m-d')?>" required>
                         </div>
                     </div> 
                     <div class="form-group row">
@@ -123,9 +130,9 @@
                                 <tbody id="debitvoucher">
                                    
                                     <tr>
-                                        <td class="" width="200p">  
+                                        <td class="" width="250p">  
        <select name="cmbCode[]" id="cmbCode_1" class="form-control" onchange="load_dbtvouchercode(this.value,1)" required="">
-          <option value="">Please select One</option>
+       <option >Select Account Name</option>
          <?php foreach ($acc as $acc1) {?>
    <option value="<?php echo html_escape($acc1->HeadCode);?>"><?php echo html_escape($acc1->HeadName);?></option>
          <?php }?>
@@ -133,9 +140,9 @@
 
                                          </td>
                                         <td><input type="text" name="txtCode[]" value="" class="form-control "  id="txtCode_1" readonly=""></td>
-                                        <td><span class="input-symbol-euro"><input type="number" name="txtAmount[]" placeholder="0.00" value="" class="form-control total_price text-left"  id="txtAmount_1" onkeyup="dbtvouchercalculation(1)" required=""></span>
+                                        <td style="text-align:center;"><span class="input-symbol-euro"><input type="number" name="txtAmount[]" placeholder="0.00" value="" class="form-control total_price text-left"  id="txtAmount_1" onkeyup="dbtvouchercalculation(1)" required=""></span>
                                            </td>
-                                       <td>
+                                       <td     style="text-align:center;">
                                                 <button class="btn btn-danger red" type="button" value="<?php echo display('delete')?>" onclick="deleteRowdbtvoucher(this)"><i class="fa fa-trash-o"></i></button>
                                             </td>
 
@@ -149,17 +156,17 @@
                                         </td>
                                         <td colspan="1" class="text-right"><label  for="reason" class="  col-form-label"><?php echo display('total') ?></label>
                                            </td>
-                                        <td class="text-left">
+                                        <td class="text-left" style="text-align:center;"  >
                                            <span class="input-symbol-euro"> <input type="text" id="grandTotal" class="form-control text-left " name="grand_total" value="" placeholder="0.00" readonly="readonly" /></span>
                                         </td>
-                                         <td><a id="add_more" class="btn" name="add_more" style="color:white;background-color:#38469f;"  onClick="addaccountdbt('debitvoucher')"><i class="fa fa-plus"></i></a></td>
+                                         <td style="text-align:center;" ><a id="add_more" class="btn" name="add_more" style="color:white;background-color:#38469f;"  onClick="addaccountdbt('debitvoucher')"><i class="fa fa-plus"></i></a></td>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
                         <div class="form-group row">
                            
-                            <div class="col-sm-12 text-right">
+                            <div class="col-sm-12 text-left">
 
                                 <input type="submit" id="add_receive" class="btn" style="color:white;background-color:#38469f;" name="save" value="<?php echo display('save') ?>" tabindex="9"/>
                                

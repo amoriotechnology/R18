@@ -54,9 +54,7 @@
 	     <div class="row">
             <div class="col-sm-12">
               
-                	<?php //if($this->permission1->method('add_user','create')->access()){?>
-                  <a href="<?php echo base_url('User/add_user')?>" class="btn btn-success m-b-5 m-r-2"><i class="ti-plus"> </i> Add User </a>
-              <?php //}?>
+            
                
             </div>
         </div>
@@ -67,8 +65,9 @@
 		        <div class="panel panel-bd lobidrag">
 		            <div class="panel-heading">
 		                <div class="panel-title">
-		                    <!-- <h4><?php echo display('manage_users') ?> </h4> -->
-							<h4>Manage user </h4>
+
+							<a href="<?php echo base_url('User/add_user')?>" class="btn btnclr" style="background-color: #3CA5DE; color: #fff;" ><i class="ti-plus"> </i> Add User </a>
+
 		                </div>
 		            </div>
 		            <div class="panel-body">
@@ -118,7 +117,7 @@
 												<?php
 													if ($user["u_type"] != 2) {
 												?>
-												<a href="<?php echo base_url('User/user_delete/'.$user["user_delete_id"])?>" class="btn btn-danger btn-sm"  data-toggle="tooltip" onclick="return confirm('Are you Sure ?')" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> " style='color:#fff;'><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												<a href="<?php echo base_url('User/user_delete/'.$user["unique_id"])?>" class="btn btn-danger btn-sm"  data-toggle="tooltip" onclick="return confirm('Are you Sure ?')" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> " style='color:#fff;'><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 												<?php
 													}
 												?>

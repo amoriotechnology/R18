@@ -21,6 +21,10 @@ textarea:focus, input:focus{
  .text-right {
     text-align: left; 
 }
+
+.select2-selection{
+    display:none;
+}
    
     </style>
 <div class="content-wrapper">
@@ -34,7 +38,7 @@ textarea:focus, input:focus{
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('bank') ?></a></li>
-                <li class="active"><?php echo display('bank_transaction') ?></li>
+                <li class="active" style="color:orange"><?php echo display('bank_transaction') ?></li>
             </ol>
         </div>
     </section>
@@ -63,35 +67,38 @@ textarea:focus, input:focus{
             $this->session->unset_userdata('error_message');
             }
         ?>
-        <div class="row">
-            <div class="col-sm-12">
-               
-                <?php if($this->permission1->method('add_bank','create')->access()){ ?>
-                  <a href="<?php echo base_url('Csettings/index')?>" class="btn btn-info m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo display('add_new_bank')?> </a>
-              <?php }?>
-             <?php if($this->permission1->method('bank_list','read')->access()){ ?>
-                  <a href="<?php echo base_url('Csettings/bank_list')?>" class="btn btn-success m-b-5 m-r-2"><i class="ti-align-justify"> </i>  <?php echo display('manage_bank')?> </a>
-                   <?php }?>
-               
-            </div>
-        </div>
+
+
+
+
+
+
+
+
 
         <!-- New bank -->
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-bd lobidrag">
-                    <div class="panel-heading">
+
+
+      <div class="panel-heading" style="height: 50px;">
                         <div class="panel-title">
+                               <a style="float:right;background-color:#38469f;color:white;" href="<?php echo base_url('Csettings/bank_transaction_list') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo ('Manage Transaction')?> </a>
                         </div>
                     </div>
+
+
+    <?php $rand=rand(); ?>
                    <?php echo form_open_multipart('Csettings/bank_debit_credit_manage_add',array('class' => 'form-vertical','id' => 'validate' ))?>
                     <div class="panel-body">
-
+                    
+<input type="hidden" name="dynamic_id" value="<?php  echo $rand ; ?>"/>
                     	<div class="form-group row">
                             <label for="date" class="col-sm-3 col-form-label"><?php echo display('date') ?> <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
                             <?php date_default_timezone_set("Asia/Dhaka"); $date = date('Y-m-d'); ?>
-                                <input type="text" class="form-control datepicker" name="date" id="date" required="" placeholder="<?php echo display('date') ?>" value="<?php echo $date; ?>" tabindex="1"/>
+                                <input type="date" class="form-control datepicker" name="date" id="date" required="" placeholder="<?php echo display('date') ?>" value="<?php echo $date; ?>" tabindex="1"/>
                             </div>
                         </div>
 

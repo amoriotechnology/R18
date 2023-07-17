@@ -1,3 +1,7 @@
+
+<?php error_reporting(1);  ?>
+
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
@@ -137,157 +141,206 @@ padding:0px;
 
                     
 
-                    <div class="panel panel-default">
-                       <div class="panel-body"> 
-                        <div class="row">
 
 
-                    <div class="col-sm-3">
-                    <a href="<?php echo base_url('Chrm/add_timesheet') ?>" class="btn btnclr dropdown-toggle" style="color:white;background-color: #337ab7;border-color: #2e6da4;"> <?php echo ('Add Time Sheet') ?></a>
+
+
+
+
+
+
+
+
+
+
+                <div class="row">
+                <div class="panel panel-bd lobidrag">
+
+                    <div class="panel-heading" style="height: 60px;">
+   <div class="col-sm-10">
                 
 
-                </div>
 
 
 
-             
 
-                      
-                    <div class="col-sm-6">
+
+   
+   <?php    foreach(  $this->session->userdata('perm_data') as $test){
+    $split=explode('-',$test);
+    if(trim($split[0])=='hrm' && $_SESSION['u_type'] ==3 && trim($split[1])=='1000'){
+      
+      
+       ?>
+
+<a href="<?php echo base_url('Chrm/add_timesheet') ?>" class="btn btnclr dropdown-toggle" style="color:white;background-color: #337ab7;border-color: #2e6da4;"> <?php echo ('Add Time Sheet') ?></a>
+                    
+                    <?php break;}} 
+                    if($_SESSION['u_type'] ==2){ ?>
+
+<a href="<?php echo base_url('Chrm/add_timesheet') ?>" class="btn btnclr dropdown-toggle" style="color:white;background-color: #337ab7;border-color: #2e6da4;"> <?php echo ('Add Time Sheet') ?></a>
+
+                        <?php  } ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <a onclick="reload();"  >  <i class="fa fa-refresh" style="font-size:25px;float:right;" aria-hidden="true"></i> </a>
-                    </div>  
-                    
-                    
-                    <div class="col-sm-1">
-                    <i class="fa fa-cog"  aria-hidden="true" id="myBtn" style="font-size:25px ;" onClick="columnSwitchMODAL()"></i> <!-- onclick opens MODAL -->
-                    </div>  
+                  </div>
 
-                
-                            <div class="dropdown bootcol" id="drop" style="float:right;padding-right:20px;padding-bottom:10px;">
-    <button class="btn btnclr dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                           <div class="col-sm-2">
+
+
+                    <i class="fa fa-cog"  aria-hidden="true" id="myBtn" style="font-size:25px;" onClick="columnSwitchMODAL()"></i> <!-- onclick opens MODAL -->
+
+                    <div class="dropdown bootcol" id="drop" style="float:right;padding-right:20px;padding-bottom:10px;">
+                    <button class="btn btnclr dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
        <span class="glyphicon glyphicon-th-list"></span>  <?php echo display('download') ?>
      
     </button>
-
-        
-
-
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">          
-      <li><a href="#" id="cmd"> <img src="<?php echo base_url()?>assets/images/pdf.png" width="24px"> PDF</a></li>
-      <li class="divider"></li>                   
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
    
-      <li><a href="#" onclick="$('#ProfarmaInvList').tableExport({type:'excel',escape:'false'});"> <img src="<?php echo base_url()?>assets/images/xls.png" width="24px"> XLS</a></li>           
-
+  
+                
+      <li><a href="#" onclick="generate()"> <img src="<?php echo base_url()?>assets/images/pdf.png" width="24px"><?php echo display('PDF') ?> </a></li>
+      
+      <li class="divider"></li>         
+                  
+      <li><a href="#" onclick="$('#ProfarmaInvList').tableExport({type:'excel',escape:'false'});"> <img src="<?php echo base_url()?>assets/images/xls.png" width="24px">  <?php echo display('XLS') ?></a></li>
+                 
     </ul>
 
-
     &nbsp;
-    <button type="button" style="float:right;"  class="btn btnclr dropdown-toggle"  onclick="printDiv('printableArea')"><?php echo display('print') ?></button>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-
-
-              
-                <div class="panel panel-bd lobidrag">
-
-<div class="panel-body"  id="dataTableExample3" >
+    <input type="button" class="btn btnclr" name="btnPrint" id="btnPrint"   value="Print" onclick="printDiv('printArea');"/>
+  </div>
+  </div>
+  </div>      
+  </div>
 
 
 
 
-<div class="row">
-<div class="col-sm-0"  style="text-align:right;">
 
 
-<div class="panel-title" >
-<div id="for_filter_by" class="for_filter_by" style="display: inline;text-align:right;"><label for="filter_by"><?php echo display('Filter By') ?>&nbsp;&nbsp;
 
-</label><select id="filterby" style="border-radius:5px;height:25px;">
-<option value="1"><?php echo display('Sl') ?></option>
+
+
+
+
+
+
+
+   <!-- Manage  Employee -->
+
+   <div class="row">
+
+<div class="col-sm-12">
+
+    <div class="panel panel-bd lobidrag">
+
+        <div class="panel-heading">
+<div class="row"> 
+<div id="for_filter_by" class="for_filter_by" style="display: inline;"><label for="filter_by"> <?php echo display('Filter By') ?> &nbsp;&nbsp;
+      
+       </label><select id="filterby" style="border-radius:5px;height:25px;">
+       <option value="1"><?php echo display('Sl') ?></option>
 <option value="2">Employee Name</option>
 <option value="3">Job title</option>
 <option value="4">Duration</option>
 <option value="5">Daily Break</option>
 <option value="6">Payment terms</option>
 <option value="7">month</option>
-
-</select> <input id="filterinput" style="border-radius:5px;height:25px;" type="text">
-
+      </select> <input id="filterinput" style="border-radius:5px;height:25px;" type="text"></div>
 </div>
+        </div>
+
+
+
+
+
+        <div class="panel-body" style="padding-top: 0px;">
+<div class="sortableTable__container">
+
+<div  id="printArea">
+             <div id="content" id="printArea">
+<div class="sortableTable__discard">
 </div>
+        <div id="customers">
+
+
+<table class="table table-bordered" cellspacing="0" width="100%" id="ProfarmaInvList">
+
+
+<thead class="sortableTable">
+<tr style="background-color: #337AB7;border-color: #2E6DA4;" class="sortableTable__header">
+<th class="1 value"  data-col="1"  data-resizable-column-id="1"    ><?php echo display('sl') ?></th>
+
+<th class="2 value"  data-col="2"  data-resizable-column-id="2"    >Employee Name</th>
+
+<th class="3 value"  data-col="3"  data-resizable-column-id="3"   >Job title</th>
+
+<th class="4 value"  data-col="4"  data-resizable-column-id="4"   >Duration</th>
+
+<th class="5 value"  data-col="5"  data-resizable-column-id="5"   >Daily Break</th>
+
+<th class="6 value"  data-col="6"  data-resizable-column-id="6" >Payment terms</th>
+
+<th class="7 value"  data-col="7"  data-resizable-column-id="7">month</th>
+
+
+<th class="8 value"  data-col="8"  data-resizable-column-id="8">Action</th>
+
+</tr>
+</thead>
+<tbody class="sortableTable__body" id="tab" >
+
+
+<?php
 
 
 
 
+if ($timesheet_list) {
 
+    ?>
 
-</div>
-</div>
+   
 
-<div id="printableArea">
+    <?php
 
-    <div class="table-responsive"  id="content">
+    $sl = 1;
 
-        <table id="ProfarmaInvList" class="table table-bordered table-striped table-hover datatable" id="ProfarmaInvList" >
-
-            <thead class="sortableTable" >
-
-    <tr  class="sortableTable__header">
-
-    <th class="1 value"  data-col="1"  data-resizable-column-id="1"    ><?php echo display('sl') ?></th>
-
-    <th class="2 value"  data-col="2"  data-resizable-column-id="2"    >Employee Name</th>
-
-    <th class="3 value"  data-col="3"  data-resizable-column-id="3"   >Job title</th>
-
-    <th class="4 value"  data-col="4"  data-resizable-column-id="4"   >Duration</th>
-
-    <th class="5 value"  data-col="5"  data-resizable-column-id="5"   >Daily Break</th>
-
-    <th class="6 value"  data-col="6"  data-resizable-column-id="6" >Payment terms</th>
-
-    <th class="7 value"  data-col="7"  data-resizable-column-id="7">month</th>
-
-
-    <th class="8 value"  data-col="8"  data-resizable-column-id="8">Action</th>
-
-    </tr>
-
-            </thead>
-
-            <tbody class="sortableTable__body" id="tab" >
-
-
-                <?php
+     foreach($timesheet_list as $timsht){?>
 
 
 
 
-                if ($timesheet_list) {
+    <tr>
 
-                    ?>
+    <td class="1 value" data-col="1"><?php echo $sl;?></td>
 
-                   
-
-                    <?php
-
-                    $sl = 1;
-
-                     foreach($timesheet_list as $timsht){?>
-
-
-
-
-                    <tr>
-
-                    <td class="1 value" data-col="1"><?php echo $sl;?></td>
-
- <td class="2 value"  data-col="2">  <?php echo html_escape($timsht['first_name']." ".$timsht['last_name']);?></a></td>
+<td class="2 value"  data-col="2">  <?php echo html_escape($timsht['first_name']." ".$timsht['last_name']);?></a></td>
 <td class="3 value"  data-col="3"><?php echo html_escape($timsht['job_title']);?></td>
 
 <td class="4 value"  data-col="4"><?php echo html_escape($timsht['duration']);?></td>
@@ -304,60 +357,119 @@ padding:0px;
 
 
 
- <td class="8 value"  data-col="8" >
+<td class="8 value"  data-col="8" >
 
-                <center>
+<center>
 
-                    <?php echo form_open() ?>
-
-
-          <a href="<?php echo base_url() . 'Chrm/edit_timesheet/'.$timsht['timesheet_id']; ?>" class="btnclr btn m-b-5 m-r-2" data-toggle="tooltip" data-placement="left" title="<?php echo display('update') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-
-               <a href="<?php echo base_url() . 'Chrm/employee_payslip_permission/'.$timsht['timesheet_id']; ?>" class="btnclr btn m-b-5 m-r-2" data-toggle="tooltip" data-placement="left" title="Administrator Update"><i class="fas fa-user-tie" aria-hidden="true"></i></a>
-
-               <a class="btnclr btn m-b-5 m-r-2" href="<?php echo base_url('Chrm/time_sheet_pdf/'.$timsht['timesheet_id'])?>"><i class="fa fa-download" aria-hidden="true"></i></a>
-             
-             
-               <a href="<?php echo base_url('Chrm/timesheet_delete/'.$timsht['timesheet_id']) ?>" class="btnclr btn m-b-5 m-r-2" onclick="return confirm('<?php echo display('are_you_sure') ?>')" data-toggle="tooltip" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+    <?php echo form_open() ?>
 
 
 
-                        <?php echo form_close() ?>
+<a href="<?php echo base_url() . 'Chrm/employee_payslip_permission/'.$timsht['timesheet_id']; ?>" class="btnclr btn m-b-5 m-r-2" data-toggle="tooltip" data-placement="left" title="Administrator Update"><i class="fas fa-user-tie" aria-hidden="true"></i></a>
 
-                </center>
+<a class="btnclr btn m-b-5 m-r-2" href="<?php echo base_url('Chrm/time_sheet_pdf/'.$timsht['timesheet_id'])?>"><i class="fa fa-download" aria-hidden="true"></i></a>
 
-                </td>
 
-                </tr>
 
-               
 
-                <?php
 
-                $sl++;
 
-            }
-        }
 
-            ?>
 
-            </tbody>
 
-            <tfoot></tfoot>
 
-        </table>
 
-    </div>
 
+
+
+
+<?php    foreach(  $this->session->userdata('perm_data') as $test){
+    $split=explode('-',$test);
+    if(trim($split[0])=='hrm' && $_SESSION['u_type'] ==3 && trim($split[1])=='0010'){
+      
+      
+       ?>
+
+<a href="<?php echo base_url() . 'Chrm/edit_timesheet/'.$timsht['timesheet_id']; ?>" class="btnclr btn m-b-5 m-r-2" data-toggle="tooltip" data-placement="left" title="<?php echo display('update') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    
+                    <?php break;}} 
+                    if($_SESSION['u_type'] ==2){ ?>
+
+<a href="<?php echo base_url() . 'Chrm/edit_timesheet/'.$timsht['timesheet_id']; ?>" class="btnclr btn m-b-5 m-r-2" data-toggle="tooltip" data-placement="left" title="<?php echo display('update') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+                        <?php  } ?>
+
+
+
+
+
+
+
+
+                        <?php    foreach(  $this->session->userdata('perm_data') as $test){
+    $split=explode('-',$test);
+    if(trim($split[0])=='hrm' && $_SESSION['u_type'] ==3 && trim($split[1])=='0001'){
+      
+      
+       ?>
+
+<a href="<?php echo base_url('Chrm/timesheet_delete/'.$timsht['timesheet_id']) ?>" class="btnclr btn m-b-5 m-r-2" onclick="return confirm('<?php echo display('are_you_sure') ?>')" data-toggle="tooltip" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    
+                    <?php break;}} 
+                    if($_SESSION['u_type'] ==2){ ?>
+
+<a href="<?php echo base_url('Chrm/timesheet_delete/'.$timsht['timesheet_id']) ?>" class="btnclr btn m-b-5 m-r-2" onclick="return confirm('<?php echo display('are_you_sure') ?>')" data-toggle="tooltip" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+                        <?php  } ?>
+
+
+
+
+
+
+
+        <?php echo form_close() ?>
+
+</center>
+
+</td>
+
+</tr>
+
+
+
+<?php
+
+$sl++;
+
+}
+}
+
+?>
+
+</tbody>
+</table>
+
+
+</div> 
+</div>
+</section>
+</div> 
+</div> 
+</div> 
 </div>
 
-</div>
-</div>
-</div>
 
-</div>
 
-</div>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -393,9 +505,32 @@ padding:0px;
 
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script type="text/javascript" src="<?php echo base_url()?>my-assets/js/profarma.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script>
- $(document).on('keyup', '#filterinput', function(){
+    $(document).on('keyup', '#filterinput', function(){
   
     var value = $(this).val().toLowerCase();
     var filter=$("#filterby").val();
@@ -403,6 +538,7 @@ padding:0px;
         $(this).toggle($(this).find("td."+filter).text().toLowerCase().indexOf(value) > -1)
     });
 });
+
 $("input:checkbox:not(:checked)").each(function() {
     var column = "table ." + $(this).attr("value");
     console.log("Heyy : "+column);
@@ -414,44 +550,53 @@ $("input:checkbox").click(function(){
       console.log("Heyy : "+column);
     $(column).toggle();
 });
-    var csrfName = '<?php echo $this->security->get_csrf_token_name();?>';
-var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
-$editor = $('#submit'),
-  $editor.on('click', function(e) {
-    if (this.checkValidity && !this.checkValidity()) return;
-    e.preventDefault();
-    var yourArray = [];
-    //loop through all checkboxes which is checked
-    $('.modal-content_colSwitch input[type=checkbox]:not(:checked)').each(function() {
-      yourArray.push($(this).val());//push value in array
-    });
-   
-    values = {
-    
-      extralist_text: yourArray
-    
-    };
-    console.log(values)
-    var json=values;
-    var data = {
-        page:$('#url').val(),
-          content: yourArray
-       
-       };
-       data[csrfName] = csrfHash;
-$.ajax({
-    
-    type: "POST",  
-    url:'<?php echo base_url();?>Cinvoice/setting',
-   
-    data: data,
-    dataType: "json", 
-    success: function(data) {
-        if(data) {
-           console.log(data);
-        }
-    }  
+
+
+$('#cmd').click(function() {
+
+  var pdf = new jsPDF('p','pt','a4');
+  $('#for_numrows,#pagesControllers').hide();
+    const invoice = document.getElementById("content");
+             console.log(invoice);
+             console.log(window);
+             var pageWidth = 8.5;
+             var margin=0.5;
+             var opt = {
+   lineHeight : 1.2,
+   margin : 0.2,
+   maxLineWidth : pageWidth - margin *1,
+                 filename: 'tax_details'+'.pdf',
+                 allowTaint: true,
+                 html2canvas: { scale: 3 },
+                 jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+             };
+              html2pdf().from(invoice).set(opt).toPdf().get('pdf').then(function (pdf) {
+  var totalPages = pdf.internal.getNumberOfPages();
+ for (var i = 1; i <= totalPages; i++) {
+    pdf.setPage(i);
+    pdf.setFontSize(10);
+    pdf.setTextColor(150);
+  }
+  }).save('tax_details.pdf');
+    setTimeout( function(){
+      $('#for_numrows,#pagesControllers').show();
+    }, 4500 );
 });
-  });
-</script>
+
+
+
+
+function reload(){
+    location.reload();
+}
+
+
+    </script>
+
+
+<style>
+	.select2-selection{
+     display:none;
+	}
+</style>
 

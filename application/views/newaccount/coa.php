@@ -86,13 +86,11 @@ if(isset($_POST['btnSave']))
 <div class="row">
     <div class="col-sm-12 col-md-12">
         <div class="panel panel-bd lobidrag">
-            <div class="panel-heading">
+            <!-- <div class="panel-heading">
                 <div class="panel-title">
-                    <h4>
-
-                    </h4>
+                
                 </div>
-            </div>
+            </div> -->
               <div class="panel-body">
 
                 <div class="row" id="">
@@ -110,13 +108,21 @@ if(isset($_POST['btnSave']))
                                 <div class="col-sm-1">
                             <button type="submit" style="background-color: #3CA5DE; color: #fff;" class="btn btnclr" name="btnSave" id="btnSerach"><?php echo display('find') ?></button>
                         </div> 
+
                          <div class="col-sm-3"></div>
+
                          <?php  if(isset($_POST['btnSave'])){?>
+                            <a onclick="reload();"  >  <i class="fa fa-refresh" style="font-size:25px;float:right;" aria-hidden="true"></i> </a>
+
                     <div class="col-sm-2">
-                     <i class="fa fa-cog"  aria-hidden="true" id="myBtn" style="font-size:25px;padding-right: 30px;" onClick="columnSwitchMODAL()"></i>
-                                      <div class="dropdown bootcol" id="drop" style="float:right;padding-right:20px;padding-bottom:10px;">
-    <button class="btn btnclr dropdown-toggle" type="button" id="dropdownMenu1" style="padding: revert;background-color:#38469f;color:white;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-       <span class="glyphicon glyphicon-th-list"></span> Download
+
+                    <i class="fa fa-cog"  aria-hidden="true" id="myBtn" style="font-size:25px;" onClick="columnSwitchMODAL()"></i> <!-- onclick opens MODAL -->
+                    &nbsp;
+ 
+                    <div class="dropdown bootcol" id="drop" style="float:right;padding-right:20px;padding-bottom:10px;">
+
+    <button class="btn btnclr dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+       <span class="glyphicon glyphicon-th-list"></span>  <?php echo display('download') ?>
      
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -130,6 +136,8 @@ if(isset($_POST['btnSave']))
       <li><a href="#" onclick="$('#ProfarmaInvList').tableExport({type:'excel',escape:'false'});"> <img src="<?php echo base_url()?>assets/images/xls.png" width="24px"> XLS</a></li>
                
     </ul>
+    &nbsp;
+    <input type="button" class="btn btnclr" name="btnPrint" id="btnPrint"   value="Print" onclick="printDiv('printArea');"/>
   </div>
     </div>
     <?php   } ?>
@@ -187,7 +195,7 @@ if(isset($_POST['btnSave']))
           <?php
                          if(isset($_POST['btnSave'])){?>
         <div class="panel panel-bd lobidrag">
-            <div class="panel-body">
+            <div class="panel-body" id="printArea">
                 <div class="">
                    <?php echo "<span style='font-weight:bold;'>Date : </span>".$_POST['sales_date']; ?>
                    <div class="sortableTable__container">
@@ -258,25 +266,28 @@ for($i=0;$i<count($sql1);$i++){
 
                         </tbody>
                     </table>
-                     </div> </div>
+                     </div> </div> </div>
+                </div>
  <div id="myModal_colSwitch" class="modal_colSwitch">
-                    <div class="modal-content_colSwitch" style="width:25%;height:40%;">
+                    <div class="modal-content_colSwitch" style="width:22%;height:33%;">
                           <span class="close_colSwitch">&times;</span>
-                          <div class="col-sm-6"><br><br>
-                          <div class="form-group row">
+       
 
-                          <input type="checkbox"  data-control-column="1" checked = "checked" class="1"  value="1"/>Voucher No<br>
-                          <input type="checkbox"  data-control-column="2" checked = "checked" class="2"  value="2"/>Remarks<br>
-
-    <input type="checkbox"  data-control-column="3" checked = "checked" class="3"  value="3"/>Amount<br>
- 
-    <input type="checkbox"  data-control-column="4" checked = "checked" class="4"   value="4"/>Date<br>
-  
-</div>
-</div>
+<div class="col-sm-2" >   </div>
 
 
-                          
+<div class="col-sm-3" ><br>
+                          <div class="form-group row"> 
+                         
+                          <br><input type="checkbox"  data-control-column="1" checked = "checked" class="1"  value="1"/>&nbsp; <?php echo ('Voucher No')?><br>
+                          <br><input type="checkbox"  data-control-column="2" checked = "checked" class="2"  value="2"/>&nbsp;<?php echo ('Remarks')?><br>
+                          <br><input type="checkbox"  data-control-column="3" checked = "checked" class="3"   value="3"/>&nbsp;<?php echo display('Amount')?><br>
+
+                          <br><input type="checkbox"  data-control-column="4" checked = "checked" class="4"   value="4"/>&nbsp;<?php echo display('Date')?><br>
+             </div>
+        </div>
+
+   
 
   
 
@@ -316,3 +327,9 @@ $("input:checkbox").click(function(){
     </script>
 
 
+
+<script>
+    function reload(){
+    location.reload();
+}
+</script>

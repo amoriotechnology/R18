@@ -100,7 +100,7 @@ class Accounts_model extends CI_Model {
 
 // Accounts list
 
-    public function Transacc()
+      public function Transacc()
 
     {
 
@@ -111,6 +111,7 @@ class Accounts_model extends CI_Model {
             ->where('IsTransaction', 1)  
 
             ->where('IsActive', 1) 
+            ->where('CreateBy', $this->session->userdata('id')) 
 
             ->order_by('HeadName')
 
@@ -133,6 +134,9 @@ class Accounts_model extends CI_Model {
             ->like('HeadCode',1020102, 'after')
 
             ->where('IsTransaction', 1) 
+           
+            ->where('CreateBy', $this->session->userdata('id')) 
+            
 
             ->order_by('HeadName')
 
@@ -1417,26 +1421,15 @@ public function journal()
  }
 
 
-    public  function get_general_ledger(){
-
-
+  public  function get_general_ledger(){
 
         $this->db->select('*');
-
         $this->db->from('acc_coa');
-
         $this->db->where('IsGL',0);
-
+        $this->db->where('CreateBy', $this->session->userdata('user_id')) ;
         $this->db->order_by('HeadName', 'asc');
-
         $query = $this->db->get();
-
         return $query->result();
-
-
-
-
-
     }
 
 

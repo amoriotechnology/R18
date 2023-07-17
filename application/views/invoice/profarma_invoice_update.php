@@ -122,6 +122,10 @@ textarea:focus, input:focus{
  content: '<?php echo $currency; ?>';
   left: 5px;
 }
+
+.select2-selection{
+display:none;
+}
 </style>
         <!-- Purchase report -->
         <div class="row">
@@ -140,11 +144,9 @@ textarea:focus, input:focus{
 <input type="submit" id="payment_history" name="payment_history" class="btn" style="float:right;color:white;background-color: #38469f;" value="<?php echo display('Payment History') ?>" style="float:right;margin-bottom:30px;"/>
                                             </form> </div> 
                              <div class="Column" style="float: right;">
-                            <?php if($this->permission1->method('manage_invoice','read')->access()){ ?>
 
                     <a style="background-color:#38469f;color:white;" href="<?php echo base_url('Cinvoice/manage_profarma_invoice') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo display('manage_invoice') ?> </a>
 
-                    <?php }?>
            
                      </div>    </div>
 
@@ -2080,83 +2082,92 @@ if (isNaN(value)) {
   $('#balance_modal').val("0");
    }
  });
-   $('#add_payment_info').submit(function (event) {
-      
-          
-      var dataString = {
-          dataString : $("#add_payment_info").serialize()
-      
-     };
-     dataString[csrfName] = csrfHash;
+ $('#add_payment_info').submit(function (event) {    
+   var dataString = {
+       dataString : $("#add_payment_info").serialize()
+  };
+  dataString[csrfName] = csrfHash;
+ 
+   $.ajax({
+       type:"POST",
+       dataType:"json",
+       url:"<?php echo base_url(); ?>Cinvoice/add_payment_info",
+       data:$("#add_payment_info").serialize(),
+
+       success:function (data) {
+ $('.amt').show();
+
+    $('#payment_modal').modal('hide');
+    $("#bodyModal1").html("Payment Successfully Completed");
+       $('#myModal1').modal('show');
     
-      $.ajax({
-          type:"POST",
-          dataType:"json",
-          url:"<?php echo base_url(); ?>Cinvoice/add_payment_info",
-          data:$("#add_payment_info").serialize(),
+    window.setTimeout(function(){
+        $('#myModal1').modal('hide');
+},2500);
+
+   var dataString = {
+       dataString : $("#histroy").serialize()
    
-          success:function (data) {
-          
-           $('#amount_paid').val($('#payment_from_modal').val());
-       $('#balance').val($('#balance_modal').val());
-       $('#amt').show();
-   $('#bal').show();
-       $('#payment_modal').modal('hide');
-       $("#bodyModal1").html("Payment Successfully Completed");
-          $('#myModal1').modal('show');
-       
-       window.setTimeout(function(){
-           $('#myModal1').modal('hide');
-   },2500);
-   
-   
-         
-         }
-   
-      });
-      event.preventDefault();
+  };
+  dataString[csrfName] = csrfHash;
+ 
+   $.ajax({
+       type:"POST",
+       dataType:"json",
+       url:"<?php echo base_url(); ?>Cinvoice/payment_history",
+       data:$("#histroy").serialize(),
+
+       success:function (data) {
+        console.log(data);
+        var gt=$('#customer_gtotal').val();
+        var amtpd=data.amt_paid;
+        console.log(data);
+        var bal= $('#customer_gtotal').val() - data.amt_paid;
+ $('#balance').val(bal);
+   $('#amount_paid').val(amtpd);
+      var t_rate=$('#custocurrency_rate').val();
+   document.getElementById("paid_convert").value=
+ 	(amtpd /t_rate ).toFixed(2);
+    document.getElementById("bal_convert").value=
+ 	(bal /t_rate ).toFixed(2);
+//             var resultFrom='<?php //echo // $curn_info_default ;?>';
+// var resultTo=$('.cus').html();
+// var searchValue_bal=parseInt(bal);
+// var searchValue_paid=parseInt(amtpd);
+// const api = "https://api.exchangerate-api.com/v4/latest/USD";
+// 	fetch(`${api}`)
+// 		.then(currency => {
+// 			return currency.json();
+// 		}).then(convert_paid);
+// 	fetch(`${api}`)
+// 		.then(currency => {
+// 			return currency.json();
+// 		}).then(convert_bal);
+//     function convert_paid(currency) {
+
+// 	let fromRate = currency.rates[resultFrom];
+// 	let toRate = currency.rates[resultTo];
+//   // console.log("PAID : FRom : "+fromRate +", To :"+toRate+', Search :'+searchValue_bal +",Total"+((toRate / fromRate) * searchValue_bal).toFixed(2));
+// document.getElementById("paid_convert").value=
+// 	((toRate / fromRate) * searchValue_paid).toFixed(2);
+
+// }
+// function convert_bal(currency) {
+// 	let fromRate = currency.rates[resultFrom];
+// 	let toRate = currency.rates[resultTo];
+//  // console.log("BAL :FRom : "+fromRate +", To :"+toRate+', Search :'+searchValue_bal +",Total"+((toRate / fromRate) * searchValue_bal).toFixed(2));
+// document.getElementById("bal_convert").value=
+// 	((toRate / fromRate) * searchValue_bal).toFixed(2);
+
+// }
+      }
+    });
+      $('#add_payment_info')[0].reset();
+      }
+
    });
-       $('#add_bank').submit(function (event) {
-      
-          
-      var dataString = {
-          dataString : $("#add_bank").serialize()
-      
-     };
-     dataString[csrfName] = csrfHash;
-    
-      $.ajax({
-          type:"POST",
-          dataType:"json",
-          url:"<?php echo base_url(); ?>Csettings/add_new_bank",
-          data:$("#add_bank").serialize(),
-   
-          success: function (data) {
-           $.each(data, function (i, item) {
-              
-               result = '<option value=' + data[i].bank_name + '>' + data[i].bank_name + '</option>';
-           });
-         
-           $('.bankpayment').selectmenu(); 
-           $('.bankpayment').append(result).selectmenu('refresh',true);
-          $("#bodyModal1").html("Bank Added Successfully");
-          $('#myModal3').modal('hide');
-          $('#add_bank_info').modal('hide');
-           $('#myModal1').modal('show');
-           $('#bank').show();
-          window.setTimeout(function(){
-         
-           $('#myModal5').modal('hide');
-           $('#myModal1').modal('hide');
-        // $('.modal').modal('hide'); 
-       $('.modal-backdrop').remove();
-        }, 2000);
-        
-         }
-   
-      });
-      event.preventDefault();
-   });
+   event.preventDefault();
+});
    $(document).ready(function(){
     $('.hiden').css("display","none");
       // $('.removebundle').hide();
@@ -2672,58 +2683,7 @@ if (isNaN(value)) {
  $('#balance_modal').val("0");
   }
 });
-$('#add_payment_info').submit(function (event) {    
-   var dataString = {
-       dataString : $("#add_payment_info").serialize()
-  };
-  dataString[csrfName] = csrfHash;
- 
-   $.ajax({
-       type:"POST",
-       dataType:"json",
-       url:"<?php echo base_url(); ?>Cinvoice/add_payment_info",
-       data:$("#add_payment_info").serialize(),
 
-       success:function (data) {
- $('.amt').show();
-
-    $('#payment_modal').modal('hide');
-    $("#bodyModal1").html("Payment Successfully Completed");
-       $('#myModal1').modal('show');
-    
-    window.setTimeout(function(){
-        $('#myModal1').modal('hide');
-},2500);
-
-   var dataString = {
-       dataString : $("#histroy").serialize()
-   
-  };
-  dataString[csrfName] = csrfHash;
- 
-   $.ajax({
-       type:"POST",
-       dataType:"json",
-       url:"<?php echo base_url(); ?>Cinvoice/payment_history",
-       data:$("#histroy").serialize(),
-
-       success:function (data) {
-        console.log(data);
-        var gt=$('#customer_gtotal').val();
-        var amtpd=data.amt_paid;
-        console.log(data);
-        var bal= $('#customer_gtotal').val() - data.amt_paid;
- $('#balance').val(bal);
-   $('#amount_paid').val(amtpd);
-  
-      }
-    });
-      $('#add_payment_info')[0].reset();
-      }
-
-   });
-   event.preventDefault();
-});
   $(document).on('keyup','.normalinvoice tbody tr:last',function (e) {
    //debugger;
 var tid=$(this).closest('table').attr('id');

@@ -70,19 +70,17 @@
                                                 
                                                 <tr>
                                                     <td align="left" class="print-table-tr">
-                                                    <img src="<?php echo base_url().$software_info[0]['invoice_logo'];?>" alt="logo" width="100px" height="80px">
-                                                    </td>
+                                                    <img src="<?php echo  base_url().$logo; ?>"   style='width: 90px;'  />
+
+                                                </td>
                                                     <td align="center" class="print-cominfo">
                                                         <span class="company-txt">
-                                                            <?php echo $company[0]['company_name'];?>
-                                                           
-                                                        </span><br>
-                                                        <?php echo $company[0]['address'];?>
-                                                        <br>
-                                                        <?php echo $company[0]['email'];?>
-                                                        <br>
-                                                         <?php echo $company[0]['mobile'];?>
+                                                     
                                                         
+                                                          <h3> <?php echo $company; ?> </h3>
+                                                         <h4></b><?php echo $address; ?> </h4>
+                                                         <h4></b><?php echo $email; ?> </h4>
+                                                         <h4></b><?php echo $phone; ?> </h4>
                                                     </td>
                                                    
                                                      <td align="right" class="print-table-tr">
@@ -178,19 +176,15 @@
                                                 
                                                 <tr>
                                                     <td align="left" class="print-table-tr">
-                                                        <img src="<?php echo base_url().$software_info[0]['invoice_logo'];?>" alt="logo" width="100px" height="80px">
+                                                    <img src="<?php echo  base_url().$logo; ?>"   style='width: 90px;'  />
                                                
                                                     </td>
                                                     <td align="center" class="print-cominfo">
                                                         <span class="company-txt">
-                                                            <?php echo $company[0]['company_name'];?>
-                                                           
-                                                        </span><br>
-                                                        <?php echo $company[0]['address'];?>
-                                                        <br>
-                                                        <?php echo $company[0]['email'];?>
-                                                        <br>
-                                                         <?php echo $company[0]['mobile'];?>
+                                                        <h3> <?php echo $company; ?> </h3>
+                                                         <h4></b><?php echo $address; ?> </h4>
+                                                         <h4></b><?php echo $email; ?> </h4>
+                                                         <h4></b><?php echo $phone; ?> </h4>
                                                         
                                                     </td>
                                                    

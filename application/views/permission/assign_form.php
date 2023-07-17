@@ -36,7 +36,7 @@
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('permission') ?></a></li>
-                <li class="active"><?php echo $title ?></li>
+                <li class="active" style="color:orange;"><?php echo $title ?></li>
             </ol>
         </div>
     </section>
@@ -122,10 +122,10 @@
                         
                     </div>
                
-                        <div class="form-group row text-right">
+                        <div class="form-group row text-left">
                               <div class="col-md-12">
-                            <button type="reset" class="btnclr btn m-b-5 m-r-2" style="color:white;background-color: #3991F4;"><?php echo display('reset') ?></button>
-                            <button type="submit" class="btnclr btn m-b-5 m-r-2" style="color:white;background-color: #3991F4;"><?php echo display('save') ?></button>
+                            <button type="reset" class="btn  m-b-5 m-r-2" style="color:white;background-color: #38469f;"><?php echo display('reset') ?></button>
+                            <button type="submit" class="btn  m-b-5 m-r-2" style="color:white;background-color: #38469f;"><?php echo display('save') ?></button>
                             </div>
                         </div>
                     <?php echo form_close() ?>

@@ -49,6 +49,48 @@ class Settings extends CI_Model {
         return false;
     }
 
+
+
+    // acc_transaction
+
+
+    public function transaction_information() {
+        $this->db->select('*');
+        $this->db->from('acc_transaction');
+        // $this->db->where('CreateBy', 1);
+                $this->db->where('create_user', 1);
+
+        $this->db->where('CreateBy',$this->session->userdata('user_id'));
+
+        $query = $this->db->get();
+
+        // echo $this->db->last_query();
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
+
+
+    public function edit_transaction_information($VNo) {
+        $this->db->select('*');
+        $this->db->from('acc_transaction');
+        $this->db->where('rand_id',$VNo);
+        $query = $this->db->get();
+        // echo $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
+
+
+
+
+
+
+
     //Person  List
     public function person_list_limt($per_page, $limit) {
         $this->db->select('*');
@@ -334,17 +376,17 @@ class Settings extends CI_Model {
     }
 
     //Get bank by id
-    // public function get_bank_by_id($bank_id) {
-    //     $this->db->select('*');
-    //     $this->db->from('bank_add');
-    //     $this->db->where('bank_id', $bank_id);
-    //     $this->db->where('status', 1);
-    //     $query = $this->db->get();
-    //     if ($query->num_rows() > 0) {
-    //         return $query->result_array();
-    //     }
-    //     return false;
-    // }
+    public function get_bank_by_id($bank_id) {
+        $this->db->select('*');
+        $this->db->from('bank_add');
+        $this->db->where('bank_id', $bank_id);
+        $this->db->where('status', 1);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
 
     // public function 
 
@@ -394,75 +436,130 @@ class Settings extends CI_Model {
     // }
 
  //Bank updaet by id
+
+
+
+
+
+
+
+
+
+    // public function bank_update_by_id($bank_id) {
+    //     if ($_FILES['signature_pic']['name']) {
+
+    //         $config['upload_path'] = './my-assets/image/logo/';
+    //         $config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG';
+    //         $config['max_size'] = "*";
+    //         $config['max_width'] = "*";
+    //         $config['max_height'] = "*";
+    //         $config['encrypt_name'] = TRUE;
+
+    //         $this->load->library('upload', $config);
+    //         if (!$this->upload->do_upload('signature_pic')) {
+    //             $error = array('error' => $this->upload->display_errors());
+    //             $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
+    //             redirect(base_url('Csettings/index'));
+    //         } else {
+    //             $image = $this->upload->data();
+    //             $signature_pic = base_url() . "my-assets/image/logo/" . $image['file_name'];
+    //         }
+    //     }
+
+    //     $old_logo = $this->input->post('old_pic',TRUE);
+
+    //     $data = array(
+    //         'bank_name' => $this->input->post('bank_name',TRUE),
+    //         'ac_name' => $this->input->post('ac_name',TRUE),
+    //         'ac_number' => $this->input->post('ac_no',TRUE),
+    //         'branch' => $this->input->post('branch',TRUE),
+    //         'signature_pic' => (!empty($signature_pic) ? $signature_pic : $old_logo),
+    //         'status' => 1
+    //     );
+    //     $bank_coaupdate = [
+    //          'HeadName'         => $this->input->post('bank_name',TRUE)
+    //     ];
+
+    //     $data['bank_name'] = $this->input->post('bank_name',TRUE);
+    //     $this->db->where('bank_id', $bank_id);
+    //     $this->db->update('bank_add', $data);
+    //      $this->db->where('HeadName', $this->input->post('oldname',TRUE));
+    //     $this->db->update('acc_coa', $bank_coaupdate);
+    //     return true;
+    // }
+
+
     public function bank_update_by_id($bank_id) {
-        if ($_FILES['signature_pic']['name']) {
-
-            $config['upload_path'] = './my-assets/image/logo/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG';
-            $config['max_size'] = "*";
-            $config['max_width'] = "*";
-            $config['max_height'] = "*";
-            $config['encrypt_name'] = TRUE;
-
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('signature_pic')) {
-                $error = array('error' => $this->upload->display_errors());
-                $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
-                redirect(base_url('Csettings/index'));
-            } else {
-                $image = $this->upload->data();
-                $signature_pic = base_url() . "my-assets/image/logo/" . $image['file_name'];
-            }
-        }
-
-        $old_logo = $this->input->post('old_pic',TRUE);
-
+ 
         $data = array(
             'bank_name' => $this->input->post('bank_name',TRUE),
             'ac_name' => $this->input->post('ac_name',TRUE),
             'ac_number' => $this->input->post('ac_no',TRUE),
             'branch' => $this->input->post('branch',TRUE),
-            'signature_pic' => (!empty($signature_pic) ? $signature_pic : $old_logo),
+            // 'signature_pic' => (!empty($signature_pic) ? $signature_pic : $old_logo),
             'status' => 1
         );
         $bank_coaupdate = [
              'HeadName'         => $this->input->post('bank_name',TRUE)
         ];
-
-        $data['bank_name'] = $this->input->post('bank_name',TRUE);
+        // $data['bank_name'] = $this->input->post('bank_name',TRUE);
         $this->db->where('bank_id', $bank_id);
         $this->db->update('bank_add', $data);
-         $this->db->where('HeadName', $this->input->post('oldname',TRUE));
+        // echo $this->db->last_query(); die();
+        $this->db->where('HeadName', $this->input->post('oldname',TRUE));
         $this->db->update('acc_coa', $bank_coaupdate);
+        //  echo $this->db->last_query(); die();
         return true;
     }
 
 
-    //==========Bank Ledger=============//
- public function bank_ledger($bank_name) {
-        $this->db->select('a.*,b.HeadName');
-        $this->db->from('acc_transaction a');
-        $this->db->join('acc_coa b','a.COAID=b.HeadCode');
-        $this->db->where('b.PHeadName','Cash At Bank');
-        if(!empty($bank_name)){
-        $this->db->where('b.HeadName',$bank_name);
-         }
-        // $this->db->where('a.VDate >=', $from);
-        // $this->db->where('a.VDate <=', $to);
-        $this->db->where('a.IsAppove',1);
-        $this->db->order_by('a.VDate','desc');
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        }
-        return false;
+public function bank_led($bank_name) {
+    $this->db->select('a.*,b.HeadName');
+    $this->db->from('acc_transaction a');
+    $this->db->join('acc_coa b','a.COAID=b.HeadCode');
+    $this->db->where('b.PHeadName','Cash At Bank');
+    if(!empty($bank_name)){
+    $this->db->where('b.HeadName',$bank_name);
+     }
+
+    $this->db->where('a.IsAppove',1);
+ 
+    $query = $this->db->get();
+    // echo $this->db->last_query();
+    if ($query->num_rows() > 0) {
+        return $query->result_array();
     }
-    //==========Bank Info=============//
+    return false;
+}
+    //==========Bank Ledger=============//
+public function bank_ledger($bank_name,$from,$to) {
+    $this->db->select('a.*,b.HeadName');
+    $this->db->from('acc_transaction a');
+    $this->db->join('acc_coa b','a.COAID=b.HeadCode');
+    $this->db->where('b.PHeadName','Cash At Bank');
+    if(!empty($bank_name)){
+    $this->db->where('b.HeadName',$bank_name);
+     }
+    $this->db->where('a.VDate >=', $from);
+    $this->db->where('a.VDate <=', $to);
+    $this->db->where('a.IsAppove',1);
+    $this->db->order_by('a.VDate','desc');
+    $query = $this->db->get();
+    //  echo $this->db->last_query(); 
+    
+    if ($query->num_rows() > 0) {
+        return $query->result_array();
+    }
+    return false;
+}
+
+//     //==========Bank Info=============//
     public function bank_info($bank_id) {
         $this->db->select('*');
         $this->db->from('bank_add');
         $this->db->where('bank_id', $bank_id);
         $query = $this->db->get();
+        // echo $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
@@ -471,11 +568,12 @@ class Settings extends CI_Model {
 
      public function bank_entry($data) {
         $this->db->insert('bank_add', $data);
+       
         $this->db->select('bank_name');
         $this->db->from('bank_add');
         $this->db->where('created_by', $this->session->userdata('user_id'));
-
         $query = $this->db->get();
+
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
@@ -578,7 +676,13 @@ class Settings extends CI_Model {
 
     //Submit payment
     public function submit_payment($data) {
+
+        //  print_r($data); die();
+        
         $result = $this->db->insert('person_ledger', $data);
+
+        // echo $this->db->last_query();die();
+
         if ($result) {
             return true;
         } else {
@@ -684,18 +788,17 @@ class Settings extends CI_Model {
     public function update_employee($postData,$transaction_id){
 
 
-        // print_r($transaction_id);
 
         $this->db->where('transaction_id', $transaction_id);
 
-        $this->db->update('person_ledger',$postData);
+        $this->db->delete('person_ledger');
 
+       //  echo $this->db->last_query(); 
         
 
         return true;
 
     }
-
 
 
 

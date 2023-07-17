@@ -337,9 +337,34 @@ $today = date('Y-m-d');
                     if($_SESSION['u_type'] ==2){ ?>
 
 <a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Ccpurchase/trucking_update_form/<?php echo  $arr['trucking_id'];  ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-<a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Ccpurchase/trucking_delete_form/<?php echo  $arr['trucking_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 
                         <?php  } ?>
+
+
+
+
+                        <?php    foreach(  $this->session->userdata('perm_data') as $test){
+    $split=explode('-',$test);
+    if(trim($split[0])=='expenses' && $_SESSION['u_type'] ==3 && trim($split[1])=='0001'){
+      
+      
+       ?>
+
+<a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" onclick="return confirm('<?php echo display('are_you_sure') ?>')" href="<?php echo base_url()?>Ccpurchase/trucking_delete_form/<?php echo  $arr['trucking_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    
+                    <?php break;}} 
+                    if($_SESSION['u_type'] ==2){ ?>
+
+<a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" onclick="return confirm('<?php echo display('are_you_sure') ?>')" href="<?php echo base_url()?>Ccpurchase/trucking_delete_form/<?php echo  $arr['trucking_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+                        <?php  } ?>
+
+
+
+
+
+
+
 
 
 

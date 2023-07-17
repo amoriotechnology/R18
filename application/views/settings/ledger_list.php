@@ -109,68 +109,47 @@ if (isset($error_message)) {
 
 
 
-<div class="panel panel-default">
-                    <div class="panel-body"> 
-                        <div class="row">
-                        <div class="col-sm-4">
-						<!-- <a href="<?php //echo base_url('Csettings/index') ?>" class="btnclr btn m-b-5 m-r-2" style="color:white;background-color: #337ab7;border-color: #2e6da4;"> Create Bank</a> -->
-
-                    <!-- <a href="<?php echo base_url('Cinvoice/add_product_csv') ?>" class="btnclr btn btn-primary m-b-5 m-r-2 text-white"><i class="ti-plus"> </i> &nbsp;  <?php //echo display('Add Invoice (CSV)') ?> </a> -->
-       
-                        </div>
-                        <div class="col-sm-5">
-                     
-                        <?php echo form_open_multipart('Cinvoice/manage_invoice',array('class' => 'form-vertical', 'id' => 'insert_sale','name' => 'insert_sale'))?>
-
-
-<!-- <?php
 
 
 
-//$today = date('Y-m-d');
-
-?> -->
-
-<!-- <div class="form-group">
-
-    <label class="" for="from_date"><?php //echo display('Search By Date Range'); ?>:</label>
-
-    <input type="text" name="daterange" style="padding: 5px;width: 180px;border-radius: 8px;"/>
-    <input type="submit" id="btn-filter" class="btnclr btn btn-success" value=<?php //echo display ('Search'); ?> >
-    
-</div>  -->
-<?php echo form_close() ?>
-                    </div>
-
-                    <div class="col-sm-1">
-                     
-                     <?php echo form_open_multipart('Cinvoice/manage_invoice',array('class' => 'form-vertical', 'id' => 'insert_sale','name' => 'insert_sale'))?>
 
 
-<?php
 
 
-$today = date('Y-m-d');
-
-?>
-
-<div class="form-group">
-<button type="submit"  style="border: none;
-    color: black;
-    border-radius: 30px;" >
- <i class="fa fa-refresh" style="font-size:20px;float:right;" aria-hidden="true"></i> 
-</button>
 
 
-</div> 
-<?php echo form_close() ?>
-                 </div>
 
-                    <div class="col-sm-2">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+         <div class="row">
+                <div class="panel panel-bd lobidrag">
+
+                    <div class="panel-heading" style="height: 60px;">
+   <div class="col-sm-10">
+
+                    <a onclick="reload();"  >  <i class="fa fa-refresh" style="font-size:25px;float:right;" aria-hidden="true"></i> </a>
+                  </div>
+
+                           <div class="col-sm-2">
+
+
                     <i class="fa fa-cog"  aria-hidden="true" id="myBtn" style="font-size:25px;" onClick="columnSwitchMODAL()"></i> <!-- onclick opens MODAL -->
-                   
+
                     <div class="dropdown bootcol" id="drop" style="float:right;padding-right:20px;padding-bottom:10px;">
-    <button class="btn btnclr dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <button class="btn btnclr dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
        <span class="glyphicon glyphicon-th-list"></span>  <?php echo display('download') ?>
      
     </button>
@@ -185,17 +164,21 @@ $today = date('Y-m-d');
       <li><a href="#" onclick="$('#ProfarmaInvList').tableExport({type:'excel',escape:'false'});"> <img src="<?php echo base_url()?>assets/images/xls.png" width="24px">  <?php echo display('XLS') ?></a></li>
                  
     </ul>
+
+    &nbsp;
+    <input type="button" class="btn btnclr" name="btnPrint" id="btnPrint"   value="Print" onclick="printDiv('printArea');"/>
   </div>
-
-  </div>  
-
-
-                </div>
-            </div>
-         </div>
-
-
+  </div>
+  </div>      
+  </div>
   
+
+
+
+
+
+
+
 
 
         <!-- Manage Invoice report -->
@@ -224,8 +207,21 @@ $today = date('Y-m-d');
 
                     <div class="panel-body" style="padding-top: 0px;">
 <div class="sortableTable__container">
+
+
+
+<div  id="printArea">
+                         <div id="content" id="printArea">
+
+
+
   <div class="sortableTable__discard">
   </div>
+
+
+
+
+
                     <div id="customers">
   <table class="table table-bordered" cellspacing="0" width="100%" id="ProfarmaInvList">
   <thead class="sortableTable">
@@ -233,12 +229,12 @@ $today = date('Y-m-d');
       <th class="1 value" data-col="1"      style="width: 80px; height: 40.0114px;" ><?php echo display('sl') ?></th>
         <th class="2 value"  data-col="2"    style="height: 45.0114px; width: 234.011px" > <?php echo display('bank_name')?></th>
         <th class="3 value"  data-col="3"   style="width: 248.011px;"        ><?php echo display('ac_name')?></th>
-        <th class="4 value" data-col="4"    style="width: 198.011px;"       ><?php echo display('ac_no')?></th>
-		<th class="5 value" data-col="5"    style="width: 198.011px;"       ><?php echo display('branch')?></th>
+        <th class="4 value" data-col="4"    style="width: 298.011px;"       ><?php echo display('ac_no')?></th>
+		<th class="5 value" data-col="5"    style="width: 298.011px;"       ><?php echo display('branch')?></th>
 		<th class="6 value" data-col="6"    style="width: 198.011px;"       ><?php echo display('balance')?></th>
         
       <div class="myButtonClass Action">
-         <th class="25 text-center" data-col="25" data-column-id="25" data-formatter="commands" data-sortable="false"   style="  width: 480.011px;  height: 39.0114px;"  ><?php echo display('Action')?></th>
+         <th class="7 text-center" data-col="7" data-column-id="7" data-formatter="commands" data-sortable="false"   style="  width: 480.011px;  height: 39.0114px;"  ><?php echo display('Action')?></th>
         </div>
       </tr>
     </thead>
@@ -279,53 +275,117 @@ $today = date('Y-m-d');
   </table>
       </div> </div>
 </section>
+
+
+
 <input type="hidden" value="Sale/New Sale" id="url"/>
+
 <script src="<?php echo base_url()?>assets/js/jquery.bootgrid.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.0-alpha.1/jspdf.plugin.autotable.js"></script>
 
 
-
-    <!-- The Modal Column Switch -->
-           <div id="myModal_colSwitch" class="modal_colSwitch" >
-                    <div class="modal-content_colSwitch" style="width:15%;height:30%;">
-                          <span class="close_colSwitch">&times;</span>
-                          <div class="col-sm-6"><br><br>
-                          <div class="form-group row">
-                          <input type="checkbox"  data-control-column="1" checked = "checked" class="1"  value="1"/> <?php echo display('ID')?><br>
-<input type="checkbox"  data-control-column="2" checked = "checked" class="2"  value="2"/> <?php echo display('bank_name')?><br>
-<input type="checkbox"  data-control-column="3" checked = "checked" class="3"   value="3"/> <?php echo display('ac_name')?><br>
-<input type="checkbox"  data-control-column="4" checked = "checked" class="4"   value="4"/> <?php echo display('ac_no')?><br>
-<input type="checkbox"  data-control-column="5" checked = "checked" class="5"  value="5"/> <?php echo display('branch')?><br>
-<input type="checkbox"  data-control-column="6" checked = "checked" class="6"   value="6"/> <?php echo display('balance')?><br>
-
-                          </div> </div>
-            </div>
-                </div>
-
-               </div>
-  
-
-                </div>
-
-
+<div id="myModal_colSwitch"  class="modal_colSwitch">
+                    <div class="modal-content_colSwitch" style="width:25%;height:30%;">
+                    <span class="close_colSwitch">&times;</span>
                        
+                          <div class="col-sm-2" ></div>
 
 
-
-                    </div>
-
-                </div>
-
-            </div>
-
+                          <div class="col-sm-3" ><br>
+                          <div class="form-group row"  > 
+                         
+                          <br><input type="checkbox"  data-control-column="1" checked = "checked" class="1" value="1"/>&nbsp;<?php echo display('ID')?><br>
+                          <br><input type="checkbox"  data-control-column="2" checked = "checked" class="2" value="2"/>&nbsp;<?php echo display('bank_name')?><br>
+                          <br><input type="checkbox"  data-control-column="3" checked = "checked" class="3 " value="3  "/>&nbsp;<?php echo display('ac_name')?> <br>
+                          <br><input type="checkbox"  data-control-column="4" checked = "checked" class="4" value="4"/>&nbsp;<?php echo display('ac_no')?><br>
+             </div>
         </div>
 
-    </section>
-    <input type ="hidden" name="csrf_test_name" id="csrf_test_name" value="<?php echo $this->security->get_csrf_hash();?>">
 
+
+        <div class="col-sm-2" ><br>
+        <div class="form-group row"  >
+
+        <br><input type="checkbox"  data-control-column="5" checked = "checked" class="5" value="5"/>&nbsp;<?php echo display('branch')?><br>
+
+        <br><input type="checkbox"  data-control-column="6" checked = "checked" class="6" value="6"/>&nbsp;<?php echo display('balance')?><br>
+
+
+<br><input type="checkbox"  data-control-column="7"  checked = "checked"   class="7" value="7"/>&nbsp;<?php echo display('Action');?><br>
+                          </div>
+                       </div>
+                    
+
+
+
+     
+                    </div>
+    </section>
 </div>
+
+
+
+
+
+
+
+
+
+
+<script src="<?php echo base_url()?>assets/js/jquery.bootgrid.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.0-alpha.1/jspdf.plugin.autotable.js"></script>
+
+
+<div id="myModal_colSwitch"  class="modal_colSwitch">
+                    <div class="modal-content_colSwitch" style="width:25%;height:30%;">
+                    <span class="close_colSwitch">&times;</span>
+                       
+                          <div class="col-sm-2" ></div>
+
+
+                          <div class="col-sm-3" ><br>
+                          <div class="form-group row"  > 
+                         
+                          <br><input type="checkbox"  data-control-column="1" checked = "checked" class="1" value="1"/>&nbsp;<?php echo display('ID')?><br>
+                          <br><input type="checkbox"  data-control-column="2" checked = "checked" class="2" value="2"/>&nbsp;<?php echo display('bank_name')?><br>
+                          <br><input type="checkbox"  data-control-column="3" checked = "checked" class="3 " value="3  "/>&nbsp;<?php echo display('ac_name')?> <br>
+                          <br><input type="checkbox"  data-control-column="4" checked = "checked" class="4" value="4"/>&nbsp;<?php echo display('ac_no')?><br>
+             </div>
+        </div>
+
+
+
+        <div class="col-sm-2" ><br>
+        <div class="form-group row"  >
+
+        <br><input type="checkbox"  data-control-column="5" checked = "checked" class="5" value="5"/>&nbsp;<?php echo display('branch')?><br>
+
+        <br><input type="checkbox"  data-control-column="6" checked = "checked" class="6" value="6"/>&nbsp;<?php echo display('balance')?><br>
+
+
+<br><input type="checkbox"  data-control-column="7"  checked = "checked"   class="7" value="7"/>&nbsp;<?php echo display('Action');?><br>
+                          </div>
+                       </div>
+                    
+
+
+
+     
+                    </div>
+    </section>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 <!-- Manage Invoice End -->
 

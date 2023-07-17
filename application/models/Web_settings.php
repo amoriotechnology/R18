@@ -38,6 +38,7 @@ class Web_settings extends CI_Model {
 
         $this->db->where('invoice_template', 'sales&Profarma');
 
+        $this->db->where('create_by',$_SESSION['user_id']);
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -122,6 +123,61 @@ public function roadtransport_remarks(){
         return false;
 
     }
+
+
+
+    public function retrieve_user_data() {
+
+        $this->db->select('*');
+
+        $this->db->from('users');
+
+      //  $this->db->where('setting_id',1);
+          $this->db->where('create_by',$_SESSION['user_id']);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+
+            return $query->result_array();
+
+        }
+
+        return false;
+
+    }
+
+
+
+
+
+
+    public function retrieve_admin_data() {
+
+        $this->db->select('*');
+
+        $this->db->from('users');
+
+      //  $this->db->where('setting_id',1);
+          $this->db->where('unique_id',$_SESSION['unique_id']);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+
+            return $query->result_array();
+
+        }
+
+        return false;
+
+    }
+
+
+
+
+
+
 
     // Email Invoice Setting
     public function retrieve_email_setting() {
@@ -315,7 +371,7 @@ if ($query->num_rows() > 0 )
             'Time'  => $mysqltime,
             'create_by'       =>  $this->session->userdata('user_id'),
             );
-        // print_r($data);
+        //remarks print_r($data);
             $this->db->insert('sales_invoice_settings', $data);
     }
 }else///remarks
@@ -337,7 +393,6 @@ if ($query->num_rows() > 0 )
             $this->db->where('user_id', $fomdata['uid']);
             $this->db->where('invoice_template',$fomdata['form_type']);
             $this->db->update('sales_invoice_settings',$data);
-            // echo $this->db->last_query();die();
 //////////Update
 }
 else
@@ -347,9 +402,13 @@ else
         'invoice_template' => $fomdata['form_type'],
         'remarks'  => $fomdata['remarks'],
         'Time'  => $mysqltime,
-        );
+        'create_by'       =>  $this->session->userdata('user_id'),
+
+    );
         // print_r($data); die();
        $this->db->insert('sales_invoice_settings', $data);
+    //    echo $this->db->last_query();die();
+
 }
 }
         return true;
@@ -378,15 +437,20 @@ else
 
     }
 
-    //Update user setting
 
+
+
+
+
+
+    //Update user setting
     public function update_user_setting($user_id,$data) {
 
         $this->db->where('user_id', $user_id);
 
         $this->db->update('users', $data);
 
-        // echo $this ->db ->last_query();die();
+        // echo $this ->db ->last_query();
         return true;
 
     }
@@ -398,9 +462,11 @@ else
          $this->db->where('user_id', $user_id);
 
         $query = $this->db->get('users');
+        // echo $this ->db ->last_query(); 
 
         return $query->row_array();
     }
+
 
 
 
@@ -485,9 +551,11 @@ else
 
         $this->db->from('bank_add');
 
+        $this->db->where('created_by',$this->session->userdata('user_id'));
+
         $query = $this->db->get();
 
-
+            // echo $this->db->last_query(); die();
 
         if ($query->num_rows() > 0) {
 

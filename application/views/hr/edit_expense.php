@@ -109,6 +109,18 @@ textarea:focus, input:focus{
 
                     <div class="panel-heading">
 
+
+                    <div class="panel-title" style="height:35px;">
+
+<div class="panel-title form_employee"  style="float:right ;">
+    <a href="<?php echo base_url('Chrm/expense_list') ?>"   style="color:white;background-color: #38469f;"  class="btn btn-info m-b-5 m-r-2"><i class="ti-align-justify"> </i> Manage Expense </a>
+    </div>
+
+</div>
+
+
+
+
                         <div class="panel-title">
 
                             <!-- <h4>Expense Item</h4> -->
@@ -188,33 +200,14 @@ textarea:focus, input:focus{
 
                     </div>
 
-<!-- 
-                    <div class="form-group row">
-
-                         <label for="picture" class="col-sm-2 col-form-div">Attachments</label>
-
-                        <div class="col-sm-4">
-
-                            <input type="file" name="w4from" class="form-control"  placeholder="<?php echo display('picture') ?>" id="w4from">
-
-                        </div>
-                      
-
-                      
-
-                         
-
-                    </div> -->
 
                     
 
 
+<br>
 
-                    <div class="form-group text-right">
+                        <button type="submit" style="float:left;color:white;background-color: #38469f;"  class="btn btn-success w-md m-b-5">Save</button>
 
-                        <button type="submit" style="float:right;color:white;background-color: #38469f;"  class="btn btn-success w-md m-b-5">Save</button>
-
-                    </div>
 
                 <?php echo form_close() ?>
 

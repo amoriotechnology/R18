@@ -5,7 +5,22 @@
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.base64.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/drag_drop_index_table.js"></script>
+  <script type="text/javascript" src="<?php echo base_url()?>assets/js/html2canvas.js"></script>
+ <script type="text/javascript" src="<?php echo base_url()?>assets/js/jspdf.plugin.autotable"></script>
+  <script type="text/javascript" src="<?php echo base_url()?>assets/js/jspdf.umd.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+ <script type="text/javascript" src="<?php echo base_url()?>my-assets/js/tableManager.js"></script>
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script type="text/javascript" src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
+<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+<script type="text/javascript" src="http://www.bacubacu.com/colresizable/js/colResizable-1.5.min.js"></script>
 
 <!-- Add new customer start -->
 <div class="content-wrapper">
@@ -19,7 +34,7 @@
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('permission') ?></a></li>
-                <li class="active"><?php echo $title ?></li>
+                <li class="active" style="color:orange;" ><?php echo $title ?></li>
             </ol>
         </div>
     </section>
@@ -84,18 +99,18 @@
                                     <td>
                                         <center>
 
-                    <?php  ///if($this->permission1->method('role_list','update')->access()){?>                     
-                                            <a href="<?php echo base_url().'Permission/edit_role/'.$row['id']; ?>" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="left" title="<?php echo display('update') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                      <?php// }?>
+                                            <a href="<?php echo base_url().'Permission/edit_role/'.$row['id']; ?>" class="btnclr btn m-b-5 m-r-2" data-toggle="tooltip" data-placement="left" title="<?php echo display('update') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
 
 
 
 
-                    <?php if($this->permission1->method('role_list','delete')->access()){?>
-                                               <a href="<?php echo base_url().'Permission/role_delete/'.$row['id']; ?>" onClick="return confirm('Are You Sure to Want to Delete?')" class=" btn btn-danger btn-xs" name="pidd" data-toggle="tooltip" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                               <?php }?>
-                                        </center>
+                                               <a href="<?php echo base_url().'Permission/role_delete/'.$row['id']; ?>" onClick="return confirm('Are You Sure to Want to Delete?')" class="btnclr btn m-b-5 m-r-2" name="pidd" data-toggle="tooltip" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        
+                                            
+                                        
+                                        
+                                            </center>
                                     </td>
                                  
 

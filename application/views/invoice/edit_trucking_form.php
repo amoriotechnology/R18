@@ -155,11 +155,9 @@ tfoot tr{
 <input type="submit" id="payment_history" name="payment_history" class="btn" style="float:right;color:white;background-color: #38469f;" value="Payment History" style="float:right;margin-bottom:30px;"/>
                                 </form> </div> 
                  <div class="Column" style="float: right;">
-                <?php if($this->permission1->method('manage_trucking','read')->access()){ ?>
 
                     <a style="background-color:#38469f;color:white;" href="<?php echo base_url('Cinvoice/manage_trucking') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo "Manage Trucking" ?> </a>
 
-        <?php }?>
 
          </div>    </div>
 

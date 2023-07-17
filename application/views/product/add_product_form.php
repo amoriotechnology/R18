@@ -251,11 +251,13 @@
                                     <div class="col-sm-7">
                                         <select class="form-control" id="category_id" style="width: 100%;"  name="category_id" tabindex="3">
                                             <option value=""><?php echo display('Select the Category') ?></option>
-                                            <?php if ($category_list) { ?>
-                                                {category_list}
-                                                <option value="{category_name}">{category_name}</option>
-                                                {/category_list}
-                                            <?php } ?>
+                                            <?php if ($category_list) { 
+                                            foreach($category_list as $cl){
+                                            ?>
+                                             
+                                                <option value="<?php echo $cl['category_name']; ?>"><?php echo $cl['category_name']; ?></option>
+                                              
+                                            <?php }} ?>
                                         </select>
                                     </div>
                               

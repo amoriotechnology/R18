@@ -43,7 +43,7 @@
         $message = $this->session->userdata('message');
         if (isset($message)) {
             ?>
-            <div class="alert alert-info alert-dismissable">
+            <div class="alert alert-info alert-dismissable" style="background-color:#38469f;color:white;font-weight:bold;">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <?php echo $message ?>                    
             </div>
@@ -53,7 +53,7 @@
         $error_message = $this->session->userdata('error_message');
         if (isset($error_message)) {
             ?>
-            <div class="alert alert-danger alert-dismissable">
+            <div class="alert alert-danger alert-dismissable" style="background-color:#38469f;color:white;font-weight:bold;">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <?php echo $error_message ?>                    
             </div>
@@ -64,6 +64,9 @@
 
 
 
+       <script>
+    $('.alert').delay(1000).fadeOut('slow');
+</script>  
 
 
                 <div class="panel panel-bd lobidrag">
@@ -161,7 +164,7 @@
                             <label for="customer_name" class="col-sm-2 col-form-label"><?php echo display('Vendor') ?> <i class="text-danger">*</i></label>
                             <div class="col-sm-7">
                                 <select name="supplier_id"  class="form-control" required="" >
-                                    <option value=""><?php echo display('vendor') ?></option>
+                                    <option value=""><?php echo display('select_supplier') ?></option>
                                     <?php if ($supplier) { ?>
                                         {supplier}
                                         <option value="{supplier_id}">{supplier_name} 
@@ -404,6 +407,10 @@
 
             
               <script>
+                 $(document).ready(function(){
+   
+   $(".sidebar-mini").addClass('sidebar-collapse') ;
+   });
                 function reload(){
     location.reload();
 }

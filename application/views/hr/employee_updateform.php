@@ -24,12 +24,12 @@
             <i class="pe-7s-note2"></i>
         </div>
         <div class="header-title">
-            <h1><?php echo display('Employee Details') ?></h1>
+            <h1><?php echo ('Edit Employee') ?></h1>
             <small></small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('hrm') ?></a></li>
-                <li class="active" style="color:orange"><?php echo html_escape($title) ?></li>
+                <li class="active" style="color:orange;"><?php echo ('Edit Employee') ?></li>
             </ol>
         </div>
     </section>
@@ -63,9 +63,18 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-bd lobidrag">
-                    <div class="panel-heading">
+
+
+                    <div class="panel-heading" style="height: 50px;">
                         <div class="panel-title">
+                               <a style="float:right;background-color:#38469f;color:white;" href="<?php echo base_url('Chrm/manage_employee') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo ('Manage Employee')?> </a>
                         </div>
+                    </div>
+
+
+
+                        <div class="panel-title">
+                        <!-- </div> -->
                     </div>
                   
                     <div class="panel-body">
@@ -824,12 +833,11 @@ Payment Type
                         </div>
                  </div>
                     
-
-                    <div class="form-group text-right">
-                     
+<br>
+                  
                         <button type="submit" style="float:center;color:white;background-color: #38469f;" class="btn  w-md m-b-5"><?php echo display('save') ?></button>
-                    </div>
-                <?php echo form_close() ?>
+             
+                        <?php echo form_close() ?>
                     </div>
                 
                 </div>

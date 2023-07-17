@@ -19,7 +19,7 @@
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('permission') ?></a></li>
-                <li class="active"><?php echo $title ?></li>
+                <li class="active" style="color:orange;"><?php echo $title ?></li>
             </ol>
         </div>
     </section>
@@ -56,6 +56,12 @@
             <div class="col-sm-12">
                 <div class="panel panel-bd lobidrag">
                     <div class="panel-heading">
+
+
+                    
+
+
+
                         <div class="panel-title">
                         </div>
                     </div>
@@ -76,7 +82,7 @@
                 
                     
                     <tr>                     <td><?php echo display($value['name']);?></td>
-                      <td><input type="checkbox" name="<?php echo display($value['name']);?>_read"><?php echo display('Read') ?> </td>
+                      <!-- <td><input type="checkbox" name="<?php // echo display($value['name']);?>_read"><?php //echo display('Read') ?> </td> -->
                       <td><input type="checkbox" name="<?php echo display($value['name']);?>_create"><?php echo display('Create') ?></td> 
                       <td><input type="checkbox" name="<?php echo display($value['name']);?>_delete"><?php echo display('Delete') ?></td> 
                       <td><input type="checkbox" name="<?php echo display($value['name']);?>_update"><?php echo display('Update') ?></td> 
@@ -91,9 +97,12 @@
            
                 <?php $m++; } ?>
                 </table>
-                <div class="form-group text-right">
-                <button type="reset" class="btnclr btn btn-success" style="color:white;background-color: #3991F4;"><?php echo display('reset') ?></button>
-                <button type="submit"  class="btnclr btn btn-success" style="color:white;background-color: #3991F4;"><?php echo display('save') ?></button>
+
+                <br>
+
+                <div class="form-group text-left">
+                <button type="reset" class="btn  m-b-5 m-r-2"  style="color:white;background-color: #38469f;"><?php echo display('reset') ?></button>
+                <button type="submit"  class="btn  m-b-5 m-r-2"   style="color:white;background-color: #38469f;"><?php echo display('save') ?></button>
 
                
 

@@ -849,6 +849,8 @@ public function update_contra_voucher(){
     }
 
 
+
+
     public function cash_book(){
         $CI = & get_instance();
         $CI->load->model('Accounts_model');
@@ -856,12 +858,45 @@ public function update_contra_voucher(){
           $CI->load->model('Web_settings');
         $data['title'] = display('cash_book');
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $data['company'] = $CI->Invoices->retrieve_company();
           $data['currency']        = $currency_details[0]['currency'];
-        $data['software_info'] = $CI->Accounts_model->software_setting_info();
+
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
+        $CI->load->model('Web_settings');
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+        $data = array(
+
+        'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+        'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+        'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+        'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+        'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
+      );
+
+
+
         $content = $this->parser->parse('newaccount/cash_book', $data, true);
        $this->template->full_admin_html_view($content);
     }
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public function bank_book(){
         $CI = & get_instance();
         $CI->load->model('Accounts_model');
@@ -876,6 +911,13 @@ public function update_contra_voucher(){
     $this->template->full_admin_html_view($content);
     }
     // Inventory Report
+    
+    
+    
+    
+    
+    
+    
      public function inventory_ledger(){
       $CI = & get_instance();
          $CI->load->model('Web_settings');
@@ -883,12 +925,59 @@ public function update_contra_voucher(){
       $CI->load->model('Invoices');
        $currency_details = $CI->Web_settings->retrieve_setting_editdata();
         $data['currency']        = $currency_details[0]['currency'];
-      $data['company'] = $CI->Invoices->retrieve_company();
+      // $data['company'] = $CI->Invoices->retrieve_company();
       $data['software_info'] = $CI->Accounts_model->software_setting_info();
+
+      $w = & get_instance();
+      $w->load->model('Ppurchases');
+      $CI->load->model('Web_settings');
+      $company_info = $w->Ppurchases->retrieve_company();
+      $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+
+      $data = array(
+
+        'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+        'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+        'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+        'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+        'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
+      );
+
+
       $data['title'] = display('Inventory_ledger');
       $content = $this->parser->parse('newaccount/inventory_ledger', $data, true);
     $this->template->full_admin_html_view($content);
     }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
      public function voucher_report(){
       $CI = & get_instance();
          $CI->load->model('Web_settings');
@@ -900,16 +989,54 @@ public function update_contra_voucher(){
     $this->template->full_admin_html_view($content);
   }
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
    public function coa_print(){
      $CI = & get_instance();
       $CI->load->model('Accounts_model');
       $CI->load->model('Invoices');
-      $data['company'] = $CI->Invoices->retrieve_company();
-      $data['software_info'] = $CI->Accounts_model->software_setting_info();
+      // $data['company'] = $CI->Invoices->retrieve_company();
+      // $data['software_info'] = $CI->Accounts_model->software_setting_info();
       $data['title'] = display('accounts_form');
+
+
+      $w = & get_instance();
+      $w->load->model('Ppurchases');
+      $CI->load->model('Web_settings');
+      $company_info = $w->Ppurchases->retrieve_company();
+      $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+      $data = array(
+        'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+        'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+        'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+        'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+        'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
+      );
        $content = $this->parser->parse('newaccount/coa_print', $data, true);
     $this->template->full_admin_html_view($content);
     }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
       //Profit loss report page
     public function profit_loss_report(){
         $data['title'] = display('profit_loss_report');
@@ -939,11 +1066,46 @@ public function update_contra_voucher(){
     $this->template->full_admin_html_view($content);
     }
      //Cash flow report search
-    public function cash_flow_report_search(){
+     
+     
+     
+     
+     
+  
+
+    //Supplier payment information 
+ public function cash_flow_report_search(){
       $CI = & get_instance();
       $CI->load->model('Accounts_model');
       $CI->load->model('Invoices');
-      $data['company'] = $CI->Invoices->retrieve_company();
+
+
+
+      $w = & get_instance();
+      $w->load->model('Ppurchases');
+      $CI->load->model('Web_settings');
+
+      $company_info = $w->Ppurchases->retrieve_company();
+      $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+
+
+      $data = array(
+
+        'logo'=>(!empty($setting[0]['invoice_logo'])?$setting[0]['invoice_logo']:$company_info[0]['logo']),  
+        'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+        'phone'=>(!empty($datacontent[0]['mobile'])?$datacontent[0]['mobile']:$company_info[0]['mobile']),   
+        'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+        'address'=>(!empty($datacontent[0]['address'])?$datacontent[0]['address']:$company_info[0]['address']), 
+      );
+
+
+
+
+
+
+
+
       $data['software_info'] = $CI->Accounts_model->software_setting_info();
         $dtpFromDate          = $this->input->post('dtpFromDate',TRUE);
         $dtpToDate            = $this->input->post('dtpToDate',TRUE);
@@ -965,6 +1127,9 @@ public function update_contra_voucher(){
     $this->template->full_admin_html_view($content);
     }
 
+
+
+
     //Supplier payment information 
     public function supplier_payment(){
        $CI = & get_instance();
@@ -985,6 +1150,14 @@ public function update_contra_voucher(){
         $content = $this->parser->parse('newaccount/supplier_payment_form', $data, true);
     $this->template->full_admin_html_view($content);
     }
+
+
+
+
+
+
+
+
 
     //supplier payment submit
      public function create_supplier_payment(){

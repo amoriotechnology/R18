@@ -1,4 +1,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+
+
+
 <style>
     .select2{
         display:none;
@@ -115,7 +120,7 @@
                         </div>
                         <div class="form-group row">
                            
-                            <div class="col-sm-12 text-right">
+                            <div class="col-sm-12 text-left">
 
                                 <input type="submit" id="add_receive" class="btn" style="color:white;background-color:#38469f;" name="save" value="<?php echo display('save') ?>" tabindex="9"/>
                                

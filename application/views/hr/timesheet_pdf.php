@@ -33,12 +33,13 @@ th{
             <i class="pe-7s-note2"></i>
         </div>
         <div class="header-title">
-            <h1><?php echo display('Sale Invoice') ?></h1>
-            <small><?php echo display('invoice_details') ?></small>
+            <h1>Time Sheet Invoice</h1>
+            <small></small>
+
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('invoice') ?></a></li>
-                <li class="active"><?php echo display('invoice_details') ?></li>
+                <li><a href="#"><?php echo display('hrm') ?></a></li>
+                <li class="active" style="color:orange;"><?php echo ('Time Sheet Invoice') ?></li>
             </ol>
         </div>
     </section>
@@ -67,38 +68,45 @@ th{
             $this->session->unset_userdata('error_message');
         }
         ?>
+
+
+
+
+
 <div id="head"></div>
+
+
+
+
+
+
+
     <div class="container" id="content" >
+
+
+    <?php
+  
+  if($template==2)
+          {
+          ?>
  
         <div class="brand-section"  style="background-color:<?php echo $color; ?>">
 
      <div class="row" >
     
    
-   <div class="col-sm-6"><img src="<?php echo  base_url().$logo; ?>"   style='width: 40%;'  /></div>
-  <div class="col-sm-2"></div>
-   <div class="col-sm-4" style="color:white;font-weight:bold;" id='company_info'>
-   
-   <b><?php echo display('Company name') ?> : </b><?php echo $company[0]['business_name']; ?><br>
-             <b>  <?php echo display('Address ') ?>: </b><?php echo $company[0]['address']; ?><br>
-             <b> <?php echo display('Email ') ?>: </b><?php echo $company[0]['email']; ?><br>
-             <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['phone']; ?><br>
-          </div>
+     <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>"   style='width: 100%;'  /></div>
 
 
+<div class="col-sm-6 text-center" style="color:white;"><h3><?php  echo "Time Sheet"; ?></h3></div>
+<div class="col-sm-4" style="color:white;font-weight:bold;" id='company_info'>
 
-
-
-
-
-
-
-
-
-
+     <b> <?php echo display('Company name') ?> : </b><?php echo $company; ?><br>
+     <b>   <?php echo display('Address') ?>  : </b><?php echo $address; ?><br>
+     <b>   <?php echo display('Email') ?>  : </b><?php echo $email; ?><br>
+     <b>   <?php echo display('Contact') ?>  : </b><?php echo $phone; ?><br>
+  </div>
     </div>
-
-
         </div>
 
 
@@ -176,14 +184,243 @@ th{
             </td>
 
                                     </tr>
-
-
-                                            </tfoot>
+                                 </tfoot>
                             </table>
                            
         
 
-</div></div></div>
+</div>
+
+<?php 
+}
+elseif($template==1)
+{ 
+?>  
+
+
+
+    <div class="brand-section"  style="background-color:<?php echo $color; ?>">
+
+<div class="row" >
+
+
+<div class="col-sm-4" id='company_info' style="color:white;">
+            
+     <b> <?php echo display('Company name') ?> : </b><?php echo $company; ?><br>
+          <b>   <?php echo display('Address') ?>  : </b><?php echo $address; ?><br>
+          <b>   <?php echo display('Email') ?>  : </b><?php echo $email; ?><br>
+          <b>   <?php echo display('Contact') ?>  : </b><?php echo $phone; ?><br>
+        </div>
+        <div class="col-sm-6 text-center" style="color:white;"><h3><?php  echo "Time Sheet"; ?></h3></div>
+    
+
+
+         <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>"   style='width: 100%;'  /></div>
+
+
+
+
+
+
+</div>
+   </div>
+
+
+   <div class="body-section" >
+       <div class="row">
+       <div class="col-6">
+       <table id="one" >
+       <tr><td  class="key">Employee Name</td><td style="width:10px;">:</td><td calss="value"><?php  echo $employee_name ; ?></td></tr>
+
+<tr><td  class="key">Job title</td><td style="width:10px;">:</td><td calss="value"><?php echo $destination; ?></td></tr>
+<tr><td class="key">Date Range</td><td style="width:10px;">:</td><td calss="value"><?php  echo $time_sheet[0]['month'] ; ?></td></tr>
+
+</table>
+
+           </div>
+           <div class="col-6">
+           <table id="two">
+<tr><td  class="key">Duration</td><td style="width:10px;">:</td><td calss="value"><?php  echo $time_sheet[0]['duration'] ; ?></td></tr>
+
+
+<tr><td  class="key">Daily Break in mins</td><td style="width:10px;">:</td><td calss="value"><?php  echo $time_sheet[0]['dailybreak'] ; ?></td></tr>
+<tr><td  class="key">Payment terms</td><td style="width:10px;">:</td><td calss="value"><?php  echo $time_sheet[0]['payment_term'] ; ?></td></tr>
+
+</table>
+</div>
+           
+   </div>
+</div>
+   <div class="body-section">
+     <div class="table-responsive">
+
+<div id="content">
+
+
+<table class="table table-bordered normalinvoice table-hover" id="normalinvoice_<?php  echo $m; ?>" >
+           <thead style="background-color:<?php echo $color; ?>">
+               <tr>
+               <th style="font-size: 12px;" rowspan="1"  class="text-center text-white">S.No</th>
+                   <th style="font-size: 12px;" rowspan="1" class="absorbing-column text-center text-white">Date</th>
+                   <th style="font-size: 12px;" rowspan="1" class="text-center text-white">Day</th>
+                   <th style="font-size: 12px;" rowspan="1" class="text-center text-white">Start Time (HH:MM)</th>
+                   <th style="font-size: 12px;" rowspan="1" class="text-center text-white">End Time (HH:MM)</th>
+                   <th style="font-size: 12px;" rowspan="1" class="text-center text-white">Hours</th>
+               
+               </tr>
+             
+           </thead>
+         <tbody>
+                               <?php  $n=0; ?>
+                               <?php foreach($time_sheet as $inv){
+                                   
+
+                               
+                                   ?>
+
+               <tr>
+               <td style="font-size: 12px;"><?php echo $n+1; ?></td>
+                  <td style="font-size: 12px;word-wrap: break-word;"><?php  echo $inv['Date'];  ?></td>
+                  <td style="font-size: 12px;word-wrap: break-word;"><?php  echo $inv['Day'];  ?></td>
+                  <td style="font-size: 12px;"><?php  echo $inv['time_start'];  ?></td>
+                    <td style="font-size: 12px;"><?php  echo $inv['time_end'];  ?></td>
+               
+                  <td style="font-size: 12px;" class="net_width"><?php  echo $inv['hours_per_day'];  ?></td>
+             </tr>
+             
+              <?php $n++;   }  ?>
+           </tbody>
+                   <tfoot>
+                               <tr>
+                            
+                               <td style="text-align:right;font-size: 12px;" colspan="5"><b>Total working Hours :</b></td>
+                                   <td >
+        <input type="text" value="<?php  echo $inv['total_hours'];  ?>"  name="overall_net[]"  class="overall_net"  style=" 
+text-align: center;width: 60px;font-size: 12px;"   readonly="readonly"  /> 
+       </td>
+
+                               </tr>
+                            </tfoot>
+                       </table>
+                      
+   
+
+</div>
+<?php 
+}
+elseif($template==3)
+{
+?>
+
+<div class="brand-section"  style="background-color:<?php echo $color; ?>">
+
+<div class="row" >
+
+
+<div class="col-sm-2 text-center" style="color:white;"><h3><?php  echo "Time Sheet"; ?></h3></div>
+
+<div class="col-sm-4"><img src="<?php echo  base_url().$logo; ?>"   style='width: 30%;float:right;'  /></div>
+
+
+<div class="col-sm-6" style="color:white;font-weight:bold ;text-align: end;" id='company_info'>
+   
+<b> <?php echo display('Company name') ?> : </b><?php echo $company; ?><br>
+  <b>   <?php echo display('Address') ?>  : </b><?php echo $address; ?><br>
+  <b>   <?php echo display('Email') ?>  : </b><?php echo $email; ?><br>
+  <b>   <?php echo display('Contact') ?>  : </b><?php echo $phone; ?><br>
+</div>
+
+
+</div>
+   </div>
+
+
+   <div class="body-section" >
+       <div class="row">
+       <div class="col-6">
+       <table id="one" >
+       <tr><td  class="key">Employee Name</td><td style="width:10px;">:</td><td calss="value"><?php  echo $employee_name ; ?></td></tr>
+
+<tr><td  class="key">Job title</td><td style="width:10px;">:</td><td calss="value"><?php echo $destination; ?></td></tr>
+<tr><td class="key">Date Range</td><td style="width:10px;">:</td><td calss="value"><?php  echo $time_sheet[0]['month'] ; ?></td></tr>
+
+</table>
+
+           </div>
+           <div class="col-6">
+           <table id="two">
+<tr><td  class="key">Duration</td><td style="width:10px;">:</td><td calss="value"><?php  echo $time_sheet[0]['duration'] ; ?></td></tr>
+
+
+<tr><td  class="key">Daily Break in mins</td><td style="width:10px;">:</td><td calss="value"><?php  echo $time_sheet[0]['dailybreak'] ; ?></td></tr>
+<tr><td  class="key">Payment terms</td><td style="width:10px;">:</td><td calss="value"><?php  echo $time_sheet[0]['payment_term'] ; ?></td></tr>
+
+</table>
+</div>
+           
+   </div>
+</div>
+   <div class="body-section">
+     <div class="table-responsive">
+
+<div id="content">
+
+
+<table class="table table-bordered normalinvoice table-hover" id="normalinvoice_<?php  echo $m; ?>" >
+           <thead style="background-color:<?php echo $color; ?>">
+               <tr>
+               <th style="font-size: 12px;" rowspan="1"  class="text-center text-white">S.No</th>
+                   <th style="font-size: 12px;" rowspan="1" class="absorbing-column text-center text-white">Date</th>
+                   <th style="font-size: 12px;" rowspan="1" class="text-center text-white">Day</th>
+                   <th style="font-size: 12px;" rowspan="1" class="text-center text-white">Start Time (HH:MM)</th>
+                   <th style="font-size: 12px;" rowspan="1" class="text-center text-white">End Time (HH:MM)</th>
+                   <th style="font-size: 12px;" rowspan="1" class="text-center text-white">Hours</th>
+               
+               </tr>
+             
+           </thead>
+         <tbody>
+                               <?php  $n=0; ?>
+                               <?php foreach($time_sheet as $inv){
+                                   
+
+                               
+                                   ?>
+
+               <tr>
+               <td style="font-size: 12px;"><?php echo $n+1; ?></td>
+                  <td style="font-size: 12px;word-wrap: break-word;"><?php  echo $inv['Date'];  ?></td>
+                  <td style="font-size: 12px;word-wrap: break-word;"><?php  echo $inv['Day'];  ?></td>
+                  <td style="font-size: 12px;"><?php  echo $inv['time_start'];  ?></td>
+                    <td style="font-size: 12px;"><?php  echo $inv['time_end'];  ?></td>
+               
+                  <td style="font-size: 12px;" class="net_width"><?php  echo $inv['hours_per_day'];  ?></td>
+             </tr>
+             
+              <?php $n++;   }  ?>
+           </tbody>
+                   <tfoot>
+                               <tr>
+                            
+                               <td style="text-align:right;font-size: 12px;" colspan="5"><b>Total working Hours :</b></td>
+                                   <td >
+        <input type="text" value="<?php  echo $inv['total_hours'];  ?>"  name="overall_net[]"  class="overall_net"  style=" 
+text-align: center;width: 60px;font-size: 12px;"   readonly="readonly"  /> 
+       </td>
+
+                               </tr>
+                            </tfoot>
+                       </table>
+                      
+   
+
+</div>
+<?php 
+
+}
+?>
+</div>
+</div>
   
     
     

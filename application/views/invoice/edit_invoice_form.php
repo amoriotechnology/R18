@@ -116,13 +116,9 @@
 <input type="submit" id="payment_history" name="payment_history" class="btn" style="float:right;color:white;background-color: #38469f;float:right;margin-bottom:30px;"   value="<?php echo display('Payment History') ?>"/>
                                             </form> </div> 
                              <div class="Column" style="float: right;">
-                            <?php if($this->permission1->method('manage_invoice','read')->access()){ ?>
-
                     <a style="background-color:#38469f;color:white;" href="<?php echo base_url('Cinvoice/manage_invoice') ?>" class="btn  m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo display('manage_invoice') ?> </a>
-
-                    <?php }?>
-           
-                     </div>    </div>
+                     </div>    
+                    </div>
 
 
 

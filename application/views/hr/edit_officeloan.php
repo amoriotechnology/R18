@@ -28,7 +28,7 @@
             $message = $this->session->userdata('message');
             if (isset($message)) {
         ?>
-        <div class="alert alert-info alert-dismissable">
+        <div class="alert alert-info alert-dismissable" style="color:white;background-color: #38469f;" >
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <?php echo $message ?>                    
         </div>
@@ -38,7 +38,7 @@
             $error_message = $this->session->userdata('error_message');
             if (isset($error_message)) {
         ?>
-        <div class="alert alert-danger alert-dismissable">
+        <div class="alert alert-danger alert-dismissable" style="color:white;background-color: #38469f;">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <?php echo $error_message ?>                    
         </div>
@@ -46,7 +46,9 @@
             $this->session->unset_userdata('error_message');
             }
         ?>
-
+<script>
+    $('.alert').delay(1000).fadeOut('slow');
+    </script>
         <div class="row">
             <div class="col-sm-12">
                
@@ -77,16 +79,20 @@ textarea:focus, input:focus{
 
                     </div>
                     </div>
-                   <?php echo form_open_multipart('Cloan/officeloan_update',array('class' => 'form-vertical','id' => 'inflow_entry' ))?>
-                    <div class="panel-body">
+                   <!-- <?php //echo form_open_multipart('Cloan/officeloan_update'.$tran_id[0]['transaction_id'],array('class' => 'form-vertical','id' => 'inflow_entry' ))?> -->
+                 
+                   <?php echo form_open_multipart('Cloan/officeloan_update/'.$transaction_id,array('class' => 'form-vertical','id' => 'validate' ))?>
+
+                 
+                   <div class="panel-body">
 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
                     	<div class="form-group row">
-                            <input type="text" value="<?php echo  $transaction_id;  ?>"  name="transaction_id"/>
+                            <input type="hidden" value="<?php echo  $transaction_id;  ?>"  name="transaction_id"/>
                             <label for="name" class="col-sm-3 col-form-label"><?php echo display('name') ?> <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
                          
                             <select class="form-control" name="person_id" id="nameofficeloanperson"  tabindex="1">
-                                    <option value="<?php echo $id; ?>"><?php echo $person_id; ?></option>
+                                    <option value="<?php echo $person_id; ?>"><?php echo $person_id; ?></option>
                                 <?php  foreach($person_list as $person) {?>  
                                     <option value="<?php  echo $person['id']?>"><?php  echo $person['first_name']." ".$person['last_name']?></option>
                               <?php }  ?>
@@ -151,8 +157,8 @@ textarea:focus, input:focus{
                                 
                                     <div class="col-sm-6">
 
-                               <select name="bank_id" class="form-control"  value="<?php echo $bank_name1; ?>" id="bankpayment">
-                                        <option value="<?php echo $bank_name1; ?>"><?php echo $bank_name1; ?></option>
+                               <select name="bank_id" class="form-control"  id="bankpayment">
+                                        <option value="<?php echo $bank_name1; ?>"><?php echo $selected_bank_name; ?></option>
                                       
                                         <?php foreach($bank_name as $bank){ ?>
                                             <option value="<?php echo $bank['bank_id']?>"><?php echo $bank['bank_name'];?></option>
@@ -211,19 +217,6 @@ textarea:focus, input:focus{
 </div>
  
 
-  <div class="modal-footer">
-
-      <div class="row">
-        <div class="col-sm-8">
-</div>
-    
-<div class="col-sm-4">
-    <a href="#" class="btn" style="color:white;background-color:#38469f;" data-dismiss="modal"><?php echo display('Close') ?></a>
-     <input type="submit" id="addBank"  style="color:white;background-color:#38469f;"  class="btn btn-primary btn-large" name="addBank" value="<?php echo display('save') ?>"/>
-     <!--  <input type="submit" class="btn btn-success" value="Submit"> -->
-
-  </div>
-  </div>  </div>
 
 </form>
   </div>

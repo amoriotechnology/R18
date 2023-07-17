@@ -1107,11 +1107,23 @@ $this->db->select("sum(a.gtotal) as amount,count(a.invoice_id) as toal_invoice,a
         $this->db->insert('daily_closing', $data);
     }
 
+
+
+
+
+
+
+
     // This function will find out all closing information of daily closing.
-    public function accounts_closing_data() {
-        $CI = & get_instance();
-        
+    
+    
+ public function accounts_closing_data() {
+        $CI = & get_instance();     
+
+        $w = & get_instance();
+        $w->load->model('Ppurchases');
         $CI->load->model('Web_settings');
+
         $last_closing_amount = $this->get_last_closing_amount();
         $cash_in = $this->cash_data_receipt();
         $cash_out = $this->cash_data();
@@ -1123,16 +1135,46 @@ $this->db->select("sum(a.gtotal) as amount,count(a.invoice_id) as toal_invoice,a
             $cash_in_hand = $cash_in - $cash_out;
         }
          $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $this->Reports->retrieve_company();
+         
+
+
+        $company_info = $w->Ppurchases->retrieve_company();
+        $setting=  $CI->Web_settings->retrieve_setting_editdata();
+
+
         return array(
             "last_day_closing" => number_format($last_closing_amount, 2, '.', ','),
             "cash_in"          => number_format($cash_in, 2, '.', ','),
               'currency'       => $currency_details[0]['currency'],
             "cash_out"         => number_format($cash_out, 2, '.', ','),
-            "company_info"     => $company_info,
+
+
+            'company'=>(!empty($datacontent[0]['company_name'])?$datacontent[0]['company_name']:$company_info[0]['company_name']),   
+            'email'=>(!empty($datacontent[0]['email'])?$datacontent[0]['email']:$company_info[0]['email']),   
+
+
             "cash_in_hand"     => number_format($cash_in_hand, 2, '.', ',')
         );
     }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
         public function get_last_closing_amount() {
         $sql = "SELECT amount FROM daily_closing WHERE date = (SELECT MAX(date) FROM daily_closing)";
         $query = $this->db->query($sql);
@@ -1143,6 +1185,15 @@ $this->db->select("sum(a.gtotal) as amount,count(a.invoice_id) as toal_invoice,a
             return FALSE;
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
         public function cash_data_receipt() {
         //-----------
@@ -1275,9 +1326,11 @@ $this->db->select("sum(a.gtotal) as amount,count(a.invoice_id) as toal_invoice,a
     }
 
 
-    public function userList(){
+   public function userList(){
         $this->db->select("*");
         $this->db->from('users');
+        $this->db->where('create_by',$this->session->userdata('user_id'));
+
         $this->db->order_by('first_name', 'asc');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -1285,7 +1338,6 @@ $this->db->select("sum(a.gtotal) as amount,count(a.invoice_id) as toal_invoice,a
         }
         return false;
     }
-
 
     public function yearly_invoice_report($month=null){
 

@@ -110,6 +110,113 @@ public function managecompany()
 
 
 
+// public function company_insert(){
+
+//  if ($_FILES['image']['name']) {
+          
+
+//         $config['upload_path']    = 'my-assets/image/logo/';
+//         $config['allowed_types']  = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG'; 
+//         $config['encrypt_name']   = TRUE;
+
+//             $this->load->library('upload', $config);
+//             if (!$this->upload->do_upload('image')) {
+//                 $error = array('error' => $this->upload->display_errors());
+//                 $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
+//                 redirect(base_url('Admin_dashboard/edit_profile'));
+//             } else {
+//             $data = $this->upload->data();  
+//             $logo = $config['upload_path'].$data['file_name']; 
+//             $config['image_library']  = 'gd2';
+//             $config['source_image']   = $logo;
+//             $config['create_thumb']   = false;
+//             $config['maintain_ratio'] = TRUE;
+//             $config['width']          = 200;
+//             $config['height']         = 200;
+//             $this->load->library('image_lib', $config);
+//             $this->image_lib->resize();
+//             $logo =  $logo;
+
+//             }
+//         }
+     
+//             // insert Company information///////////////
+    
+//             $uid=$_SESSION['user_id'];
+    
+//             $data = array(
+//                 'company_name'    =>$this->input->post('company_name',true),
+//                 'email' => $this->input->post('email',true),
+//                 'address'      => $this->input->post('address',true),
+//                 'mobile'   => $this->input->post('mobile',true),
+//                 'website'  => $this->input->post('website',true),
+//                 'logo'       => $logo,
+//                 'create_by'     => $uid,
+//                 'status'     => 0
+//             );
+    
+//              $this->db->insert('company_information',$data);
+//               $cid= $this->db->insert_id();
+         
+//              $data1 = array(
+//                 'create_by'     => $cid,
+//              );
+             
+//              $this->db->insert('web_setting',$data1);
+
+//              $data2 = array(
+//                 'create_by'     => $cid,
+//                  'uid'     => $cid
+//              );
+//              $this->db->insert('invoice_design',$data2);
+
+
+
+//              $num_str = sprintf("%03d", mt_rand(1, 999));
+//      $data = array(
+            
+//               'unique_id'  =>   "AD".$cid.$num_str,
+               
+             
+//                 'create_by'     => $uid,
+               
+//             );
+//              $insert=$this->db->insert('users',$data);
+            
+//              $data = array(
+//                 'username'    =>$this->input->post('username',true),
+                
+//                 'password' => md5("gef" . $this->input->post('password',true)),
+//               'unique_id'  =>   "AD".$cid.$num_str,
+//                 'user_type'      => 1+1,
+//                 'u_type'      => 1+1,
+//                 'security_code'   => $this->input->post('mobile',true),
+//                 'email_id'  => $this->input->post('user_email',true),
+//                 'status'       =>0,
+//                 'cid'     => $cid,
+//                 'user_id' =>$cid,
+//                 'create_by'     => $uid,
+               
+//             );
+//              $insert=$this->db->insert('user_login',$data);
+//     $data2 = array(
+//                 'cid'     => $cid,
+//                 'user_id' =>$cid,
+//                 'create_by'     => $uid,
+//             );
+//             $insert=$this->db->insert('payslip_invoice_design',$data2);
+//              if($insert)
+//              {
+//                 redirect('user/managecompany');
+//              }
+        
+        
+    
+//     }
+    
+    
+
+
 public function company_insert(){
 
  if ($_FILES['image']['name']) {
@@ -139,22 +246,7 @@ public function company_insert(){
 
             }
         }
-        
-    //          $target_path=$_SERVER['DOCUMENT_ROOT'].'/R14/my-assets/image/logo/';  // example.com/entities/
-    // if(move_uploaded_file($_FILES['image']['tmp_name'], $target_path .$_FILES['image']['name'])) { 
-    
-    //   // echo 'uploaded'.$target_path .$_FILES['product_image']['name'];
-    
-    // } else{
-    //     //echo "There was an error uploading the file, please try again!";
-    // }
-    //     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_path)) {
-    //       //  echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
-    //     }
-        
-    
-        // $new_logo = (!empty($logo) ? $logo : $old_logo);
-            
+     
             // insert Company information///////////////
     
             $uid=$_SESSION['user_id'];
@@ -172,22 +264,28 @@ public function company_insert(){
     
              $this->db->insert('company_information',$data);
               $cid= $this->db->insert_id();
-              $cid= $this->db->insert_id();
+         
              $data1 = array(
                 'create_by'     => $cid,
-                //  'template'     =>1,
              );
-            //  print_r($data1); die();
+             
              $this->db->insert('web_setting',$data1);
-             $this->db->insert('invoice_design',$data1);
+
+             $data2 = array(
+                'create_by'     => $cid,
+                 'uid'     => $cid
+             );
+             $this->db->insert('invoice_design',$data2);
+
+
+
              $num_str = sprintf("%03d", mt_rand(1, 999));
      $data = array(
             
                'unique_id'  =>   "AD".$cid.$num_str,
-               
-             
                 'create_by'     => $uid,
-               
+                'user_id'     => $cid
+
             );
              $insert=$this->db->insert('users',$data);
             
@@ -207,7 +305,12 @@ public function company_insert(){
                
             );
              $insert=$this->db->insert('user_login',$data);
-    
+    $data2 = array(
+                'cid'     => $cid,
+                'user_id' =>$cid,
+                'create_by'     => $uid,
+            );
+            $insert=$this->db->insert('payslip_invoice_design',$data2);
              if($insert)
              {
                 redirect('user/managecompany');
@@ -216,9 +319,6 @@ public function company_insert(){
         
     
     }
-    
-    
-
     public function company_insert_branch(){
   
         $uid=$_SESSION['user_id'];

@@ -99,7 +99,9 @@ if (isset($error_message)) {
 
 ?>
 
-           
+               <script>
+    $('.alert').delay(1000).fadeOut('slow');
+</script>    
 
         <!-- Manage Product report -->
 
@@ -315,35 +317,85 @@ if (isset($error_message)) {
  
 
 
-<?php    foreach(  $this->session->userdata('perm_data') as $test){
+<!-- <?php    foreach(  $this->session->userdata('perm_data') as $test){
     $split=explode('-',$test);
     if(trim($split[0])=='supplier' && $_SESSION['u_type'] ==3 && trim($split[1])=='0010'){
       
       
        ?>
-<td data-col="21" class="21"><a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Csupplier/supplier_update_form/<?php echo  $arr['supplier_id']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+<a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Csupplier/supplier_update_form/<?php echo  $arr['supplier_id']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
                     
                     <?php break;}} 
                     if($_SESSION['u_type'] ==2){ ?>
 
 <td data-col="21" class="21"><a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Csupplier/supplier_update_form/<?php echo  $arr['supplier_id']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-<a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Csupplier/supplier_delete_form/<?php echo  $arr['supplier_id']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+<a class="btnclr btn  btn-sm" onclick="return confirm('<?php echo display('are_you_sure') ?>')"  style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Csupplier/supplier_delete_form/<?php echo  $arr['supplier_id']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
 
                         <?php  } ?>
 
-
-
-
-
-
-
-
-
                         </div>
 
-  </div>
-</tr>
+  </div> -->
+
+
+
+
+
+
+
+
+
+<td data-col="22" class="22 text-center Action">
+
+
+<?php    foreach(  $this->session->userdata('perm_data') as $test){
+    $split=explode('-',$test);
+    if(trim($split[0])=='supplier' && $_SESSION['u_type'] ==3 && trim($split[1])=='0010'  ){    
+       ?>
+<a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Csupplier/supplier_update_form/<?php echo  $arr['supplier_id']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+         <?php break;}} 
+
+
+   foreach(  $this->session->userdata('perm_data') as $test){
+  $split=explode('-',$test);
+  if(trim($split[0])=='supplier' && $_SESSION['u_type'] ==3 && trim($split[1])=='0001'  ){    
+     ?>
+<a class="btnclr btn  btn-sm" onclick="return confirm('<?php echo display('are_you_sure') ?>')"  style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Csupplier/supplier_delete_form/<?php echo  $arr['supplier_id']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>     <?php break;}}   ?>
+ 
+
+<?php       if($_SESSION['u_type'] ==2){ ?>
+
+<a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Csupplier/supplier_update_form/<?php echo  $arr['supplier_id']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+<a class="btnclr btn  btn-sm" onclick="return confirm('<?php echo display('are_you_sure') ?>')"  style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Csupplier/supplier_delete_form/<?php echo  $arr['supplier_id']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+        <?php  } ?> 
+
+
+</td>
+
+
+
+
+
+
+
+
+                        </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
      <?php   
 $count++;
@@ -353,7 +405,7 @@ $count++;
                 
 } }  else{
     ?>
-     <tr><td colspan="9" style="text-align:center;font-weight:bold;"><?php  echo "No Records Found"  ;?></td></tr>
+     <tr><td colspan="21" style="text-align:center;font-weight:bold;"><?php  echo "No Records Found"  ;?></td></tr>
     <?php
           }
 

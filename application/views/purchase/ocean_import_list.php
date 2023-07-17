@@ -333,10 +333,33 @@ $today = date('Y-m-d');
                     
                     <?php break;}} 
                     if($_SESSION['u_type'] ==2){ ?>
-  <a class="btnclr btn btn-success btn-sm" style="background-color: #3ca5de;" href="<?php echo base_url()?>Cpurchase/ocean_import_tracking_details_data/<?php echo  $arr['ocean_import_tracking_id'];  ?>"><i class="fa fa-download" aria-hidden="true"></i></a>
 
 <a class="btnclr btn btn-success btn-sm" style="background-color: #3ca5de;" href="<?php echo base_url()?>Cpurchase/ocean_import_tracking_update_form/<?php echo  $arr['ocean_import_tracking_id'];  ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-<a class="btnclr btn btn-success btn-sm" style="background-color: #3ca5de;" href="<?php echo base_url()?>Cpurchase/ocean_import_tracking_delete_form/<?php echo  $arr['ocean_import_tracking_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+                        <?php  } ?>
+
+
+
+
+                        <a class="btnclr btn btn-success btn-sm" style="background-color: #3ca5de;" href="<?php echo base_url()?>Cpurchase/ocean_import_tracking_details_data/<?php echo  $arr['ocean_import_tracking_id'];  ?>"><i class="fa fa-download" aria-hidden="true"></i></a>
+
+
+
+
+
+                        <?php    foreach(  $this->session->userdata('perm_data') as $test){
+    $split=explode('-',$test);
+    if(trim($split[0])=='expenses' && $_SESSION['u_type'] ==3 && trim($split[1])=='0001'){
+      
+      
+       ?>
+
+<a class="btnclr btn btn-success btn-sm" style="background-color: #3ca5de;" onclick="return confirm('<?php echo display('are_you_sure') ?>')" href="<?php echo base_url()?>Cpurchase/ocean_import_tracking_delete_form/<?php echo  $arr['ocean_import_tracking_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    
+                    <?php break;}} 
+                    if($_SESSION['u_type'] ==2){ ?>
+
+<a class="btnclr btn btn-success btn-sm" style="background-color: #3ca5de;" onclick="return confirm('<?php echo display('are_you_sure') ?>')" href="<?php echo base_url()?>Cpurchase/ocean_import_tracking_delete_form/<?php echo  $arr['ocean_import_tracking_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 
                         <?php  } ?>
 
@@ -359,7 +382,7 @@ $count++;
                 
 } }  else{
     ?>
-     <tr><td colspan="8" style="text-align:center;font-weight:bold;"><?php  echo "No Records Found"  ;?></td></tr>
+     <tr><td colspan="24" style="text-align:center;font-weight:bold;"><?php  echo "No Records Found"  ;?></td></tr>
     <?php
           }
 

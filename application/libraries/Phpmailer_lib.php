@@ -12,9 +12,9 @@ class Phpmailer_Lib{
   }
 
   public function load(){
-  	require_once APPPATH.'third_party/PHPMailer/Exception.php';
-  	require_once APPPATH.'third_party/PHPMailer/PHPMailer.php';
-  	require_once APPPATH.'third_party/PHPMailer/SMTP.php';
+  	require_once 'PHPMAILER/Exception.php';
+  	require_once 'PHPMAILER/PHPMailer.php';
+  	require_once 'PHPMAILER/SMTP.php';
 
   	$mail = new PHPMailer;
   	return $mail;

@@ -67,65 +67,57 @@ th{
             $this->session->unset_userdata('error_message');
         }
         ?> 
-    <div class="container" id="content">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="invoice-title">
-                <h2>Office Load Invoice</h2>
-                <img style="float: right; width:110px; position: relative; bottom: 64px; right: 7px;" src="<?php echo  base_url().$logo; ?>"  />
-            </div>
-          <br>
-            <hr>  
-            <div class="row">
-                <div class="col-xs-6">
-                    <address>
-                    <strong>Details:</strong><br>
-                    <b><?php echo display('Company name') ?> : </b><?php echo $company[0]['business_name']; ?><br>
-        <b>  <?php echo display('Address ') ?>: </b><?php echo $company[0]['address']; ?><br>
-        <b> <?php echo display('Email ') ?>: </b><?php echo $company[0]['email']; ?><br>
-        <b>  <?php echo display('Contact ') ?>: </b><?php echo $company[0]['phone']; ?><br>
-                    </address>
-                
-        
-                </div>
-               <!--  <div class="col-xs-6 text-right">
-                    <address>
-                    <strong>Shipped To:</strong><br>
-                        Jane Smith<br>
-                        1234 Main<br>
-                        Apt. 4B<br>
-                        Springfield, ST 54321
-                    </address>
-                </div> -->
-            </div>
-            <!-- <div class="row">
-                <div class="col-xs-6">
-                    <address>
-                        <strong>Payment Method:</strong><br>
-                        Visa ending **** 4242<br>
-                        jsmith@email.com
-                    </address>
-                </div>
-                <div class="col-xs-6 text-right">
-                    <address>
-                        <strong>Order Date:</strong><br>
-                        March 7, 2014<br><br>
-                    </address>
-                </div>
-            </div> -->
-        </div>
-    </div>
+  <div class="container" id="content">
+
+
+  <?php
+    if($template==3)
+            {
+            ?>
+
+
+
+    <div class="brand-section"  style="background-color:<?php echo $color; ?>" >
+
+
+          
+        <div class="row" >
+     
+   
     
+        <div class="col-sm-2 text-center" style="color:white;"><h3><?php  echo "Office Loan"; ?></h3></div>
+
+<div class="col-sm-4"><img src="<?php echo  base_url().$logo; ?>"   style='width: 30%;float:right;'  /></div>
+
+
+<div class="col-sm-6" style="color:white;font-weight:bold ;text-align: end;" id='company_info'>
+   
+<b> <?php echo display('Company name') ?> : </b><?php echo $company; ?><br>
+  <b>   <?php echo display('Address') ?>  : </b><?php echo $address; ?><br>
+  <b>   <?php echo display('Email') ?>  : </b><?php echo $email; ?><br>
+  <b>   <?php echo display('Contact') ?>  : </b><?php echo $phone; ?><br>
+</div>
+
+
+
+
+
+
+</div>
+    </div>
+
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                <h3 class="panel-title"><strong>Office Loan Invoice </strong></h3>
+                <!-- <h3 class="panel-title"><strong>Office Loan Invoice </strong></h3> -->
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-condensed">
-                            <thead>
+                            <thead style="background-color:<?php echo $color; ?>">
+
                                 <tr>
                                 <td><strong>S.No</strong></td>
                                     <td class="text-center"><strong> Name</strong></td>
@@ -154,6 +146,173 @@ th{
                 </div>
             </div>
         </div>
+
+
+
+        <?php 
+}
+
+elseif($template==1)
+{
+?>  
+
+<div class="brand-section"  style="background-color:<?php echo $color; ?>" >
+
+
+          
+<div class="row" >
+
+
+<div class="col-sm-4" id='company_info' style="color:white;">
+            
+     <b> <?php echo display('Company name') ?> : </b><?php echo $company; ?><br>
+          <b>   <?php echo display('Address') ?>  : </b><?php echo $address; ?><br>
+          <b>   <?php echo display('Email') ?>  : </b><?php echo $email; ?><br>
+          <b>   <?php echo display('Contact') ?>  : </b><?php echo $phone; ?><br>
+        </div>
+        <div class="col-sm-6 text-center" style="color:white;"><h3><?php  echo "Office Loan"; ?></h3></div>
+    
+
+
+         <div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>"   style='width: 100%;'  /></div>
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        <!-- <h3 class="panel-title"><strong>Office Loan Invoice </strong></h3> -->
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead style="background-color:<?php echo $color; ?>">
+
+                        <tr>
+                        <td><strong>S.No</strong></td>
+                            <td class="text-center"><strong> Name</strong></td>
+                            <td class="text-center"><strong> Date</strong></td>
+                            <td class="text-center"><strong> Amount</strong></td>
+                            <td class="text-center"><strong>Phone</strong></td>
+                            <td class="text-center"><strong> Payment Type</strong></td>
+                            <td class="text-center"><strong>Details</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php $s= 1; foreach ($office_loan_datas as $key => $value) { ?>
+                        <tr>
+                            <td><?php echo $s; ?></td>
+                            <td class="text-center"><?php echo $value['person_id']; ?></td>
+                            <td class="text-center"><?php echo $value['date']; ?></td>
+                            <td class="text-center"><?php echo $value['debit']; ?></td>
+                            <td class="text-center"><?php echo $value['phone']; ?></td>
+                            <td class="text-center"><?php echo $value['paytype']; ?></td>
+                            <td class="text-center"><?php echo $value['details']; ?></td>
+                        </tr>
+                        <?php $s++; } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<?php 
+}
+elseif($template==2)
+{
+?>
+
+<div class="brand-section"  style="background-color:<?php echo $color; ?>" >
+
+
+          
+<div class="row" >
+
+
+<div class="col-sm-2"><img src="<?php echo  base_url().$logo; ?>"   style='width: 100%;'  /></div>
+
+
+<div class="col-sm-6 text-center" style="color:white;"><h3><?php  echo "Office Loan"; ?></h3></div>
+<div class="col-sm-4" style="color:white;font-weight:bold;" id='company_info'>
+
+     <b> <?php echo display('Company name') ?> : </b><?php echo $company; ?><br>
+     <b>   <?php echo display('Address') ?>  : </b><?php echo $address; ?><br>
+     <b>   <?php echo display('Email') ?>  : </b><?php echo $email; ?><br>
+     <b>   <?php echo display('Contact') ?>  : </b><?php echo $phone; ?><br>
+  </div>
+
+
+
+
+
+
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        <!-- <h3 class="panel-title"><strong>Office Loan Invoice </strong></h3> -->
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead style="background-color:<?php echo $color; ?>">
+
+                        <tr>
+                        <td><strong>S.No</strong></td>
+                            <td class="text-center"><strong> Name</strong></td>
+                            <td class="text-center"><strong> Date</strong></td>
+                            <td class="text-center"><strong> Amount</strong></td>
+                            <td class="text-center"><strong>Phone</strong></td>
+                            <td class="text-center"><strong> Payment Type</strong></td>
+                            <td class="text-center"><strong>Details</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php $s= 1; foreach ($office_loan_datas as $key => $value) { ?>
+                        <tr>
+                            <td><?php echo $s; ?></td>
+                            <td class="text-center"><?php echo $value['person_id']; ?></td>
+                            <td class="text-center"><?php echo $value['date']; ?></td>
+                            <td class="text-center"><?php echo $value['debit']; ?></td>
+                            <td class="text-center"><?php echo $value['phone']; ?></td>
+                            <td class="text-center"><?php echo $value['paytype']; ?></td>
+                            <td class="text-center"><?php echo $value['details']; ?></td>
+                        </tr>
+                        <?php $s++; } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<?php 
+
+}
+?>
+
+
+
+
     </div>
 </div>  
     </section> <!-- /.content -->

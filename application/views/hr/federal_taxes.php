@@ -346,9 +346,10 @@ border-top:none;
 border-collapse:collapse;'>
                 <thead style='height:25px;'>
            
-                   <th style='text-align:center;width:30px;'>".display('sl')."</th>
+                   <th style='text-align:center;'>".display('sl')."</th>
                     <th style='text-align:center;'>State Name</th>
-                    <th style='text-align: start;'>State Taxes</th>
+                    <th style='width:50%; text-align: left;'>State Taxes</th>
+                    
                    
                 </thead><tbody>";
                 $k=1;
@@ -359,7 +360,7 @@ border-collapse:collapse;'>
                   $j=1;
                
                  
-                  echo "<tr><td>".$k."</td> <td><input style='text-align:center' type='checkbox' value=".$states_list[$i]['state']." class='checkbox_id' ></td> <td class='state_name' style='text-align:center;font-weight:bold;' rowspan='".$j."'>". $states_list[$i]['state']."</td> <td><table>";
+                  echo "<tr><td style='text-align:center;' ><input style='text-align:center' type='checkbox' value=".$states_list[$i]['state']." class='checkbox_id' >".$k."</td><td class='state_name' style='text-align:center;font-weight:bold;' rowspan='".$j."'>". $states_list[$i]['state']."</td> <td><table>";
                    foreach($splt as $sp){
                    
           //  $empName = $states_list[$i];

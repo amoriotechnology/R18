@@ -112,7 +112,7 @@
                 ?>  
                     
                     <tr style="text-align: center;">                     <td ><?php echo display($value2['name']);?></td>
-                      <td><input type="checkbox" name="<?php echo display($value2['name']);?>_create"><?php echo ('_create') ?> </td>
+                      <td><input type="checkbox" name="<?php echo display($value2['name']);?>_create"> </td>
                       <!-- <td><input type="checkbox" name="<?php echo display($value['name']);?>_create"><?php echo ('read') ?>_read</td>  -->
                       <!-- <td><input type="checkbox" name="<?php echo display($value['name']);?>_delete"><?php echo display('Delete') ?></td> 
                       <td><input type="checkbox" name="<?php echo display($value['name']);?>_update"><?php echo display('Update') ?></td>  -->

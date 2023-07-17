@@ -491,13 +491,13 @@ elseif($template==3)
       <div class="modal-content" style="width: 500px;height:100px;text-align:center;margin-bottom: 300px;">
         <div class="modal-header" style="color:white;background-color:#38469f;">
       
-          <h4 class="modal-title"><?php echo display('Sales - Road Transport') ?></h4>
+          <h4 class="modal-title"><?php echo 'Sales - Road Transport' ?></h4>
         </div>
         <div class="content">
 
         <div class="modal-body" style="text-align:center;font-weight:bold;">
           
-          <h4><?php echo display('Road Transport Downloaded Successfully') ?></h4>
+          <h4><?php echo 'Road Transport Downloaded Successfully' ?></h4>
      
         </div>
         <div class="modal-footer">

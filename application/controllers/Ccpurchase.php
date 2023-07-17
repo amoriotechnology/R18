@@ -180,6 +180,8 @@ class Ccpurchase extends CI_Controller {
         $CI->load->library('linvoice');
         $CI->load->model('Purchases');
         $CI->load->model('Web_settings');
+        $CI->load->model('Invoices');
+
         $CI1 = & get_instance();
         $CI1->load->model('Purchases');
         $dropdown = $CI1->Purchases->invoice_dropdown();
@@ -189,10 +191,8 @@ class Ccpurchase extends CI_Controller {
         $voucher_no = $this->Purchases->trucking_voucher_no();
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
         $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
-        $taxfield1 = $CI->db->select('tax_id,tax')
-         ->from('tax_information')
-         ->get()
-         ->result_array();
+        $taxfield1 = $CI->Invoices->tax_data();
+      
         $data = array(
             'curn_info_default' =>$curn_info_default[0]['currency_name'],
           

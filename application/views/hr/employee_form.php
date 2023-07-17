@@ -84,12 +84,7 @@
 
 
 
-                         <?php echo form_open_multipart('Chrm/employee_create','id="validate"', ) ?>
-
-
-
-
-
+                         <?php echo form_open_multipart('Chrm/employee_create','id="validate"' ) ?>
 
 
 
@@ -133,7 +128,7 @@
 
 
 
-        <select name="designation"  class="form-control" style="width: 100%;"required>
+        <select name="designation"  id="desig"  class="form-control" style="width: 100%;"required>
 
 <option value="">Select Designation</option>
 
@@ -163,7 +158,7 @@ Payment Type
 <div class="col-sm-7">
 
 
-<select name="rate_type"  class="form-control" style="width: 100%;" >
+<select name="rate_type"  id="paytype" class="form-control" style="width: 100%;" >
 
       <option value="">Select Type</option>
 
@@ -1023,7 +1018,7 @@ Payment Type
 
 <!------ add new designation_modal -->  
 <div class="modal fade" id="designation_modal" role="dialog">
-<div class="modal-dialog modal-lg" >
+<div class="modal-dialog" role="document">
 
 <!-- <div class="modal-dialog" role="document"> -->
 
@@ -1142,7 +1137,6 @@ var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
         $select.append(option); // append new options
     }
       $('#new_payment_type').val('');
-      //  $('#paytype').append(result).selectmenu('refresh',true);
       $("#bodyModal1").html("Payment Added Successfully");
       $('#payment_type').modal('hide');
       
@@ -1201,7 +1195,7 @@ var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
           url:'<?php echo base_url();?>Chrm/add_designation_data',
           success: function(data1, statut) {
      
-       var $select = $('select#designation');
+       var $select = $('select#desig');
    
             $select.empty();
             console.log(data);
@@ -1209,12 +1203,12 @@ var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
         var option = $('<option/>').attr('value', data1[i].id).text(data1[i].designation);
         $select.append(option); // append new options
     }
-    //  $('#designation').val('');
-      //  $('#paytype').append(result).selectmenu('refresh',true);
+     $('#designation').val('');
+    //    $('#desig').append(result).selectmenu('refresh',true);
       $("#bodyModal1").html("Designation  Added Successfully");
       $('#designation_modal').modal('hide');
       
-      $('#paytype').show();
+      $('#desig').show();
        $('#myModal1').modal('show');
       window.setTimeout(function(){
         $('#designation_modal').modal('hide');

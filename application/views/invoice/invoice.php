@@ -148,11 +148,7 @@ if (isset($error_message)) {
 
 
 <?php
-
-
-
 $today = date('Y-m-d');
-
 ?>
 
 <div class="form-group">
@@ -293,7 +289,7 @@ $today = date('Y-m-d');
         <th class="18 value" data-col="18" data-resizable-column-id="18"    style="width: 198.011px;"       ><?php echo display('Shipping Address')?></th>
         
         <th class="19 value" data-col="19" data-resizable-column-id="19"    style="width: 198.011px;"       ><?php echo display('Tax Details')?></th>
-            <th class="20 value" data-col="20" data-resizable-column-id="20"    style="width: 198.011px;"  ><?php echo display('Grand Total')?><?php echo display('Preferred Currency')?></th>
+            <th class="20 value" data-col="20" data-resizable-column-id="20"    style="width: 198.011px;"  ><?php echo display('Grand Total')." ";?><?php echo display('Preferred Currency')?></th>
               <th class="21 value" data-col="21" data-resizable-column-id="21"    style="width: 198.011px;"       ><?php echo display('Amount Paid')?></th>
                 <th class="22" data-col="22" data-resizable-column-id="22"    style="width: 198.011px;"       ><?php echo display('Balance Amount')?></th>
                   <th class="23 value" data-col="23" data-resizable-column-id="23"    style="width: 198.011px;"       ><?php echo display('Remarks/Conditions')?></th>
@@ -376,8 +372,23 @@ $today = date('Y-m-d');
   
   
   
-   <a class="btnclr btn  btn-sm" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Cinvoice/sale_invoice_delete/<?php echo  $arr['invoice_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 
+
+   <?php    foreach(  $this->session->userdata('perm_data') as $test){
+    $split=explode('-',$test);
+    if(trim($split[0])=='sales' && $_SESSION['u_type'] ==3 && trim($split[1])=='0001'){
+      
+      
+       ?>
+
+<a class="btnclr btn  btn-sm" onclick="return confirm('<?php echo display('are_you_sure') ?>')" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Cinvoice/sale_invoice_delete/<?php echo  $arr['invoice_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    
+                    <?php break;}} 
+                    if($_SESSION['u_type'] ==2){ ?>
+
+<a class="btnclr btn  btn-sm" onclick="return confirm('<?php echo display('are_you_sure') ?>')" style="background-color: #3ca5de; color: #fff;" href="<?php echo base_url()?>Cinvoice/sale_invoice_delete/<?php echo  $arr['invoice_id'];  ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+                        <?php  } ?>
 
 
 
@@ -395,7 +406,7 @@ $count++;
                 
 } }  else{
     ?>
-     <tr><td colspan="12" style="text-align:center;font-weight:bold;"><?php  echo "No Records Found"  ;?></td></tr>
+     <tr><td colspan="14" style="text-align:center;font-weight:bold;"><?php  echo "No Records Found"  ;?></td></tr>
     <?php
           }
 
@@ -456,7 +467,7 @@ $count++;
                           <div class="form-group row">
                         
 <input type="checkbox"  data-control-column="19"  class="19" value="19"/><?php echo display('Tax Details')?><br>
-<input type="checkbox"  data-control-column="20"  class="20" value="20"/><?php echo display('Grand Total')?><?php echo display('Preferred Currency')?><br>
+<input type="checkbox"  data-control-column="20"  class="20" value="20"/><?php echo display('Grand Total')." ";?><?php echo display('Preferred Currency')?><br>
 <input type="checkbox"  data-control-column="21"  class="21" value="21"/><?php echo display('Amount Paid')?><br>
 <input type="checkbox"  data-control-column="22"  class="22" value="22"/><?php echo display('Balance Amount')?><br>
 <input type="checkbox"  data-control-column="23"  class="23" value="23"/><?php echo display('Remarks/Conditions')?><br>

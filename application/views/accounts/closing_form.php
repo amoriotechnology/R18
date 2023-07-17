@@ -75,11 +75,11 @@ textarea:focus, input:focus{
                     <div class="panel-body">
 
                         <div class="text-center">
-                            {company_info}
-                            <h3> {company_name} </h3>
-                            <h4>{address} </h4>
+                          
+                           <h3> <?php echo $company; ?> </h3>
+                            <h4></b><?php echo $email; ?> </h4>
                             <h4><?php echo display('cash_closing') ?> </h4>
-                            {/company_info}
+                            
                             <h4> <?php echo display('date') ?>:<?php echo date("d/m/Y"); ?> </h4>
                         </div>
 

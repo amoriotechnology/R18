@@ -1,3 +1,22 @@
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+<script src="
+https://cdn.jsdelivr.net/npm/jquery-base64-js@1.0.1/jquery.base64.min.js
+"></script>
+
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/css.css" />
+<script type="text/javascript" src="http://www.bacubacu.com/colresizable/js/colResizable-1.5.min.js"></script>
+
+
+
+
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>my-assets/css/balance_sheet.css" />
 <div class="content-wrapper">
     <section class="content-header">
@@ -10,7 +29,7 @@
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo "Accounts"; ?></a></li>
-                <li class="active"><?php echo "Balance Sheet"; ?></li>
+                <li class="active" style="color:orange;"><?php echo "Balance Sheet"; ?></li>
             </ol>
         </div>
     </section>
@@ -72,8 +91,8 @@
                         </div>
                         <div class="form-group text-right">
                              <button type="submit"
-                                class="btn btn-success w-md m-b-5"><?php echo display('find') ?></button>
-                                    <input type="button" class="btn button-print" name="btnPrint" id="btnPrint"
+                             class="btn btnclr" ><?php echo display('find') ?></button>
+                                    <input type="button" class="btn btnclr" name="btnPrint" id="btnPrint"
                             value="Print" onclick="printContent('printArea')" />
                         </div>
    <?php echo form_close();?>
